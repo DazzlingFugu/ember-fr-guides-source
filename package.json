@@ -1,20 +1,19 @@
 {
   "name": "ember-guides",
-  "version": "3.7.0",
+  "version": "1.0.0",
   "private": true,
-  "description": "Markdown files and Guidemaker for Ember-Guides",
-  "homepage": "https://github.com/ember-learn/guides-source#readme",
+  "description": "Markdown files and Guidemaker for French Ember-Guides",
+  "homepage": "https://github.com/DazzlingFugu/ember-fr-guides-source#readme",
   "bugs": {
-    "url": "https://github.com/ember-learn/guides-source/issues"
+    "url": "https://github.com/DazzlingFugu/ember-fr-guides-source/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ember-learn/guides-source.git"
+    "url": "git+https://github.com/DazzlingFugu/ember-fr-guides-source.git"
   },
   "license": "MIT",
   "contributors": [
-    "Chris Manson <chris@stonecircle.io>",
-    "Ember.JS Learning team"
+    "Marine Dunstetter"
   ],
   "directories": {
     "doc": "doc",
