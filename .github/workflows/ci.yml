@@ -22,7 +22,7 @@ jobs:
       - name: Use Node.js ${{ env.NODE_VERSION }}
         uses: actions/setup-node@v2
         with:
-          cache: 'npm'
+          cache: "npm"
           node-version: ${{ env.NODE_VERSION }}
 
       - name: Install dependencies
@@ -30,7 +30,6 @@ jobs:
 
       - name: Lint
         run: npm run lint
-
 
   test-app:
     name: Test app
@@ -43,19 +42,18 @@ jobs:
       - name: Use Node.js ${{ env.NODE_VERSION }}
         uses: actions/setup-node@v2
         with:
-          cache: 'npm'
+          cache: "npm"
           node-version: ${{ env.NODE_VERSION }}
 
       - name: Install dependencies
         run: npm install
 
-      - name: Test
-        uses: percy/exec-action@v0.3.1
-        with:
-          custom-command: npm run test:ember
-        env:
-          PERCY_TOKEN: 877df6aad8486060f69a34864b6cd33f870633743b23411343737c46a875a762
-
+      # - name: Test
+      #   uses: percy/exec-action@v0.3.1
+      #   with:
+      #     custom-command: npm run test:ember
+      #   env:
+      #     PERCY_TOKEN: aabbccdd
 
   test-node:
     name: Test node-tests
@@ -68,7 +66,7 @@ jobs:
       - name: Use Node.js ${{ env.NODE_VERSION }}
         uses: actions/setup-node@v2
         with:
-          cache: 'npm'
+          cache: "npm"
           node-version: ${{ env.NODE_VERSION }}
 
       - name: Install dependencies
