@@ -228,7 +228,7 @@ export default Controller.extend({
 ```
 
 This syntax is known as _classic class_ syntax. You can check out the
-[pre-Octane guides on classic classes](../../../v3.12.0/object-model/)
+[pre-Octane guides on classic classes](https://guides.emberjs.com/v3.12.0/object-model/)
 for more information on how to convert a classic class to modern Ember.
 
 ## Cross-Browser Support
