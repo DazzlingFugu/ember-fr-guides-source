@@ -15,7 +15,7 @@ module.exports = function getBadRelativeUrlsForFile(mdFile) {
         return { fileToFix: mdFile.filepath, badImageLink: link, reason: 'not absolute path' };
       }
 
-      if (!checkIfPathExists(`public/${link}`)) {
+      if (!checkIfPathExists(`tmp/guides-source/public/${link}`)) {
         return { fileToFix: mdFile.filepath, badImageLink: link, reason: 'file does not exist' };
       }
 
