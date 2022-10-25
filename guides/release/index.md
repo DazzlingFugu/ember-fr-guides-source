@@ -1,6 +1,6 @@
-Bienvenue sur les Guides Ember.js ! Cette documentation va vous faire devenir un expert Ember.
+Bienvenue sur le Guide Ember.js ! Cette documentation va vous accompagner pas à pas jusqu'à faire de vous un expert Ember.
 
-Avec la pléthore de bibliothèques facilement disponibles pour le développement front-end, il est parfois un peu déroutant de travailler avec un framework front-end comme Ember.js, où _tout_ ce que vous avez besoin pour construire une application est déjà inclus. C'est pourquoi, nous avons segmenté chaque partie des guides afin que vous puissiez vous concentrer sur la partie avec laquelle vous souhaitez travailler. Cela devrait aussi vous permettre de trouver plus rapidement ce dont vous avez besoin !
+Avec la pléthore de bibliothèques disponibles pour le développement front-end, il est parfois un peu déroutant de travailler avec un framework front-end comme Ember.js, où _tout_ ce dont vous avez besoin pour construire une application est déjà inclus. C'est pourquoi, nous avons segmenté le guide de manière à ce que vous puissiez vous concentrer sur la partie avec laquelle vous souhaitez travailler. Cela devrait aussi vous permettre de trouver plus rapidement ce dont vous avez besoin !
 
 <ul class="list-cards">
 	<li class="list-item-card">
