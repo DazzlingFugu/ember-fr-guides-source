@@ -1,11 +1,11 @@
-[![This project uses GitHub Actions for continuous integration.](https://github.com/ember-learn/guides-source/workflows/CI/badge.svg)](https://github.com/ember-learn/guides-source/actions?query=workflow%3ACI)
-[![This project is using Percy.io for visual regression testing.](https://percy.io/static/images/percy-badge.svg)](https://percy.io/Ember/guides-app)
+[![This project uses GitHub Actions for continuous integration.](https://github.com/DazzlingFugu/ember-fr-guides-source/workflows/CI/badge.svg)](https://github.com/DazzlingFugu/ember-fr-guides-source/actions?query=workflow%3ACI)
 
-# Ember Guides Source
+# Ember Guides French Source
 
-This repository contains the written content for the [Ember.js Guides](https://guides.emberjs.com). Contributors can file issues and submit pull requests (PRs) to help improve everyone's learning experience.
+This repository contains the written content for the [Ember.js Guides French](https://guides.emberjs.com). Contributors can file issues and submit pull requests (PRs) to help improve everyone's learning experience.
 
 Looking for repositories for the other parts of [emberjs.com](https://emberjs.com)? Check out
+[Ember Guides Source (English)](https://github.com/ember-learn/guides-source)
 [website](https://github.com/ember-learn/ember-website),
 [ember-api-docs](https://github.com/ember-learn/ember-api-docs),
 [super-rentals tutorial](https://github.com/ember-learn/super-rentals),
@@ -25,9 +25,9 @@ Please see [CONTRIBUTING.md](CONTRIBUTING.md) for additional instructions on how
 
 ## Project layout
 
-The Ember Guides content is written in Markdown. Each minor version of Ember has its own directory within `/guides`.
+The Ember Guides content is written in Markdown.
 
-In general, your PR should make edits to only the files in the `/guides/release` directory, which corresponds to the latest version of Ember. Exceptions may include fixing broken links and typos in older versions of the Ember Guides.
+In general, your PR should make edits to only the files in the `/guides/release` directory, which corresponds to the latest version of Ember. 
 
 If you run `ember serve`, the Markdown files are turned into HTML to create an app. We use the following addons to make this happen:
 
@@ -43,10 +43,11 @@ If you run `ember serve`, the Markdown files are turned into HTML to create an a
 To run the Ember Guides app locally, type these commands into your terminal.
 
 ```bash
-git clone git://github.com/ember-learn/guides-source.git
+git clone git://github.com/DazzlingFugu/ember-fr-guides-source.git
 
-cd guides-source
+cd ember-fr-guides-source
 npm install
+npm run setup
 ember serve
 ```
 
@@ -68,7 +69,7 @@ npm test
 The guides are spellchecked and linted for Markdown consistency. You can check your edits by running,
 
 ```bash
-npm run lint:md
+npm run lint
 ```
 
 Linting and spellchecking must pass or they will fail in CI (continuous integration). See [CONTRIBUTING.md](CONTRIBUTING.md) for more information on linting and spellchecking.
