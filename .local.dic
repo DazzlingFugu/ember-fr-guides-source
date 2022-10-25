@@ -1,3 +1,4 @@
+*NPM
 *google
 2FA
 30KB
@@ -184,6 +185,10 @@ codemods
 coc-ember
 CoffeeScript
 ColorSafe
+checksum/S
+codebase/S
+codemod
+codemods
 componentized
 composable
 config
@@ -250,9 +255,12 @@ first
 focusability
 focusable
 formatter
+focusability
+focusable
+formatter
+formatters
 front-end
 frontend/S
-formatters
 fullname
 geocode
 geocode/GS
@@ -300,8 +308,9 @@ linter/a0p+
 linting
 localhost:4200
 lockfile/S
-linters
 LSP
+localhost:4200
+lockfile/S
 lookups
 md5
 minifi/DR
