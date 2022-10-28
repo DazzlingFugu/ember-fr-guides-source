@@ -2,7 +2,7 @@
 
 # Ember Guides en français
 
-Ce répertoire contient la traduction française du guide Ember.js officiel :
+Ce répertoire contient la traduction française du guide officiel Ember.js :
 - [Ember.js Guides, site web](https://github.com/ember-learn/ember-website),
 - [Ember Guides Source](https://github.com/ember-learn/guides-source)
 
@@ -10,11 +10,11 @@ Ce répertoire contient la traduction française du guide Ember.js officiel :
 
 Bienvenue et merci pour votre aide !
 
-Les nouveaux contributeurs sont encouragés à consulter les problèmes étiquetés **help wanted** ou **good first issue**. Si vous avez des questions ou recherchez un buddy pour une session de pair, vous pouvez rejoindre [#lang-french](https://discord.com/channels/480462759797063690/486235962700201984) sur [le Discord de la communauté Ember](https://discordapp.com/invite/zT3asNS).
+Les nouveaux contributeurs sont encouragés à consulter les problèmes étiquetés **help wanted** ou **good first issue**. Si vous avez des questions ou êtes intéressé par une session de pair, vous pouvez rejoindre [#lang-french](https://discord.com/channels/480462759797063690/486235962700201984) sur [le Discord de la communauté Ember](https://discordapp.com/invite/zT3asNS).
 
 Veuillez consulter [CONTRIBUTING.md](CONTRIBUTING.md) pour des instructions supplémentaires sur la façon de formater votre travail et de soumettre une PR.
 
-Le contenu du Guide Ember est écrit en Markdown. En général, votre PR ne doit apporter des modifications qu'aux fichiers du répertoire `/guides/release`, qui correspond à la dernière version d'Ember.
+Le contenu du Guide Ember est écrit en Markdown. En général, votre PR ne devrait modifier que les fichiers du répertoire `/guides/release`, qui correspond à la dernière version d'Ember.
 
 ## Développement local
 
@@ -37,7 +37,7 @@ Remarque : sur Mac, si vous obtenez l'erreur `Error: EMFILE: too many open files
 
 ### Linting et correction orthographique
 
-Les guides sont vérifiés et lintés pour la cohérence de Markdown. Vous pouvez vérifier vos modifications en exécutant :
+Les guides sont soumis à un contrôle orthographique et "lintés" pour la cohérence de Markdown. Vous pouvez vérifier vos modifications en exécutant :
 
 ```bash
 npm run lint
