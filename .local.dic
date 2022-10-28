@@ -179,16 +179,13 @@ chainable
 cheatsheet
 checkboxes
 checksum/S
+coc-ember
 codebase/S
 codemod
 codemods
-coc-ember
 CoffeeScript
 ColorSafe
 checksum/S
-codebase/S
-codemod
-codemods
 componentized
 composable
 config
@@ -300,15 +297,24 @@ jquery-integration
 keyCode
 lang
 lifecycle/S
+<<<<<<< HEAD
+=======
+linter
+linters
+LSP
+>>>>>>> 201f3b99 (Docs/ update and translate `README.md` (#5))
 lint
 linté
 lintés
 linter/S
 linter/a0p+
 linting
+<<<<<<< HEAD
 localhost:4200
 lockfile/S
 LSP
+=======
+>>>>>>> 201f3b99 (Docs/ update and translate `README.md` (#5))
 localhost:4200
 lockfile/S
 lookups
