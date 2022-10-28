@@ -1,4 +1,3 @@
-*NPM
 *google
 2FA
 30KB
@@ -10,6 +9,7 @@ Backburner
 Bower
 Browserlist
 CDN/S
+CI
 CLI
 CWD
 Chai
@@ -26,6 +26,7 @@ DOM
 DX
 DataAdapter
 DevTools
+Discord
 ENV
 ES2015
 ES2016
@@ -48,6 +49,7 @@ FastPass
 Favicon
 GIFs
 Getters
+GitHub
 GitLab
 Globals
 GraphQL
@@ -73,8 +75,10 @@ JSONAPISerializer
 JSONSerializer
 KVO
 LTS
+Markdown
 MDN
 Mapbox
+NPM
 NVDA
 Neovim
 Netlify
@@ -124,6 +128,7 @@ VoiceOver
 Vue
 W3C
 WAI-ARIA
+Watchman
 WCAG
 WebSocket/S
 Websockets
@@ -131,6 +136,7 @@ XHR
 XSS
 ZEIT
 Zoey
+app
 aXe
 accessor/S
 activations
@@ -163,6 +169,7 @@ blockquote
 blogPost
 bookmarklet
 breakpoint/S
+buddy
 bugfix/S
 callouts
 camelCase/D
@@ -234,6 +241,7 @@ favicon
 fileMapTokens
 filesPath
 filesystem/S
+first
 focusability
 focusable
 formatter
@@ -255,6 +263,7 @@ hardcode
 hardcode/D
 hasMany
 hashchange
+help
 hostname
 html
 htmlbars
@@ -277,8 +286,12 @@ jquery-integration
 keyCode
 lang
 lifecycle/S
-linter
-linters
+lint
+linté
+lintés
+linter/S
+linter/a0p+
+linting
 localhost:4200
 lockfile/S
 lookups
@@ -408,6 +421,7 @@ viewport
 vim-ember-hbs
 vim-javascript
 vim-js-pretty-template
+wanted
 webpack
 webpage
 websocket
