@@ -21,10 +21,12 @@
     "test": "tests"
   },
   "scripts": {
-    "setup": "./scripts/setup.sh",
-    "build": "cd tmp/guides-source &&  npm run build",
-    "lint": "remark . --frail --quiet",
-    "start": "cd tmp/guides-source && npm start",
+    "build": "ember build --environment=production",
+    "lint": "npm-run-all --aggregate-output --continue-on-error --parallel lint:*",
+    "lint:hbs": "ember-template-lint .",
+    "lint:js": "eslint .",
+    "lint:md": "remark . --frail --quiet",
+    "start": "ember serve",
     "test": "npm run test:node && npm run test:ember",
     "test:ember": "cd tmp/guides-source && ember test",
     "test:node": "mocha node-tests --exclude node-tests/local/**",
