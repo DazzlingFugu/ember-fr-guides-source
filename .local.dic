@@ -181,6 +181,9 @@ checksum/S
 codebase/S
 codemod
 codemods
+coc-ember
+CoffeeScript
+ColorSafe
 componentized
 composable
 config
@@ -188,6 +191,8 @@ configPath
 cron
 customizable
 customizations
+D3
+DAP
 dasherize
 dasherized
 datepicker
@@ -294,6 +299,8 @@ linter/a0p+
 linting
 localhost:4200
 lockfile/S
+linters
+LSP
 lookups
 md5
 minifi/DR
@@ -399,6 +406,8 @@ template-lifecycle-dom-and-modifiers
 templating
 todo
 todos
+treesitter
+triple-backtick
 tooltip
 trackable
 transitionTo
