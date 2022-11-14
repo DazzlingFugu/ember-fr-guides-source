@@ -1,32 +1,30 @@
-Component templates can leave one or more placeholders that users can fill with their own HTML.
-These are called blocks.
-Here's an example that provides a component with the implicit default block.
+Les templates de composant peuvent avoir un ou plusieurs placeholders que les utilisateurs peuvent remplir avec leur propre code HTML.
+Ces placeholders sont appelés des blocs (ou block).
+Voici un exemple de composant appelé avec le bloc par défaut implicite.
 
 ```handlebars
 <ExampleComponent>
-  This is the default <b>block content</b> that will
-  replace `{{yield}}` (or `{{yield to="default"}}`)
-  in the `ExampleComponent` template.
+  Ceci est le <b>contenu du bloc</b> par défaut qui 
+  remplacera `{{yield}}` (ou `{{yield to="default"}}`)
+  dans le template de `ExampleComponent`.
 </ExampleComponent>
 ```
 
-This is equivalent to explicitly naming the default block using the named block syntax.
+L'exemple ci-dessus est équivalent à nommer explicitement le bloc par défaut en utilisant la syntaxe "named block".
 
 ```handlebars
 <ExampleComponent>
   <:default>
-    This is the default <b>block content</b> that will
-    replace `{{yield}}` (or `{{yield to="default"}}`)
-    in the `ExampleComponent` template.
+    Ceci est le <b>contenu du bloc</b> par défaut qui 
+    remplacera `{{yield}}` (ou `{{yield to="default"}}`)
+    dans le template de `ExampleComponent`.
   </:default>
 </ExampleComponent>
 ```
 
-Through Block Content, users of the component can add additional styling and
-behavior by using HTML, modifiers, and other components within the block.
+Via l'utilisation des blocs, les utilisateurs du composant peuvent ajouter du style et des comportements supplémentaires en HTML, à l'aide de modifiers ou d'autres composants à l'intérieur du bloc.
 
-To make that more concrete, let's take a look at two similar components
-representing different user's messages.
+Pour rendre ça plus concret, examinons deux composants similaires qui représentent les différents messages de l'utilisateur.
 
 ```handlebars {data-filename="app/components/received-message.hbs"}
 <aside>
@@ -35,12 +33,12 @@ representing different user's messages.
 <section>
   <h4 class="username">
     Tomster
-    <span class="local-time">their local time is 4:56pm</span>
+    <span class="local-time">heure locale: 4:56</span>
   </h4>
 
   <p>
-    Hey Zoey, have you had a chance to look at the EmberConf
-    brainstorming doc I sent you?
+    Hey Zoey, as-tu eu l'occasion de regarder le document
+    de brainstorming pour l'EmberConf que je t'ai envoyé ?
   </p>
 </section>
 ```
@@ -55,40 +53,39 @@ representing different user's messages.
   <p>Hey!</p>
 
   <p>
-    I love the ideas! I'm really excited about where this year's
-    EmberConf is going, I'm sure it's going to be the best one yet.
-    Some quick notes:
+    J'adore les idées ! Je suis vraiment enthousiaste de voir la 
+    direction que prend l'EmberConf cette année, je suis sûre que ce 
+    sera la meilleure à ce jour.
+    Quelques notes rapides :
   </p>
 
   <ul>
     <li>
-      Definitely agree that we should double the coffee budget this
-      year (it really is impressive how much we go through!)
+      Tout à fait d'accord sur le fait qu'on devrait doubler le budget 
+      café cette année (c'est vraiment impressionnant tout ce qu'on 
+      boit !)
     </li>
     <li>
-      A blimp would definitely make the venue very easy to find, but
-      I think it might be a bit out of our budget. Maybe we could
-      rent some spotlights instead?
+      Un dirigeable rendrait certainement le lieu très facile à trouver, 
+      mais je pense que c'est peut-être un peu hors de notre budget. On 
+      pourrait peut-être louer des projecteurs à la place ?
     </li>
     <li>
-      We absolutely will need more hamster wheels, last year's line
-      was <em>way</em> too long. Will get on that now before rental
-      season hits its peak.
+      On aura absolument besoin de plus de roues de hamster, la file 
+      d'attente l'an dernier était <em>beaucoup</em> trop longue. Je 
+      vais m'y mettre maintenant avant la saison soit trop avancée pour 
+      la location.
     </li>
   </ul>
 
-  <p>Let me know when you've nailed down the dates!</p>
+  <p>Dis-moi quand tu auras fixé les dates !</p>
 </section>
 ```
 
-Instead of having two different components, one for sent messages and one for
-received messages, we could instead try to create a single message component.
-Inside of this message component, we could substitute the avatar and username
-with generic components, too.
+Au lieu d'avoir deux composants différents, un pour les messages envoyés et un pour les messages reçus, nous pourrions plutôt essayer de créer un composant de message unique.
+À l'intérieur de ce composant unique, nous pourrions substituer l'avatar et le nom d'utilisateur, également avec des composants génériques.
 
-Their structure is pretty straightforward and similar, so we can use arguments
-and conditionals to handle the differences in content between them (see the
-previous chapters for details on how to do this).
+La structure des deux messages est assez simple et similaire, nous pouvons donc utiliser des arguments et des conditions pour gérer les différences de contenu entre eux (voir les chapitres précédents pour plus de détails sur la façon de procéder).
 
 ```handlebars {data-filename="app/components/message.hbs"}
 <Message::Avatar
@@ -107,12 +104,9 @@ previous chapters for details on how to do this).
 </section>
 ```
 
-This works pretty well, but the message content is very different. It's also
-pretty long, so it wouldn't really be easy to pass the message content through
-as an argument. What we really want is to leave a placeholder for any content
-supplied by the `<Message>` tag.
+Ça fonctionne plutôt bien, mais le cas du contenu du message est différent. Le message peut être long, donc pas facile de le passer comme argument. En fait, ce que nous voulons, c'est laisser un placeholder pour tout contenu fourni par la balise `<Message>`.
 
-The way to do this in Ember is by using the `{{yield}}` syntax.
+La manière de faire ça avec Ember est d'utiliser la syntaxe `{{yield}}`.
 
 ```handlebars {data-filename="app/components/message.hbs"}
 <Message::Avatar
@@ -134,13 +128,13 @@ The way to do this in Ember is by using the `{{yield}}` syntax.
 <div class="cta">
   <div class="cta-note">
     <div class="cta-note-body">
-      <div class="cta-note-heading">Zoey says...</div>
+      <div class="cta-note-heading">Zoey dit...</div>
       <div class="cta-note-message">
-        <code>{{yield}}</code> is named after a similar concept in scripting languages,
-        including Ruby, JavaScript and Python. You don't need to understand the connection
-        in order to use it, but if you're in the mood for a tangent, check out
+        <code>{{yield}}</code> est nommé d'après un concept similaire dans les languages de script,
+        comme Ruby, JavaScript et Python. Pas besoin de comprendre le lien pour l'utiliser, mais si 
+        vous êtes d'humeur à aller plus loin, jetez un oeil à 
         <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/yield">
-          the yield operator in JavaScript
+          "the yield operator in JavaScript"
         </a>
       </div>
     </div>
@@ -148,21 +142,20 @@ The way to do this in Ember is by using the `{{yield}}` syntax.
   </div>
 </div>
 
-You can think of using `{{yield}}` as leaving a placeholder for the content of the
-`<Message>` tag.
+Vous pouvez penser à `{{yield}}` comme à un espace réservé au contenu de la balise `<Message>`.
 
 ```handlebars {data-filename="app/components/received-message.hbs"}
 <Message
   @username="Tomster"
   @userIsActive={{true}}
-  @userLocalTime="4:56pm"
+  @userLocalTime="4:56"
 
-  @avatarTitle="Tomster's avatar"
+  @avatarTitle="L'avatar de Tomster"
   @avatarInitial="T"
 >
   <p>
-    Hey Zoey, have you had a chance to look at the EmberConf
-    brainstorming doc I sent you?
+    Hey Zoey, as-tu eu l'occasion de regarder le document
+    de brainstorming pour l'EmberConf que je t'ai envoyé ?
   </p>
 </Message>
 ```
@@ -172,76 +165,73 @@ You can think of using `{{yield}}` as leaving a placeholder for the content of t
   @username="Zoey"
   @isCurrentUser={{true}}
 
-  @avatarTitle="Zoey's avatar"
+  @avatarTitle="L'avatar de Zoey"
   @avatarInitial="Z"
 >
   <p>Hey!</p>
 
   <p>
-    I love the ideas! I'm really excited about where this year's
-    EmberConf is going, I'm sure it's going to be the best one yet.
-    Some quick notes:
+    J'adore les idées ! Je suis vraiment enthousiaste de voir la 
+    direction que prend l'EmberConf cette année, je suis sûre que ce 
+    sera la meilleure à ce jour.
+    Quelques notes rapides :
   </p>
 
   <ul>
     <li>
-      Definitely agree that we should double the coffee budget this
-      year (it really is impressive how much we go through!)
+      Tout à fait d'accord sur le fait qu'on devrait doubler le budget 
+      café cette année (c'est vraiment impressionnant tout ce qu'on 
+      boit !)
     </li>
     <li>
-      A blimp would definitely make the venue very easy to find, but
-      I think it might be a bit out of our budget. Maybe we could
-      rent some spotlights instead?
+      Un dirigeable rendrait certainement le lieu très facile à trouver, 
+      mais je pense que c'est peut-être un peu hors de notre budget. On 
+      pourrait peut-être louer des projecteurs à la place ?
     </li>
     <li>
-      We absolutely will need more hamster wheels, last year's line
-      was <em>way</em> too long. Will get on that now before rental
-      season hits its peak.
+      On aura absolument besoin de plus de roues de hamster, la file 
+      d'attente l'an dernier était <em>beaucoup</em> trop longue. Je 
+      vais m'y mettre maintenant avant la saison soit trop avancée pour 
+      la location.
     </li>
   </ul>
 
-  <p>Let me know when you've nailed down the dates!</p>
+  <p>Dis-moi quand tu auras fixé les dates !</p>
 </Message>
 ```
 
-As shown here, we can pass different content into the tag. The content
-of the tag is also referred to as _the block_. The `{{yield}}` syntax
-yields to the block once the block is passed into the component.
+Comme montré ici, nous pouvons passer différents contenus dans la balise. Le contenu de la balise est aussi appelé _block_. La syntaxe `{{yield}}` "cède sa place" au bloc une fois celui-ci passé au composant.
 
 <div class="cta">
   <div class="cta-note">
     <div class="cta-note-body">
-      <div class="cta-note-heading">Zoey says...</div>
+      <div class="cta-note-heading">Zoey dit...</div>
       <div class="cta-note-message">
-        You can think of the <code>Message</code> component like a function,
-        and the block as a <a href="https://developer.mozilla.org/en-US/docs/Glossary/Callback_function"><em>callback</em></a>
-        that you're passing to the component. From this perspective, the <code>{{yield}}</code> syntax
-        calls the callback.
+        Vous pouvez penser au composant <code>Message</code> comme à une fonction,
+        et au bloc comme à un <a href="https://developer.mozilla.org/en-US/docs/Glossary/Callback_function"><em>callback</em></a>
+        que vous passez au composant. De ce point de vue, la syntaxe <code>{{yield}}</code>
+        appelle le callback.
       </div>
     </div>
     <img src="/images/mascots/zoey.png" role="presentation" alt="">
   </div>
 </div>
 
-### Conditional Blocks
+### Blocs conditionnels
 
-Sometimes, we may want to provide some default content if the user of a component
-hasn't provided a block. For instance, consider an error message dialog that has
-a default message in cases where we don't know what error occurred. We could show
-the default message using the `(has-block)` syntax in an `ErrorDialog` component.
+Parfois, nous pouvons vouloir fournir du contenu par défaut si l'utilisateur d'un composant n'a pas spécifié de bloc. Par exemple, prenons une boîte de dialogue de message d'erreur qui aurait un message par défaut dans les cas où nous ne savons pas quelle erreur s'est produite. Nous pourrions montrer le message par défaut utilisant la syntaxe `(has-block)` dans un composant `ErrorDialog`.
 
 ```handlebars {data-filename=app/components/error-dialog.hbs}
 <dialog>
   {{#if (has-block)}}
     {{yield}}
   {{else}}
-    An unknown error occurred!
+    Une erreur s'est produite!
   {{/if}}
 </dialog>
 ```
 
-Now, if we use our `ErrorDialog` component without a block, we'll get the
-default message.
+Maintenant, si nous utilisons notre composant `ErrorDialog` sans bloc, nous obtindrons le message par défaut.
 
 ```handlebars
 <ErrorDialog/>
@@ -249,24 +239,22 @@ default message.
 ```html
 <!-- rendered -->
 <dialog>
-  An unknown error occurred!
+  Une erreur s'est produite!
 </dialog>
 ```
 
-If we had a more detailed message, though, we could use the block to pass it to
-the dialog.
+Cependant, si nous voulons afficher un message plus détaillé, nous pouvons spécifier le bloc pour le passer à la boîte de dialogue.
 
 ```handlebars
 <ErrorDialog>
   <Icon type="no-internet" />
-  <p>You are not connected to the internet!</p>
+  <p>Vous n'êtes pas connecté à Internet !</p>
 </ErrorDialog>
 ```
 
-## Block Parameters
+## Paramètres de bloc
 
-Blocks can also pass values back into the template, similar to a callback
-function in JavaScript. Consider for instance a simple `BlogPost` component.
+Les blocs peuvent aussi remonter des valeurs au template, à l'image des fonctions de callback en JavaScript. Prenons par exemple un simple composant `BlogPost`.
 
 ```handlebars {data-filename=app/components/blog-post.hbs}
 <h1>{{@post.title}}</h1>
@@ -280,10 +268,7 @@ function in JavaScript. Consider for instance a simple `BlogPost` component.
 <BlogPost @post={{@blogPost}} />
 ```
 
-We may want to give the user the ability to put extra content before or after
-the post, such as an image or a profile. Since we don't know what the
-user wants to do with the body of the post, we can instead pass the body back
-to them.
+Nous pourrions vouloir laisser à l'utilisateur la possibilité d'ajouter du contenu supplémentaire avant ou après le post, comme une image ou un profil. Comme nous ne savons pas ce que veut faire l'utilisateur avec le corps du post (`body`), nous pouvons, à la place, lui remonter le `body`.
 
 ```handlebars {data-filename=app/components/blog-post.hbs}
 <h1>{{@post.title}}</h1>
@@ -303,7 +288,7 @@ to them.
 </BlogPost>
 ```
 
-We can yield back multiple values as well, separated by spaces.
+Il est possible de remonter ainsi de multiples valeurs, séparées par des espaces.
 
 ```handlebars {data-filename=app/components/blog-post.hbs}
 {{yield @post.title @post.author @post.body }}
