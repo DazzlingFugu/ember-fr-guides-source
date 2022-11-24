@@ -10,7 +10,7 @@ Voici un exemple de composant appelé avec le bloc par défaut implicite.
 </ExampleComponent>
 ```
 
-L'exemple ci-dessus est équivalent à nommer explicitement le bloc par défaut en utilisant la syntaxe "named block".
+L'exemple ci-dessus est équivalent à appeler explicitement le bloc par défaut en utilisant la syntaxe "named block".
 
 ```handlebars
 <ExampleComponent>
@@ -24,7 +24,7 @@ L'exemple ci-dessus est équivalent à nommer explicitement le bloc par défaut 
 
 Via l'utilisation des blocs, les utilisateurs du composant peuvent ajouter du style et des comportements supplémentaires en HTML, à l'aide de modifiers ou d'autres composants à l'intérieur du bloc.
 
-Pour rendre ça plus concret, examinons deux composants similaires qui représentent les différents messages de l'utilisateur.
+Pour rendre ça plus concret, examinons deux composants similaires qui représentent les différents messages d'un utilisateur.
 
 ```handlebars {data-filename="app/components/received-message.hbs"}
 <aside>
@@ -33,7 +33,7 @@ Pour rendre ça plus concret, examinons deux composants similaires qui représen
 <section>
   <h4 class="username">
     Tomster
-    <span class="local-time">heure locale: 4:56</span>
+    <span class="local-time">heure locale : 16h56</span>
   </h4>
 
   <p>
@@ -83,7 +83,7 @@ Pour rendre ça plus concret, examinons deux composants similaires qui représen
 ```
 
 Au lieu d'avoir deux composants différents, un pour les messages envoyés et un pour les messages reçus, nous pourrions plutôt essayer de créer un composant de message unique.
-À l'intérieur de ce composant unique, nous pourrions substituer l'avatar et le nom d'utilisateur, également avec des composants génériques.
+À l'intérieur de ce composant, nous pourrions également substituer l'avatar et le nom d'utilisateur par d'autres composants génériques.
 
 La structure des deux messages est assez simple et similaire, nous pouvons donc utiliser des arguments et des conditions pour gérer les différences de contenu entre eux (voir les chapitres précédents pour plus de détails sur la façon de procéder).
 
@@ -133,7 +133,7 @@ La manière de faire ça avec Ember est d'utiliser la syntaxe `{{yield}}`.
         <code>{{yield}}</code> est nommé d'après un concept similaire dans les languages de script,
         comme Ruby, JavaScript et Python. Pas besoin de comprendre le lien pour l'utiliser, mais si 
         vous êtes d'humeur à aller plus loin, jetez un oeil à 
-        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/yield">
+        <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Operators/yield">
           "the yield operator in JavaScript"
         </a>
       </div>
@@ -148,7 +148,7 @@ Vous pouvez penser à `{{yield}}` comme à un espace réservé au contenu de la 
 <Message
   @username="Tomster"
   @userIsActive={{true}}
-  @userLocalTime="4:56"
+  @userLocalTime="16h56"
 
   @avatarTitle="L'avatar de Tomster"
   @avatarInitial="T"
