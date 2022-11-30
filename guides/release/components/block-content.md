@@ -1,6 +1,6 @@
-Les templates de composant peuvent avoir un ou plusieurs placeholders que les utilisateurs peuvent remplir avec leur propre code HTML.
-Ces placeholders sont appelés des blocs (ou block).
-Voici un exemple de composant appelé avec le bloc par défaut implicite.
+Les templates de composant peuvent avoir un ou plusieurs placeholders que les utilisateurs peuvent utiliser pour injecter leur propre code HTML.
+Ces placeholders sont appelés des blocs (ou _block_).
+Voici un exemple de composant appelé avec le bloc par défaut (qui est implicite).
 
 ```handlebars
 <ExampleComponent>
@@ -104,7 +104,7 @@ La structure des deux messages est assez simple et similaire, nous pouvons donc 
 </section>
 ```
 
-Ça fonctionne plutôt bien, mais le cas du contenu du message est différent. Le message peut être long, donc pas facile de le passer comme argument. En fait, ce que nous voulons, c'est laisser un placeholder pour tout contenu fourni par la balise `<Message>`.
+Ça fonctionne plutôt bien, mais le cas du contenu du message est différent. Le message peut être long, donc pas facile de le passer en argument. En fait, ce que nous voulons, c'est laisser un placeholder afin de "capturer" tout contenu passé au composant `<Message>`.
 
 La manière de faire ça avec Ember est d'utiliser la syntaxe `{{yield}}`.
 
@@ -134,7 +134,7 @@ La manière de faire ça avec Ember est d'utiliser la syntaxe `{{yield}}`.
         comme Ruby, JavaScript et Python. Pas besoin de comprendre le lien pour l'utiliser, mais si 
         vous êtes d'humeur à aller plus loin, jetez un oeil à 
         <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Operators/yield">
-          "the yield operator in JavaScript"
+          l'opérateur `yield` en JavaScript
         </a>
       </div>
     </div>
@@ -219,7 +219,7 @@ Comme montré ici, nous pouvons passer différents contenus dans la balise. Le c
 
 ### Blocs conditionnels
 
-Parfois, nous pouvons vouloir fournir du contenu par défaut si l'utilisateur d'un composant n'a pas spécifié de bloc. Par exemple, prenons une boîte de dialogue de message d'erreur qui aurait un message par défaut dans les cas où nous ne savons pas quelle erreur s'est produite. Nous pourrions montrer le message par défaut utilisant la syntaxe `(has-block)` dans un composant `ErrorDialog`.
+Parfois, nous pouvons vouloir fournir du contenu par défaut si l'utilisateur d'un composant n'a pas spécifié de bloc. Par exemple, prenons une boîte de dialogue de message d'erreur qui aurait un message par défaut dans les cas où nous ne savons pas quelle erreur s'est produite. Nous pourrions afficher le message par défaut en utilisant la syntaxe `(has-block)` dans un composant `ErrorDialog`.
 
 ```handlebars {data-filename=app/components/error-dialog.hbs}
 <dialog>
@@ -231,7 +231,7 @@ Parfois, nous pouvons vouloir fournir du contenu par défaut si l'utilisateur d'
 </dialog>
 ```
 
-Maintenant, si nous utilisons notre composant `ErrorDialog` sans bloc, nous obtindrons le message par défaut.
+Maintenant, si nous utilisons notre composant `ErrorDialog` sans bloc, il affichera le message par défaut.
 
 ```handlebars
 <ErrorDialog/>
@@ -252,7 +252,7 @@ Cependant, si nous voulons afficher un message plus détaillé, nous pouvons sp�
 </ErrorDialog>
 ```
 
-## Paramètres de bloc
+## Paramètres des blocs
 
 Les blocs peuvent aussi remonter des valeurs au template, à l'image des fonctions de callback en JavaScript. Prenons par exemple un simple composant `BlogPost`.
 
@@ -268,7 +268,7 @@ Les blocs peuvent aussi remonter des valeurs au template, à l'image des fonctio
 <BlogPost @post={{@blogPost}} />
 ```
 
-Nous pourrions vouloir laisser à l'utilisateur la possibilité d'ajouter du contenu supplémentaire avant ou après le post, comme une image ou un profil. Comme nous ne savons pas ce que veut faire l'utilisateur avec le corps du post (`body`), nous pouvons, à la place, lui remonter le `body`.
+Nous pourrions vouloir laisser à l'utilisateur la possibilité d'ajouter du contenu supplémentaire avant ou après le post, comme une image ou un profil. Comme nous ne savons pas ce que veut faire l'utilisateur avec le corps du post (`body`), nous pouvons, à la place, lui retourner le `body`.
 
 ```handlebars {data-filename=app/components/blog-post.hbs}
 <h1>{{@post.title}}</h1>
@@ -288,7 +288,7 @@ Nous pourrions vouloir laisser à l'utilisateur la possibilité d'ajouter du con
 </BlogPost>
 ```
 
-Il est possible de remonter ainsi de multiples valeurs, séparées par des espaces.
+Il est possible de retourner ainsi plusieurs valeurs, séparées par des espaces.
 
 ```handlebars {data-filename=app/components/blog-post.hbs}
 {{yield @post.title @post.author @post.body }}
