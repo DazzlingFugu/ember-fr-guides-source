@@ -1,43 +1,42 @@
-Out of the box, Ember provides 2 components for building a form:
+Ember fournit deux composants prêts à l'emploi pour construire des formulaires:
 
 * [`<Input>`](https://api.emberjs.com/ember/release/classes/Ember.Templates.components/methods/Input?anchor=Input)
 * [`<Textarea>`](https://api.emberjs.com/ember/release/classes/Ember.Templates.components/methods/Textarea?anchor=Textarea)
 
-These components are similar in HTML markup to the native `<input>` or `<textarea>` elements. In contrast to the native elements, `<Input>` and `<Textarea>` automatically update the state of their bound values.
-
+Le markup HTML de ces composants est similaire à celui des éléments `<input>` et `<textarea>`. Au contraire de ces éléments natifs, `<Input>` et `<Textarea>` mettent automatiquement à jour l'état des valeurs qui leur sont liées.
 
 ## `<Input>`
 
-We mentioned that the built-in components are similar in HTML markup to their native counterparts. What does this mean?
+Nous avons dit plus haut que les composants _built-in_ (c'est-à-dire "construits à l'intérieur du framework") ont un markup HTML similaire à celui de leur équivalent natif. Que'est-ce que ça signifie ?
 
-Consider the following example in a template file.
+Considérons l'exemple suivant, le template d'un fichier.
 
 ```handlebars
-<label for="user-question">Ask a question about Ember:</label>
+<label for="user-question">Posez une question sur Ember :</label>
 <Input
   id="user-question"
   @type="text"
-  @value="How do text fields work?"
+  @value="Comment fonctionnent les champs textes ?"
 />
 ```
 
-When Ember renders this template, you will see the following HTML code:
+Quand Ember rend ce template, vous pouvez voir le code HTML suivant : 
 
 ```html
-<label for="user-question">Ask a question about Ember:</label>
-<input id="user-question" type="text" value="How do text fields work?" />
+<label for="user-question">Posez une question sur Ember :</label>
+<input id="user-question" type="text" value="Comment fonctionnent les champs textes ?" />
 ```
 
 
-### Ways to associate labels and inputs
+### Associer _labels_ et _inputs_
 
-Every input should be associated with a label. In HTML, there are a few ways to do this. With the built-in `<Input>` component,
+Chaque _input_ (champ texte) doit être associé à un _label_ (étiquette). Le composant built-in `<Input>` permet de :
 
-1. You can nest the input inside the label.
+1. Imbriquer l'input dans le label.
 
    ```handlebars
    <label>
-     Ask a question about Ember:
+     Posez une question sur Ember :
 
      <Input
        @type="text"
@@ -46,11 +45,11 @@ Every input should be associated with a label. In HTML, there are a few ways to 
    </label>
    ```
 
-2. You can create an ID (globally unique within the webpage), then associate the label to the input with `for` attribute and `id` attribute.
+2. Créer un ID (unique dans la page web), puis associer le label et l'input à l'aide des attributs `for` et `id`.
 
    ```handlebars
    <label for={{this.myUniqueId}}>
-     Ask a question about Ember:
+     Posez une question sur Ember :
    </label>
 
    <Input
@@ -60,37 +59,37 @@ Every input should be associated with a label. In HTML, there are a few ways to 
    />
    ```
 
-3. You can use the `aria-label` attribute to label the input with a string that is visually hidden but still available to assistive technology. 
+3. Utiliser l'attribut `aria-label` pour décrire l'input à l'aide d'un texte invisible à l'écran mais détectable par les technologies d'assistance.
 
    ```handlebars
    <Input
-     aria-label="Ask a question about Ember"
+     aria-label="Posez une question sur Ember"
      @type="text"
      @value={{this.userQuestion}}
    />
    ```
 
-While it is more appropriate to use the `<label>` element, the `aria-label` attribute can be used in instances where visible text content is not possible.
+Il est plus approprié d'utiliser l'élément `<label>`, mais l'attribut `aria-label` devient utile dans les cas où un intitulé visible n'est pas possible.
 
 
-### Setting attributes on `<Input>`
+### Définir les attributs de `<Input>`
 
-With a few exceptions, you can pass [input attributes](https://developer.mozilla.org/docs/Web/HTML/Element/input#Attributes) as attributes (i.e. do not prepend `@`) to the `<Input>` component.
+À quelques exceptions près, vous pouvez passer [les attributs de input](https://developer.mozilla.org/fr/docs/Web/HTML/Element/input#Attributes) au composant `<Input>`.
 
-For example, the `aria-labelledby` attribute may be useful if you have a search input. The search button can serve as the label for the input element:
+Par exemple, l'attribut `aria-labelledby` peut être utile pour implémenter un champ de recherche. Le bouton de recherche peut servir de label pour l'élément input :
 
 ```handlebars
 <Input aria-labelledby="button-search" />
-<button id="button-search" type="button">Search</button>
+<button id="button-search" type="button">Rechercher</button>
 ```
 
-If an attribute is set to a quoted string (`"button-search"` in the prior example), its value will be set directly on the element.
+Quand un attribut est assigné avec des doubles quotes (`"button-search"` dans l'exemple ci-dessus), sa valeur est assignée directement à l'élément.
 
-You can also bind the attribute value to a property that you own.
-In the next example, the `disabled` attribute is bound to the value of `isReadOnly` in the current context.
+Vous pouvez aussi lier l'attribut `value` à une propriété définie dans votre application.
+Dans l'exemple suivant, l'attribut `disabled` est lié à la valeur de `isReadOnly` dans le contexte courant.
 
 ```handlebars
-<label for="input-name">Name:</label>
+<label for="input-name">Nom :</label>
 <Input
   id="input-name"
   @value={{this.name}}
@@ -99,7 +98,7 @@ In the next example, the `disabled` attribute is bound to the value of `isReadOn
 />
 ```
 
-Recall that there were a few exceptions. The following input attributes must be passed as arguments (i.e. do prepend `@`) to the `<Input>` component:
+Rappelez-vous qu'il y a quelques exceptions. Les attributs d'input suivants doivent être passés au composant `<Input>` comme argumens (les arguments sont préfixés du symbole `@`) :
 
 - `@checked`
 - `@type`
@@ -108,10 +107,10 @@ Recall that there were a few exceptions. The following input attributes must be 
 
 ### Actions
 
-Starting with Ember Octane, we recommend using the `{{on}}` modifier to call an action on specific events such as the [input event](https://developer.mozilla.org/docs/Web/API/HTMLElement/input_event).
+À partir de Ember Octane, il est recommandé d'utiliser le modifier `{{on}}` pour appeler une action lors d'un _event_ (événement se produisant sur la page) comment [l'event "input"](https://developer.mozilla.org/fr/docs/Web/API/HTMLElement/input_event).
 
 ```handlebars
-<label for="input-name">Name:</label>
+<label for="input-name">Nom :</label>
 <Input
   id="input-name"
   @value={{this.name}}
@@ -119,13 +118,13 @@ Starting with Ember Octane, we recommend using the `{{on}}` modifier to call an 
 />
 ```
 
-[Learn more about the `{{on}}` modifier.](../../upgrading/current-edition/action-on-and-fn/#toc_the-on-modifier)
+[À propos du modifier `{{on}}`](../../upgrading/current-edition/action-on-and-fn/#toc_the-on-modifier)
 
-Lastly, Ember also provides custom input events `@enter`, `@insert-newline` and `@escape-press`. These events do not exist on native input elements, but you may find them to be useful for handling keyboard interactions.
+Pour terminer, Ember fournit également plusieurs events d'input spécifiques :  `@enter`, `@insert-newline` et `@escape-press`. Ces events n'existent pas sur les éléments input natifs, mais vous pourriez les trouver utiles pour implémenter les intéractions clavier.
 
-The modern, Octane-style way to handle keyboard events is to [write a modifier](../../upgrading/current-edition/glimmer-components/#toc_writing-your-own-modifiers) to separate concerns: The component manages the state, while the modifier manages interactions with the DOM. Your action will receive an actual `event` object.
+Le style Octane moderne pour gérer les events clavier est [d'écrire un modifier](../../upgrading/current-edition/glimmer-components/#toc_writing-your-own-modifiers) afin de séparer les responsabilités : le composant gère les états, tandis que le modifier gère les intéractions avec le DOM. L'action appelée lors d'un event reçoit alors un objet `event` en paramètre.
 
-There are [community-made addons](https://emberobserver.com/?query=keyboard) to help manage keyboard events. For example, with [ember-keyboard](https://github.com/adopted-ember-addons/ember-keyboard), you can write,
+[La communauté propose des addons](https://emberobserver.com/?query=keyboard) permettant de gérer les events clavier. Par exemple, avec [ember-keyboard](https://github.com/adopted-ember-addons/ember-keyboard), vous pouvez écrire :
 
 ```handlebars
 {{!-- Before --}}
@@ -141,17 +140,15 @@ There are [community-made addons](https://emberobserver.com/?query=keyboard) to 
 />
 ```
 
-Note, the `keydown` event was used for `Escape` because `keypress` is deprecated.
+Notez que l'event `keydown` est utilisé pour détecter l'appui sur la touche `Escape` car `keypress` est déprécié.
 
 
-### Checkboxes
+### Cases à cocher
 
-You can use the
-[`<Input>`](https://api.emberjs.com/ember/release/classes/Ember.Templates.components/methods/Input?anchor=Input)
-component to create a checkbox. Set `@type` to the string `"checkbox"`, and use `@checked` instead of `@value`.
+Vous pouvez utiliser le composant [`<Input>`](https://api.emberjs.com/ember/release/classes/Ember.Templates.components/methods/Input?anchor=Input) pour créer une _checkbox_ (case à cocher). Assignez le texte `"checkbox"` à l'argument `@type`, et utilisez `@checked` à la place de `@value`.
 
 ```handlebars
-<label for="admin-checkbox">Is Admin?</label>
+<label for="admin-checkbox">Est admin ?</label>
 <Input
   id="admin-checkbox"
   @type="checkbox"
@@ -159,10 +156,10 @@ component to create a checkbox. Set `@type` to the string `"checkbox"`, and use 
 />
 ```
 
-To call an action on specific events, use the `{{on}}` modifier:
+Pour appeler une action lors d'events spécifiques, utilisez le modifier `{{on}}` :
 
 ```handlebars
-<label for="admin-checkbox">Is Admin?</label>
+<label for="admin-checkbox">Est admin ?</label>
 <Input
   id="admin-checkbox"
   @type="checkbox"
@@ -174,10 +171,10 @@ To call an action on specific events, use the `{{on}}` modifier:
 
 ## `<Textarea>`
 
-The following example shows how to bind `this.userComment` to a text area's value.
+L'exemple suivant montre comment lier `this.userComment` à la valeur d'un élément _textarea_ (texte multi-lignes).
 
 ```handlebars
-<label for="user-comment">Comment:</label>
+<label for="user-comment">Commentaire :</label>
 <Textarea
   id="user-comment"
   @value={{this.userComment}}
@@ -187,34 +184,26 @@ The following example shows how to bind `this.userComment` to a text area's valu
 ```
 
 
-### Setting attributes on `<Textarea>`
+### Définir les attributs d'un `<Textarea>`
 
-With the exception of `@value` argument, you can use any [attribute](https://developer.mozilla.org/docs/Web/HTML/Element/textarea#Attributes) that `<textarea>` natively supports.
-
+À l'exception de l'argument `@value`, vous pouvez passer tous les [attributs](https://developer.mozilla.org/fr/docs/Web/HTML/Element/textarea#Attributes) que `<textarea>` supporte nativement.
 
 <!--
   TODO:
   Move this section to a dedicated page for how to build forms.
   Please present a solution that does not use `{{mut}}`.
 -->
-## Binding dynamic attribute
+## Lier les attributs dynamiques
 
-You might need to bind a property dynamically to an input if you're building a
-flexible form, for example. To achieve this you need to use the
-[`{{get}}`](https://api.emberjs.com/ember/release/classes/Ember.Templates.helpers/methods/get?anchor=get)
-and [`{{mut}}`](https://api.emberjs.com/ember/release/classes/Ember.Templates.helpers/methods/mut?anchor=mut)
-in conjunction like shown in the following example:
+Vous pourriez avoir besoin de lier dynamiquement une propriété à un input si vous construisez, par exemple, un formulaire dynamique. Pour ça, vous devrez utiliser conjointement les helpers [`{{get}}`](https://api.emberjs.com/ember/release/classes/Ember.Templates.helpers/methods/get?anchor=get) et [`{{mut}}`](https://api.emberjs.com/ember/release/classes/Ember.Templates.helpers/methods/mut?anchor=mut) comme dans l'exemple suivant :
 
 ```handlebars
-<label for="input-name">Name:</label>
+<label for="input-name">Nom :</label>
 <Input
   id="input-name"
   @value={{mut (get this.person this.field)}}
 />
 ```
 
-The `{{get}}` helper allows you to dynamically specify which property to bind,
-while the `{{mut}}` helper allows the binding to be updated from the input. See
-the respective helper documentation for more detail:
-[`{{get}}`](https://api.emberjs.com/ember/release/classes/Ember.Templates.helpers/methods/get?anchor=get)
-and [`{{mut}}`](https://api.emberjs.com/ember/release/classes/Ember.Templates.helpers/methods/mut?anchor=mut).
+Le helper `{{get}}` permet de spécifier dynamiquement quelle propriété est liée à la valeur de l'input, tandis que le helper `{{mut}}` permet la mise à jour de cette propriété en fonction du texte entré dans l'input. Pour plus de détails sur ces deux helpers, consultez [`{{get}}`](https://api.emberjs.com/ember/release/classes/Ember.Templates.helpers/methods/get?anchor=get)
+et [`{{mut}}`](https://api.emberjs.com/ember/release/classes/Ember.Templates.helpers/methods/mut?anchor=mut).
