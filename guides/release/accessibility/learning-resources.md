@@ -23,7 +23,7 @@ Ces ressources d'apprentissage sur l'accessibilité ont pour but d'apporter une 
 - [Créateur de palettes de couleur accessibles](https://toolness.github.io/accessible-color-matrix/)
 
 
-### Ecriture
+### Écriture
 
 - [Langage clair et simple](https://plainlanguage.gov/) - Apprendre comment écrire d'une manière accessible et inclusive pour une compréhension de lecture plus facile.
 
