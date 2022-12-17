@@ -1,6 +1,6 @@
 Ces ressources d'apprentissage sur l'accessibilité ont pour but d'apporter une aide additionnelle aux développeurs et développeuses pour améliorer la qualité de leur code.
 
-*Note: Les liens ci-dessous redirigent vers des articles écrits en Anglais
+*Note: La plupart des liens ci-dessous redirigent vers des articles écrits en Anglais
 
 - [Documentation Web MDN: Accessibilité](https://developer.mozilla.org/en-US/docs/Learn/Accessibility)
 - [Utiliser ARIA:](https://www.w3.org/TR/using-aria/) un guide pratique pour développeurs.euses: Comment ajouter des informations d'accessibilité sur des éléments HTML
