@@ -30,4 +30,4 @@ Ces ressources d'apprentissage sur l'accessibilité ont pour but d'apporter une 
 
 ### Autres articles utiles
 
-- [La différence entre la navigation clavier et lecteur d'écran](https://tink.uk/the-difference-between-keyboard-and-screen-reader-navigation/)
+- [The difference between keyboard and screen reader navigation](https://tink.uk/the-difference-between-keyboard-and-screen-reader-navigation/)
