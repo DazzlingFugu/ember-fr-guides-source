@@ -11,7 +11,7 @@ Ces ressources d'apprentissage sur l'accessibilité ont pour but d'apporter une 
 
 ## Ressources pratiques
 
-- [Aperçus sur l'accessibilité](https://accessibilityinsights.io/)- Utiliser FastPass pour trouver des problèmes communs à fort impacts
+- [Accessibility Insights](https://accessibilityinsights.io/)- Utiliser FastPass pour trouver des problèmes communs à fort impact
 - [extension aXe pour Chrome](https://chrome.google.com/webstore/detail/axe/lhdoppojpmngadmnindnejefpokejbdd)
 - [Aide sur l'accessibilité](https://a11ysupport.io/)- Comprendre si son code marche avec les technologies d'assistance
 - [Où et comment ajouter un bug d'accessibilité](https://www.digitala11y.com/how-where-to-report-accessibility-bugs/)
