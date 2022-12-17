@@ -1,4 +1,4 @@
-Ces ressources d'apprentissage sur l'accessibilité ont pour but d'apporter une aide additionnelle aux développeurs.euses pour améliorer la qualité de leur code.
+Ces ressources d'apprentissage sur l'accessibilité ont pour but d'apporter une aide additionnelle aux développeurs et développeuses pour améliorer la qualité de leur code.
 
 *Note: Les liens ci-dessous redirigent vers des articles écrits en Anglais
 
