@@ -19,7 +19,7 @@ Ces ressources d'apprentissage sur l'accessibilité ont pour but d'apporter une 
 
 ### Design
 
-- [ColorSafe](http://colorsafe.co/)- Aider les designers avec de magnifiques palettes de couleurs accessibles, basées sur les directives WCAG, ratio de couleurs de contraste de textes et arrières plans.
+- [ColorSafe](http://colorsafe.co/)- Appuyer les designers en proposant de magnifiques palettes de couleurs accessibles, basées sur les directives WCAG, avec ratio de couleurs de contraste de textes et arrières plans.
 - [Créateur de palettes de couleur accessibles](https://toolness.github.io/accessible-color-matrix/)
 
 
