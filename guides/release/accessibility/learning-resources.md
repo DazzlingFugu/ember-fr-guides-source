@@ -2,11 +2,12 @@ Ces ressources d'apprentissage sur l'accessibilité ont pour but d'apporter une 
 
 *Note: La plupart des liens ci-dessous redirigent vers des articles écrits en Anglais
 
-- [Documentation Web MDN: Accessibilité](https://developer.mozilla.org/en-US/docs/Learn/Accessibility)
-- [Utiliser ARIA:](https://www.w3.org/TR/using-aria/) un guide pratique pour développeurs.euses: Comment ajouter des informations d'accessibilité sur des éléments HTML
-- [Web Content Accessibility Guidelines(WCAG): Directives du contenu web sur l'accessibilité 2.1](https://www.w3.org/TR/WCAG21/)
-- [Accessible Rich Internet Applications (ARIA): Applications internet riches et accessibles 1.1](https://www.w3.org/TR/wai-aria-1.1/)
-- [Comment répondre aux directives WCAG (référence rapide)](https://www.w3.org/WAI/WCAG21/quickref/)
+- [Documentation Web MDN: Accessibilité](https://developer.mozilla.org/fr/docs/Learn/Accessibility)
+
+- [Using ARIA](https://www.w3.org/TR/using-aria/) : un guide pratique pour ajouter aux éléments HTML des informations accessibles.
+- [Web Content Accessibility Guidelines(WCAG) : Directives du contenu web sur l'accessibilité 2.1](https://www.w3.org/TR/WCAG21/)
+- [Accessible Rich Internet Applications (ARIA) : Applications Internet Riches et Accessibles 1.1](https://www.w3.org/TR/wai-aria-1.1/)
+- [How to Meet WCAG (Quick Reference)](https://www.w3.org/WAI/WCAG21/quickref/)
 
 ## Ressources pratiques
 
