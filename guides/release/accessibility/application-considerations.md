@@ -1,6 +1,6 @@
 Dans cette partie, vous allez en apprendre plus sur les différentes configurations et librairies ayant un effet sur l'accessibilité globale d'une application.
 
-## L'attribut Lang
+## L'attribut `lang`
 
 Déclarer la langue d'une page HTML permet aux utilisateurs de mieux comprendre son contenu.
 
@@ -15,11 +15,11 @@ ember new mon-app --lang fr
 
 Cette commande va créer une application ayant le Français définit comme langue principale, sur l'attribut `lang` du tag `<html>`.
 
-Pour une application existant, un développeur peut éditer le fichier `index.html` file ou installer l'addon [ember-intl](https://github.com/ember-intl/ember-intl).
+Pour une application existante, un développeur peut éditer le fichier `index.html` file ou installer l'addon [ember-intl](https://github.com/ember-intl/ember-intl).
 
-L'attribut `lang` du tag `html` ne peut contenir plusieurs _valeurs_. Si un élément de la page contient du texte dans une langue différente que la langue principale, vous pouvez dans ce cas lui définir son propre attribut `lang`.
+L'attribut `lang` de l'élément `html` ne peut contenir plusieurs _valeurs_. Si un élément de la page contient du texte dans une langue différente que la langue principale, vous pouvez lui définir son propre attribut `lang`.
 
-![Par exemple, the tag HTML peut définir "es" en tant que langue principale et un paragraphe peut quant à lui avoir "en" en tant que langue définie](/images/accessibility/application-considerations/lang.png)
+![Par exemple, l'élément HTML peut définir "es" en tant que langue principale et un paragraphe peut quant à lui avoir "en" en tant que langue définie](/images/accessibility/application-considerations/lang.png)
 
 <div class="cta">
   <div class="cta-note">
@@ -47,12 +47,12 @@ Voici quelques exemples d'addons axés sur l'accessibilité créés par des memb
 - [ember-a11y-landmarks](https://github.com/ember-a11y/ember-a11y-landmarks) - Un addon Ember facilitant l'utilisation des rôles sémantique HTML afin d'améliorer l'accessibilité.
 - [ember-component-focus](https://github.com/ember-a11y/ember-component-focus) - Un mixin pour ajouter des méthodes à vos composants Ember afin de vous aider à gérer l'élément ayant le focus
 - [ember-steps](https://github.com/rwjblue/ember-steps) - Addon de création de wizard, de flow avec onglets, et plus ...
-- [ember-page-title](https://github.com/tim-evans/ember-page-title) - Addon de gestion des titres de page pour application Ember.js
+- [ember-page-title](https://github.com/tim-evans/ember-page-title) - Addon de gestion des titres de page pour applications Ember.js
 - [ember-self-focused](https://github.com/linkedin/self-focused/tree/master/packages/ember-self-focused) - Bouge le focus sur le corps d'une page au changement de route
-- [ember-keyboard](https://github.com/patience-tema-baron/ember-keyboard) - Un addon Ember.js pour simplifier la gestion des événements clavier.
+- [ember-keyboard](https://github.com/patience-tema-baron/ember-keyboard) - Addon pour simplifier la gestion des événements clavier.
 - [ember-a11y-testing](https://github.com/ember-a11y/ember-a11y-testing) - Pour ajouter facilement des tests d'accessibilités dans une suite de tests Ember.
-- [a11y-announcer](https://github.com/ember-a11y/a11y-announcer) - Un addon permettant d'annoncer les changements de route côté lecteur d'ecran.
-- [ember-template-lint](https://github.com/ember-template-lint/ember-template-lint) - linter pour les template Ember
+- [a11y-announcer](https://github.com/ember-a11y/a11y-announcer) - Addon permettant d'annoncer les changements de route côté lecteur d'ecran.
+- [ember-template-lint](https://github.com/ember-template-lint/ember-template-lint) - Linter pour les template Ember
   ![Aperçu d'un compte rendu de lint d'un template](/images/accessibility/application-considerations/template-lint.png)
 
 Bien qu'il y ait beaucoup de notions à prendre en compte et à connaître, voici une aide-mémoire pour vous aider à commencer: [Aide-memoire Accéssibilités](https://moritzgiessmann.de/accessibility-cheatsheet/)
