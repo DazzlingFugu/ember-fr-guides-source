@@ -3,7 +3,7 @@ Ember fournit deux composants prêts à l'emploi pour construire des formulaires
 * [`<Input>`](https://api.emberjs.com/ember/release/classes/Ember.Templates.components/methods/Input?anchor=Input)
 * [`<Textarea>`](https://api.emberjs.com/ember/release/classes/Ember.Templates.components/methods/Textarea?anchor=Textarea)
 
-Le markup HTML de ces composants est similaire à celui des éléments `<input>` et `<textarea>`. Au contraire de ces éléments natifs, `<Input>` et `<Textarea>` mettent automatiquement à jour l'état des valeurs qui leur sont liées.
+Le markup HTML de ces composants est similaire à celui des éléments natifs `<input>` et `<textarea>`. À la différence des éléments natifs, `<Input>` et `<Textarea>` mettent automatiquement à jour l'état des valeurs qui leur sont liées.
 
 ## `<Input>`
 
@@ -30,7 +30,7 @@ Quand Ember rend ce template, vous pouvez voir le code HTML suivant :
 
 ### Associer _labels_ et _inputs_
 
-Chaque _input_ (champ texte) doit être associé à un _label_ (étiquette). Le composant built-in `<Input>` permet de :
+Chaque _input_ (champ texte) doit être associé à un _label_ (étiquette). Il y a différentes manières d'écrire cette association en HTML. Le composant built-in `<Input>` permet de :
 
 1. Imbriquer l'input dans le label.
 
@@ -107,7 +107,7 @@ Rappelez-vous qu'il y a quelques exceptions. Les attributs d'input suivants doiv
 
 ### Actions
 
-À partir de Ember Octane, il est recommandé d'utiliser le modifier `{{on}}` pour appeler une action lors d'un _event_ (événement se produisant sur la page) comment [l'event "input"](https://developer.mozilla.org/fr/docs/Web/API/HTMLElement/input_event).
+À partir de Ember Octane, il est recommandé d'utiliser le modifier `{{on}}` pour appeler une action lors d'un _event_ (événement se produisant sur la page) comme [l'event "input"](https://developer.mozilla.org/fr/docs/Web/API/HTMLElement/input_event).
 
 ```handlebars
 <label for="input-name">Nom :</label>
@@ -122,7 +122,7 @@ Rappelez-vous qu'il y a quelques exceptions. Les attributs d'input suivants doiv
 
 Pour terminer, Ember fournit également plusieurs events d'input spécifiques :  `@enter`, `@insert-newline` et `@escape-press`. Ces events n'existent pas sur les éléments input natifs, mais vous pourriez les trouver utiles pour implémenter les intéractions clavier.
 
-Le style Octane moderne pour gérer les events clavier est [d'écrire un modifier](../../upgrading/current-edition/glimmer-components/#toc_writing-your-own-modifiers) afin de séparer les responsabilités : le composant gère les états, tandis que le modifier gère les intéractions avec le DOM. L'action appelée lors d'un event reçoit alors un objet `event` en paramètre.
+Le style moderne (ou Ember Octane) pour gérer les events clavier est [d'écrire un modifier](../../upgrading/current-edition/glimmer-components/#toc_writing-your-own-modifiers) afin de séparer les responsabilités : le composant gère les états, tandis que le modifier gère les intéractions avec le DOM. L'action appelée lors d'un event reçoit alors un objet `event` en paramètre.
 
 [La communauté propose des addons](https://emberobserver.com/?query=keyboard) permettant de gérer les events clavier. Par exemple, avec [ember-keyboard](https://github.com/adopted-ember-addons/ember-keyboard), vous pouvez écrire :
 
