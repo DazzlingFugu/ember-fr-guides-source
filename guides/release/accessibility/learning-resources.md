@@ -25,7 +25,7 @@ Ces ressources d'apprentissage sur l'accessibilité ont pour but d'apporter une 
 
 ### Écriture
 
-- [Langage clair et simple](https://plainlanguage.gov/) - Apprendre comment écrire d'une manière accessible et inclusive pour une compréhension de lecture plus facile.
+- [plainlanguage.gov](https://plainlanguage.gov/) - Apprendre comment écrire d'une manière accessible et inclusive pour une compréhension de lecture plus facile.
 
 
 ### Autres articles utiles
