@@ -7,7 +7,7 @@ Le markup HTML de ces composants est similaire à celui des éléments natifs `<
 
 ## `<Input>`
 
-Nous avons dit plus haut que les composants _built-in_ (c'est-à-dire "construits à l'intérieur du framework") ont un markup HTML similaire à celui de leur équivalent natif. Que'est-ce que ça signifie ?
+Nous avons dit plus haut que les composants _built-in_ (c'est-à-dire "construits à l'intérieur du framework") ont un markup HTML similaire à celui de leur équivalent natif. Qu'est-ce que ça signifie ?
 
 Considérons l'exemple suivant, le template d'un fichier.
 
@@ -16,7 +16,7 @@ Considérons l'exemple suivant, le template d'un fichier.
 <Input
   id="user-question"
   @type="text"
-  @value="Comment fonctionnent les champs textes ?"
+  @value="Comment fonctionnent les champs texte ?"
 />
 ```
 
