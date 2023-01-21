@@ -11,7 +11,7 @@ Des technologies d'assistance (aussi appelées lecteurs d'écran, ou plus couram
 - NVDA, logiciel open source, disponible sur Windows
 - TalkBack, intégré sur les produits Android
 
-Lorsque tu développes et crées des tests de conformité, garde à l'esprit qu'il y a des combinaisons de lecteurs d'écran et navigateurs qui ont été développés afin de bien fonctionner ensembles, en utilisant des combinaisons différentes, cela peut donner des résultats de faux positif. Ces combinaisons peuvent changer avec le temps, une révision régulière de la liste ci-dessous est recommandée:
+Lorsque qu'on développe et effectue des tests de conformité, il faut garder à l'esprit que des combinaisons de lecteur d'écran et navigateur qui fonctionnent bien ensemble ont été développées. En utilisant des combinaisons différentes, cela peut donner des faux positif. Ces combinaisons peuvent changer avec le temps, une révision régulière de la liste ci-dessous est recommandée:
 
 - Firefox & NVDA (Windows)
 - IE & JAWS (Windows)
