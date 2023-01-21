@@ -5,7 +5,7 @@ Il est important d'utiliser un lecteur d'écran pour s'assurer que son applicati
 Des technologies d'assistance (aussi appelées lecteurs d'écran, ou plus couramment _screen readers_ en anglais) sont disponibles sur la plupart les plateformes d'ordinateurs et smartphones.
 
 - VoiceOver, intégré sur les produits Apple
-- Narrator, intégré sur produits Windows
+- Narrator, intégré sur les produits Windows
 - Orca, disponible en intégration sur Ubuntu, ou disponible en téléchargement
 - JAWS, technologie brevetée par Freedom Scientific, disponible sur Windows
 - NVDA, logiciel open source, disponible sur Windows
