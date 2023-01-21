@@ -1,4 +1,4 @@
-## Combinaison de lecteur d'écran et navigateur
+## Combinaisons de lecteur d'écran et navigateur
 
 Il est important d'utiliser un lecteur d'écran pour s'assurer que ton application est accessible.
 
