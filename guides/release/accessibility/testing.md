@@ -2,7 +2,7 @@
 
 Il est important d'utiliser un lecteur d'écran pour s'assurer que son application est accessible.
 
-Des technologies d'assistance (aussi appelées lecteurs d'écran) sont disponibles sur la plupart les plateformes d'ordinateurs et smartphones.
+Des technologies d'assistance (aussi appelées lecteurs d'écran, ou plus couramment _screen readers_ en anglais) sont disponibles sur la plupart les plateformes d'ordinateurs et smartphones.
 
 - VoiceOver, intégré sur les produits Apple
 - Narrator, intégré sur produits Windows
