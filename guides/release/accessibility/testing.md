@@ -18,4 +18,4 @@ Lorsque qu'on développe et effectue des tests de conformité, il faut garder à
 - Edge & Narrator (Windows)
 - Safari & VoiceOver (MacOS)
 
-La meilleure méthode pour apprendre comment un lecteur d'écran fonctionne est de l'utiliser soi-même ! Cela peut paraître difficile au début, mais comprendre l'utilisation d'un lecteur d'écran (ainsi que d'autres technologies d'assistance) t'aidera a devenir un·e développeur·euse plus expérimenté·e.
+La meilleure méthode pour apprendre comment un lecteur d'écran fonctionne est de l'utiliser soi-même ! Cela peut paraître difficile au début, mais comprendre l'utilisation d'un lecteur d'écran (ainsi que d'autres technologies d'assistance) vous aidera à acquérir davantage d'expérience.
