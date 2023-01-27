@@ -1,21 +1,21 @@
-## Screen Reader and Browser Combinations
+## Combinaisons de lecteur d'écran et navigateur
 
-It is important to use a screen reader when checking to make sure your application is accessible. 
+Il est important d'utiliser un lecteur d'écran pour s'assurer que son application est accessible.
 
-There are assistive technologies (known as screen readers) available for all common desktop platforms and mobile devices. 
+Des technologies d'assistance (aussi appelées lecteurs d'écran, ou plus couramment _screen readers_ en anglais) sont disponibles sur la plupart les plateformes d'ordinateurs et smartphones.
 
-- VoiceOver, integrated in Apple products
-- Narrator, integrated in Windows products
-- Orca, available for integration in Ubuntu, otherwise available as a download
-- JAWS, proprietary software by Freedom Scientific, available for Windows
-- NVDA, open source software, available for Windows
-- TalkBack, integrated in Android products
+- VoiceOver, intégré sur les produits Apple
+- Narrator, intégré sur les produits Windows
+- Orca, disponible en intégration sur Ubuntu, ou disponible en téléchargement
+- JAWS, technologie brevetée par Freedom Scientific, disponible sur Windows
+- NVDA, logiciel open source, disponible sur Windows
+- TalkBack, intégré sur les produits Android
 
-While developing and testing for conformance, keep in mind that there are well-known screen reader and browser combinations that were developed in a way that work well together; using combinations different than these may produce false-positive results. It should be noted that these may change over time, so periodic review of this list is recommended. 
+Lorsque qu'on développe et effectue des tests de conformité, il faut garder à l'esprit que des combinaisons de lecteur d'écran et navigateur qui fonctionnent bien ensemble ont été développées. En utilisant des combinaisons différentes, cela peut donner des faux positif. Ces combinaisons peuvent changer avec le temps, une révision régulière de la liste ci-dessous est recommandée:
 
 - Firefox & NVDA (Windows)
 - IE & JAWS (Windows)
 - Edge & Narrator (Windows)
 - Safari & VoiceOver (MacOS)
 
-The absolute best method for learning how a screen reader works is using one yourself! It might feel a little awkward at first, but understanding how to use a screen reader (and other assistive technology) will help you become a more skilled developer. 
+La meilleure méthode pour apprendre comment un lecteur d'écran fonctionne est de l'utiliser soi-même ! Cela peut paraître difficile au début, mais comprendre l'utilisation d'un lecteur d'écran (ainsi que d'autres technologies d'assistance) vous aidera à acquérir davantage d'expérience.
