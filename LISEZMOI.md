@@ -3,6 +3,7 @@
 # Ember Guides en français
 
 Ce répertoire contient la traduction française du guide officiel Ember.js :
+
 - [Ember.js Guides, site web](https://github.com/ember-learn/ember-website),
 - [Ember Guides Source](https://github.com/ember-learn/guides-source)
 
@@ -18,7 +19,7 @@ Le contenu du Guide Ember est écrit en Markdown. En général, votre PR ne devr
 
 ## Développement local
 
-**NOTE:** Ce projet utilise [Volta](https://volta.sh/) pour s'assurer que la bonne version de Node.js et de NPM est utilisée lors du développement local.
+**NOTE:** Ce projet utilise [Volta](https://volta.sh/) pour s'assurer que la bonne version de Node.js et de npm est utilisée lors du développement local.
 
 Pour exécuter l'app Guide Ember localement, saisissez ces commandes dans votre terminal :
 
@@ -27,8 +28,7 @@ git clone git://github.com/DazzlingFugu/ember-fr-guides-source.git
 
 cd ember-fr-guides-source
 npm install
-npm run setup
-npm start
+ember serve
 ```
 
 Ensuite, visitez [http://localhost:4200](http://localhost:4200) dans votre navigateur.

@@ -252,9 +252,6 @@ first
 focusability
 focusable
 formatter
-focusability
-focusable
-formatter
 formatters
 front-end
 frontend/S
@@ -297,27 +294,16 @@ jquery-integration
 keyCode
 lang
 lifecycle/S
-<<<<<<< HEAD
-=======
-linter
-linters
-LSP
->>>>>>> 201f3b99 (Docs/ update and translate `README.md` (#5))
 lint
 linté
 lintés
 linter/S
 linter/a0p+
 linting
-<<<<<<< HEAD
-localhost:4200
-lockfile/S
-LSP
-=======
->>>>>>> 201f3b99 (Docs/ update and translate `README.md` (#5))
 localhost:4200
 lockfile/S
 lookups
+LSP
 md5
 minifi/DR
 minification
