@@ -1,3 +1,4 @@
+*NPM
 *google
 2FA
 30KB
@@ -178,9 +179,13 @@ chainable
 cheatsheet
 checkboxes
 checksum/S
+coc-ember
 codebase/S
 codemod
 codemods
+CoffeeScript
+ColorSafe
+checksum/S
 componentized
 composable
 config
@@ -188,6 +193,8 @@ configPath
 cron
 customizable
 customizations
+D3
+DAP
 dasherize
 dasherized
 datepicker
@@ -245,6 +252,7 @@ first
 focusability
 focusable
 formatter
+formatters
 front-end
 frontend/S
 fullname
@@ -295,6 +303,7 @@ linting
 localhost:4200
 lockfile/S
 lookups
+LSP
 md5
 minifi/DR
 minification
@@ -399,6 +408,8 @@ template-lifecycle-dom-and-modifiers
 templating
 todo
 todos
+treesitter
+triple-backtick
 tooltip
 trackable
 transitionTo

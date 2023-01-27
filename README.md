@@ -3,6 +3,7 @@
 # Ember Guides French Source
 
 This repository contains the French translation of the official Ember.js Guides:
+
 - [Ember.js Guides website (English)](https://github.com/ember-learn/ember-website),
 - [Ember Guides Source (English)](https://github.com/ember-learn/guides-source)
 
@@ -14,7 +15,7 @@ First-time contributors are encouraged to look at issues that are labeled **help
 
 Please see [CONTRIBUTING.md](CONTRIBUTING.md) for additional instructions on how to format your work and submit a PR.
 
-The Ember French Guides content is written in Markdown. In general, your PR should make edits to only the files in the `/guides/release` directory, which corresponds to the latest version of Ember. 
+The Ember French Guides content is written in Markdown. In general, your PR should make edits to only the files in the `/guides/release` directory, which corresponds to the latest version of Ember.
 
 ## Local development
 
@@ -27,8 +28,7 @@ git clone git://github.com/DazzlingFugu/ember-fr-guides-source.git
 
 cd ember-fr-guides-source
 npm install
-npm run setup
-npm start
+ember serve
 ```
 
 Afterwards, visit [http://localhost:4200](http://localhost:4200) in your browser.
@@ -57,7 +57,7 @@ npm run test:node
 
 # Run all test scripts in `/node-tests/local`. In particular,
 # this command checks all external links in the release version
-# of the Guides and across all versions of the official Guides. 
+# of the Guides and across all versions of the official Guides.
 npm run test:node-local
 
 # When checking external links in the release version, don't

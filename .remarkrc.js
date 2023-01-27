@@ -1,3 +1,4 @@
+/* eslint-env node */
 const unified = require("unified");
 const read = require("fs").readFileSync;
 const dictionaryFr = require("dictionary-fr");
