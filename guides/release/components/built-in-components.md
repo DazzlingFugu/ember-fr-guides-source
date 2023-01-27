@@ -30,7 +30,7 @@ Quand Ember rend ce template, vous pouvez voir le code HTML suivant :
 
 ### Associer _labels_ et _inputs_
 
-Chaque _input_ (champ texte) doit être associé à un _label_ (étiquette). Il y a différentes manières d'écrire cette association en HTML. Le composant built-in `<Input>` permet de :
+Chaque _input_ (champ texte) doit être associé à un _label_ (étiquette). Il y a différentes manières d'écrire cette association en HTML. Avec le composant built-in `<Input>`, il est possible de :
 
 1. Imbriquer l'input dans le label.
 
@@ -85,7 +85,7 @@ Par exemple, l'attribut `aria-labelledby` peut être utile pour implémenter un 
 
 Quand un attribut est assigné avec des doubles quotes (`"button-search"` dans l'exemple ci-dessus), sa valeur est assignée directement à l'élément.
 
-Vous pouvez aussi lier l'attribut `value` à une propriété définie dans votre application.
+Vous pouvez aussi lier la valeur d'un attribut à une propriété définie dans votre application.
 Dans l'exemple suivant, l'attribut `disabled` est lié à la valeur de `isReadOnly` dans le contexte courant.
 
 ```handlebars
@@ -98,7 +98,7 @@ Dans l'exemple suivant, l'attribut `disabled` est lié à la valeur de `isReadOn
 />
 ```
 
-Rappelez-vous qu'il y a quelques exceptions. Les attributs d'input suivants doivent être passés au composant `<Input>` comme argumens (les arguments sont préfixés du symbole `@`) :
+Rappelez-vous qu'il y a quelques exceptions. Les attributs d'input suivants doivent être passés au composant `<Input>` comme arguments (les arguments sont préfixés du symbole `@`) :
 
 - `@checked`
 - `@type`
