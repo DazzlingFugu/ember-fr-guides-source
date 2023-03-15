@@ -1,117 +1,97 @@
-Welcome to Ember! Follow this guide to build a simple web app using HTML, JavaScript, the command line, and some of Ember's best features.
-Each step has code you can copy and paste directly or modify to make it your own.
-Along the way, you will be introduced to the Ember community so that you know who to ask for help and how to continue your learning journey.
+Bienvenue dans Ember&nbsp;! Suivez ce guide pour construire une application web simple utilisant HTML, JavaScript, l'outil de ligne de commande et quelques-unes des meilleures fonctionnalités de Ember. En chemin, nous vous présenterons la communauté Ember afin que vous sachiez vers qui vous tourner pour recevoir de l'aide ou continuer votre apprentissage.
 
-We'll cover these steps:
+Voici les étapes que nous couvrirons&nbsp;:
 
-1. Installing Ember.
-2. Creating a new application.
-3. Defining a route.
-4. Writing a UI component.
-5. Building your app to be deployed to production.
-6. Deploying your app to Netlify.
+1. Installer Ember
+2. Créer une nouvelle application
+3. Définir une route
+4. Écrire un composant d'UI
+5. _Builder_ l'app pour la déployer en production
+6. Déployer l'app sur Netlify
 
-## Install Ember
+## Installer Ember
 
-You can install Ember with a single command using npm,
-the Node.js package manager.
-Type this into your terminal:
+Ember peut être installé avec une simple commande NPM, le gestionnaire de paquets de Node.js. Tapez ceci dans votre terminal&nbsp;:
 
 ```bash
 npm install -g ember-cli
 ```
 
-Don't have npm? [Learn how to install Node.js and npm here](https://docs.npmjs.com/getting-started/installing-node).
-For a full list of dependencies necessary for an Ember CLI project, visit the [Ember CLI Guides - Installing](https://cli.emberjs.com/release/basic-use/).
+Vous n'avez pas NPM&nbsp;? [Apprenez comment installer Node.js et NPM ici](https://docs.npmjs.com/getting-started/installing-node). Pour une liste complète de toutes les dépendances nécessaires à un projet Ember CLI, visitez [Ember CLI Guides - Installing](https://cli.emberjs.com/release/basic-use/).
 
-## Create a New Application
+## Créer une Nouvelle Application
 
-Once you've installed Ember CLI via npm,
-you will have access to a new `ember` command in your terminal.
-You can use the `ember new` command to create a new application.
+Une fois Ember CLI installé à l'aide de NPM, vous avez accès à une nouvelle commande `ember` dans votre terminal. Vous pouvez désormais taper la commande `ember new` pour créer une nouvelle application&nbsp;:
 
 ```bash
 ember new ember-quickstart --lang en
 ```
 
-This one command will create a new directory called `ember-quickstart` and set up a new Ember application inside of it.
-The `--lang en` option sets the app's primary language to English to help improve [accessibility](../../accessibility/application-considerations/).
-Out of the box, your application will include:
+Cette commande crée un nouveau dossier appelé `ember-quickstart` et prépare une nouvelle application Ember à l'intérieur. L'option `--lang en` définit l'anglais comme langue principale afin d'améliorer dès le départ l'[accessibilité](../../accessibility/application-considerations/). Telle quelle, l'application fraîchement créée inclut&nbsp;:
 
-* A development server.
-* Template compilation.
-* JavaScript and CSS minification.
-* Modern features via Babel.
+- Un serveur de développpement
+- Un compilateur de templates
+- La minification des fichiers JavaScript et CSS
+- Les fonctionnalités modernes via Babel
 
-By providing everything you need to build production-ready web applications in an integrated package,
-Ember makes starting new projects a breeze.
+En fournissant tout ce dont vous avez besoin pour construire une application web prête pour la production, Ember fait de la création d'un nouveau projet une promenade de santé.
 
-Let's make sure everything is working properly.
-`cd` into the application directory `ember-quickstart` and start the development server by typing:
+Assurons-nous que tout fonctionne comme attendu. Tapez la commande `cd` pour accéder au répertoire `ember-quickstart` et démarrez le serveur de développement&nbsp;:
 
 ```bash
 cd ember-quickstart
 ember serve
 ```
 
-After a few seconds, you should see output that looks like this:
+Après quelques secondes, vous devriez voir le contenu suivant dans votre terminal&nbsp;:
 
 ```text
 Livereload server on http://localhost:7020
 Serving on http://localhost:4200/
 ```
 
-(To stop the server at any time, type Ctrl-C in your terminal.)
+(Pour arrêter le serveur, tapez Ctrl-C dans votre terminal.)
 
-Open [`http://localhost:4200`](http://localhost:4200) in your browser of choice.
-You should see an Ember welcome page and not much else.
+Visitez [`http://localhost:4200`](http://localhost:4200) dans le navigateur de votre choix.
+Vous devriez voir une page de bienvenue Ember, et rien d'autre.
 
 <div class="cta">
   <div class="cta-note">
     <div class="cta-note-body">
-      <div class="cta-note-heading">Zoey says...</div>
+      <div class="cta-note-heading">Zoey dit...</div>
       <div class="cta-note-message">
-        If you are having trouble getting this running, other Ember developers would be happy to help!
-        Visit <a href="https://emberjs.com/community/"> The Ember Community Page</a> to join chat groups or forums.
+        Si vous rencontrez un problème pour démarrer le serveur et afficher la page de bienvenue, d'autres devs Ember seront ravis de vous aider&nbsp;! Visitez <a href="https://emberjs.com/community/">la page Ember Community</a> pour rejoindre des groupes de discussion ou des forums.
       </div>
     </div>
     <img src="/images/mascots/zoey.png" role="presentation" alt="">
   </div>
 </div>
 
-Congratulations! You just created and booted your first Ember app.
+Félicitations&nbsp;! Vous venez de créer et lancer votre première app Ember.
 
-## Write some HTML in a template
+## Écrire du HTML dans un template
 
-We will start by editing the `application` template.
-This template is always on screen while the user has your application loaded.
-In your editor, open `app/templates/application.hbs` and change it to the following:
+Nous commencerons par éditer le template de l'`application`. Ce template est toujours celui affiché à l'écran quand un utilisateur charge votre application. Dans votre éditeur, ouvrez `app/templates/application.hbs` et changez le contenu comme suit&nbsp;:
 
 ```handlebars {data-filename=app/templates/application.hbs}
-<h1>PeopleTracker</h1>
+<h1>Registre de noms</h1>
 
 {{outlet}}
 ```
 
-Ember detects the changed file and automatically reloads the page for you in the background.
-You should see that the welcome page has been replaced by "PeopleTracker".
-You also added an `{{outlet}}` to this page,
-which means that any route will be rendered in that place.
+Ember détecte automatiquement que le fichier a changé et recharge la page pour vous en arrière-plan. Vous devriez voir la page de bienvenue remplacée par "Compteur de visites". Nous avons aussi ajouté un `{{outlet}}` à cette page. Cela signifie que toute route à afficher le sera à cet endroit.
 
-## Define a Route
+## Définir une Route
 
-Let's build an application that shows a list of scientists.
-To do that, the first step is to create a route.
-For now, you can think of routes as being the different pages that make up your application.
+Construisons une application qui affiche une liste de scientifiques. Pour cela, la première étape est de créer une route. Dans un premier temps, imaginez les routes comme étant les différentes pages de votre application.
 
-Ember comes with _generators_ that automate the boilerplate code for common tasks.
-To generate a route, type this in a new terminal window in your `ember-quickstart` directory:
+Ember inclut des _generators_ (générateurs) qui automatisent l'écriture des morceaux de code les plus courants. Pour générer une route, tapez ceci dans une nouvelle fenêtre de votre terminal, toujours depuis le répertoire `ember-quickstart`&nbsp;:
 
 ```bash
 ember generate route scientists
 ```
 
-You'll see output like this:
+Vous verrez les journaux suivants:
 
 ```text
 installing route
@@ -123,54 +103,46 @@ installing route-test
   create tests/unit/routes/scientists-test.js
 ```
 
-That is Ember telling you that it has created:
+Ember vous indique les fichiers qu'il a créé pour vous&nbsp;:
 
-1. A template to be displayed when the user visits `/scientists`.
-2. A `Route` object that fetches the model used by that template.
-3. An entry in the application's router (located in `app/router.js`).
-4. A unit test for this route.
+1. Un template à afficher quand l'utilisateur visite `/scientists`.
+2. Un objet `Route` qui récupère le modèle utilisé par ce template.
+3. Une entrée dans le routeur de l'application (situé dans `app/router.js`).
+4. Un test unitaire pour cette route.
 
-Open the newly-created template in `app/templates/scientists.hbs` and add the following HTML:
+Ouvrez le template fraîchement créé dans `app/templates/scientists.hbs` et ajoutez le contenu HTML suivant&nbsp;:
 
 ```handlebars {data-filename=app/templates/scientists.hbs}
-{{page-title "Scientists"}}
-<h2>List of Scientists</h2>
+{{page-title "Scientifiques"}}
+<h2>Liste de Scientifiques</h2>
 ```
 
-In your browser, open [`http://localhost:4200/scientists`](http://localhost:4200/scientists).
-You should see the `<h2>` we put in the `scientists.hbs` template right below the `<h1>` from our `application.hbs` template.
+Dans votre navigateur, ouvrez [`http://localhost:4200/scientists`](http://localhost:4200/scientists). Vous devriez voir le `<h2>` que nous avons écrit dans `scientists.hbs`, juste en dessous du `<h1>` provenant du template `application.hbs`.
 
-Since the scientist route is nested under the application route, Ember will render its content inside the application route template's `{{outlet}}` directive.
+Puisque la route "scientist" est imbriquée dans la route de l'application, Ember affiche son contenu à l'intérieur de la directive `{{outlet}}` du template de l'application.
 
-Now that we've got the `scientists` template rendering,
-let's give it some data to render.
-We do that by specifying a _model_ for that route,
-and we can specify a model by editing `app/routes/scientists.js`.
+Maintenant que le rendu du template `scientists` est prêt, fournissons-lui quelques données à afficher. Pour cela, nous allons spécifier un _model_ (modèle) pour cette route en éditant `app/routes/scientists.js`.
 
-We'll take the code created for us by the generator and add a `model()` method to the `Route`:
+Partons du code créé pour nous par le générateur et ajoutons une méthode `model()` à la `Route`&nbsp;:
 
 ```javascript {data-filename="app/routes/scientists.js"}
-import Route from '@ember/routing/route';
+import Route from "@ember/routing/route";
 
 export default class ScientistsRoute extends Route {
   model() {
-    return ['Marie Curie', 'Mae Jemison', 'Albert Hofmann'];
+    return ["Marie Curie", "Mae Jemison", "Albert Hofmann"];
   }
 }
 ```
 
-This code example uses a feature of JavaScript called classes.
-Learn more with this [overview of the latest JavaScript features](https://ponyfoo.com/articles/es6).
+Cet exemple de code utilise une fonctionnalité de JavaScript appelée les classes. Apprenez-en davantage avec cette [vue d'ensemble des dernières fonctionnalités JavaScript](https://ponyfoo.com/articles/es6).
 
-In a route's `model()` method, you return whatever data you want to make available to the template.
-If you need to fetch data asynchronously,
-the `model()` method supports any library that uses [JavaScript Promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise).
+La méthode `model()` d'une route vous permet de retourner n'importe quelles données que vous souhaitez rendre accessible au template. Si vous devez récupérer des données de manière asynchrone, la méthode `model()` supporte n'importe quelle librairie basée sur les [Promises (promesses) JavaScript](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Promise).
 
-Now let's tell Ember how to turn that array of strings into HTML.
-Open the `scientists` template and add the following code to loop through the array and print it:
+À présent, indiquons à Ember comment transformer ce tableau de `string` en HTML. Ouvrez le template `scientists` et ajoutez le code suivant pour itérer sur le tableau et l'afficher&nbsp;:
 
 ```handlebars {data-filename="app/templates/scientists.hbs"}
-<h2>List of Scientists</h2>
+<h2>Liste de Scientifiques</h2>
 
 <ul>
   {{#each @model as |scientist|}}
@@ -179,32 +151,25 @@ Open the `scientists` template and add the following code to loop through the ar
 </ul>
 ```
 
-Here, we use the `each` _helper_ to loop over each item in the array we
-provided from the `model()` hook. Ember will render the _block_ contained
-inside the `{{#each}}...{{/each}}` helper once for each item (each scientist in
-our case) in the array. The item (the scientist) that is being rendered
-currently will be made available in the `scientist` variable, as denoted by
-`as |scientist|` in the `each` helper.
+Ici, nous utilisons le _helper_ `each` pour itérer sur chaque élément transmis par le _hook_ `model()` (Le terme _hook_ désigne une fonction "prévue par le framework"&nbsp;: parce que la méthode `model()` se trouve dans un fichier spécifique et porte un nom spécifique, Ember sait où la trouver et exécute le code que vous y avez écrit à un moment précis.)
 
-The end result is that there will be one `<li>` element corresponding to each
-scientist in the array inside the `<ul>` unordered list.
+Ember affiche le bloc contenu à l'intérieur du _helper_ `{{#each}}...{{/each}}` pour chaque élément (dans notre cas, chaque scientifique) du tableau. L'élément (le scientifique) en cours de traitement est rendu disponible dans une variable `scientist`, notée `as |scientist|` dans le _helper_ `each`.
 
-## Create a UI Component
+Le résultat final consiste en une balise `<li>` par scientifique du tableau à l'intérieur de la balise `<ul>` (pour _unordered list_, liste non ordonnée).
 
-As your application grows, you will notice you are sharing UI elements between multiple pages,
-or using them multiple times on the same page.
-Ember makes it easy to refactor your templates into reusable components.
+## Écrire un Composant d'UI
 
-Let's create a `<PeopleList>` component that we can use in multiple places to show a list of people.
+À mesure que votre application grandit, vous constaterez que vous partagez certains éléments d'UI entre plusieurs pages, ou bien que vous utiliserez les mêmes plusieurs fois dans la même page. Ember vous permet d'améliorer facilement vos templates en en faisant des composants réutilisables.
 
-As usual, there's a generator that makes this easy for us.
-Make a new component by typing:
+Créons un composant `<PeopleList>` que nous pouvons utiliser à de multiples endroits pour afficher une liste de personnes.
+
+Comme toujours, un générateur nous rend la tâche facile. Créez un nouveau composant en tapant&nbsp;:
 
 ```bash
 ember generate component people-list
 ```
 
-Copy and paste the `scientists` template into the `<PeopleList>` component's template and edit it to look as follows:
+Copiez-collez le contenu du template `scientists` dans celui de `<PeopleList>`, puis éditez-le comme suit&nbsp;:
 
 ```handlebars {data-filename=app/components/people-list.hbs}
 <h2>{{@title}}</h2>
@@ -216,73 +181,59 @@ Copy and paste the `scientists` template into the `<PeopleList>` component's tem
 </ul>
 ```
 
-Note that we've changed the title from a hard-coded string ("List of Scientists")
-to `{{@title}}`. The `@` indicates that `@title` is an argument that will be
-passed into the component, which makes it easier to reuse the same component in
-other parts of the app we are building.
+Nous avons changé le titre ("Liste de Scientifiques") écrit en dur en `{{@title}}`. `@` indique que `@title` est un argument qui sera passé au composant, ce qui facilite sa réutilisation dans d'autres endroits de l'application.
 
-We've also renamed `scientist` to the more-generic `person`,
-decreasing the coupling of our component to where it's used.
+Nous avons aussi renommé `scientist` en `person`, un mot plus générique, afin de découpler le composant de l'endroit précis où il est utilisé.
 
-Our component is called `<PeopleList>`, based on its name on the file system. Please note that the letters P and L are capitalized.
+Notre composant s'appelle `<PeopleList>`, ce nom est basé sur le nom du fichier. Notez que les lettres P et L sont en majuscule.
 
 <div class="cta">
   <div class="cta-note">
     <div class="cta-note-body">
-      <div class="cta-note-heading">Zoey says...</div>
+      <div class="cta-note-heading">Zoey dit...</div>
       <div class="cta-note-message">
-        A component's name is derived from its file name.
-        We capitalize the first letter and every letter after <code>-</code>, then remove the hyphens.
-        This is known as pascal case.
+        Le nom d'un composant est dérivé de son nom de fichier.
+        La première lettre et les lettres situées après chaque <code>-</code> sont en majuscule, et les tirets supprimés.
+        Cette syntaxe est connue sous le nom de "pascal case".
       </div>
     </div>
     <img src="/images/mascots/zoey.png" role="presentation" alt="">
   </div>
 </div>
 
-Save this template and switch back to the `scientists` template.
+Sauvegardez ce template et retournez sur le template `scientists`.
 
-We're going to tell our component:
+Nous allons indiquer à notre composant&nbsp;:
 
-1. What title to use, via the `@title` argument.
-2. What array of people to use, via the `@people` argument. We'll
-   provide this route's `@model` as the list of people.
+1. Quel titre utiliser, via l'argument `@title`.
+2. Quel tableau de personnes utiliser, via l'argument `@people`. Nous fournirons le `@model` de la route comme liste de personnes.
 
-We'll need to make some changes to the code we wrote before.
+Pour cela, nous allons devoir faire quelques changements dans le code écrit précédemment.
 
-In the rest of the code examples in this tutorial, whenever we add or remove code, we will show a "diff." The lines you need to remove have a minus sign in front of them, and the lines you should add have a plus sign. If you are using a screen reader while you go through the Guides, we recommend using Firefox and NVDA or Safari and VoiceOver for the best experience.
+Dans le reste des exemples de codes de ce tutoriel, à chaque fois que nous ajouterons ou supprimerons du code, nous montrerons un "diff". Les lignes à supprimer commenceront par un signe moins, et les lignes à ajouter par un signe plus. Si vous utilisez un lecteur d'écran tandis que vous parcourez le Guide, nous recommendons, pour la meilleure expérience, l'utilisation de Firefox et NVDA ou Safari et VoiceOver.
 
-Let's replace all our old code with our new componentized version:
+Remplaçons l'ancien code avec la version avec composant&nbsp;:
 
-```handlebars {data-filename="app/templates/scientists.hbs" data-diff="-1,-2,-3,-4,-5,-6,-7,+8,+9,+10,+11"}
-<h2>List of Scientists</h2>
+```handlebars {data-filename="app/templates/scientists.hbs" data-diff="-1,-2,-3,-4,-5,-6,-7,+8"}
+<h2>Liste de Scientifiques</h2>
 
 <ul>
   {{#each @model as |scientist|}}
     <li>{{scientist}}</li>
   {{/each}}
 </ul>
-<PeopleList 
-  @title="List of Scientists" 
-  @people={{@model}} 
-/>
+<PeopleList @title="Liste de Scientifiques" @people={{@model}} />
 ```
 
-Go back to your browser and you should see that the UI looks identical.
-The only difference is that now we've componentized our list into a version that's more reusable and more maintainable.
+Retournez sur votre navigateur et vous devriez constater que l'UI est identique. La seule différence est que, maintenant, l'affichage de la liste est géré par un composant réutilisable et plus facile à maintenir.
 
-You can see this in action if you create a new route that shows a different list of people.
-As an additional exercise (that we won't cover),
-you can try to create a `programmers` route that shows a list of famous programmers.
-If you re-use the `<PeopleList>` component, you can do it with almost no code at all.
+Vous pouvez voir le composant en action en créant une nouvelle route affichant une liste de personnes différentes. Par exemple, en exercice additionnel (à faire vous-mêmes), vous pourriez essayer de créer une route `programmers` qui affiche une liste de programmeur et programmeuses célèbres. Si vous réutilisez le composant `<PeopleList>`, vous pouvez le faire pratiquement sans ajouter de code.
 
-## Responding to user interactions
+## Répondre aux interactions utilisateur
 
-So far, our application is listing data, but there is no way for the user to
-interact with the information. In web applications we often want to respond to
-user actions like clicks or hovers. Ember makes this easy to do.
+Pour l'instant, notre application liste des données, mais il n'y a aucun moyen pour l'utilisateur d'interagir avec les informations. En application web, nous voulons souvent répondre aux actions utilisateur comme les clics ou les survols avec la souris. Ember nous simplifie la tâche.
 
-First, we can modify the `<PeopleList>` component to include a button:
+D'abord, modifions le composant `<PeopleList>` pour inclure un bouton&nbsp;:
 
 ```handlebars {data-filename="app/components/people-list.hbs"}
 <h2>{{@title}}</h2>
@@ -296,41 +247,29 @@ First, we can modify the `<PeopleList>` component to include a button:
 </ul>
 ```
 
-Now that we have a button, we need to wire it up to do _something_ when a user
-clicks on it. For simplicity, let's say we want to show an `alert` dialog with
-the person's name when the button is clicked.
+Maintenant que nous avons un bouton, nous devons le brancher pour "faire quelque chose" quand un utilisateur clique dessus. Pour rester simple, admettons que, au moment du clic, nous voulons afficher un message d'alerte contenant le nom de la personne.
 
-So far, our `<PeopleList>` component is purely presentational – it takes some
-inputs as arguments and renders them using a template. To introduce _behavior_
-to our component – handling the button click in this case, we will need to
-attach some _code_ to the component.
+Jusque-là, notre composant `<PeopleList>` est purement présentationnel, il prend des arguments en entrée et les affiche à l'aide d'un template. Pour donner un comportement à notre composant – ici, gérer le clic – nous devons "attacher du code" au composant.
 
-In addition to the template, a component can also have a JavaScript file for
-this exact purpose. Go ahead and create a `.js` file with the same name and in
-the same directory as our template (`app/components/people-list.js`),
-and paste in the following content:
+Pour cela, en plus du template, un composant peut aussi avoir un fichier JavaScript. Créez un fichier `.js` avec le même nom et dans le même dossier que le template (`app/components/people-list.js`), et collez le contenu suivant&nbsp;:
 
 ```javascript {data-filename="app/components/people-list.js"}
-import Component from '@glimmer/component';
-import { action } from '@ember/object';
+import Component from "@glimmer/component";
+import { action } from "@ember/object";
 
 export default class PeopleListComponent extends Component {
   @action
   showPerson(person) {
-    alert(`The person's name is ${person}!`);
+    alert(`Le nom de cette personne est ${person}!`);
   }
 }
 ```
 
-_Note: If you want this file created for you, you may pass the `-gc` flag when running the component generator._
+_Note: Si vous voulez que ce fichier soit généré pour vous, vous pouvez passer l'option `-gc` quand vous lancez le générateur de composant._
 
-Here, we created a basic component class and added a method that accepts a
-person as an argument and brings up an alert dialog with their name. The
-`@action` _decorator_ indicates we want to use this method as an _action_
-in our template, in response to user interaction.
+Ici, nous avons créé une classe de composant basique et ajouté une méthode qui accèpte une personne en argument et affiche une boîte de dialogue avec son nom. Le _decorator_ (décorateur) `@action` indique que nous souhaitons utiliser cette méthode en tant qu'"action" dans notre template, en réponse à une interation utilisateur.
 
-Now that we have implemented the desired behavior, we can go back to
-the component's template and wire everything up:
+Le comportement implémenté, nous pouvons retourner sur le template du composant et le mettre à jour&nbsp;:
 
 ```handlebars {data-filename="app/components/people-list.hbs" data-diff="-6,+7"}
 <h2>{{@title}}</h2>
@@ -339,21 +278,17 @@ the component's template and wire everything up:
   {{#each @people as |person|}}
     <li>
       <button type="button">{{person}}</button>
-      <button type="button" {{on 'click' this.showPerson}}>{{person}}</button>
+      <button type="button" {{on "click" this.showPerson}}>{{person}}</button>
     </li>
   {{/each}}
 </ul>
 ```
 
-Here, we used the `on` _modifier_ to attach the `this.showPerson` action to
-the button in the template.
+Ici, nous utilisons le _modifier_ `on` pour attacher l'action `this.showPerson` au bouton qui se trouve dans le template.
 
-There is a problem with this though – if you tried this in the browser, you
-will quickly discover that clicking on the buttons will bring up an alert
-dialog that said "The person's name is `[Object MouseEvent]`!" – eek!
+Cependant, nous avons un problème. Si vous essayez dans le navigateur, vous vous apercevrez que cliquer sur les boutons affiche une boîte de dialogue annonçant "Le nom de cette personne est `[Object MouseEvent]`!" – eek&nbsp;!
 
-The cause of this bug is that we wrote our action to take an argument – the
-person's name – and we forgot to pass it. The fix is easy enough:
+La cause de ce bug est que l'action que nous avons écrite prend un argument – le nom de la personne – et nous avons oublié de le passer. Fixer ça est assez simple&nbsp;:
 
 ```handlebars {data-filename="app/components/people-list.hbs" data-diff="-6,+7"}
 <h2>{{@title}}</h2>
@@ -361,161 +296,140 @@ person's name – and we forgot to pass it. The fix is easy enough:
 <ul>
   {{#each @people as |person|}}
     <li>
-      <button type="button" {{on 'click' this.showPerson}}>{{person}}</button>
-      <button type="button" {{on 'click' (fn this.showPerson person)}}>{{person}}</button>
+      <button type="button" {{on "click" this.showPerson}}>{{person}}</button>
+      <button
+        type="button"
+        {{on "click" (fn this.showPerson person)}}
+      >{{person}}</button>
     </li>
   {{/each}}
 </ul>
 ```
 
-Instead of passing the action to the `on` modifier directly, we used the `fn`
-helper to pass the `person` as an argument which our action expects.
+Au lieu de passer l'action directement au _modifier_ `on`, nous utilisons le _helper_ `fn` pour passer `person` en tant qu'argument attendu par l'action.
 
-Feel free to try this in the browser. Finally, everything should behave exactly
-as we hoped!
+Essayez dans votre navigateur. Cette fois, tout devrait se comporter comme espéré&nbsp;!
 
-## Building For Production
+## _Builder_ pour la Production
 
-Now that we've written our application and verified that it works in development,
-it's time to get it ready to deploy to our users.
+Maintenant que nous avons écrit notre application et vérifié qu'elle fonctionne en développement, il est temps de la préparer au déploiement pour nos utilisateurs.
 
-To do so, run the following command:
+Pour cela, lancez la commande suivante&nbsp;:
 
 ```bash
 ember build --environment=production
 ```
 
-The `build` command packages up all of the assets that make up your
-application&mdash;JavaScript, templates, CSS, web fonts, images, and
-more.
+La commande `build` empaquette tous les fichiers qui constituent votre application &mdash; JavaScript, templates, CSS, polices web, images, etc... &mdash; Dans le Guide, nous appellerons le résultat de cette commande le "build" et emploierons l'anglicisme "builder" en tant que verbe d'action pour cette opération.
 
-In this case, we told Ember to build for the production environment via the `--environment` flag.
-This creates an optimized bundle that's ready to upload to your web host.
-Once the build finishes,
-you'll find all of the concatenated and minified assets in your application's `dist/` directory.
+Ici, nous avons dit à Ember de builder l'application pour l'environnement de production via l'option `--environment`. On obtient ainsi un paquet optimisé et prêt à être téléversé sur votre serveur web. Une fois le build terminé, vous trouverez tous les fichiers concaténés et minifiés dans le dossier `dist/` de votre application.
 
-The Ember community values collaboration and building common tools that everyone relies on.
-If you're interested in deploying your app to production in a fast and reliable way,
-check out the [Ember CLI Deploy](http://ember-cli-deploy.com/) addon.
+La communauté Ember accorde beaucoup de valeur à la collaboration et à la construction d'outils communs sur lesquels chacun puisse s'appuyer. Si vous êtes intéressé par un moyen fiable et rapide de déployer votre application en production, jetez un oeil à l'addon [Ember CLI Deploy](http://ember-cli-deploy.com/).
 
-If you deploy your application to an Apache web server, first create a new virtual host for the application.
-To make sure all routes are handled by `index.html`,
-add the following directive to the application's virtual host configuration:
+Si vous déployez votre application sur un serveur web Apache, créez d'abord un nouvel hôte virtuel pour votre application. Pour vous assurer que toutes les routes sont traitées par l'`index.html`, ajoutez la directive suivante dans la configuration de l'hôte virtuel de l'application&nbsp;:
 
 ```apacheconf
 FallbackResource index.html
 ```
 
-## Deploying your app to Netlify
+## Déployer l'app sur Netlify
 
-[Netlify](http://netlify.com/products) is a one of many ways to deploy your app to the web so you can share it with others!
+[Netlify](http://netlify.com/products) est l'une des nombreuses solutions existantes pour déployer votre application sur le web et la partager&nbsp;!
 
-![About Netlify](/images/quick-guide/netlify/netlify-product.png)
+![À propos de Netlify](/images/quick-guide/netlify/netlify-product.png)
 
-Why Netlify?
+Pourquoi Netlify?
 
-It does not require a high level of knowledge for you to deploy your website to production.
-Netlify offers a free account option and no credit card is required.
-These Guides themselves are hosted on Netlify, while other parts of `emberjs.com` are hosted using Heroku, Fastly, GitHub pages, and AWS.
-Overall, Ember developers have many options for how they deploy their apps! Netlify is just one of the many options you have.
+Cette solution ne requiert pas de connaissances avancées pour déployer votre site web en production. Netlify offre une option de compte gratuit et aucune carte bancaire n'est requise. Le Guide Ember officiel est hébergé sur Netlify, tandis que d'autres ressources de `emberjs.com` sont hébergées sur Heroku, Fastly, Github pages, et AWS.
+Dans l'ensemble, les devs Ember ont de nombreuses possibilités à leur disposition pour déployer leurs apps&nbsp;! Netlify en est une parmi d'autres.
 
-Following these steps will help you get your site up and running in minutes:
+Suivre les étapes suivantes vous aidera à mettre en place votre site en quelques minutes&nbsp;:
 
-First you need to [sign up for a Netlify account](https://app.netlify.com/signup) if you do not already have one:
+D'abord, [créez un compte Netlify](https://app.netlify.com/signup) si vous n'en avez pas déjà un&nbsp;:
 
-![deploying to Netlify](/images/quick-guide/netlify/create-netlify-account.png)
+![Déployer sur Netlify](/images/quick-guide/netlify/create-netlify-account.png)
 
-The next step is to let the web app server know how to handle URLs. There are 2 ways to do so.
+L'étape suivante est d'indiquer au serveur web comment traiter les URLs. Il y a deux manières de le faire.
 
-One, you can create a file in your `ember-quickstart/public` folder called
-`_redirects`. Add `/* /index.html 200` to the first line and save the file. 
-This will let the server know to redirect all pages to `index.html` file. 
-Once redirected, Ember.js app itself will generate the matching html for URLs such as `/scientists`.
+La première est de créer un fichier `_redirects` dans votre dossier `ember-quickstart/public`. Écrivez `/* /index.html 200` à la première ligne et sauvegardez le fichier. Cela indiquera au serveur de rediriger toutes les pages sur `index.html`. Une fois redirigée, l'app Ember.js elle-même générera le HTML correspondant aux URLs comme `/scientists`.
 
-Two, you can use an addon created by the community, such as [ember-cli-netlify](https://github.com/shipshapecode/ember-cli-netlify), to handle URLs.
+La deuxième est d'utiliser un addon créé par la communauté, comme [ember-cli-netlify](https://github.com/shipshapecode/ember-cli-netlify), pour gérer les URLs.
 
-Now you are ready to deploy your app to production on Netlify platform. There are two ways to do this:
+Vous voilà prêt à déployer votre app en production sur la plateforme Netlify. Il y a deux manières de le faire&nbsp;:
 
-1. Deploying to Netlify using drag and drop
-2. Deploying to Netlify using Git (specifically GitHub)
+1. Déployer sur Netlify en utilisant le glisser-déposer
+2. Déployer sur Netlify en utilisant Git (plus précisément GitHub)
 
-**Deploying to Netlify using drag and drop**
+**Déployer sur Netlify en utilisant le glisser-déposer**
 
-You may need to re-create your `dist` directory to include changes made to `_redirects` file by running this command
+Vous pourriez avoir besoin de recréer le dosier `dist` pour inclure les changements faits dans le fichier `_redirects` en relançant la commande&nbsp;:
 
 ```bash
 ember build --environment=production
 ```
 
-Once you are logged-in to your Netlify account and in the "Sites" section, you should see the Netlify drag and drop area
+Une fois que vous êtes connecté à votre compte Netlify, dans la section "Sites", vous devriez voir la zone de glisser-déposer de Netlify.
 
-  ![Netlify Drag and Drop Area](/images/quick-guide/netlify/drag-and-drop/02.png)
+![Netlify Drag and Drop Area](/images/quick-guide/netlify/drag-and-drop/02.png)
 
-Next, locate your `dist` folder on your local machine and drag and drop it into this area
+Ensuite, trouvez votre dossier `dist` sur votre ordinateur et glissez-déposez-le dans cette zone.
 
-When your files have been successfully uploaded, you should see the status of your deployment in the "Getting started" section
+Quand vos fichiers ont été téléversés avec succès, vous devriez voir le statut de votre déploiement dans la section "Getting started".
 
 ![Getting Started using Drag and Drop on Netlify](/images/quick-guide/netlify/drag-and-drop/03.png)
 
-Once you see "Your site is deployed" as shown above, your website is now live and you can click on the link provided above the "Getting started" section to view your site
+Une fois que vous voyez le message "Your site is deployed" comme ci-dessus, votre site est en ligne et, pour le voir, vous pouvez cliquer sur le lien fourni au-dessus de la section "Getting started".
 
-![View your site on Netlify](/images/quick-guide/netlify/drag-and-drop/04.png)
+![Voir votre site sur Netlify](/images/quick-guide/netlify/drag-and-drop/04.png)
 
-Congratulations! Your site is now live and in production!
+Félicitations! Votre site est en production !
 
-**Deploying to Netlify using Git (specifically GitHub)**
+**Déployer sur Netlify en utilisant Git (plus précisément GitHub)**
 
-Make sure you are logged-in to your Netlify account and in the "Sites" section
+Assurez-vous que vous êtes connecté à votre compte Netlify, puis dans la section "Sites", cliquez sur le bouton "New site from Git".
 
-Click the button that says "New site from Git".
+![Netlify Déploiement Continu Git](/images/quick-guide/netlify/github/new-site-from-git.png)
 
-![Netlify Continuous Deployment Git](/images/quick-guide/netlify/github/new-site-from-git.png)
+Cliquez sur le bouton "GitHub" sous "Continuous Deployment" pour connecter votre compte GitHub. Lors de cette étape, vous devrez interagir avec une série d'écrans de login GitHub et on vous demandera de configurer vos préférences GitHub relatives à Netlify.
 
-Click the "GitHub" button under "Continuous Deployment" to connect to your GitHub account. Please note you will be taken to a series of GitHub login screens and asked to select your GitHub preferences related to Netlify
+![Netlify choisissez votre répertoire GitHub pour déployer](/images/quick-guide/netlify/github/connect-to-github.png)
 
-![Netlify choose your GitHub repository to deploy](/images/quick-guide/netlify/github/connect-to-github.png)
+Une fois votre compte GitHub connecté avec succès à Netlify, vous devriez voir une liste de répertoires. Sélectionnez ou recherchez le répertoire GitHub que vous souhaitez déployer.
 
-Once you have successfully connected your GitHub account with Netlify, you should see a list of repositories to choose from. Select or search for your GitHub repository that you wish to deploy
+![Netlify Options de Déploiement par Défaut Ember](/images/quick-guide/netlify/github/select-github-repo.png)
 
-![Netlify Ember Default Deploy Settings](/images/quick-guide/netlify/github/select-github-repo.png)
+Si vous avez pu sélectionner le répertoire et qu'il s'agit d'une application Ember, Netlify générera automatiquement des options de déploiement par défaut comme montré ci-dessous. Ici, admettons que vous ne souhaitez pas changer les options. Si tout vous semble en ordre, cliquez sur le bouton "Deploy site".
 
-If you have successfully selected your repo and it is an Ember application, Netlify will automatically generate the deploy settings as shown below. These instructions assume you do not want to change any of the default settings generated by Netlify. So if everything looks good to you, go ahead and click the "Deploy site" button
+![Netlify GitHub Vue d'Ensemble du Déploiement](/images/quick-guide/netlify/github/github-create-new-site.png)
 
-![Netlify GitHub Deploy Overview](/images/quick-guide/netlify/github/github-create-new-site.png)
+Une fois que vous avez cliqué sur le bouton "Deploy site", vous serez redirigé sur l'"Overview" (vue d'ensemble) de votre site web et vous devriez voir le status de votre déploiement.
 
-Once you click the "Deploy site" button, you will be taken to your website "Overview" and you should see the status of your deployment
+![Netlify GitHub Confirmation du Déploiement](/images/quick-guide/netlify/github/github-deploy-confirmation.png)
 
-![Netlify GitHub Deploy Confirmation](/images/quick-guide/netlify/github/github-deploy-confirmation.png)
+Quand vous voyez "Your site is deployed" comme ci-dessus, votre site est en ligne et, pour le voir, vous pouvez cliquer sur le lien fourni au-dessus de la section "Getting started".
 
-Once you see "Your site is deployed" as shown above, your website is now live and you can click on the link provided above the "Getting started" section to view your site
+![Voir votre site sur Netlify](/images/quick-guide/netlify/github/github-live.png)
 
-![View your site on Netlify](/images/quick-guide/netlify/github/github-live.png)
+Félicitations! Votre site est en production !
 
-Congratulations! Your site is now live and in production!
-  
-## Next steps
+## Étapes suivantes
 
-Now that your app is deployed, what should you do next?
+Maintenant que votre app est déployée, que devriez-vous faire ensuite&nbsp;?
 
-### Advance to the next level
+### Monter au niveau suivant
 
-There is an official, free tutorial here in the Guides that delves deeper into some of the features you used today.
-[Give it a try!](../../tutorial/part-1/)
+Il existe un tutoriel officiel gratuit dans le Guide qui approfondit quelques-unes des fonctionnalités que nous avons vues. [Pourquoi ne pas l'essayer&nbsp;?](../../tutorial/part-1/)
 
-### Explore the ecosystem
+### Explorer l'écosystème
 
-Now that you have the basics down, are you feeling creative and adventurous?
-The Ember community has created hundreds of addons that you can use for free in your app.
-Addons let you quickly add features like calendars, navbars, payments, authentication, themes, and more.
-Visit [Ember Observer](https://emberobserver.com) to browse the possibilities!
+À présent que vous connaissez les bases, vous sentez-vous plus créatif et aventureux&nbsp;? La communauté Ember a créé des centaines d'addons que vous pouvez utiliser gratuitement dans votre app. Les addons vous permettent d'ajouter rapidement des fonctionnalités comme des calendriers, barres de navigation, outils de paiement, d'authentification, thèmes, etc... Visitez [Ember Observer](https://emberobserver.com) pour jeter un oeil à toutes les possibilités&nbsp;!
 
-### Style it up
+### Ajoutez un style
 
-That app we made is a bit plain. Do you know any CSS? Put your styles in `app/styles/app.css`, which is automatically included in your app build.
+L'app que nous avons réalisée est un peu brute. Connaissez-vous CSS&nbsp;? Placez vos feuilles de style dans `app/styles/app.css`, qui est inclus automatiquement dans le build de votre app.
 
-### Connect with the Ember Community
+### Connectez-vous à la communauté Ember
 
-One thing that makes Ember special is that every app you create has a _lot_ in common with apps that other people have made.
-This means that chances are good that you can connect with other developers who share both your interests and technical challenges.
-Visit the [Ember Community page](https://emberjs.com/community/) to learn about the ways you can get connected. Find a nearby meetup, ask questions, follow a newsletter, and more!
-We hope to see you around!
+Une chose qui rend Ember si spécial est que chaque app que vous créez a _beaucoup_ en commun avec les apps que d'autres ont réalisées avant vous. Ainsi, il y a de grandes chances que vous puissiez échanger avec des développeurs et développeuses qui partagent les mêmes intérêts et défis techniques que vous. Visitez la page [Ember Community](https://emberjs.com/community/) pour apprendre comment entrer en contact. Trouvez un meetup à venir, posez des questions, suivez la newsletter et plus encore&nbsp;!
+
+Nous espérons vous voir&nbsp;!
