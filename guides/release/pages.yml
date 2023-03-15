@@ -55,7 +55,7 @@
           url: "service-injection"
         - title: "Ember Data"
           url: "ember-data"
-        - title: 'Composants dit "Provider"'
+        - title: 'Composants dits "Provider"'
           url: "provider-components"
         - title: "Récapitulatif"
           url: "recap"
@@ -76,7 +76,7 @@
       url: "conditional-content"
     - title: "Contenu des Blocs"
       url: "block-content"
-    - title: "Fonctions dites "Helpers""
+    - title: 'Fonctions dites "Helpers"'
       url: "helper-functions"
     - title: "État local des Composants et Actions"
       url: "component-state-and-actions"
