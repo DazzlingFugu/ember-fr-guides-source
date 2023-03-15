@@ -1,34 +1,33 @@
-In this section, you will learn about the configurations and libraries that affect an entire application's accessibility.
+Dans cette partie, vous allez en apprendre plus sur les différentes configurations et librairies ayant un effet sur l'accessibilité globale d'une application.
 
-## Lang Attribute
+## L'attribut `lang`
 
-Declaring the language of the HTML document allows users to better understand your content.
+Déclarer la langue d'une page HTML permet aux utilisateurs de mieux comprendre son contenu.
 
-> Both assistive technologies and conventional user agents can render text more accurately when the language of the Web page is identified. Screen readers can load the correct pronunciation rules. Visual browsers can display characters and scripts correctly. Media players can show captions correctly. As a result, users with disabilities will be better able to understand the content.
+> Les outils d'accessibilités ainsi que les navigateurs Web sont capables d'avoir un rendu plus précis quand la langue d'une page est définie. Les lecteurs d'écrans peuvent ainsi affiner leurs prononciations. Les navigateurs Web peuvent correctement afficher les caractères et les scripts. Les lecteurs vidéos peuvent afficher les bons sous-titres. Tout ceci permet aux utilisateurs, ayant un handicap, de mieux comprendre le contenu d'une page Web.
 > [WCAG Success Criterion 3.1.1: Intent](https://www.w3.org/WAI/WCAG21/Understanding/language-of-page.html#intent)
 
-A primary language should be defined on the `<html>` element's `lang` attribute. For new apps, you can use the `--lang` option on the `ember new` command to set the language for a new application.
+La langue principale doit être définie au niveau de l'attribut `lang` du l'élément `<html>`. Lors de la création d'une nouvelle application, vous pouvez utiliser l'option `--lang` de la commande `ember new` afin d'en définir sa langue principale.
 
 ```bash
 ember new mon-app --lang fr
 ```
 
-This command will create your application with French defined as the primary language
-on the `<html>` element's `lang` attribute.
+Cette commande va créer une application ayant le français définit comme langue principale, sur l'attribut `lang` de l'élément `<html>`.
 
-For existing Ember apps, a developer may edit the `index.html` file or leverage [ember-intl](https://github.com/ember-intl/ember-intl).
+Pour une application existante, un développeur peut éditer le fichier `index.html` file ou installer l'addon [ember-intl](https://github.com/ember-intl/ember-intl).
 
-The `html` element may not have multiple `lang` _values_. If an element contains content in a language different from the primary, then you can provide the element its own `lang` attribute.
+L'attribut `lang` de l'élément `html` ne peut contenir plusieurs _valeurs_. Si un élément de la page contient du texte dans une langue différente que la langue principale, vous pouvez lui définir son propre attribut `lang`.
 
-![For example, the HTML tag may have a lang of "es" while a paragraph may have a lang of "en"](/images/accessibility/application-considerations/lang.png)
+![Par exemple, l'élément HTML peut définir "es" en tant que langue principale et un paragraphe peut quant à lui avoir "en" en tant que langue définie](/images/accessibility/application-considerations/lang.png)
 
 <div class="cta">
   <div class="cta-note">
     <div class="cta-note-body">
-      <div class="cta-note-heading">Zoey says...</div>
+      <div class="cta-note-heading">Zoey dit...</div>
       <div class="cta-note-message">
         <p>
-        To learn more about the lang attribute and how to use it: <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/lang">https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/lang</a>. Unsure which language subtag to use? Try <a href="https://r12a.github.io/app-subtags/">the Language Subtag Lookup tool</a>.
+        Pour en apprendre plus l'attribut lang et comment l'utiliser: <a href="https://developer.mozilla.org/fr/docs/Web/HTML/Global_attributes/lang">https://developer.mozilla.org/fr/docs/Web/HTML/Global_attributes/lang</a>. Vous ne savez pas quelle valeur utiliser pour l'attribut lang ? Jetez un coup d'œil à cet <a href="https://r12a.github.io/app-subtags/">outil de recherche</a>.
         </p>
       </div>
     </div>
@@ -36,23 +35,24 @@ The `html` element may not have multiple `lang` _values_. If an element contains
   </div>
 </div>
 
-## Accessibility addons
+## Les addons d'accessibilité
 
-Any addon that will provide UI elements to the application should be evaluated for accessibility before use.
+Tout addon fournissant des composants visuels à une application devrait être évalué en termes d'accessibilité avant d'être utilisé.
 
-There are some existing Ember addons that may help you make your app more accessible. Each addon should be evaluated for its own usefulness and merit- you may find in some instances, that it would be better to implement the ideas presented in the addon in your own application.
+Il existe déjà des addons Ember pouvant vous aider à rendre une application plus accessible.
+Chaque addon doit être choisi en fonction des bénéfices qu'il apporte et de son utilité. Il est possible que dans certains cas, il soit préférable de réimplémenter vous-même une partie des fonctionnalités d'un addon, directement dans votre application.
 
-Here are some examples of accessibility-focused addons created by many people throughout the Ember community:
+Voici quelques exemples d'addons axés sur l'accessibilité créés par des membres de la communauté Ember:
 
-- [ember-a11y-landmarks](https://github.com/ember-a11y/ember-a11y-landmarks) - Ember addon to help with landmark roles for better accessibility
-- [ember-component-focus](https://github.com/ember-a11y/ember-component-focus) - A mixin for adding methods to your Ember components that help you manage the currently focused element.
-- [ember-steps](https://github.com/rwjblue/ember-steps) - Declarative create wizards, tabbed UIs, and more
-- [ember-page-title](https://github.com/tim-evans/ember-page-title) - Page title management for Ember.js Apps
-- [ember-self-focused](https://github.com/linkedin/self-focused/tree/master/packages/ember-self-focused) - Focus on route on transition
-- [ember-keyboard](https://github.com/patience-tema-baron/ember-keyboard) - An Ember.js addon for the painless support of keyboard events
-- [ember-a11y-testing](https://github.com/ember-a11y/ember-a11y-testing) - A suite of accessibility tests that can be run within the Ember testing framework
-- [a11y-announcer](https://github.com/ember-a11y/a11y-announcer) - An accessible ember route change announcer
-- [ember-template-lint](https://github.com/ember-template-lint/ember-template-lint) - linter for Ember templates
-  ![Template Linting Preview](/images/accessibility/application-considerations/template-lint.png)
+- [ember-a11y-landmarks](https://github.com/ember-a11y/ember-a11y-landmarks) - Addon facilitant l'utilisation des rôles sémantique HTML afin d'améliorer l'accessibilité.
+- [ember-component-focus](https://github.com/ember-a11y/ember-component-focus) - Un mixin pour ajouter des méthodes à vos composants Ember afin de vous aider à gérer l'élément ayant le focus
+- [ember-steps](https://github.com/rwjblue/ember-steps) - Addon de création de wizard, de flow avec onglets, et plus ...
+- [ember-page-title](https://github.com/tim-evans/ember-page-title) - Addon de gestion des titres de page pour applications Ember.js
+- [ember-self-focused](https://github.com/linkedin/self-focused/tree/master/packages/ember-self-focused) - Bouge le focus sur le corps d'une page au changement de route
+- [ember-keyboard](https://github.com/patience-tema-baron/ember-keyboard) - Addon pour simplifier la gestion des événements clavier.
+- [ember-a11y-testing](https://github.com/ember-a11y/ember-a11y-testing) - Pour ajouter facilement des tests d'accessibilités dans une suite de tests Ember.
+- [a11y-announcer](https://github.com/ember-a11y/a11y-announcer) - Addon permettant d'annoncer les changements de route côté lecteur d'ecran.
+- [ember-template-lint](https://github.com/ember-template-lint/ember-template-lint) - Linter pour les template Ember
+  ![Aperçu d'un compte rendu de lint d'un template](/images/accessibility/application-considerations/template-lint.png)
 
-While there are quite a few moving parts, here's a cheat sheet to get you started: [Accessibility Cheat Sheet](https://moritzgiessmann.de/accessibility-cheatsheet/)
+Bien qu'il y ait beaucoup de notions à prendre en compte et à connaître, voici un aide-mémoire pour vous aider à commencer : [Accessibility Cheat Sheet](https://moritzgiessmann.de/accessibility-cheatsheet/)
