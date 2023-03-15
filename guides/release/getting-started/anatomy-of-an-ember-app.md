@@ -1,130 +1,104 @@
-Before you start writing any Ember code, it's a good idea to get an overview of how an
-Ember application works.
+Avant de se lancer dans du code Ember, il peut être utile de se faire une idée de la manière dont une application Ember fonctionne.
 
-![ember core concepts](/images/ember-core-concepts/ember-core-concepts.svg)
+![Concepts fondamentaux d'Ember](/images/ember-core-concepts/ember-core-concepts.svg)
 
-## Router and Route Handlers
+## Routeur et Gestionnaires de Route
 
-Imagine we are writing a web app for a site that lets users list their properties to rent. At any given time, we should be able to answer questions about the current state like _What rental are they looking at?_ and _Are they editing it?_ In Ember, the answer to these questions is determined by the URL.
-The URL can be set in a few ways:
+Imaginons que nous écrivons une web app permettant aux utilisateurs de lister leurs biens à louer. À tout instant, nous devrions être en mesure de répondre à des questions telles que : "De quelle location l'utilisateur est-il en train de regarder le détail ?" ou "Est-il en train de l'éditer ?" En Ember, la réponse à ces questions est déterminée par l'URL.
 
-* The user loads the app for the first time.
-* The user changes the URL manually, such as by clicking the back button or by editing the address bar.
-* The user clicks a link within the app.
-* Some other event in the app causes the URL to change.
+Il existe plusieurs manières de modifier l'URL courante :
 
-No matter how the URL gets set, the first thing that happens is that the Ember router maps the URL to a route handler.
+- L'utilisateur charge l'application pour la première fois.
+- L'utilisateur change l'URL manuellement, en clicquant sur le bouton "Précédent" ou en éditant la barre d'adresse du navigateur.
+- L'utilisateur clique sur un lien à l'intérieur de l'app.
+- D'autres événements se produisant dans l'app sont susceptibles de modifier l'URL.
 
-The route handler then typically does two things:
+Peu importe la manière dont l'URL a été changée, la première action qui en découle est que le routeur d'Ember associe l'URL à un gestionnaire de route.
 
-* It loads a model.
-* It renders a template, which has access to the model.
+Le gestionnaire de route fait alors, entre autres, deux choses :
 
-## Models
+- Il charge un modèle.
+- Il affiche un template qui a accès au modèle.
 
-Models represent persistent state.
+## Modèles
 
-For example, a property rentals application would want to save the details of
-a rental when a user publishes it, and so a rental would have a model defining
-its details, perhaps called the _rental_ model. You may also need a _user_
-model to keep track of who is currently logged in.
+Un modèle représente un état persistant.
 
-A model typically persists information to a web server, although models can be
-configured to save to anywhere else, such as the browser's Local Storage.
+Par exemple, notre application de gestion de locations devrait pouvoir enregistrer les détails d'un bien à louer quand l'utilisateur les publie, et donc à chaque bien serait associé un modèle définissant ses détails. Nous pourrions appeler ce modèle _rental_ (location). Nous aurions aussi besoin d'un modèle _user_ (utilisateur) pour conserver l'identité de l'utilisateur connecté.
 
-By default new Ember apps include [Ember Data](../../models/), which is a
-separate data library that integrates with Ember and provides a solid,
-conventional model layer. We'll see Ember Data in action in the tutorial in
-the next section.
+En général, on persiste les informations d'un modèle en les envoyant à un serveur web, bien qu'en réalité il soit possible de les sauvegarder n'importe où ailleurs, comme par exemple dans le "Local Storage" du navigateur.
 
-You can also provide your own model layer using other data libraries such as
-[Redux](https://github.com/ember-redux/ember-redux) or
-[Apollo](https://github.com/ember-graphql/ember-apollo-client), or create your
-own model layer using the tools that Ember provides for state, such as
-[autotracking](../../components/component-state-and-actions/). We'll learn more
-about these tools throughout the guides.
+Par défaut, une nouvelle app Ember inclut [Ember Data](../../models/), une librairie de gestion de données distincte du framework, mais très conventionnelle. Ember Data s'intègre avec Ember et fournit une strate solide pour gérer les modèles.
+
+Vous pouvez cependant manipuler vos modèles à l'aide de n'importe quelle autre librairie de gestion de données, comme [Redux](https://github.com/ember-redux/ember-redux) ou
+[Apollo](https://github.com/ember-graphql/ember-apollo-client), ou même créer votre propre système en vous appuyant sur les outils fournis par Ember pour gérer les états, comme [autotracking](../../components/component-state-and-actions/). Nous en apprendrons plus sur ces outils dans d'autres parties du guide.
 
 ## Templates
 
-Ember uses templates to build up the user interface in an application.
+Ember utilise des "templates" pour construire l'interface utilisateur de l'application.
 
-If you have written HTML before, you already know how to write a basic Ember
-template. For example:
+Si vous êtes familier avec HTML, alors vous savez déjà écrire un template Ember basique. Par exemple :
 
 ```handlebars {data-filename="app/templates/welcome.hbs"}
-<div>Hi, this is a valid Ember template!</div>
+<div>Bonjour, ceci est un template Ember valide!</div>
 ```
 
-In addition to static HTML content, Ember uses the syntax of [Handlebars](http://handlebarsjs.com)
-to describe dynamic user interface elements.
+En plus du contenu HTML statique, Ember utilise la syntaxe [Handlebars](http://handlebarsjs.com) pour décrire les éléments dynamiques de l'interface utilisateur.
 
-For example, as mentioned before, the route handler makes the model available
-to its template:
+Par exemple, comme mentionné précédemment, le gestionnaire de route rend le modèle qu'il charge accessible à son template :
 
 ```handlebars {data-filename="app/templates/welcome.hbs"}
-{{!-- The model for this route is the current user --}}
+{{! Le modèle de cette route est l'utilisateur courant }}
 
 <div>
-  Hi <img src="{{@model.profileImage}}" alt="{{@model.name}}'s profile picture"> {{@model.name}},
-  this is a valid Ember template!
+  Bonjour
+  <img
+    src="image de profile de {{@model.profileImage}}"
+    alt="{{@model.name}}"
+  />
+  {{@model.name}}, ceci est un template Ember valide !
 </div>
 
 {{#if @model.isAdmin}}
-  <div>Remember, with great power comes great responsibility!</div>
+  <div>Rappelez-vous, un grand pouvoir implique de grandes responsabilités!</div>
 {{/if}}
 ```
 
-This example combines several Handlebars features to create a personalized
-experience for the user, something we couldn't do with just static HTML alone.
-We used the comment syntax (`{{!-- ... --}}`) to leave a note for future
-developers, the double curly braces syntax (`{{...}}`) to include dynamic
-values, as well as using the `{{#if}}...{{/if}}` syntax to conditionally render
-some extra content.
+Cet exemple combine plusieurs fonctionnalités d'Handlebars pour créer une expérience utilisateur personnalisée, on ne pourrait pas faire ça avec simplement du HTML statique.
+Ici, nous utilisons la syntaxe de commentaire (`{{!-- ... --}}`) pour laisser des notes aux futurs développeurs, la double-accolade (`{{...}}`) pour inclure des valeurs dynamiques, et la syntaxe `{{#if}}...{{/if}}` pour afficher un contenu seulement si une condition est respectée.
 
-We will go into more details about each of these template features later on in
-this guide.
+Nous verrons plus en détail chacune de ces fonctionnalités des templates plus tard dans le guide.
 
-## Components
+## Composants
 
-Components allow you to break up your templates and organize them into small,
-self-contained and reusable pieces.
+Les composants permettent de "découper" les templates et de les organiser en sections plus petites, indépendantes et réutilisables.
 
-In its most basic form, a component is just a piece of template that can be
-referred to by name. Similar to functions in programming languages, they can
-also take _arguments_, allowing them to be customized to the specific context
-they are being rendered into.
+Dans sa forme la plus basique, un composant est juste un morceau de template identifié par son nom. On peut assimiler les composants aux fonctions des langages de programmation, car ils peuvent aussi prendre des paramètres d'entrée (_arguments_), ce qui les rend adaptables au contexte spécifique dans lequel ils sont affichés.
 
-For example, the example in the previous section is getting a bit long. We can
-_extract_ the snippet for rendering the user's name and profile picture into
-its own component:
+Reprenons l'exemple de la partie précédente, qui commence à contenir un peu de complexité. Nous pouvons "extraire" le code qui affiche le nom de l'utilisateur et sa photo de profil dans un composant dédié :
 
 ```handlebars {data-filename="app/components/user-profile.hbs"}
-<img src="{{@user.profileImage}}" alt="{{@user.name}}'s profile picture"> {{@user.name}}
+<img src="{{@user.profileImage}}" alt="image de profile de {{@user.name}}" />
+{{@user.name}}
 ```
 
-Doing this allows us to simplify the original template like so:
+Maintenant, nous pouvons simplifier le template initial comme ceci :
 
 ```handlebars {data-filename="app/templates/welcome.hbs"}
-{{!-- The model for this route is the current user --}}
+{{! Le modèle de cette route est l'utilisateur courant }}
 
 <div>
-  Hi <UserProfile @user={{@model}} /> this is a valid Ember template!
+  Bonjour
+  <UserProfile @user={{@model}} />, ceci est un template Ember valide !
 </div>
 
 {{#if @model.isAdmin}}
-  <div>Remember, with great power comes great responsibility!</div>
+  <div>Rappelez-vous, un grand pouvoir implique de grandes responsabilités!</div>
 {{/if}}
 ```
 
-Not only did we clean up the original template to be more readable, we now
-have a `<UserProfile>` component that we can reuse whenever we need to render
-information about a given user.
+Non seulement nous avons rendu le template initial plus lisible, mais désormais, nous avons aussi un composant `<UserProfile>` que nous pouvons réutiliser n'importe où dans l'application pour afficher les informations sur l'utilisateur courant.
 
-You can think of components as Ember's way for letting you create your own HTML
-tags. In addition to rendering content, components can also have JavaScript
-code associated with them, allowing you to add _behavior_, such as responding
-to a user clicking on your component.
+On peut voir les composants Ember comme une façon de créer ses propres balises HTML. Non seulement les composants affichent du contenu, mais on peut aussi leur associer du code JavaScript, afin de leur ajouter des comportements, comme répondre au clic d'un utilisateur.
 
-We will cover these advanced component features in a later chapter. For now,
-let's see these core concepts in action by building a property rental
-application in the next lesson.
+Nous couvrirons les fonctionnalités avancées des composants dans un chapitre ultérieur. Pour l'instant, voyons ces concepts fondamentaux en action en construisant, dans la leçon suivante, une application de gestion de locations.
