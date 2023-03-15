@@ -167,7 +167,7 @@
     - title: "Applications et Instances"
       url: "index"
       isAdvanced: true
-    - title: "Injection de Dépendences"
+    - title: "Injection de Dépendances"
       url: "dependency-injection"
       isAdvanced: true
     - title: "Initializers"
@@ -242,10 +242,10 @@
       url: "testing-routes"
     - title: "Tester les Modèles"
       url: "testing-models"
-- title: "Addons et Dépendences"
+- title: "Addons et Dépendances"
   url: "addons-and-dependencies"
   pages:
-    - title: "Gérer les Dépendences"
+    - title: "Gérer les Dépendances"
       url: "index"
 - title: "Outils de Développement"
   url: "toc-heading_developer-tools"
