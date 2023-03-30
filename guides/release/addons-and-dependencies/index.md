@@ -1,4 +1,4 @@
-Tandis que vous développez votre app Ember, il est probable que vous recontriez des scénarios communs qui ne sont pas adressés par le framework en lui-même. Peut-être voulez-vous employer un préprocesseur CSS pour écrire vos feuilles de style ? ou bien utiliser une librairie JS populaire ? ou peut-être importer des composants ayant été écrits par une autre équipe de votre organisation ?
+Lorsque vous développez votre app Ember, il est probable que vous recontriez des scénarios communs qui ne sont pas adressés par le framework en lui-même. Peut-être voulez-vous employer un préprocesseur CSS pour écrire vos feuilles de style ? ou bien utiliser une librairie JS populaire ? ou peut-être importer des composants ayant été écrits par une autre équipe de votre organisation ?
 
 Pour résoudre certains de ces problèmes, Ember CLI fournit un format appelé [Ember Addons](#toc_addons) afin de distribuer des librairies réutilisables. De plus, vous pourriez vouloir faire usage de dépendances front-end comme un framework CSS ou un sélecteur de date JavaScript qui ne sont pas spécifiques à Ember.
 
@@ -68,7 +68,7 @@ app.import("node_modules/showdown/dist/showdown.js", {
 
 Vous pouvez maintenant importer `showdown` dans votre application (ex&nbsp;: `import showdown from 'showdown';`).
 
-### Fichiers Spécifiques à un Environment
+### Fichiers spécifiques à un environment
 
 Si vous souhaitez utiliser différents fichiers dans différents environnements, spécifiez un objet en premier paramètre de `app.import`. Chaque clé de l'objet est le nom de l'environnement, et sa valeur est le fichier à utiliser dans cet environnement&nbsp;:
 
