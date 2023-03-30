@@ -9,7 +9,7 @@ Imaginons que nous écrivons une web app permettant aux utilisateurs de lister l
 Il existe plusieurs manières de modifier l'URL courante :
 
 - L'utilisateur charge l'application pour la première fois.
-- L'utilisateur change l'URL manuellement, en clicquant sur le bouton "Précédent" ou en éditant la barre d'adresse du navigateur.
+- L'utilisateur change l'URL manuellement, en cliquant sur le bouton "Précédent" ou en éditant la barre d'adresse du navigateur.
 - L'utilisateur clique sur un lien à l'intérieur de l'app.
 - D'autres événements se produisant dans l'app sont susceptibles de modifier l'URL.
 
@@ -78,7 +78,7 @@ Dans sa forme la plus basique, un composant est juste un morceau de template ide
 Reprenons l'exemple de la partie précédente, qui commence à contenir un peu de complexité. Nous pouvons "extraire" le code qui affiche le nom de l'utilisateur et sa photo de profil dans un composant dédié :
 
 ```handlebars {data-filename="app/components/user-profile.hbs"}
-<img src="{{@user.profileImage}}" alt="image de profile de {{@user.name}}" />
+<img src="{{@user.profileImage}}" alt="image de profil de {{@user.name}}" />
 {{@user.name}}
 ```
 
