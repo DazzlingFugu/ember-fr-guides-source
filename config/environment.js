@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function(environment) {
+module.exports = function (environment) {
   let ENV = {
     modulePrefix: 'ember-fr-guides-source',
     environment,
@@ -15,8 +15,8 @@ module.exports = function(environment) {
       },
       EXTEND_PROTOTYPES: {
         // Prevent Ember Data from overriding Date.parse.
-        Date: false
-      }
+        Date: false,
+      },
     },
 
     APP: {
@@ -33,29 +33,12 @@ module.exports = function(environment) {
       sourceRepo: 'https://github.com/ember-learn/guides-source'
     },
 
-    algolia: {
-      algoliaId: 'Y1OMR4C7MF',
-      algoliaKey: '5d01c83734dc36754d9e94cbf6f8964d',
-      indexName: 'ember-fr-guides-source'
-    },
-
     showdown: {
       ghCompatibleHeaderId: true,
       prefixHeaderId: 'toc_'
     },
 
     deprecationsGuideURL: 'https://www.emberjs.com/deprecations/',
-
-    metricsAdapters: [
-      {
-        name: 'GoogleAnalytics',
-        environments: ['production'],
-        config: {
-          id: 'UA-27675533-1',
-          require: ['linkid']
-        }
-      },
-    ],
   };
 
   if (environment === 'development') {
