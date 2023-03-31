@@ -19,7 +19,7 @@ npm install -g ember-cli
 
 Vous n'avez pas NPM&nbsp;? [Apprenez comment installer Node.js et NPM ici](https://docs.npmjs.com/getting-started/installing-node). Pour une liste complète de toutes les dépendances nécessaires à un projet Ember CLI, visitez [Ember CLI Guides - Installing](https://cli.emberjs.com/release/basic-use/).
 
-## Créer une Nouvelle Application
+## Créer une nouvelle application
 
 Une fois Ember CLI installé à l'aide de NPM, vous avez accès à une nouvelle commande `ember` dans votre terminal. Vous pouvez désormais taper la commande `ember new` pour créer une nouvelle application&nbsp;:
 
@@ -81,7 +81,7 @@ Nous commencerons par éditer le template de l'`application`. Ce template est to
 
 Ember détecte automatiquement que le fichier a changé et recharge la page pour vous en arrière-plan. Vous devriez voir la page de bienvenue remplacée par "Compteur de visites". Nous avons aussi ajouté un `{{outlet}}` à cette page. Cela signifie que toute route à afficher le sera à cet endroit.
 
-## Définir une Route
+## Définir une route
 
 Construisons une application qui affiche une liste de scientifiques. Pour cela, la première étape est de créer une route. Dans un premier temps, imaginez les routes comme étant les différentes pages de votre application.
 
@@ -157,7 +157,7 @@ Ember affiche le bloc contenu à l'intérieur du _helper_ `{{#each}}...{{/each}}
 
 Le résultat final consiste en une balise `<li>` par scientifique du tableau à l'intérieur de la balise `<ul>` (pour _unordered list_, liste non ordonnée).
 
-## Écrire un Composant d'UI
+## Écrire un composant d'UI
 
 À mesure que votre application grandit, vous constaterez que vous partagez certains éléments d'UI entre plusieurs pages, ou bien que vous utiliserez les mêmes plusieurs fois dans la même page. Ember vous permet d'améliorer facilement vos templates en en faisant des composants réutilisables.
 
@@ -310,7 +310,7 @@ Au lieu de passer l'action directement au _modifier_ `on`, nous utilisons le _he
 
 Essayez dans votre navigateur. Cette fois, tout devrait se comporter comme espéré&nbsp;!
 
-## _Builder_ pour la Production
+## _Builder_ pour la production
 
 Maintenant que nous avons écrit notre application et vérifié qu'elle fonctionne en développement, il est temps de la préparer au déploiement pour nos utilisateurs.
 
