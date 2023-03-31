@@ -6,5 +6,4 @@ Pour le formuler autrement, l'`Application` _définit votre application_ tandis 
 
 Cette séparation des responsabilités, en plus de clarifier l'architecture de votre app, peut aussi améliorer son efficacité. C'est particulièrement vrai quand votre app doit démarrer de manière répétée durant les tests et / ou le rendu serveur (par exemple via [FastBoot](https://github.com/tildeio/ember-cli-fastboot)).
 
-
 La configuration d'une seule `Application` peut être écrite et partagée entre de multiples instances d'`ApplicationInstance` à états. Ces instances peuvent être supprimées dès qu'elles ne sont plus nécessaires (par exemple quand un test a fini de s'exécuter ou d'une requête FastBoot est terminée).
