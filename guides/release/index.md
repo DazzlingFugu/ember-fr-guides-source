@@ -13,7 +13,7 @@ Avec la pléthore de bibliothèques disponibles pour le développement front-end
 		<div class="shape shape--dark"></div>
     <div class="shape shape--accent"></div>
     <div class="shape shape--light"></div>
-		<a href="./models/">Ember Data</a>
+		<a href="./models/">EmberData</a>
 	</li>
 	<li class="list-item-card">
 		<div class="shape shape--dark"></div>
