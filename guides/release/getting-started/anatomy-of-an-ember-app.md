@@ -28,7 +28,7 @@ Par exemple, notre application de gestion de locations devrait pouvoir enregistr
 
 En général, on persiste les informations d'un modèle en les envoyant à un serveur web, bien qu'en réalité il soit possible de les sauvegarder n'importe où ailleurs, comme par exemple dans le "Local Storage" du navigateur.
 
-Par défaut, une nouvelle app Ember inclut [Ember Data](../../models/), une librairie de gestion de données distincte du framework, mais très conventionnelle. Ember Data s'intègre avec Ember et fournit une strate solide pour gérer les modèles.
+Par défaut, une nouvelle app Ember inclut [EmberData](../../models/), une librairie de gestion de données distincte du framework, mais très conventionnelle. EmberData s'intègre avec Ember et fournit une strate solide pour gérer les modèles.
 
 Vous pouvez cependant manipuler vos modèles à l'aide de n'importe quelle autre librairie de gestion de données, comme [Redux](https://github.com/ember-redux/ember-redux) ou
 [Apollo](https://github.com/ember-graphql/ember-apollo-client), ou même créer votre propre système en vous appuyant sur les outils fournis par Ember pour gérer les états, comme [autotracking](../../components/component-state-and-actions/). Nous en apprendrons plus sur ces outils dans d'autres parties du guide.
