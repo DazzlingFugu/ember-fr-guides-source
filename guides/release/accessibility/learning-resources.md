@@ -4,6 +4,7 @@ Ces ressources d'apprentissage sur l'accessibilité ont pour but d'apporter une 
 
 - [Documentation Web MDN: Accessibilité](https://developer.mozilla.org/fr/docs/Learn/Accessibility)
 
+<!--spell ignore-->
 - [Using ARIA](https://www.w3.org/TR/using-aria/) : un guide pratique pour ajouter aux éléments HTML des informations accessibles.
 - [Web Content Accessibility Guidelines(WCAG) : Directives du contenu web sur l'accessibilité 2.1](https://www.w3.org/TR/WCAG21/)
 - [Accessible Rich Internet Applications (ARIA) : Applications Internet Riches et Accessibles 1.1](https://www.w3.org/TR/wai-aria-1.1/)

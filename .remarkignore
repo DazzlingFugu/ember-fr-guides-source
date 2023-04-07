@@ -8,5 +8,6 @@ guides/release/working-with-javascript
 
 # translated only files
 guides/release/**/*.md
+!guides/release/accessibility/learning-resources.md
 !guides/release/applications/index.md
 !guides/release/index.md
