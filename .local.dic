@@ -44,6 +44,7 @@ EmbeddedRecordsMixin
 Ember
 Ember.js
 EmberApp
+EmberData
 Ember_Observer
 Evented
 FastBoot
@@ -66,6 +67,7 @@ IE11
 IndexedDB
 Inflector
 Initializer/S
+Inspector
 Intellisense
 JPG
 JS
@@ -205,6 +207,7 @@ de
 debounce
 debounce/DG
 declaratively
+decorator/S
 defaultBlueprint
 demoURL
 deprecation/S
@@ -365,6 +368,7 @@ relayout
 renderer
 repo
 repos
+request/S
 rerender
 rerendering
 rerenders

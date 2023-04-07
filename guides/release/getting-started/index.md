@@ -1,73 +1,49 @@
-## What is Ember?
+## Qu'est-ce qu'Ember?
 
-Ember.js is a productive, battle-tested JavaScript framework for building modern web applications.
-It includes everything you need to build rich UIs that work on any device. It does so by providing
-developers many features that are essential to manage complexity in modern web applications,
-as well as an integrated development toolkit that enables rapid iteration.
+Ember.js est un _framework_ JavaScript, productif et testé à toute épreuve, permettant de construire des applications web modernes. 
+Il inclut tout ce dont vous avez besoin pour construire des interfaces utilisateur riches fonctionnant sur n'importe quel appareil. Pour cela, il fournit de nombreuses fonctionnalités de développement essentielles pour gérer la complexité des applications modernes, ainsi qu'une boîte à outils de développement intégrée qui permet d'itérer rapidement.
 
-Some of these features that you'll learn about in the guides are:
+Voici certaines de ces fonctionnalités, que vous apprendrez à maîtriser dans le Guide&nbsp;:
 
-* [Ember CLI](https://cli.emberjs.com/release/) - A robust development toolkit to create, develop, and build Ember applications. Learn [basic commands](https://cli.emberjs.com/release/basic-use/cli-commands/) from the CLI Guides.
-* [Components](../components/) - The fundamental construct used in Ember applications, used to create reusable UI elements and define the layout and the functionality of the app.
-* [Routing](../routing/) - A central part of an Ember application. Enables developers to drive the application state from the URL.
-* [Services](../services/) - The way to store long-term state in your application and pass it around.
-* [EmberData](../models/) - EmberData provides a consistent way to communicate with external APIs and manage application state
-* [Ember Inspector](../ember-inspector/) - A browser extension, or bookmarklet, to inspect your application live. It's also useful for spotting Ember applications in the wild, try to install it and open up the [NASA website](https://www.nasa.gov/)!
+* [Ember CLI](https://cli.emberjs.com/release/) - Une boîte à outils de développement robuste pour créer, développer et compiler des applications Ember. Apprenez les [commandes basiques](https://cli.emberjs.com/release/basic-use/cli-commands/) (page en anglais) dans le Guide CLI.
+* [Composants](../components/) - La brique fondamentale des applications Ember, on les utilise pour créer des éléments d'UI réutilisables et définir la mise en page et l'aspect fonctionnel de l'app.
+* [Routing](../routing/) - Une partie centrale de toute application Ember. Il vous permet de piloter l'état de l'application à partir de l'URL.
+* [Services](../services/) - Le moyen de stocker l'état long-terme de votre application et de le partager.
+* [EmberData](../models/) - EmberData fournit une solution cohérente pour communiquer avec des APIs externes et gérer l'état de l'application.
+* [Ember Inspector](../ember-inspector/) - Une extension de navigateur, pour inspecter votre application en _live_. Elle peut aussi s'avérer utile pour repérer les applications Ember sur le Grand Internet. Essayez de l'installer puis d'inspecter le [site web de la NASA](https://www.nasa.gov/)&nbsp;!
 
-## Organization
+## Organisation
 
-On the left side of each Guides page is a table of contents,
-organized into sections that can be expanded to show the topics
-they cover. Both the sections and the topics within each section are
-ordered from basic to advanced concepts.
+À gauche de chaque page du Guide est affichée une table des matières, organisée en sections qui peuvent être étendues pour visualiser tous les sujets couverts. Les sections comme les sujets imbriqués dans chacune d'elles sont ordonnés des concepts les plus simples aux plus avancés.
 
-The Guides are intended to contain practical explanations of how to
-build Ember apps, focusing on the most widely-used features of Ember.js.
-For comprehensive documentation of every Ember feature and API, see the
-[Ember.js API documentation](https://api.emberjs.com/).
+L'objectif du Guide est de fournir des explications pratiques sur la façon de construire des apps Ember, en se concentrant sur les fonctionnalités de Ember.js les plus largement utilisées.
+Pour une documentation plus poussée de chaque fonctionnalité et de chaque API, voir le site [Ember.js API documentation](https://api.emberjs.com/).
 
-The Guides begin with an explanation of how to get started with Ember,
-followed by a tutorial on how to build your first Ember app.
-If you're brand new to Ember,
-we recommend you start off by following along with these first two sections of the Guides.
+Le Guide commence par une prise en mais de Ember, suivie d'un tutoriel sur comment construire une app Ember. Si Ember est vraiment complètement nouveau pour vous, nous vous recommandons de suivre ces deux premières sections.
 
-## Assumptions
+## Prérequis
 
-While we try to make the Guides as beginner-friendly as we can, we must
-establish a baseline so that the guides can keep focused on Ember.js
-functionality. We will try to link to appropriate documentation whenever a
-concept is introduced.
+Si nous voulons rendre le Guide aussi accessible que possible aux débutants, nous devons tout de même établir un certain cap et rester concentrés sur les fonctionnalités de Ember.js. Ainsi, nous essaierons de vous renvoyer vers la documentation appropriée chaque fois qu'un concept est introduit.
 
-To make the most out of the guides, you should have a working knowledge of
-**HTML, CSS, and JavaScript** - the building blocks of web pages. You can find
-out more about each of these technologies in the [Working with HTML, CSS, and JavaScript](./working-with-html-css-and-javascript)
-guide, including some of the special features that Ember uses such as class
-fields and decorators.
+Pour tirer le meilleur parti des contenus, mieux vaut avoir une connaissance métier de **HTML, CSS, et JavaScript** - les briques de construction des pages web. Vous trouverez plus d'information sur chacune des ces technologies dans le guide [Travailler avec HTML, CSS, et JavaScript](./working-with-html-css-and-javascript), qui inclut quelques-unes des fonctionnalités particulières qu'Ember utilise, comme les _fields_ ou les _decorators_.
 
-## Accessibility
+## Accessibilité
 
-If you are using a screen reader while you go through the Guides, we recommend using Firefox and NVDA or Safari and VoiceOver for the best experience.
+Si vous utilisez un lecteur d'écran tandis que vous parcourez le Guide, nous vous recommandons Firefox et NVDA ou Safari et VoiceOver pour la meilleure expérience.
 
-## Reporting a problem
+## Rapporter un problème
 
-Typos, missing words, and code samples with errors are all considered
-documentation bugs. If you spot one of them, or want to otherwise improve
-the existing guides, we are happy to help you help us!
+Fautes de frappe, mots manquants et autres erreurs dans les exemples de code sont considérés comme des bugs de documentation. Si vous en détectez un, ou si vous souhaitez améliorer le contenu existant, nous sommes ravis de vous aider à nous aider&nbsp;!
 
-Some of the more common ways to report a problem with the guides are:
+Voici les quelques méthodes les plus courantes pour rapporter un problème dans les contenus&nbsp;:
 
-* Using the pencil icon on the top-right of each guide page
-* Opening an issue or pull request to [the GitHub repository](https://github.com/ember-learn/guides-source/)
+* Utiliser l'icône de crayon en haut à droite de chaque page de guide.
+* Ouvrir une _issue_ ou une _pull request_ sur [le répertoire GitHub](https://github.com/DazzlingFugu/ember-fr-guides-source)
 
-Clicking the pencil icon will bring you to GitHub's editor for that
-guide so you can edit right away, using the Markdown markup language.
-This is the fastest way to correct a typo, a missing word, or an error in
-a code sample.
+Cliquer sur l'icône de crayon vous enverra sur l'éditeur GitHub de la page afin que vous puissiez l'éditer à l'aide du langage de mise en forme Markdown. C'est le moyen le plus rapide de corriger une faute de frappe, un mot manquant ou une erreur dans un exemple de code.
 
-If you wish to make a more significant contribution be sure to check our
-[issue tracker](https://github.com/ember-learn/guides-source/issues) to see if your issue is already being addressed. If you don't find an active issue, open a new one.
+Si vous avez en tête une contribution plus conséquente, vérifier dans si notre [liste des _issues_](https://github.com/DazzlingFugu/ember-fr-guides-source/issues) adresse déjà le problème. Si vous ne trouvez aucun _issue_ active sur le sujet, alors ouvrez-en une nouvelle.
 
-If you have any questions about styling or the contributing process, you
-can check out our [contributing guide](https://github.com/ember-learn/guides-source/blob/master/CONTRIBUTING.md). If your question persists, reach us in the `#dev-ember-learning` channel on the [Ember Community Discord](https://discordapp.com/invite/zT3asNS).
+Si vous avez la moindre question sur le moyen de contribuer, jetez un œil à notre [CONTRIBUTING.md](https://github.com/DazzlingFugu/ember-fr-guides-source/blob/master/CONTRIBUTING.md). Si celui-ci ne répond pas à votre question, contactez-nous via le salon `#lang-french` du [Discord de la communauté Ember](https://discordapp.com/invite/zT3asNS).
 
-Good luck!
+Bonne chance&nbsp;!
