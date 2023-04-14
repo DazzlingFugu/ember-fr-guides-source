@@ -4,6 +4,7 @@ Ces ressources d'apprentissage sur l'accessibilité ont pour but d'apporter une 
 
 - [Documentation Web MDN: Accessibilité](https://developer.mozilla.org/fr/docs/Learn/Accessibility)
 
+<!-- spell ignore -->
 - [Using ARIA](https://www.w3.org/TR/using-aria/) : un guide pratique pour ajouter aux éléments HTML des informations accessibles.
 - [Web Content Accessibility Guidelines(WCAG) : Directives du contenu web sur l'accessibilité 2.1](https://www.w3.org/TR/WCAG21/)
 - [Accessible Rich Internet Applications (ARIA) : Applications Internet Riches et Accessibles 1.1](https://www.w3.org/TR/wai-aria-1.1/)
@@ -11,10 +12,10 @@ Ces ressources d'apprentissage sur l'accessibilité ont pour but d'apporter une 
 
 ## Ressources pratiques
 
-- [Accessibility Insights](https://accessibilityinsights.io/)- Utiliser FastPass pour trouver des problèmes communs à fort impact
+- <!-- spell ignore -->[Accessibility Insights](https://accessibilityinsights.io/)- Utiliser FastPass pour trouver des problèmes communs à fort impact
 - [Extension aXe pour Chrome](https://chrome.google.com/webstore/detail/axe/lhdoppojpmngadmnindnejefpokejbdd)
-- [Accessibility Support](https://a11ysupport.io/)- Comprendre si son code marche avec les technologies d'assistance
-- [How and where to report accessibility bugs](https://www.digitala11y.com/how-where-to-report-accessibility-bugs/)
+- <!-- spell ignore -->[Accessibility Support](https://a11ysupport.io/)- Comprendre si son code marche avec les technologies d'assistance
+- <!-- spell ignore -->[How and where to report accessibility bugs](https://www.digitala11y.com/how-where-to-report-accessibility-bugs/)
 
 
 ### Design
@@ -30,4 +31,5 @@ Ces ressources d'apprentissage sur l'accessibilité ont pour but d'apporter une 
 
 ### Autres articles utiles
 
+<!-- spell ignore -->
 - [The difference between keyboard and screen reader navigation](https://tink.uk/the-difference-between-keyboard-and-screen-reader-navigation/)
