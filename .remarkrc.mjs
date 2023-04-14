@@ -6,6 +6,7 @@ import retextLatin from "retext-latin";
 import retextRepeatedWords from "retext-repeated-words";
 import retextSyntaxUrls from "retext-syntax-urls";
 import retextSpell from "retext-spell";
+import remarkMessageControl from 'remark-message-control';
 
 import dictionaryFr from "dictionary-fr";
 import { readFileSync } from 'fs';
@@ -21,6 +22,10 @@ const remarkConfig = {
         .use(retextSpell, {
           dictionary: dictionaryFr,
           personal: readFileSync("./.local.dic"),
+        })
+        .use(remarkMessageControl, {
+          name: 'spell',
+          sources: ['retext-spell']
         })
     ],
     "remark-preset-lint-consistent",

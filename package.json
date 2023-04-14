@@ -88,6 +88,7 @@
     "qunit-dom": "^1.6.0",
     "remark-cli": "^11.0.0",
     "remark-lint": "^9.1.1",
+    "remark-message-control": "^7.1.1",
     "remark-preset-lint-consistent": "^5.1.1",
     "remark-preset-lint-recommended": "^6.1.2",
     "remark-retext": "^5.0.1",
