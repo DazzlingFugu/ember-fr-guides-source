@@ -4,8 +4,8 @@ import remarkRetext from "remark-retext";
 
 import retextLatin from "retext-latin";
 import retextRepeatedWords from "retext-repeated-words";
-import retextSyntaxUrls from "retext-syntax-urls"
-import retextSpell from "retext-spell"
+import retextSyntaxUrls from "retext-syntax-urls";
+import retextSpell from "retext-spell";
 
 import dictionaryFr from "dictionary-fr";
 import { readFileSync } from 'fs';
