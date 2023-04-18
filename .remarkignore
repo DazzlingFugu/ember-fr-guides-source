@@ -11,3 +11,4 @@ guides/release/**/*.md
 !guides/release/accessibility/learning-resources.md
 !guides/release/applications/index.md
 !guides/release/index.md
+!guides/release/getting-started/working-with-html-css-and-javascript.md

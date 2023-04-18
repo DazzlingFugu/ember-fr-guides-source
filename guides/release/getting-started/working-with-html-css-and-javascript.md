@@ -1,76 +1,41 @@
-Ember is a framework for building applications that run in the browser, which
-means that they are made with HTML, CSS, and JavaScript. It is very helpful to
-be familiar with these technologies. If you find yourself getting stuck or
-confused as you learn Ember, come back to this page and see if there is a
-general topic below that you could explore.
+Ember est un framework pour construire des applications qui tournent dans le navigateur, ce qui signifie qu'elles sont développées avec HTML, CSS et JavaScript. Il est donc très utile d'être à l'aise avec ces technologies. Si vous vous retrouvez bloqué ou rencontrez des incertitudes durant votre apprentissage de Ember, revenez à cette page et tentez de voir s'il y a, derrière vos questions, un sujet plus général que vous pourriez explorer.
 
 ## HTML
 
-Hypertext Markup Language (HTML) is a language for specifying the layout of web
-pages. It is a markup language that defines the structure of your content
-declaratively, which makes it very powerful. Ember provides a templating
-language that extends HTML and provides tools for making that structure dynamic.
+<!-- spell ignore -->
+Hypertext Markup Language (HTML) est un langage permettant de spécifier la mise en forme des pages web. C'est un langage de mise en forme qui définit la structure de votre contenu de manière déclarative, ce qui le rend très puissant. Ember fournit un langage de _templating_ qui étend HTML avec des outils pour rendre la structure dynamique.
 
-If you're new to HTML, we recommend [Mozilla's HTML Tutorial](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/HTML_basics)
-is fairly comprehensive, and the MDN site is one of the best resources for
-learning about web APIs.
+Si vous débutez en HTML, nous recommandons [Les bases du HTML](https://developer.mozilla.org/fr/docs/Learn/Getting_started_with_the_web/HTML_basics) qui est assez complet, d'ailleurs le site MDN est l'une des meilleures ressources pour apprendre les APIs web.
 
 ## CSS
 
-CSS (Cascading Style Sheets) are used to style HTML. While HTML lays out the
-basic structure, CSS provides the rules for how that structure should display in
-the browser.
+<!-- spell ignore -->
+Les Cascading Style Sheets (CSS) sont utilisées pour styliser le HTML. Tandis que HTML définit la structure de la page, CSS fournit les règles qui dictent la manière dont s'affiche cette structure dans le navigateur.
 
-If you're new to CSS, we recommend [the MDN guide for learning it](https://developer.mozilla.org/en-US/docs/Learn/CSS/First_steps),
-as it is fairly comprehensive and up to date.
+Si vous débutez en CSS, nous recommandons [le guide MDN pour l'apprendre](https://developer.mozilla.org/fr/docs/Learn/CSS/First_steps), étant donné qu'il est assez complet et à jour.
 
 ## JavaScript
 
-JavaScript is the primary scripting language of the web. Most Ember apps have
-some amount of JavaScript code in them.
+JavaScript est le premier langage de script du web. La plupart des apps Ember contiennent une certaine quantité de code JavaScript.
 
-Since Ember is a template-oriented framework, not all developers need to
-use JavaScript when working on Ember apps. Some developers may be more
-focused on the structure of an app's templates, its styles, or the
-accessibility of an app. However, it's good to have some
-general knowledge of JavaScript for the places where it is used.
+Puisque Ember est un framework orienté template, tous les devs n'ont pas besoin d'utiliser JavaScript en travaillant sur des apps Ember. Certain(e)s préféreront se concentrer sur la structure des templates de l'app, ses styles, ou encore l'accessibilité. Cela dit, mieux vaut avoir quelques connaissances générales en JavaScript pour comprendre les endroits du code ou il est utilisé.
 
-If you're new to JavaScript, here are some excellent introductory materials:
+Si vous débutez en JavaScript, voici d'excellentes ressources d'introduction&nbsp;:
 
-- [Mozilla's JavaScript Tutorial](https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript)
-  is pretty comprehensive, and the MDN documentation is the go-to source for
-  learning about JavaScript and web APIs.
-- [javascript.info](https://javascript.info) is a detailed interactive guide
-  that takes you through from the basics to the details. This one is pretty good
-  for beginners with no programming experience, since it starts from scratch and
-  ramps up.
-- [ES6 for humans](https://github.com/metagrover/ES6-for-humans) is a great
-  resource if you're already familiar with JavaScript in general, but haven't
-  had a chance to get to know some of its latest features that were finalized in 2015.
+- [Le tutoriel JavaScript de Mozilla](https://developer.mozilla.org/fr/docs/Web/JavaScript/Language_overview) est plutôt complet, et la documentation MDN est une source incontournable pour apprendre JavaScript et les APIs web.
+- [javascript.info](https://fr.javascript.info/) est un guide interactif détaillé qui vous emmènera des bases aux concepts avancés. Cette ressource est très bien pour les débutants qui ont peu d'expérience de la programmation, puisqu'il part de zéro et fait monter en compétence.
+- <!-- spell ignore -->[ES6 for humans](https://github.com/metagrover/ES6-for-humans) est une super ressource si vous êtes déjà familier avec JavaScript en général, mais que nous n'avez pas eu l'opportunité de découvrir ses dernières fonctionnalités, finalisées en 2015.
 
-We recommend familiarizing yourself with the following concepts in particular to
-make the most out of these guides and of Ember:
+Nous vous recommandons de vous familiariser avec les concepts suivants, afin de tirer le maximum de ce guide et d'Ember&nbsp;: 
 
-* **Classes** - classes are one of the most fundamental constructs
-  in JavaScript, and are used frequently in Ember. See the next section for more
-  details on them.
-* **Modules** - you will better understand [Ember CLI's](https://ember-cli.com/)
-  project structure and import paths if you are comfortable with
-  [JavaScript Modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules).
-* **Events** - The native way to deal with user input in browser based web
-  applications. Events are not part of the language of JavaScript itself, but
-  they are part of the browser environment that JavaScript runs in, and they are
-  used commonly in Ember. You can read the [MDN introduction to events](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Events)
-  for more details.
-* **Promises** - the native way to deal with asynchrony in your JavaScript code.
-  See the relevant [Mozilla Developer Network](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
-  section. In addition, modern [`async/await` function syntax](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Async_await)
-  is good to know.
+* **Classes** - les classes sont l'une des briques les plus fondamentales de JavaScript et sont fréquemment utilisées dans Ember. Voir la section suivante pour plus de détails.
+* **Modules** - Vous comprendrez mieux la structure du projet [Ember CLI](https://ember-cli.com/) et ses chemins d'imports si vous êtes à l'aise avec les [modules JavaScript](https://developer.mozilla.org/fr/docs/Web/JavaScript/Guide/Modules).
+* **Événements** - (_events_) Le moyen natif de gérer les entrées utilisateur dans des applications pour navigateur. Les événements ne font pas partie du langage JavaScript en lui-même, ils font partie de l'environnement du navigateur dans lequel JavaScript s'exécute, et ils sont couramment utilisés dans Ember. Vous pouvez lire l'[introduction aux événements de MDN](https://developer.mozilla.org/fr/docs/Learn/JavaScript/Building_blocks/Events) pour en savoir plus.
+* **Promesses** - (_promises_) Le moyen natif de gérer le code asynchrone en JavaScript. Référez-vous à cette [section du guide Mozilla](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Promise). La syntaxe de fonction [`async/await`](https://developer.mozilla.org/fr/docs/Learn/JavaScript/Asynchronous/Promises) est également utile à connaître.
 
-## JavaScript Classes
+## Classes JavaScript
 
-Ember uses [JavaScript classes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)
-for many of its constructs, such as Components, Routes, Services, and more:
+Ember utilise des [classes JavaScript](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Classes) pour beaucoup de ses briques, les composants, les routes, les services et autres&nbsp;:
 
 ```js
 export default class PermissionController extends Controller {
@@ -83,16 +48,11 @@ export default class PermissionController extends Controller {
 }
 ```
 
-Some of the features that Ember relies on, such as [class fields](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes#Field_declarations)
-and [decorators](https://github.com/tc39/proposal-decorators) have not yet been
-fully finalized in JavaScript just yet, so we'll cover these here with the
-assumption that you've had a chance to familiarize yourself with classes before.
-If you haven't, you can also check out [our detailed class primer](../../in-depth-topics/native-classes-in-depth/).
+Certaines fonctionnalités sur lesquelles Ember s'appuie, comme les [déclarations de champs (_class fields_)](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Classes#d%C3%A9clarations_de_champs) ou les [décorateurs (_decorators_)](https://github.com/tc39/proposal-decorators), n'ont pas encore été complètement finalisées en JavaScript, donc nous les couvrirons ici en supposant que vous avez déjà eu l'opportunité de vous familiariser avec les classes. Si ce n'est pas le cas, jetez d'abord un œil à notre section sur les [classes natives](../../in-depth-topics/native-classes-in-depth/).
 
-### Fields
+### Déclarations de champs
 
-Class fields allow you to assign properties to an instance of the class on
-construction. You can define a field like this:
+Les déclarations de champs vous permettent d'assigner des propriétés à une instance de classe lors de sa construction. Vous pouvez déclarer un champ de la façon suivante&nbsp;:
 
 ```js
 class Permission {
@@ -100,8 +60,7 @@ class Permission {
 }
 ```
 
-This is very similar to defining the `Permission` class with a constructor like
-this:
+C'est très similaire à la définition d'un constructeur pour la classe `Permission`, comme ceci&nbsp;:
 
 ```js
 class Permission {
@@ -111,11 +70,7 @@ class Permission {
 }
 ```
 
-Class fields are somewhat like object properties, but they have some key
-differences. They are created and assigned to every instance of the class,
-meaning that instance gets a _unique_ version of the field. This doesn't matter
-if the field is a primitive, like a string or a number, but does matter if it's
-an object or an array:
+Les champs déclarés peuvent être des objets, mais il y a quelques différences clés. Ils sont créés et assignés à chaque instance de la classe, ce qui signifie que chaque instance obtient une version _unique_ de ce champ. Ce détail est sans importance si le champ est une primitive comme un string ou un nombre, mais il change tout si c'est un objet ou un tableau&nbsp;:
 
 ```js
 class Permission {
@@ -126,11 +81,10 @@ let tom = new Permission();
 let yehuda = new Permission();
 
 tom.roles === yehuda.roles;
-// false, they're different arrays
+// false, ce sont des tableaux différents
 ```
 
-Fields can also access the class instance using `this` when they are being
-assigned:
+Les champs peuvent aussi accéder à l'instance de classe avec `this` lorsqu'ils sont assignés&nbsp;:
 
 ```js
 class Child {
@@ -144,18 +98,11 @@ class Parent {
 }
 ```
 
-Fields are assigned before any code in the `constructor` method is run, which is
-why we can rely on them being assigned correctly by the time it runs. Fields do
-_not_ exist on the class itself, nor do they exist on the class's prototype,
-they only exist on the _instance_ of the class. However, they can be added to
-the class directly using the `static` keyword, like other class elements.
+Les champs sont assignés avant que le code dans le constructeur ne s'exécute, on peut donc s'appuyer sur le fait qu'ils sont déjà assignés quand on entre dans le constructeur. Les champs _n'existent pas_ dans la classe en elle-même, ni dans le prototype de la classe, ils existent seulement dans l'_instance_ de la classe. Ils peuvent être ajoutés à la classe à l'aide du mot clé `static`, comme les autres éléments de classe.
 
-### Decorators
+### Décorateurs
 
-Decorators are user defined modifiers that can be applied to a class or class
-element such as a field or method to change its behavior. For instance, you
-could create a `@cache` decorator that caches the return value of a getter the
-first time it is calculated:
+Les décorateurs (_decorators_) sont des _modifiers_ que vous définissez et qui peuvent s'appliquer à une classe ou un élément de classe, comme un champ ou un méthode, pour changer son comportement. Par exemple, vous pourriez créer un décorateur `@cache` qui retourne la valeur d'un accesseur la première fois qu'il est calculé&nbsp;:
 
 ```js
 import { cache } from 'my-cache-decorator';
@@ -175,17 +122,14 @@ console.log(counter.count); // 0
 console.log(counter.count); // 0
 ```
 
-Decorators are _normal_ JavaScript functions that get applied with a special
-syntax, which is why you import them like any other function, but you use the
-`@` symbol when applying them. Decorators come in a variety of flavors, and some
-can be applied to classes directly as well:
+Les décorateurs sont des fonctions JavaScript comme les autres qui s'appliquent avec une syntaxe particulière, c'est pourquoi vous les importez comme n'importe quelle autre fonction, vous utilisez simplement le symbole `@` pour les appliquer. Les décorateurs prennent diverses formes, certains peuvent aussi s'appliquer directement sur des classes, comme ceci&nbsp;:
 
 ```js
 @observable
 class Permission {}
 ```
 
-Some decorators can also receive arguments:
+D'autre peuvent recevoir des arguments&nbsp;:
 
 ```js
 class Permission {
@@ -198,21 +142,13 @@ let current = new Permission();
 console.log(current.editable); // false
 ```
 
-Ember provides a number of decorators, such as the `@tracked` decorator, that
-will be described in greater detail later on in the guides.
+Ember fournit un certain nombre de décorateurs, comme le décorateur `@tracked`, que nous décrirons en détail plus loin dans le Guide.
 
-> _Note: Decorators are still being actively developed in JavaScript, which means
-> that there may be small changes in the future. The decorators provided by
-> Ember should remain stable through these changes, but it is recommended that
-> you exercise caution if using any external decorator libraries which may not
-> have the same stability guarantees._
+> _Note: en JavaScript, les décorateurs sont toujours en cours de développement actif, il pourrait donc y avoir de petits changements à l'avenir. Les décorateurs fournis par Ember devraient rester stables malgré ces changements, mais nous vous recommandons de faire preuve de prudence si vous importez des librairies de décorateurs externes qui pourraient ne pas garantir la même stabilité._s
 
-### Classic Classes
+### Classes dites "classiques"
 
-Classic classes are deprecated, but it is still useful to be able
-to recognize them when looking at older code or blog posts.
-Ember used its own custom class syntax before native JavaScript classes existed,
-which looks like this:
+Les classes "classiques" (_classic classes_) sont dépréciées, mais il est toujours utile de savoir les reconnaître en lisant un code ou des articles de blog anciens. Avant que les classes natives en JavaScript n'existent, Ember utilisait sa propre syntaxe pour les classes, elle ressemblait à ça&nbsp;:
 
 ```js
 export default Controller.extend({
@@ -227,24 +163,12 @@ export default Controller.extend({
 });
 ```
 
-This syntax is known as _classic class_ syntax. You can check out the
-[pre-Octane guides on classic classes](https://guides.emberjs.com/v3.12.0/object-model/)
-for more information on how to convert a classic class to modern Ember.
+Cette syntaxe est nommée _classic class_. Vous pouvez jeter un œil aux classes classiques dans [la version "pre-Octane" du Guide officiel](https://guides.emberjs.com/v3.12.0/object-model/) pour plus d'informations sur comment les convertir à des classes modernes.
 
-## Cross-Browser Support
+## Support multi-navigateur
 
-Just like the JavaScript language changes over time, web browsers change too!
-Ember helps you to write code that can work across many different browsers and
-their versions. Behind the scenes, Ember uses Babel to compile modern JavaScript
-to something that can work on all browsers. Without this step, you could
-accidentally end up shipping code that works for your version of Chrome but
-breaks for someone using Edge. Ember has you covered!
+Tout comme le langage JavaScript, les navigateurs web aussi évoluent au fil du temps&nbsp;! Ember vous aide à écrire du code qui fonctionne sur de nombreux navigateurs et leurs versions.
 
-Luckily, Ember comes with a solution out of the box for this. Ember applications
-use [Babel](https://babeljs.io/) to compile modern JavaScript to something that
-can work on _all_ browsers. This means you can write modern JavaScript and use
-the latest features without any additional setup!
+Sous le capot, Ember utilise [Babel](https://babeljs.io/) pour compiler le JavaScript moderne en quelque chose qui fonctionne sur tous les navigateurs. Sans cette étape, vous pourriez accidentellement livrer du code qui fonctionne pour votre version de Chrome mais casse chez quelqu'un utilisant Edge. Ember couvre vos arrières et vous permet d'écrire des applications en JavaScript moderne sans aucune configuration additionnelle. &nbsp;!
 
-> _Note: Some features require you to [enable the Babel polyfill](https://github.com/babel/ember-cli-babel#polyfill).
-> This adds some extra weight to your application, but ensures you'll be
-> compatible with any new features that are added to JavaScript._
+> _Note: Certaines fonctionnalités nécessitent [d'activer les _polyfills_ de Babel](https://github.com/babel/ember-cli-babel#polyfill). Ils ajoutent un peu de poids à votre application mais assurent sa compatibilité avec toute nouvelle fonctionnalité ajoutée à JavaScript._
