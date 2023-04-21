@@ -28,7 +28,7 @@ const remarkConfig = {
     ["remark-lint-list-item-indent", "space"],
     ["remark-lint-list-item-bullet-indent", false],
     ["remark-lint-code-block-style", false],
-    ["remark-message-control", { name: 'spell', source: ['retext-spell'] }],
+    ["remark-message-control", { name: 'spell', source: ['retext-spell', 'retext-repeated-words'] }],
   ]
 };
 

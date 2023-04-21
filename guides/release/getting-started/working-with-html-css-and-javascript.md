@@ -1,3 +1,4 @@
+<!-- spell ignore -->
 Ember est un framework pour construire des applications qui tournent dans le navigateur, ce qui signifie qu'elles sont développées avec HTML, CSS et JavaScript. Il est donc très utile d'être à l'aise avec ces technologies. Si vous vous retrouvez bloqué ou rencontrez des incertitudes durant votre apprentissage de Ember, revenez à cette page et tentez de voir s'il y a, derrière vos questions, un sujet plus général que vous pourriez explorer.
 
 ## HTML
