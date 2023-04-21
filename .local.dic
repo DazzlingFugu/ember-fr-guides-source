@@ -28,6 +28,7 @@ DX
 DataAdapter
 DevTools
 Discord
+Edge
 ENV
 ES2015
 ES2016
@@ -65,12 +66,14 @@ HammerJS
 Hm
 Hoc
 Homebrew
+IE
 IE11
 IndexedDB
 Inflector
 Initializer/nombrable
 Inspector
 Intellisense
+JAWS
 JPG
 JS
 JSLint
@@ -84,6 +87,7 @@ LTS
 Markdown
 MDN
 Mapbox
+Narrator
 NVDA
 Neovim
 Netlify
@@ -365,6 +369,7 @@ presentational
 présentationnel/sensationnel
 pseudocode
 querySelectorAll
+reader/nombrable
 readme
 readonly
 recognizers
@@ -383,6 +388,7 @@ runnable
 runtime
 sandboxed
 scp
+screen/nombrable
 screencasting
 selectable
 serializer/nombrable

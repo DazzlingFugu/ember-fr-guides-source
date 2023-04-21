@@ -7,7 +7,7 @@ Des technologies d'assistance (aussi appelées lecteurs d'écran, ou plus couram
 - VoiceOver, intégré sur les produits Apple
 - Narrator, intégré sur les produits Windows
 - Orca, disponible en intégration sur Ubuntu, ou disponible en téléchargement
-- JAWS, technologie brevetée par Freedom Scientific, disponible sur Windows
+- <!-- spell ignore --> JAWS, technologie brevetée par Freedom Scientific, disponible sur Windows
 - NVDA, logiciel open source, disponible sur Windows
 - TalkBack, intégré sur les produits Android
 

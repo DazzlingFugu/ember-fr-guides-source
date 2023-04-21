@@ -11,6 +11,7 @@ guides/release/**/*.md
 !guides/release/accessibility/application-considerations.md
 !guides/release/accessibility/index.md
 !guides/release/accessibility/learning-resources.md
+!guides/release/accessibility/testing.md
 !guides/release/applications/index.md
 !guides/release/getting-started/index.md
 !guides/release/index.md
