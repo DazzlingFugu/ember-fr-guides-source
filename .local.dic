@@ -182,6 +182,7 @@ buddy
 bugfix/nombrable
 build
 builder
+built-in
 callback
 callouts
 camelCase/D
@@ -198,6 +199,7 @@ codemod
 codemods
 CoffeeScript
 ColorSafe
+checkbox
 checksum/nombrable
 community
 componentized
@@ -253,12 +255,14 @@ ember-debug-handlers-polyfill
 ember-dictionary
 ember-fast-cli
 ember-intl
+ember-keyboard
 ember-qunit
 ember-styleguide
 ember-try
 engineering/A
 enumerables
 erroring
+event/nombrable
 facto
 falsy
 favicon
@@ -373,6 +377,7 @@ presentational
 présentationnel/sensationnel
 pseudocode
 querySelectorAll
+quotes
 reader/nombrable
 readme
 readonly
@@ -433,6 +438,7 @@ teardown
 template/nombrable
 template-lifecycle-dom-and-modifiers
 templating
+textarea
 todo/nombrable
 treesitter
 triple-backtick

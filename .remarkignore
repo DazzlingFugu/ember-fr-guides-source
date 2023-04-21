@@ -15,6 +15,7 @@ guides/release/**/*.md
 !guides/release/addons-and-dependencies/index.md
 !guides/release/applications/index.md
 !guides/release/components/block-content.md
+!guides/release/components/built-in-components.md
 !guides/release/getting-started/index.md
 !guides/release/index.md
 !guides/release/getting-started/anatomy-of-an-ember-app.md

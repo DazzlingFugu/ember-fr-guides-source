@@ -3,11 +3,11 @@ Ember fournit deux composants prêts à l'emploi pour construire des formulaires
 * [`<Input>`](https://api.emberjs.com/ember/release/classes/Ember.Templates.components/methods/Input?anchor=Input)
 * [`<Textarea>`](https://api.emberjs.com/ember/release/classes/Ember.Templates.components/methods/Textarea?anchor=Textarea)
 
-Le markup HTML de ces composants est similaire à celui des éléments natifs `<input>` et `<textarea>`. À la différence des éléments natifs, `<Input>` et `<Textarea>` mettent automatiquement à jour l'état des valeurs qui leur sont liées.
+Le balisage HTML de ces composants est similaire à celui des éléments natifs `<input>` et `<textarea>`. À la différence des éléments natifs, `<Input>` et `<Textarea>` mettent automatiquement à jour l'état des valeurs qui leur sont liées.
 
 ## `<Input>`
 
-Nous avons dit plus haut que les composants _built-in_ (c'est-à-dire "construits à l'intérieur du framework") ont un markup HTML similaire à celui de leur équivalent natif. Qu'est-ce que ça signifie ?
+Nous avons dit plus haut que les composants _built-in_ (c'est-à-dire "construits à l'intérieur du framework") ont un balisage HTML similaire à celui de leur équivalent natif. Qu'est-ce que ça signifie ?
 
 Considérons l'exemple suivant, le template d'un fichier.
 
@@ -120,9 +120,9 @@ Rappelez-vous qu'il y a quelques exceptions. Les attributs d'input suivants doiv
 
 [À propos du modifier `{{on}}`](../../upgrading/current-edition/action-on-and-fn/#toc_the-on-modifier)
 
-Pour terminer, Ember fournit également plusieurs events d'input spécifiques :  `@enter`, `@insert-newline` et `@escape-press`. Ces events n'existent pas sur les éléments input natifs, mais vous pourriez les trouver utiles pour implémenter les intéractions clavier.
+Pour terminer, Ember fournit également plusieurs events d'input spécifiques :  `@enter`, `@insert-newline` et `@escape-press`. Ces events n'existent pas sur les éléments input natifs, mais vous pourriez les trouver utiles pour implémenter les interactions clavier.
 
-Le style moderne (ou Ember Octane) pour gérer les events clavier est [d'écrire un modifier](../../upgrading/current-edition/glimmer-components/#toc_writing-your-own-modifiers) afin de séparer les responsabilités : le composant gère les états, tandis que le modifier gère les intéractions avec le DOM. L'action appelée lors d'un event reçoit alors un objet `event` en paramètre.
+Le style moderne (ou Ember Octane) pour gérer les events clavier est [d'écrire un modifier](../../upgrading/current-edition/glimmer-components/#toc_writing-your-own-modifiers) afin de séparer les responsabilités : le composant gère les états, tandis que le modifier gère les interactions avec le DOM. L'action appelée lors d'un event reçoit alors un objet `event` en paramètre.
 
 [La communauté propose des addons](https://emberobserver.com/?query=keyboard) permettant de gérer les events clavier. Par exemple, avec [ember-keyboard](https://github.com/adopted-ember-addons/ember-keyboard), vous pouvez écrire :
 
