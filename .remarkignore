@@ -12,4 +12,5 @@ guides/release/**/*.md
 !guides/release/applications/index.md
 !guides/release/getting-started/index.md
 !guides/release/index.md
+!guides/release/getting-started/anatomy-of-an-ember-app.md
 !guides/release/getting-started/working-with-html-css-and-javascript.md

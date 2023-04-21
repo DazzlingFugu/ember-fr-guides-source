@@ -6,6 +6,7 @@ API/nombrable
 ActiveSupport
 Algolia
 Americentric
+Apollo
 Backburner
 Bower
 Browserlist
@@ -56,6 +57,7 @@ GitHub
 GitLab
 Globals
 GraphQL
+Handlebars
 HTML5
 HTMLBars
 HTTPS
@@ -359,6 +361,7 @@ readonly
 recognizers
 relayout
 renderer
+rental
 repo
 repos
 request/nombrable
@@ -384,6 +387,7 @@ stacktrace/nombrable
 stateful
 stdin
 stdout
+storage
 storeConfigInMeta
 styleguide/nombrable
 stylesheet/nombrable
