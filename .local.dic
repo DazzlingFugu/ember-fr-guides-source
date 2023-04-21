@@ -1,5 +1,3 @@
-*NPM
-*google
 2FA
 30KB
 API/nombrable
@@ -7,6 +5,7 @@ ActiveSupport
 Algolia
 Americentric
 Apollo
+AWS
 Backburner
 Bower
 Browserlist
@@ -58,6 +57,7 @@ GitLab
 Globals
 GraphQL
 Handlebars
+Heroku
 HTML5
 HTMLBars
 HTTPS
@@ -84,7 +84,6 @@ LTS
 Markdown
 MDN
 Mapbox
-NPM
 NVDA
 Neovim
 Netlify
@@ -124,6 +123,7 @@ Treeshaking
 UI
 UIs
 URI
+URL/nombrable
 URL-escaped
 UX
 VM
@@ -175,6 +175,8 @@ bookmarklet
 breakpoint/nombrable
 buddy
 bugfix/nombrable
+build
+builder
 callouts
 camelCase/D
 camelize
@@ -191,6 +193,7 @@ codemods
 CoffeeScript
 ColorSafe
 checksum/nombrable
+community
 componentized
 composable
 config
@@ -230,6 +233,7 @@ ember-addon
 ember-cli-app-version
 ember-cli-babel
 ember-cli-cjs-transform
+ember-cli-deploy
 ember-cli-deprecation-workflow
 ember-cli-document-title
 ember-cli-head
@@ -275,8 +279,9 @@ hardcode/D
 hasMany
 hashchange
 help
+helper/nombrable
+hook/nombrable
 hostname
-html
 htmlbars
 htmlbars-inline-precompile
 http
@@ -303,11 +308,13 @@ lintés
 linter/nombrable
 linter/a0p+
 linting
+list/nombrable
 localhost:4200
 lockfile/nombrable
 lookups
 LSP
 md5
+meetup
 minifi/DR
 minification
 minified
@@ -319,6 +326,7 @@ mixin
 mixins
 mockup
 modifiers
+model/nombrable
 modularity
 namespace/DG
 namespace/nombrable
@@ -354,6 +362,7 @@ preprocess/D
 preprocess/DGS
 preprocessor/nombrable
 presentational
+présentationnel/sensationnel
 pseudocode
 querySelectorAll
 readme
