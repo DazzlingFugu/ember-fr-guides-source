@@ -173,6 +173,7 @@ beforeEach
 beforeInstall
 beforeUninstall
 belongsTo
+block/nombrable
 blockquote
 blogPost
 bookmarklet
@@ -181,6 +182,7 @@ buddy
 bugfix/nombrable
 build
 builder
+callback
 callouts
 camelCase/D
 camelize
@@ -329,8 +331,9 @@ misspelt
 mixin
 mixins
 mockup
-modifiers
 model/nombrable
+modifier
+modifiers
 modularity
 namespace/DG
 namespace/nombrable
@@ -350,6 +353,7 @@ params
 pathing
 performant
 pipelining
+placeholder/nombrable
 pluralization/nombrable
 podModulePrefix
 polyfill/nombrable
@@ -460,4 +464,3 @@ webpack
 webpage
 websocket
 wizard
-working-with-html-css-and-javascript

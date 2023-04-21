@@ -10,7 +10,8 @@ Voici un exemple de composant appelé avec le bloc par défaut (qui est implicit
 </ExampleComponent>
 ```
 
-L'exemple ci-dessus est équivalent à appeler explicitement le bloc par défaut en utilisant la syntaxe "named block".
+<!-- spell ignore -->
+L'exemple ci-dessus est équivalent à appeler explicitement le bloc par défaut en utilisant la syntaxe de bloc nommé (_named block_).
 
 ```handlebars
 <ExampleComponent>
