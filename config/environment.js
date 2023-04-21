@@ -30,7 +30,7 @@ module.exports = function (environment) {
 
     guidemaker: {
       title: 'Ember Guides',
-      sourceRepo: 'https://github.com/ember-learn/guides-source'
+      sourceRepo: 'https://github.com/DazzlingFugu/ember-fr-guides-source'
     },
 
     showdown: {
