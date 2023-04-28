@@ -4,7 +4,7 @@ Ember propose différentes manières d'aider les développeurs et développeuses
 
 L'accessibilité devrait être considérée dès le début de tout projet, qu'elle fasse partie ou non des objectifs explicites. Personne ne peut prédire le futur de quelqu'un (tel qu'avoir besoin de technologies d'assistance un jour), et beaucoup de pays dans le monde exigent par la loi de rendre les sites web accessibles. L'accessibilité doit être pensée de la même manière que la performance, c'est-à-dire une nécessité pour tout produit sur le web.
 
-De plus, il est plus simple d'implémenter des bases d'accessibilité au début d'un projet que d'essayer de l'ajouter plus tard, en cours de développement. La sémantique HTML ne prend pas plus de temps que d'appliquer des balises non sémantiques, elle rend le développement moins pénible et crée moins de balisage, ce qui rend l'application plus performante et mieux optimisée pour les moteurs de recherche.
+De plus, il est plus simple d'implémenter des bases d'accessibilité au début d'un projet que d'essayer de l'ajouter plus tard, en cours de développement. La sémantique HTML ne prend pas plus de temps que d'appliquer des balises non sémantiques, elle permet un développement moins pénible et crée moins de balisage, ce qui rend l'application plus performante et mieux optimisée pour les moteurs de recherche.
 
 ## Stratégie d'accessibilité
 

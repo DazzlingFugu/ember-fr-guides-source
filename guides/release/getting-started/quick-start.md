@@ -372,7 +372,7 @@ ember build --environment=production
 
 Une fois que vous êtes connecté à votre compte Netlify, dans la section "Sites", vous devriez voir la zone de glisser-déposer de Netlify.
 
-![Netlify, aire de glissez-déposez](/images/quick-guide/netlify/drag-and-drop/02.png)
+![Netlify, zone de glissez-déposez](/images/quick-guide/netlify/drag-and-drop/02.png)
 
 Ensuite, trouvez votre dossier `dist` sur votre ordinateur et glissez-déposez-le dans cette zone.
 
