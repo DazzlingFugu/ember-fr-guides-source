@@ -2,7 +2,7 @@
 *google
 2FA
 30KB
-API/S
+API/nombrable
 ActiveSupport
 Algolia
 Americentric
@@ -37,6 +37,7 @@ ES3
 ES5
 ES6
 ESLint
+Edge
 EditorConfig
 EmbeddedRecordMixin
 EmbeddedRecordsMixin
@@ -137,7 +138,7 @@ XHR
 XSS
 ZEIT
 Zoey
-app
+app/nombrable
 aXe
 accessor/S
 activations
@@ -179,6 +180,8 @@ chainable
 cheatsheet
 checkboxes
 checksum/S
+class
+classic
 coc-ember
 codebase/S
 codemod
@@ -210,6 +213,7 @@ deserialization
 deserialize/DG
 deserialize/NR
 destructure/G
+dev/nombrable
 devDependencies
 draggable
 dropdown
@@ -245,6 +249,7 @@ erroring
 facto
 falsy
 favicon
+field/nombrable
 fileMapTokens
 filesPath
 filesystem/S
@@ -315,6 +320,7 @@ misspelt
 mixin
 mixins
 mockup
+modifiers
 modularity
 namespace/DG
 namespace/S
@@ -336,7 +342,7 @@ performant
 pipelining
 pluralization/S
 podModulePrefix
-polyfill/S
+polyfill/nombrable
 polymorphism
 pre-determined
 pre-octane
@@ -404,6 +410,7 @@ syntaxes
 tagless
 tailwindcss
 teardown
+template/nombrable
 template-lifecycle-dom-and-modifiers
 templating
 todo
