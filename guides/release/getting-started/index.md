@@ -19,7 +19,7 @@ Voici certaines de ces fonctionnalités, que vous apprendrez à maîtriser dans 
 L'objectif du Guide est de fournir des explications pratiques sur la façon de construire des apps Ember, en se concentrant sur les fonctionnalités de Ember.js les plus largement utilisées.
 Pour une documentation plus poussée de chaque fonctionnalité et de chaque API, voir le site [Ember.js API documentation](https://api.emberjs.com/).
 
-Le Guide commence par une prise en mais de Ember, suivie d'un tutoriel sur comment construire une app Ember. Si Ember est vraiment complètement nouveau pour vous, nous vous recommandons de suivre ces deux premières sections.
+Le Guide commence par une prise en main de Ember, suivie d'un tutoriel sur comment construire une app Ember. Si Ember est complètement nouveau pour vous, nous vous recommandons de suivre ces deux premières sections.
 
 ## Prérequis
 
