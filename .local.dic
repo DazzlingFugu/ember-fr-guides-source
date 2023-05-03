@@ -276,6 +276,7 @@ formatters
 front-end
 frontend/nombrable
 fullname
+generator/nombrable
 geocode/GS
 geocoding
 geolocation
