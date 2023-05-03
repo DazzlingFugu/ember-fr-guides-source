@@ -379,7 +379,7 @@ Ensuite, trouvez votre dossier `dist` sur votre ordinateur et glissez-déposez-l
 <!-- spell ignore -->
 Quand vos fichiers ont été téléversés avec succès, vous devriez voir le statut de votre déploiement dans la section "Getting started".
 
-![Prise en main avec le glissez-déposez sur Netlify](/images/quick-guide/netlify/drag-and-drop/03.png)
+![Prise en main avec le glisser-déposer sur Netlify](/images/quick-guide/netlify/drag-and-drop/03.png)
 
 <!-- spell ignore -->
 Une fois que vous voyez le message "Your site is deployed" comme ci-dessus, votre site est en ligne et, pour le voir, vous pouvez cliquer sur le lien fourni au-dessus de la section "Getting started".
