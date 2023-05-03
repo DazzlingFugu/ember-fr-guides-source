@@ -8,8 +8,16 @@ guides/release/working-with-javascript
 
 # translated only files
 guides/release/**/*.md
+!guides/release/accessibility/application-considerations.md
+!guides/release/accessibility/index.md
 !guides/release/accessibility/learning-resources.md
+!guides/release/accessibility/testing.md
+!guides/release/addons-and-dependencies/index.md
 !guides/release/applications/index.md
+!guides/release/components/block-content.md
+!guides/release/components/built-in-components.md
 !guides/release/getting-started/index.md
 !guides/release/index.md
+!guides/release/getting-started/anatomy-of-an-ember-app.md
+!guides/release/getting-started/quick-start.md
 !guides/release/getting-started/working-with-html-css-and-javascript.md

@@ -1,4 +1,4 @@
-Lorsque vous développez votre app Ember, il est probable que vous recontriez des scénarios communs qui ne sont pas adressés par le framework en lui-même. Peut-être voulez-vous employer un préprocesseur CSS pour écrire vos feuilles de style ? ou bien utiliser une librairie JS populaire ? ou peut-être importer des composants ayant été écrits par une autre équipe de votre organisation ?
+Lorsque vous développez votre app Ember, il est probable que vous rencontriez des scénarios communs qui ne sont pas adressés par le framework en lui-même. Peut-être voulez-vous employer un préprocesseur CSS pour écrire vos feuilles de style ? ou bien utiliser une librairie JS populaire ? ou peut-être importer des composants ayant été écrits par une autre équipe de votre organisation ?
 
 Pour résoudre certains de ces problèmes, Ember CLI fournit un format appelé [Ember Addons](#toc_addons) afin de distribuer des librairies réutilisables. De plus, vous pourriez vouloir faire usage de dépendances front-end comme un framework CSS ou un sélecteur de date JavaScript qui ne sont pas spécifiques à Ember.
 
@@ -12,7 +12,7 @@ ember install ember-cli-sass
 
 Quand cette commande s'exécute, elle modifie votre `package.json` (ainsi que `package-lock.json` ou `yarn.lock`) et, en général, importe d'autres dépendances. Certains addons génèrent aussi, lorsque c'est nécessaire, des fichiers additionnels dans votre projet.
 
-Il existe une multitude d'addons répondant à tous types de besoins. Pour plus de détails et pour consulter d'autres exemples sur ce que les addons peuvent faire, nous vous invitons à jeter un oeil à la [documentation de Ember CLI](https://cli.emberjs.com/release/basic-use/using-addons/).
+Il existe une multitude d'addons répondant à tous types de besoins. Pour plus de détails et pour consulter d'autres exemples sur ce que les addons peuvent faire, nous vous invitons à jeter un œil à la [documentation de Ember CLI](https://cli.emberjs.com/release/basic-use/using-addons/).
 
 La communauté Ember publie et maintient de nombreux addons, il peut donc être difficile de savoir si l'un (ou plusieurs&nbsp;!) d'entre eux couvre vos besoins. Le site web [Ember Observer](https://www.emberobserver.com/) conserve un index à jour des addons Ember, triés par catégorie et notés selon des critères objectifs. Si vous recherchez un addon, nous vous recommandons de commencer vos recherches par là&nbsp;!
 
@@ -68,7 +68,7 @@ app.import("node_modules/showdown/dist/showdown.js", {
 
 Vous pouvez maintenant importer `showdown` dans votre application (ex&nbsp;: `import showdown from 'showdown';`).
 
-### Fichiers spécifiques à un environment
+### Fichiers spécifiques à un environnement
 
 Si vous souhaitez utiliser différents fichiers dans différents environnements, spécifiez un objet en premier paramètre de `app.import`. Chaque clé de l'objet est le nom de l'environnement, et sa valeur est le fichier à utiliser dans cet environnement&nbsp;:
 
@@ -79,7 +79,7 @@ app.import({
 });
 ```
 
-Si vous souhaitez importer un fichier dans un seul environnement, vous pouvez nester `app.import` dans un bloc `if`. Pour les fichiers requis durant l'exécution des tests, vous devrez aussi utiliser l'option `{type: 'test'}` afin de vous assurer qu'ils soient bien disponibles en mode test.
+Si vous souhaitez importer un fichier dans un seul environnement, vous pouvez imbriquer `app.import` dans un bloc `if`. Pour les fichiers requis durant l'exécution des tests, vous devrez aussi utiliser l'option `{type: 'test'}` afin de vous assurer qu'ils soient bien disponibles en mode test.
 
 ```javascript {data-filename=ember-cli-build.js}
 if (app.env === "development") {

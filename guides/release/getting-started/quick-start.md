@@ -11,17 +11,17 @@ Voici les étapes que nous couvrirons&nbsp;:
 
 ## Installer Ember
 
-Ember peut être installé avec une simple commande NPM, le gestionnaire de paquets de Node.js. Tapez ceci dans votre terminal&nbsp;:
+Ember peut être installé avec une simple commande npm, le gestionnaire de paquets de Node.js. Tapez ceci dans votre terminal&nbsp;:
 
 ```bash
 npm install -g ember-cli
 ```
 
-Vous n'avez pas NPM&nbsp;? [Apprenez comment installer Node.js et NPM ici](https://docs.npmjs.com/getting-started/installing-node). Pour une liste complète de toutes les dépendances nécessaires à un projet Ember CLI, visitez [Ember CLI Guides - Installing](https://cli.emberjs.com/release/basic-use/).
+Vous n'avez pas npm&nbsp;? [Apprenez comment installer Node.js et npm ici](https://docs.npmjs.com/getting-started/installing-node). Pour une liste complète de toutes les dépendances nécessaires à un projet Ember CLI, visitez [Ember CLI Guides - Installing](https://cli.emberjs.com/release/basic-use/).
 
 ## Créer une nouvelle application
 
-Une fois Ember CLI installé à l'aide de NPM, vous avez accès à une nouvelle commande `ember` dans votre terminal. Vous pouvez désormais taper la commande `ember new` pour créer une nouvelle application&nbsp;:
+Une fois Ember CLI installé à l'aide de npm, vous avez accès à une nouvelle commande `ember` dans votre terminal. Vous pouvez désormais taper la commande `ember new` pour créer une nouvelle application&nbsp;:
 
 ```bash
 ember new ember-quickstart --lang en
@@ -29,7 +29,7 @@ ember new ember-quickstart --lang en
 
 Cette commande crée un nouveau dossier appelé `ember-quickstart` et prépare une nouvelle application Ember à l'intérieur. L'option `--lang en` définit l'anglais comme langue principale afin d'améliorer dès le départ l'[accessibilité](../../accessibility/application-considerations/). Telle quelle, l'application fraîchement créée inclut&nbsp;:
 
-- Un serveur de développpement
+- Un serveur de développement
 - Un compilateur de templates
 - La minification des fichiers JavaScript et CSS
 - Les fonctionnalités modernes via Babel
@@ -159,6 +159,7 @@ Le résultat final consiste en une balise `<li>` par scientifique du tableau à 
 
 ## Écrire un composant d'UI
 
+<!-- spell ignore -->
 À mesure que votre application grandit, vous constaterez que vous partagez certains éléments d'UI entre plusieurs pages, ou bien que vous utiliserez les mêmes plusieurs fois dans la même page. Ember vous permet d'améliorer facilement vos templates en en faisant des composants réutilisables.
 
 Créons un composant `<PeopleList>` que nous pouvons utiliser à de multiples endroits pour afficher une liste de personnes.
@@ -210,7 +211,7 @@ Nous allons indiquer à notre composant&nbsp;:
 
 Pour cela, nous allons devoir faire quelques changements dans le code écrit précédemment.
 
-Dans le reste des exemples de codes de ce tutoriel, à chaque fois que nous ajouterons ou supprimerons du code, nous montrerons un "diff". Les lignes à supprimer commenceront par un signe moins, et les lignes à ajouter par un signe plus. Si vous utilisez un lecteur d'écran tandis que vous parcourez le Guide, nous recommendons, pour la meilleure expérience, l'utilisation de Firefox et NVDA ou Safari et VoiceOver.
+Dans le reste des exemples de codes de ce tutoriel, à chaque fois que nous ajouterons ou supprimerons du code, nous montrerons un "diff". Les lignes à supprimer commenceront par un signe moins, et les lignes à ajouter par un signe plus. Si vous utilisez un lecteur d'écran tandis que vous parcourez le Guide, nous recommandons, pour la meilleure expérience, l'utilisation de Firefox et NVDA ou Safari et VoiceOver.
 
 Remplaçons l'ancien code avec la version avec composant&nbsp;:
 
@@ -267,7 +268,7 @@ export default class PeopleListComponent extends Component {
 
 _Note: Si vous voulez que ce fichier soit généré pour vous, vous pouvez passer l'option `-gc` quand vous lancez le générateur de composant._
 
-Ici, nous avons créé une classe de composant basique et ajouté une méthode qui accèpte une personne en argument et affiche une boîte de dialogue avec son nom. Le _decorator_ (décorateur) `@action` indique que nous souhaitons utiliser cette méthode en tant qu'"action" dans notre template, en réponse à une interation utilisateur.
+Ici, nous avons créé une classe de composant basique et ajouté une méthode qui accepte une personne en argument et affiche une boîte de dialogue avec son nom. Le _decorator_ (décorateur) `@action` indique que nous souhaitons utiliser cette méthode en tant qu'"action" dans notre template, en réponse à une interaction utilisateur.
 
 Le comportement implémenté, nous pouvons retourner sur le template du composant et le mettre à jour&nbsp;:
 
@@ -286,6 +287,7 @@ Le comportement implémenté, nous pouvons retourner sur le template du composan
 
 Ici, nous utilisons le _modifier_ `on` pour attacher l'action `this.showPerson` au bouton qui se trouve dans le template.
 
+<!-- spell ignore -->
 Cependant, nous avons un problème. Si vous essayez dans le navigateur, vous vous apercevrez que cliquer sur les boutons affiche une boîte de dialogue annonçant "Le nom de cette personne est `[Object MouseEvent]`!" – eek&nbsp;!
 
 La cause de ce bug est que l'action que nous avons écrite prend un argument – le nom de la personne – et nous avons oublié de le passer. Fixer ça est assez simple&nbsp;:
@@ -324,7 +326,7 @@ La commande `build` empaquette tous les fichiers qui constituent votre applicati
 
 Ici, nous avons dit à Ember de builder l'application pour l'environnement de production via l'option `--environment`. On obtient ainsi un paquet optimisé et prêt à être téléversé sur votre serveur web. Une fois le build terminé, vous trouverez tous les fichiers concaténés et minifiés dans le dossier `dist/` de votre application.
 
-La communauté Ember accorde beaucoup de valeur à la collaboration et à la construction d'outils communs sur lesquels chacun puisse s'appuyer. Si vous êtes intéressé par un moyen fiable et rapide de déployer votre application en production, jetez un oeil à l'addon [Ember CLI Deploy](http://ember-cli-deploy.com/).
+La communauté Ember accorde beaucoup de valeur à la collaboration et à la construction d'outils communs sur lesquels chacun puisse s'appuyer. Si vous êtes intéressé par un moyen fiable et rapide de déployer votre application en production, jetez un œil à l'addon [ember-cli-deploy](http://ember-cli-deploy.com/).
 
 Si vous déployez votre application sur un serveur web Apache, créez d'abord un nouvel hôte virtuel pour votre application. Pour vous assurer que toutes les routes sont traitées par l'`index.html`, ajoutez la directive suivante dans la configuration de l'hôte virtuel de l'application&nbsp;:
 
@@ -340,7 +342,7 @@ FallbackResource index.html
 
 Pourquoi Netlify?
 
-Cette solution ne requiert pas de connaissances avancées pour déployer votre site web en production. Netlify offre une option de compte gratuit et aucune carte bancaire n'est requise. Le Guide Ember officiel est hébergé sur Netlify, tandis que d'autres ressources de `emberjs.com` sont hébergées sur Heroku, Fastly, Github pages, et AWS.
+Cette solution ne requiert pas de connaissances avancées pour déployer votre site web en production. Netlify offre une option de compte gratuit et aucune carte bancaire n'est requise. Le Guide Ember officiel est hébergé sur Netlify, tandis que d'autres ressources de `emberjs.com` sont hébergées sur Heroku, Fastly, GitHub pages, et AWS.
 Dans l'ensemble, les devs Ember ont de nombreuses possibilités à leur disposition pour déployer leurs apps&nbsp;! Netlify en est une parmi d'autres.
 
 Suivre les étapes suivantes vous aidera à mettre en place votre site en quelques minutes&nbsp;:
@@ -362,7 +364,7 @@ Vous voilà prêt à déployer votre app en production sur la plateforme Netlify
 
 **Déployer sur Netlify en utilisant le glisser-déposer**
 
-Vous pourriez avoir besoin de recréer le dosier `dist` pour inclure les changements faits dans le fichier `_redirects` en relançant la commande&nbsp;:
+Vous pourriez avoir besoin de recréer le dossier `dist` pour inclure les changements faits dans le fichier `_redirects` en relançant la commande&nbsp;:
 
 ```bash
 ember build --environment=production
@@ -370,14 +372,16 @@ ember build --environment=production
 
 Une fois que vous êtes connecté à votre compte Netlify, dans la section "Sites", vous devriez voir la zone de glisser-déposer de Netlify.
 
-![Netlify Drag and Drop Area](/images/quick-guide/netlify/drag-and-drop/02.png)
+![Netlify, zone de glissez-déposez](/images/quick-guide/netlify/drag-and-drop/02.png)
 
 Ensuite, trouvez votre dossier `dist` sur votre ordinateur et glissez-déposez-le dans cette zone.
 
+<!-- spell ignore -->
 Quand vos fichiers ont été téléversés avec succès, vous devriez voir le statut de votre déploiement dans la section "Getting started".
 
-![Getting Started using Drag and Drop on Netlify](/images/quick-guide/netlify/drag-and-drop/03.png)
+![Prise en main avec le glisser-déposer sur Netlify](/images/quick-guide/netlify/drag-and-drop/03.png)
 
+<!-- spell ignore -->
 Une fois que vous voyez le message "Your site is deployed" comme ci-dessus, votre site est en ligne et, pour le voir, vous pouvez cliquer sur le lien fourni au-dessus de la section "Getting started".
 
 ![Voir votre site sur Netlify](/images/quick-guide/netlify/drag-and-drop/04.png)
@@ -386,10 +390,12 @@ Félicitations! Votre site est en production !
 
 **Déployer sur Netlify en utilisant Git (plus précisément GitHub)**
 
+<!-- spell ignore -->
 Assurez-vous que vous êtes connecté à votre compte Netlify, puis dans la section "Sites", cliquez sur le bouton "New site from Git".
 
 ![Netlify Déploiement Continu Git](/images/quick-guide/netlify/github/new-site-from-git.png)
 
+<!-- spell ignore -->
 Cliquez sur le bouton "GitHub" sous "Continuous Deployment" pour connecter votre compte GitHub. Lors de cette étape, vous devrez interagir avec une série d'écrans de login GitHub et on vous demandera de configurer vos préférences GitHub relatives à Netlify.
 
 ![Netlify choisissez votre répertoire GitHub pour déployer](/images/quick-guide/netlify/github/connect-to-github.png)
@@ -398,14 +404,17 @@ Une fois votre compte GitHub connecté avec succès à Netlify, vous devriez voi
 
 ![Netlify Options de Déploiement par Défaut Ember](/images/quick-guide/netlify/github/select-github-repo.png)
 
+<!-- spell ignore -->
 Si vous avez pu sélectionner le répertoire et qu'il s'agit d'une application Ember, Netlify générera automatiquement des options de déploiement par défaut comme montré ci-dessous. Ici, admettons que vous ne souhaitez pas changer les options. Si tout vous semble en ordre, cliquez sur le bouton "Deploy site".
 
 ![Netlify GitHub Vue d'Ensemble du Déploiement](/images/quick-guide/netlify/github/github-create-new-site.png)
 
-Une fois que vous avez cliqué sur le bouton "Deploy site", vous serez redirigé sur l'"Overview" (vue d'ensemble) de votre site web et vous devriez voir le status de votre déploiement.
+<!-- spell ignore -->
+Une fois que vous avez cliqué sur le bouton "Deploy site", vous serez redirigé sur l'"Overview" (vue d'ensemble) de votre site web et vous devriez voir le statut de votre déploiement.
 
 ![Netlify GitHub Confirmation du Déploiement](/images/quick-guide/netlify/github/github-deploy-confirmation.png)
 
+<!-- spell ignore -->
 Quand vous voyez "Your site is deployed" comme ci-dessus, votre site est en ligne et, pour le voir, vous pouvez cliquer sur le lien fourni au-dessus de la section "Getting started".
 
 ![Voir votre site sur Netlify](/images/quick-guide/netlify/github/github-live.png)
@@ -422,7 +431,7 @@ Il existe un tutoriel officiel gratuit dans le Guide qui approfondit quelques-un
 
 ### Explorer l'écosystème
 
-À présent que vous connaissez les bases, vous sentez-vous plus créatif et aventureux&nbsp;? La communauté Ember a créé des centaines d'addons que vous pouvez utiliser gratuitement dans votre app. Les addons vous permettent d'ajouter rapidement des fonctionnalités comme des calendriers, barres de navigation, outils de paiement, d'authentification, thèmes, etc... Visitez [Ember Observer](https://emberobserver.com) pour jeter un oeil à toutes les possibilités&nbsp;!
+À présent que vous connaissez les bases, vous sentez-vous plus créatif et aventureux&nbsp;? La communauté Ember a créé des centaines d'addons que vous pouvez utiliser gratuitement dans votre app. Les addons vous permettent d'ajouter rapidement des fonctionnalités comme des calendriers, barres de navigation, outils de paiement, d'authentification, thèmes, etc... Visitez [Ember Observer](https://emberobserver.com) pour jeter un œil à toutes les possibilités&nbsp;!
 
 ### Ajoutez un style
 
