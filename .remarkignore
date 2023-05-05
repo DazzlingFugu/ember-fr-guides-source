@@ -21,3 +21,4 @@ guides/release/**/*.md
 !guides/release/getting-started/anatomy-of-an-ember-app.md
 !guides/release/getting-started/quick-start.md
 !guides/release/getting-started/working-with-html-css-and-javascript.md
+!guides/release/tutorial/part-1/index.md

@@ -385,7 +385,7 @@ readonly
 recognizers
 relayout
 renderer
-rental
+rental/nombrable
 repo
 repos
 request/nombrable

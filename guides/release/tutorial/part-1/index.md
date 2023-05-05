@@ -1,22 +1,21 @@
-<!-- Heads up! This is a generated file, do not edit directly. You can find the source at https://github.com/ember-learn/super-rentals-tutorial/blob/master/src/markdown/tutorial/part-1/index.md -->
+Bienvenue dans le Tutoriel Ember&nbsp;!
 
-Welcome to the Ember Tutorial!
+Dans ce tutoriel, nous allons utiliser Ember pour construire une application appelée _Super Rentals_ (Super locations). Ce sera un site web pour rechercher des lieux intéressants où vous installer pendant vos prochaines vacances. Jetez un œil à [l'application une fois terminée](https://ember-super-rentals.netlify.com) pour vous faire une idée du périmètre du projet (il s'agit du tutoriel officiel dont le contenu est en anglais).
 
-In this tutorial, we will use Ember to build an application called Super Rentals. This will be a website for browsing interesting places to stay during your next vacation. Check out the [finished app](https://ember-super-rentals.netlify.com) to get a sense of the scope of the project.
+<img src="/images/tutorial/part-2/provider-components/homepage-with-rentals-component@2x.png" alt="L'app Super Rentals terminée" width="1024" height="1327">
 
-<img src="/images/tutorial/part-2/provider-components/homepage-with-rentals-component@2x.png" alt="The finished Super Rentals app" width="1024" height="1327">
+<!-- spell ignore -->
+En cours de route, vous apprendrez tout ce qu'il y a à savoir pour construire une application Ember basique. Si vous vous retrouvez bloqué à n'importe quel passage du tutoriel, n'hésitez pas à télécharger <https://github.com/ember-learn/super-rentals/tree/super-rentals-tutorial-output> pour voir le code fonctionnel complet.
 
-Along the way, you will learn everything you need to know to build a basic Ember application. If you get stuck at any point during the tutorial, feel free to download <https://github.com/ember-learn/super-rentals/tree/super-rentals-tutorial-output> for a complete working example.
+Ce tutoriel est structuré en deux parties. La première partie couvre les concepts basiques suivants&nbsp;:
 
-This tutorial is structured into two parts. The first part covers the following basic concepts:
+- Utiliser Ember CLI
+- Naviguer à travers la structure de dossiers et de fichiers de l'application Ember
+- Construire des pages et créer des liens entre elles 
+- Templates et composants
+- Tests automatisés
+- Travailler avec un serveur de données
 
-- Using Ember CLI
-- Navigating the file and folder structure of an Ember app
-- Building and linking between pages
-- Templates and components
-- Automated testing
-- Working with server data
+La seconde partie du tutoriel s'appuie sur ces concepts pour passer l'apprentissage au niveau suivant.
 
-The second part of the tutorial builds upon these concepts and takes things to the next level.
-
-Let's dive right in!
+C'est parti&nbsp;!
