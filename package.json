@@ -75,7 +75,7 @@
     "eslint-plugin-qunit": "^6.2.0",
     "gfm-code-blocks": "^1.0.0",
     "guidemaker": "^2.4.0",
-    "guidemaker-default-template": "^5.0.0",
+    "guidemaker-ember-locale-template": "git://github.com/DazzlingFugu/guidemaker-ember-locale-template#main",
     "loader.js": "^4.7.0",
     "lodash": "^4.17.21",
     "markdown-link-extractor": "^1.2.2",
