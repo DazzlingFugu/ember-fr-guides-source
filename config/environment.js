@@ -29,8 +29,16 @@ module.exports = function (environment) {
     },
 
     guidemaker: {
-      title: 'Ember Guides',
-      sourceRepo: 'https://github.com/DazzlingFugu/ember-fr-guides-source'
+      title: 'Guide Ember.js 🇫🇷',
+      host: {
+        name: 'Netlify',
+        site: 'https://app.netlify.com',
+      },
+      social: {
+        github: 'DazzlingFugu/ember-fr-guides-source',
+        discordLink: 'https://discord.com/channels/480462759797063690/486235962700201984'
+      },
+      sourceRepo: 'https://github.com/DazzlingFugu/ember-fr-guides-source',
     },
 
     showdown: {
