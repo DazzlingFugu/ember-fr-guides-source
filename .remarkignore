@@ -4,22 +4,22 @@ MAINTAINERS.md
 tmp
 
 # redirect only files
-guides/release/working-with-javascript
+guides/working-with-javascript
 
 # translated only files
-guides/release/**/*.md
-!guides/release/accessibility/application-considerations.md
-!guides/release/accessibility/components.md
-!guides/release/accessibility/index.md
-!guides/release/accessibility/learning-resources.md
-!guides/release/accessibility/testing.md
-!guides/release/addons-and-dependencies/index.md
-!guides/release/applications/index.md
-!guides/release/components/block-content.md
-!guides/release/components/built-in-components.md
-!guides/release/getting-started/index.md
-!guides/release/index.md
-!guides/release/getting-started/anatomy-of-an-ember-app.md
-!guides/release/getting-started/quick-start.md
-!guides/release/getting-started/working-with-html-css-and-javascript.md
-!guides/release/tutorial/part-1/index.md
+guides/**/*.md
+!guides/accessibility/application-considerations.md
+!guides/accessibility/components.md
+!guides/accessibility/index.md
+!guides/accessibility/learning-resources.md
+!guides/accessibility/testing.md
+!guides/addons-and-dependencies/index.md
+!guides/applications/index.md
+!guides/components/block-content.md
+!guides/components/built-in-components.md
+!guides/getting-started/index.md
+!guides/index.md
+!guides/getting-started/anatomy-of-an-ember-app.md
+!guides/getting-started/quick-start.md
+!guides/getting-started/working-with-html-css-and-javascript.md
+!guides/tutorial/part-1/index.md

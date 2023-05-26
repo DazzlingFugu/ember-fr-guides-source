@@ -1,5 +1,5 @@
 #!/bin/sh
-SRC_PATTERN="guides/release/"
+SRC_PATTERN="guides/"
 changes=`git diff --cached --name-only | grep "$SRC_PATTERN"`
 for translated in $changes; do
   while read -r line; do
