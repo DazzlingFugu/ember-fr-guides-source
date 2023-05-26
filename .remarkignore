@@ -9,6 +9,7 @@ guides/release/working-with-javascript
 # translated only files
 guides/release/**/*.md
 !guides/release/accessibility/application-considerations.md
+!guides/release/accessibility/components.md
 !guides/release/accessibility/index.md
 !guides/release/accessibility/learning-resources.md
 !guides/release/accessibility/testing.md
