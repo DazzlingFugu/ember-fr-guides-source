@@ -206,5 +206,15 @@ li.toc-group.toc-level-0 {
   padding-left: 1em;
 }
 
+/* Custom styling of the French app */
+.footer-middle {
+  flex: 2;
+  text-align: center;
+}
+
+
 /* Override `guidemaker-ember-locale-template` style */
 // Add some rules specific to the French template
+.footer {
+  padding-bottom: 1em;
+}
