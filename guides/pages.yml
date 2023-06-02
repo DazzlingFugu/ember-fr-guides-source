@@ -1,11 +1,11 @@
 - title: "Introduction"
   url: "toc-heading_introduction"
   is_heading: true
-- title: "Guides et Tutoriels"
+- title: "Guide et Tutoriels"
   url: "index"
   skip_toc: true
   pages:
-    - title: "Guides Ember.js"
+    - title: "Guide Ember.js"
       url: ""
 - title: "Pour bien démarrer"
   url: "getting-started"

@@ -1,6 +1,6 @@
 [![Ce projet utilise GitHub Actions pour l'intégration continue.](https://github.com/DazzlingFugu/ember-fr-guides-source/workflows/CI/badge.svg)](https://github.com/DazzlingFugu/ember-fr-guides-source/actions?query=workflow%3ACI)
 
-# Ember Guides en français
+# Ember.js Guides en français
 
 Ce répertoire contient la traduction française du guide officiel Ember.js :
 
