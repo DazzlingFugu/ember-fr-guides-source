@@ -1,26 +1,24 @@
-A [`Service`](https://api.emberjs.com/ember/release/classes/Service) is an Ember object that lives for the duration of the application, and can be made available in different parts of your application.
+Un [`Service`](https://api.emberjs.com/ember/release/classes/Service) est un objet Ember instancié pour toute la durée de vie de l'application, et qui rend accessible différentes parties de l'application.
 
-Services are useful for features that require shared state or persistent connections. Example uses of services might
-include:
+Les services sont utiles aux fonctionnalités qui nécessitent des états partagés ou des connexions persistantes. Parmi les exemples d'utilisation des Services, on a&nbsp;:
 
-* User/session authentication.
-* Geolocation.
-* WebSockets.
-* Server-sent events or notifications.
-* Server-backed API calls that may not fit EmberData.
-* Third-party APIs.
-* Logging.
+* les sessions et l'authentification des utilisateurs
+* la géolocalisation
+* les _WebSockets_
+* les notifications ou événements envoyés par le serveur (_server-sent events_)
+* les appels API ne fonctionnant pas avec EmberData
+* les APIs tierces
+* le _log in_
 
-### Defining Services
+### Définir des services
 
-Services can be generated using Ember CLI's `service` generator.
-For example, the following command will create the `ShoppingCart` service:
+Les services peuvent être générés à l'aide du générateur de `service` d'Ember CLI. Par exemple, la commande suivante créera le service `ShoppingCart` (panier de courses)&nbsp;:
 
 ```bash
 ember generate service shopping-cart
 ```
 
-Services must extend the [`Service`](https://api.emberjs.com/ember/release/classes/Service) base class:
+Les services doivent étendre la classe [`Service`](https://api.emberjs.com/ember/release/classes/Service)&nbsp;:
 
 ```javascript {data-filename=app/services/shopping-cart.js}
 import Service from '@ember/service';
@@ -29,8 +27,7 @@ export default class ShoppingCartService extends Service {
 }
 ```
 
-Like any Ember object, a service is initialized and can have properties and methods of its own.
-Below, the shopping cart service manages an items array that represents the items currently in the shopping cart.
+Comme tous les objets Ember, un service est initialisé et peut posséder ses propres propriétés et méthodes. Ci-dessous, le service `ShoppingCart` gère un tableau d'éléments qui représente les éléments se trouvant actuellement dans le panier.
 
 ```javascript {data-filename=app/services/shopping-cart.js}
 import { A } from '@ember/array';
@@ -53,14 +50,13 @@ export default class ShoppingCartService extends Service {
 }
 ```
 
-### Accessing Services
+### Accéder à des services
 
-To access a service,
-you can inject it into any container-resolved object such as a component or another service using the `service` decorator from the `@ember/service` module.
-There are two ways to use this decorator.
-You can either invoke it with no arguments, or you can pass it the registered name of the service.
-When no arguments are passed, the service is loaded based on the name of the decorated property.
-You can load the shopping cart service with no arguments like below.
+Pour accéder à un service, vous pouvez l'injecter dans n'importe quel objet résolu par le _container_ de l'application, comme un composant ou un autre service, en utilisant le décorateur `service` du module `@ember/service`.
+
+Il y a deux façons d'utiliser ce décorateur. Soit vous l'invoquez sans argument, soit vous lui passez le nom enregistré pour le service. Quand aucun argument n'est passé, le service est chargé en fonction du nom de la propriété décorée.
+
+Ainsi, vous pouvez charger le service `ShoppingCart` comme ci-dessous&nbsp;:
 
 ```javascript {data-filename=app/components/cart-contents.js}
 import Component from '@glimmer/component';
@@ -72,9 +68,9 @@ export default class CartContentsComponent extends Component {
 }
 ```
 
-This injects the shopping cart service into the component and makes it available as the `shoppingCart` property.
+Ce code injecte le service `ShoppingCart` dans le composant et le rend accessible en tant que propriété `shoppingCart`.
 
-Another way to inject a service is to provide the name of the service as an argument to the decorator.
+L'autre façon d'injecter le service est de fournir le nom du service en argument du décorateur&nbsp;:
 
 ```javascript {data-filename=app/components/cart-contents.js}
 import Component from '@glimmer/component';
@@ -86,11 +82,9 @@ export default class CartContentsComponent extends Component {
 }
 ```
 
-This injects the shopping cart service into the component and makes it available as the `cart` property.
+Ce code injecte le service `ShoppingCart` dans le composant et le rend accessible en tant que propriété `cart`.
 
-Sometimes a service may or may not exist, like when an initializer conditionally registers a service.
-Since normal injection will throw an error if the service doesn't exist,
-you must look up the service using Ember's [`getOwner`](https://api.emberjs.com/ember/release/classes/@ember%2Fapplication/methods/getOwner?anchor=getOwner) instead.
+Parfois, un service peut ou non exister, par exemple quand un _initializer_ l'enregistre de manière conditionnelle. Comme une injection classique provoquera une erreur si le service n'existe pas, vous devez rechercher le service en utilisant la méthode [`getOwner`](https://api.emberjs.com/ember/release/classes/@ember%2Fapplication/methods/getOwner?anchor=getOwner) de Ember&nbsp;:
 
 ```javascript {data-filename=app/components/cart-contents.js}
 import Component from '@glimmer/component';
@@ -104,11 +98,9 @@ export default class CartContentsComponent extends Component {
 }
 ```
 
-Injected properties are lazy loaded; meaning the service will not be instantiated until the property is explicitly called.
+Les propriétés injectées sont chargée en différé (_lazy loading_). Ça signifie que le service ne sera pas instancié jusqu'à ce que la propriété soit appelée explicitement. Une fois chargé, le service persiste aussi longtemps que l'application existe.
 
-Once loaded, a service will persist until the application exits.
-
-Below we add a remove action to the `cart-contents` component.
+Ci-dessous, l'action `remove` (retirer) est ajoutée au composant `cart-contents`&nbsp;:
 
 ```javascript {data-filename=app/components/cart-contents.js}
 import Component from '@glimmer/component';
@@ -125,15 +117,16 @@ export default class CartContentsComponent extends Component {
 }
 ```
 
-Once injected into a component, a service can also be used in the template.
-Note `cart` being used below to get data from the cart.
+Une fois injecté dans un composant, un service peut aussi être utilisé dans le template.
+
+Ici, la propriété `cart` est utilisée pour afficher les éléments du panier&nbsp;:
 
 ```handlebars {data-filename=app/components/cart-contents.hbs}
 <ul>
   {{#each this.cart.items as |item|}}
     <li>
       {{item.name}}
-      <button type="button" {{on "click" (fn this.remove item)}}>Remove</button>
+      <button type="button" {{on "click" (fn this.remove item)}}>Retirer</button>
     </li>
   {{/each}}
 </ul>

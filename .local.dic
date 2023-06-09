@@ -312,6 +312,7 @@ jank
 jquery-integration
 keyCode
 lang
+lazy
 lifecycle/nombrable
 lint
 linté
@@ -320,6 +321,7 @@ linter/nombrable
 linter/a0p+
 linting
 list/nombrable
+loading
 localhost:4200
 lockfile/nombrable
 lookups
@@ -402,6 +404,7 @@ screen/nombrable
 screencasting
 selectable
 serializer/nombrable
+server-sent
 serverless
 setter/nombrable
 sideload/DG
