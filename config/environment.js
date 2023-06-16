@@ -30,6 +30,8 @@ module.exports = function (environment) {
 
     guidemaker: {
       title: 'Guide Ember.js 🇫🇷',
+      logo: '/images/ember-fr-logo.svg',
+      description: 'Le Guide Ember.js traduit en Français',
       host: {
         name: 'Netlify',
         site: 'https://app.netlify.com',
