@@ -12,6 +12,7 @@ guides/**/*.md
 !guides/accessibility/components.md
 !guides/accessibility/index.md
 !guides/accessibility/learning-resources.md
+!guides/accessibility/page-template-considerations.md
 !guides/accessibility/testing.md
 !guides/addons-and-dependencies/index.md
 !guides/applications/index.md
