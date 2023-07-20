@@ -1,26 +1,24 @@
-<!-- Heads up! This is a generated file, do not edit directly. You can find the source at https://github.com/ember-learn/super-rentals-tutorial/blob/master/src/markdown/tutorial/part-1/01-orientation.md -->
+Dans ce chapitre, vous installerez _[Ember CLI](https://cli.emberjs.com/release/)_, puis vous l'utiliserez pour générer un nouveau projet Ember ainsi que quelques _templates_ et styles basiques pour votre nouvelle app. À la fin de ce chapitre, vous devriez avoir une page d'accueil sur laquelle s'affiche la mignonne petite bouille du Professeur Tomster&nbsp;:
 
-In this chapter, you will install _[Ember CLI](https://cli.emberjs.com/release/)_, use it to generate a new Ember project, and add some basic templates and styles to your new app. By the end of this chapter, you should have a landing page with Professor Tomster's cute little face featured on it:
+<img src="/images/tutorial/part-1/orientation/styled-with-tomster@2x.png" alt="L'app Super Rentals à la fin du chapitre" width="1024" height="250">
 
-<img src="/images/tutorial/part-1/orientation/styled-with-tomster@2x.png" alt="The Super Rentals app by the end of the chapter" width="1024" height="250">
+En construisant votre page d'accueil, vous apprendrez à&nbsp;:
 
-While building your landing page, you will learn about:
+- Installer Ember CLI
+- Créer une nouvelle app Ember avec Ember CLI
+- Démarrer et arrêter le serveur de développement
+- Éditer des fichier et les recharger instantanément
+- Travailler avec HTML, CSS et des fichiers dans une app Ember
 
-- Installing Ember CLI
-- Creating a new Ember app with Ember CLI
-- Starting and stopping the development server
-- Editing files and live reload
-- Working with HTML, CSS and assets in an Ember app
+## Installer Ember CLI
 
-## Installing Ember CLI
-
-You can install the latest version of Ember CLI by running the following command. If you've already done this by following the [Quick Start](../../../getting-started/quick-start/) guide, feel free to skip ahead!
+Installez la dernière version de Ember CLI en exécutant la commande suivante. Si vous l'aviez déjà fait en suivant le guide de [Prise en main](../../../getting-started/quick-start/), vous pouvez sauter cette section&nbsp;!
 
 ```shell
 $ npm install -g ember-cli
 ```
 
-To verify that your installation was successful, run:
+Pour vérifier que votre installation a réussi, exécutez&nbsp;:
 
 ```shell
 $ ember --version
@@ -29,11 +27,11 @@ node: 14.19.1
 os: linux x64
 ```
 
-If a version number is shown, you're ready to go.
+Si un numéro de version s'affiche, vous êtes prêt pour la suite.
 
-## Creating a New Ember App with Ember CLI
+## Créer une nouvelle app Ember avec Ember CLI
 
-We can create a new project using Ember CLI's `new` command. It follows the pattern `ember new <project-name>`. In our case, the project name would be `super-rentals`. We will also include a `--lang en` option. This sets our app's primary language to English and improves the website's [accessibility](../../../accessibility/application-considerations/).
+On crée un nouveau projet en utilisant la commande `new` de Ember CLI. Elle suit la syntaxe `ember new <project-name>`. Dans notre cas, le nom du projet serait `super-rentals`. Nous inclurons aussi une option `--lang en`, qui définit l'anglais comme langue principale de l'app et améliore l'[accessibilité](../../../accessibility/application-considerations/) du site web.
 
 ```shell
 $ ember new super-rentals --lang en
@@ -93,13 +91,13 @@ Get started by typing:
 Happy coding!
 ```
 
-This should have created a new folder for us called `super-rentals`. We can navigate into it using the `cd` command.
+Un nouveau dossier `super-rentals` a dû être créé pour nous. Nous pouvons naviguer à l'intérieur en utilisant la commande `cd`.
 
 ```shell
 $ cd super-rentals
 ```
 
-For the rest of the tutorial, all commands should be run within the `super-rentals` folder. This folder has the following structure:
+Pour le reste du tutoriel, toutes les commandes devrons être exécutées à l'intérieur du dossier `super-rentals`. Ce dossier possède la structure suivante&nbsp;:
 
 ```plain
 super-rentals
@@ -161,11 +159,11 @@ super-rentals
 17 directories, 36 files
 ```
 
-We'll learn about the purposes of these files and folders as we go. For now, just know that we'll spend most of our time working within the `app` folder.
+Nous apprendrons le rôle de ces fichiers et dossiers le long du tutoriel. Pour l'instant, sachez seulement que nous passerons la majeure partie du temps à travailler dans le dossier `app`.
 
-## Starting and Stopping the Development Server
+## Démarrer et arrêter le serveur de développement
 
-Ember CLI comes with a lot of different commands for a variety of development tasks, such as the `ember new` command that we saw earlier. It also comes with a _development server_, which we can launch with the `ember server` command:
+Ember CLI fournit beaucoup de commandes différentes adaptées à de nombreuses tâches, comme la commande `ember new` que nous avons vues plus tôt. Ember CLI fournit aussi un serveur de développement ( _development server_), que nous pouvons lancer avec la commande `ember server`:
 
 ```shell
 $ ember server
@@ -174,72 +172,73 @@ building...
 Build successful (9761ms) – Serving on http://localhost:4200/
 ```
 
-The development server is responsible for compiling our app and serving it to the browsers. It may take a while to boot up. Once it's up and running, open your favorite browser and head to <http://localhost:4200>. You should see the following welcome page:
+Le serveur de développement est chargé de compiler notre application puis de la servir aux navigateurs. Il peut mettre un peu de temps à démarrer. Une fois qu'il est prêt et lancé, ouvrez le navigateur de votre choix et visitez <http://localhost:4200>. Vous devriez voir la page de bienvenue suivante&nbsp;:
 
 <img src="/images/tutorial/part-1/orientation/welcome@2x.png" alt="Welcome to Ember!" width="1024" height="906">
 
 <div class="cta">
   <div class="cta-note">
     <div class="cta-note-body">
-      <div class="cta-note-heading">Zoey says...</div>
+      <div class="cta-note-heading">Zoey dit...</div>
       <div class="cta-note-message">
-        <p>The <code>localhost</code> address in the URL means that you can only access the development server from your local machine. If you would like to share your work with the world, you will have to <em><a href="https://cli.emberjs.com/release/basic-use/deploying/">deploy</a></em> your app to the public Internet. We'll cover how to do that in Part 2 of the tutorial.</p>
+        <p>L'adresse <code>localhost</code> dans l'URL signifie que vous ne pouvez accéder au serveur de développement que depuis votre machine locale. Si vous voulez partagez vos travaux avec le reste du monde, vous devrez <em><a href="https://cli.emberjs.com/release/basic-use/deploying/">déployer</a></em> votre application publiquement sur Internet. Nous verrons comment le faire dans la Partie 2 du tutoriel.</p>
       </div>
     </div>
     <img src="/images/mascots/zoey.png" role="presentation" alt="">
   </div>
 </div>
 
-You can exit out of the development server at any time by typing `Ctrl + C` into the terminal window where `ember server` is running. That is, typing the "C" key on your keyboard _while_ holding down the "Ctrl" key at the same time. Once it has stopped, you can start it back up again with the same `ember server` command. We recommend having two terminal windows open: one to run the server in background, another to type other Ember CLI commands.
+Vous pouvez stopper le serveur de développement à tout moment en tapant `Ctrl + C` dans le terminal où `ember server` est lancé (c'est-à-dire taper le "C" de votre clavier _pendant_ que vous maintenez la touche "Ctrl" enfoncée). Une fois le serveur arrêté, vous pouvez le démarrer à nouveau avec la même commande `ember server`. Nous vous recommandons d'avoir deux fenêtres de terminal ouvertes&nbsp;: une dans laquelle vous lancez le serveur en tâche de fond, une autre pour taper les autres commandes Ember CLI.
 
-## Editing Files and Live Reload
+## Éditer des fichier et les recharger instantanément
 
-The development server has a feature called _live reload_, which monitors your app for file changes, automatically re-compiles everything, and refreshes any open browser pages. This comes in really handy during development, so let's give that a try!
+Le serveur de développement possède une fonctionnalité appelée _live reload_ (rechargement en direct / instantané), qui monitore votre application pour savoir quand des fichiers sont modifiés, re-compile tout automatiquement et rafraîchit les pages ouvertes dans le navigateur s'il y en a. C'est très pratique durant le développement, alors essayons&nbsp;!
 
-As text on the welcome page pointed out, the source code for the page is located in `app/templates/application.hbs`. Let's try to edit that file and replace it with our own content:
+Comme l'indique le texte de la page de bienvenue, son code source se trouve dans `app/templates/application.hbs`. Essayons d'éditer ce fichier et de remplacer son contenu par le nôtre&nbsp;:
 
 ```handlebars { data-filename="app/templates/application.hbs" data-diff="-1,-2,-3,-4,-5,-6,-7,+8" }
 {{page-title "SuperRentals"}}
 
-{{!-- The following component displays Ember's default welcome message. --}}
+{{!-- Le composant suivant affiche le message de bienvenue par défaut de Ember. --}}
 <WelcomePage />
-{{!-- Feel free to remove this! --}}
+{{!-- N'hésitez pas à le supprimer ! --}}
 
 {{outlet}}
-Hello World!!!
+Bonjour tout le monde !!!
 ```
 
-Soon after saving the file, your browser should automatically refresh and render our greetings to the world. Neat!
+Juste après que vous ayez sauvegardé le fichier, votre navigateur devrait rafraîchir automatiquement la page et afficher nos salutations à tout le monde. Pratique&nbsp;!
 
-<img src="/images/tutorial/part-1/orientation/hello-world@2x.png" alt="Hello World!!!" width="1024" height="250">
+<img src="/images/tutorial/part-1/orientation/hello-world@2x.png" alt="Bonjour tout le monde !!!" width="1024" height="250">
 
-When you are done experimenting, go ahead and delete the `app/templates/application.hbs` file. We won't be needing this for a while, so let's start afresh. We can add it back later when we have a need for it.
+Quand vous avez terminé vos explorations, supprimez le fichier `app/templates/application.hbs`. Nous n'en aurons plus besoin pour un moment, donc commençons depuis zéro. Nous pourrons le rajouter plus tard, au moment opportun.
 
-Again, if you still have your browser tab open, your tab will automatically re-render a blank page as soon as you delete the file. This reflects the fact that we no longer have an application template in our app.
+Encore une fois, si votre navigateur est toujours ouvert, l'onglet devrait afficher automatiquement une page blanche dès que vous avez supprimé le fichier. Ça montre que nous n'avons plus de template d'application dans notre app.
 
-## Working with HTML, CSS and Assets in an Ember App
+## Travailler avec HTML, CSS et des fichiers dans une app Ember
 
-Create a `app/templates/index.hbs` file and paste the following markup.
+Créez un fichier `app/templates/index.hbs` et copiez-y le balisage suivant&nbsp;;
 
 ```handlebars { data-filename="app/templates/index.hbs" }
 <div class="jumbo">
   <div class="right tomster"></div>
-  <h2>Welcome to Super Rentals!</h2>
-  <p>We hope you find exactly what you're looking for in a place to stay.</p>
+  <h2>Bienvenue sur "Super Rentals" !</h2>
+  <p>Nous espérons que vous trouverez l'endroit parfait où séjourner.</p>
 </div>
 ```
 
-If you are thinking, "Hey, that looks like HTML!", then you would be right! In their simplest form, Ember templates are really just HTML. If you are already familiar with HTML, you should feel right at home here.
+<!-- spell ignore -->
+Si vous vous dites "Tiens, ça ressemble à du HTML&nbsp;!", alors vous avez raison&nbsp;! Dans leur forme la plus simple, les _templates_ Ember ne sont vraiment que du HTML. Si vous être déjà familier avec HTML, vous devriez vous sentir comme chez vous.
 
-Of course, unlike HTML, Ember templates can do a lot more than just displaying static content. We will see that in action soon.
+Bien entendu, contrairement au HTML, les templates Ember peuvent faire bien plus qu'afficher du contenu statique. Nous verrons ça en action bientôt.
 
-After saving the file, your browser tab should automatically refresh, showing us the welcome message we just worked on.
+Après avoir sauvegardé le fichier, l'onglet de votre navigateur devrait se rafraîchir automatiquement, et montrer le message de bienvenue que nous venons d'écrire.
 
-<img src="/images/tutorial/part-1/orientation/unstyled@2x.png" alt="Welcome to Super Rentals! (unstyled)" width="1024" height="250">
+<img src="/images/tutorial/part-1/orientation/unstyled@2x.png" alt="Bienvenue sur Super Rentals ! (sans style)" width="1024" height="250">
 
-Before we do anything else, let's add some styling to our app. We spend enough time staring at the computer screen as it is, so we must protect our eyesight against unstyled markup!
+Avant de faire quoi que ce soit d'autre, ajoutons des styles à notre app. Protégeons notre vue de ce balisage triste, nous avons déjà passé suffisamment de temps à le regarder.
 
-Fortunately, our designer sent us some CSS to use, so we can <a href="/downloads/style.css" download="app.css">download the stylesheet file</a> and copy it into `app/styles/app.css`. This file has all the styles we need for building the rest of the app.
+Heureusement, nos designers nous ont envoyé un peu de CSS à utiliser, alors nous pouvons <a href="/downloads/style.css" download="app.css">télécharger la feuille de style</a> et la copier dans `app/styles/app.css`. Ce fichier contient tous les styles dont nous avons besoin pour construire le reste de l'app.
 
 ```css { data-filename="app/styles/app.css" }
 @import url(https://fonts.googleapis.com/css?family=Lato:300,300italic,400,700,700italic);
@@ -279,22 +278,22 @@ body {
 <div class="cta">
   <div class="cta-note">
     <div class="cta-note-body">
-      <div class="cta-note-heading">Zoey says...</div>
+      <div class="cta-note-heading">Zoey dit...</div>
       <div class="cta-note-message">
-        <p>The CSS file is pretty long, so we didn't show the entire file here. Be sure to use the link above to download the complete file!</p>
+        <p>Le fichier CSS est assez long, alors nous ne le montrons pas en entier ci-dessus. Assurez-vous d'utiliser le lien de téléchargement dans le paragraphe précédent pour obtenir le fichier complet&nbsp;!</p>
       </div>
     </div>
     <img src="/images/mascots/zoey.png" role="presentation" alt="">
   </div>
 </div>
 
-If you are familiar with CSS, feel free to customize these styles to your liking! Just keep in mind that you may see some visual differences going forward, should you choose to do so.
+Si vous êtes familier avec CSS, libre à vous de personnaliser ces styles à votre goût&nbsp;! Gardez simplement à l'esprit que vous pourriez alors noter des différences visuelles entre vos écrans et ceux du tutoriel.
 
-When you are ready, save the CSS file; our trusty development server should pick it up and refresh our page right away. No more unstyled content!
+Quand vous êtes prêt, sauvegardez le fichier CSS&nbsp;; notre serveur de développement, fiable comme il est, devrait l'utiliser et rafraîchir la page immédiatement. Fini les contenus sans style&nbsp;!
 
-<img src="/images/tutorial/part-1/orientation/styled@2x.png" alt="Welcome to Super Rentals! (styled)" width="1024" height="250">
+<img src="/images/tutorial/part-1/orientation/styled@2x.png" alt="Bienvenue sur Super Rentals ! (avec les styles)" width="1024" height="250">
 
-To match the mockup from our designer, we will also need to download the `teaching-tomster.png` image, which was referenced from our CSS file:
+Pour que le contenu corresponde à la maquette de notre designer, nous devrons aussi télécharger l'image `teaching-tomster.png`, qui est référencée dans le fichier CSS&nbsp;:
 
 ```css { data-filename=app/styles/app.css }
 .tomster {
@@ -303,11 +302,10 @@ To match the mockup from our designer, we will also need to download the `teachi
 }
 ```
 
-As we learned earlier, the Ember convention is to place your source code in the `app` folder. For other assets like images and fonts, the convention is to put them in the `public` folder. We will follow this convention by <a href="/downloads/teaching-tomster.png" download="teaching-tomster.png">downloading the image file</a> and saving it into `public/assets/images/teaching-tomster.png`.
+Comme nous l'avons appris plus tôt, la convention Ember veut que le code source soit placé dans le dossier `app`. Pour les autres fichiers comme les images ou les polices d'écriture, la convention est de les placer dans le dossier `public`. Nous suivrons cette convention <a href="/downloads/teaching-tomster.png" download="teaching-tomster.png">en téléchargeant l'image</a> et en l'enregistrant dans `public/assets/images/teaching-tomster.png`.
 
-Both Ember CLI and the development server understand these folder conventions and will automatically make these files available to the browser.
+Ember CLI et le serveur de développement s'appuient tous les deux sur ces conventions pour les dossiers et rendent leur contenu automatiquement disponible pour le navigateur.
 
-You can confirm this by navigating to
-`http://localhost:4200/assets/images/teaching-tomster.png`. The image should also show up in the welcome page we have been working on. You may need to do a manual refresh for the browser to pick up the new file.
+Vous pouvez le vérifier en visitant `http://localhost:4200/assets/images/teaching-tomster.png`. L'image devrait s'afficher dans la page de bienvenue sur laquelle nous avons travaillé. Vous pourriez avoir besoin de rafraîchir manuellement pour que le navigateur prenne en compte le nouveau fichier.
 
-<img src="/images/tutorial/part-1/orientation/styled-with-tomster@2x.png" alt="Welcome to Super Rentals! (with Tomster)" width="1024" height="250">
+<img src="/images/tutorial/part-1/orientation/styled-with-tomster@2x.png" alt="Bienvenue sur Super Rentals ! (avec Tomster)" width="1024" height="250">
