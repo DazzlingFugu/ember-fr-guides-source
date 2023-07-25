@@ -256,7 +256,9 @@ ember-dictionary
 ember-fast-cli
 ember-intl
 ember-keyboard
+ember-page-title
 ember-qunit
+ember-self-focused
 ember-styleguide
 ember-try
 engineering/A
@@ -314,6 +316,7 @@ keyCode
 lang
 lazy
 lifecycle/nombrable
+link
 lint
 linté
 lintés
@@ -342,6 +345,7 @@ model/nombrable
 modifier
 modifiers
 modularity
+monopage
 namespace/DG
 namespace/nombrable
 natively
@@ -409,6 +413,7 @@ serverless
 setter/nombrable
 sideload/DG
 singularize
+skip
 source-readibility
 sourcemap/nombrable
 stacktrace/nombrable
