@@ -123,7 +123,7 @@ Avec Ember, on peut faire mieux que ça&nbsp;! Plutôt que d'utiliser la bonne v
 ```handlebars { data-filename="app/templates/index.hbs" data-diff="+5" }
 <div class="jumbo">
   <div class="right tomster"></div>
-  <h2>Bienvenue sur "Super Rentals"&nbsp;!</h2>
+  <h2>Bienvenue sur "Super Rentals" !</h2>
   <p>Nous espérons que vous trouverez l'endroit parfait où séjourner.</p>
   <LinkTo @route="about" class="button">À propos de nous</LinkTo>
 </div>
@@ -159,7 +159,7 @@ Avec Ember, on peut faire mieux que ça&nbsp;! Plutôt que d'utiliser la bonne v
     <a href="tel:503.555.1212">+1 (503) 555-1212</a><br>
     <a href="mailto:superrentalsrep@emberjs.com">superrentalsrep@emberjs.com</a>
   </address>
-  <LinkTo @route="about" class="button">About</LinkTo>
+  <LinkTo @route="about" class="button">À propos de nous</LinkTo>
 </div>
 ```
 
