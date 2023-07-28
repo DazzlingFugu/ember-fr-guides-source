@@ -17,6 +17,7 @@ guides/**/*.md
 !guides/addons-and-dependencies/index.md
 !guides/applications/ember-engines.md
 !guides/applications/index.md
+!guides/applications/dependency-injection.md
 !guides/components/block-content.md
 !guides/components/built-in-components.md
 !guides/getting-started/index.md

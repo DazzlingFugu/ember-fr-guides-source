@@ -1,50 +1,33 @@
-Ember applications utilize the [dependency injection](https://en.wikipedia.org/wiki/Dependency_injection)
-("DI") design pattern to declare and instantiate classes of objects and dependencies between them.
+Les applications Ember utilisent le modèle de conception d'injection de dépendance ("DI" pour [dependency injection](https://en.wikipedia.org/wiki/Dependency_injection)) pour déclarer et instancier des classes d'objets et des dépendances entre elles.
 
-Generally, [Services](../../services/) are Ember's primary method for sharing
-state via dependency injection. In most cases, you shouldn't need to learn about
-how to work with Ember's DI system directly, or how to manually register and
-setup dependencies. However, there are times when it may be necessary. This
-guide covers the details of the system, and how to use it when needed.
+Généralement, les [services](../../services/) sont la principale méthode d'Ember pour partager l'état via l'injection de dépendances. Dans la plupart des cas, vous ne devriez pas avoir besoin d'apprendre comment travailler directement avec le système DI d'Ember, ni comment enregistrer et configurer manuellement des dépendances. Cependant, cela peut occasionnellement être nécessaire. Ce guide couvre les détails du système et explique comment l'utiliser en cas de besoin.
 
-## Overview
+## Tour d'horizon
 
-Applications and application instances each serve a role in Ember's DI implementation.
+Les applications et les instances d'application jouent chacune un rôle dans la mise en œuvre de la DI d'Ember.
 
-An [`Application`](https://api.emberjs.com/ember/release/classes/Application) serves as a "registry" for dependency declarations.
-Factories (i.e. classes) are registered with an application,
-as well as rules about "injecting" dependencies that are applied when objects are instantiated.
+Une [`Application`](https://api.emberjs.com/ember/release/classes/Application) sert de _registry_ (registre) pour les déclarations de dépendances. Les _factories_ (usines / fabriques), c'est-à-dire les classes, sont enregistrées avec l'application, tout comme les règles qui régissent l'injection de dépendances, et qui sont appliquées quand les objets sont instanciés.
 
-An [`ApplicationInstance`](https://api.emberjs.com/ember/release/classes/ApplicationInstance) serves as the "owner" for objects that are instantiated from registered factories.
-Application instances provide a means to "look up" (i.e. instantiate and / or retrieve) objects.
+Une _[`ApplicationInstance`](https://api.emberjs.com/ember/release/classes/ApplicationInstance)_ (instance d'application) sert de _owner_ (propriétaire) pour les objets instanciés à partir des _factories_ enregistrées. Les instances d'application fournissent un moyen de "rechercher" (c'est-à-dire d'instancier et/ou de récupérer) des objets.
 
-> _Note: Although an `Application` serves as the primary registry for an app,
-> each `ApplicationInstance` can also serve as a registry.
-> Instance-level registrations are useful for providing instance-level customizations,
-> such as A/B testing of a feature._
+> _Note: Bien qu'une `Application` serve de registre principal pour une app, chaque `ApplicationInstance` peut également servir de registre. Les enregistrements au niveau de l'instance sont utiles pour fournir des personnalisations au niveau de l'instance, telles que les tests A/B d'une fonctionnalité._
 
-## Factory Registrations
+## Enregistrement des _factories_
 
-A factory can represent any part of your application, like a _route_, _template_, or custom class.
-Every factory is registered with a particular key.
-For example, the index template is registered with the key `template:index`,
-and the application route is registered with the key `route:application`.
+Une _factory_ (fabrique) peut représenter n'importe quelle partie de votre application, comme une route , un modèle ou un _template_. Chaque _factory_ est enregistrée avec une clé particulière. Par exemple, le _template_ d'index est enregistré avec la clé `template:index`, et la route de l'application est enregistrée avec la clé `route:application`.
 
-Registration keys have two segments split by a colon (`:`).
-The first segment is the framework factory type, and the second is the name of the particular factory.
-Hence, the `index` template has the key `template:index`.
-Ember has several built-in factory types, such as `service`, `route`, `template`, and `component`.
+Les clés d'enregistrement sont formées de deux segments séparés par deux points (`:`). Le premier segment est le type de `factory` du framework, et le second est le nom de la _factory_ en question. Ainsi, le template d'index a pour clé `template:index`. Ember a plusieurs types de _factories_ intégrées, tels que `service`, `route`, `template` et `component`.
 
 <div class="cta">
   <div class="cta-note">
     <div class="cta-note-body">
-      <div class="cta-note-heading">Zoey says...</div>
+      <div class="cta-note-heading">Zoey dit...</div>
       <div class="cta-note-message">
         <p>
-          You might ask, how can I find the name of a factory?
+          Vous vous demandez peut-être comment retrouver le nom d'une <em>factory</em>&nbsp;?
         </p>
         <p>
-          Factories are kebab-cased and directories are followed by a forward slash. For example, a controller <code>app/controllers/users/primary-teachers</code> is registered as <code>controller:users/primary-teachers</code>.
+          Les <em>factorie</em> ont des noms `kebab-cased` et les dossiers son suffixés d'un <em>slash</em>. Par exemple, un contrôleur <code>app/controllers/users/primary-teachers</code> est enregistré sous le nom <code>controller:users/primary-teachers</code>.
         </p>
       </div>
     </div>
@@ -52,14 +35,11 @@ Ember has several built-in factory types, such as `service`, `route`, `template`
   </div>
 </div>
 
-You can create your own factory type by simply registering a factory with the new type.
-For example, to create a `user` type,
-you'd simply register your factory with `application.register('user:user-to-register')`.
+Vous pouvez créer votre propre type de _factory_ en l'enregistrant simplement avec le nouveau type. Par exemple, pour créer un type `user` (utilisateur), vous devez enregistrer votre _factory_ avec `application.register('user:user-to-register')`.
 
-Factory registrations must be performed either in application
-or application instance initializers (with the former being much more common).
+Les enregistrements de _factory_ doivent être effectués dans les initialiseurs d'application (_initializers_) ou d'instance d'application (_instance initializers_), le premier étant beaucoup plus courant.
 
-For example, an application initializer could register a `Logger` factory with the key `logger:main`:
+Par exemple, un initialiseur d'application pourrait enregistrer une _factory_ `Logger` (enregistreur de messages) avec la clé `logger:main`:
 
 ```javascript {data-filename=app/initializers/logger.js}
 import EmberObject from '@ember/object';
@@ -80,14 +60,11 @@ export default {
 };
 ```
 
-### Registering Already Instantiated Objects
+### Enregistrer des objets déjà instanciés
 
-By default, Ember will attempt to instantiate a registered factory when it is looked up.
-When registering an already instantiated object instead of a class,
-use the `instantiate: false` option to avoid attempts to re-instantiate it during lookups.
+Par défaut, Ember tentera d'instancier une _factory_ enregistrée lorsqu'elle est recherchée (_lookup_). Lors de l'enregistrement d'un objet déjà instancié au lieu d'une classe, utilisez l'option `instantiate: false` pour éviter les tentatives de ré-instanciation lors des recherches.
 
-In the following example, the `logger` is a plain JavaScript object that should
-be returned "as is" when it's looked up:
+Dans l'exemple suivant, le `logger` est un objet JavaScript simple qui doit être renvoyé "tel quel" lorsqu'il est recherché&nbsp;:
 
 ```javascript {data-filename=app/initializers/logger.js}
 export function initialize(application) {
@@ -106,16 +83,13 @@ export default {
 };
 ```
 
-### Registering Singletons vs. Non-Singletons
+### Enregistrer des singletons _vs._ des non-singletons
 
-By default, registrations are treated as "singletons".
-This simply means that an instance will be created when it is first looked up,
-and this same instance will be cached and returned from subsequent lookups.
+Par défaut,les enregistrements sont traités comme des "singletons". Cela signifie simplement qu'une instance sera créée lors de la première recherche, puis que cette même instance sera alors mise en cache et retournée lors des recherches suivantes.
 
-When you want fresh objects to be created for every lookup,
-register your factories as non-singletons using the `singleton: false` option.
+Quand vous souhaitez qu'un nouvel objet soit créé à chaque recherche, enregistrez vos _factories_ en tant que non-singletons à l'aide de l'option `singleton: false`.
 
-In the following example, the `Message` class is registered as a non-singleton:
+Dans l'exemple suivant, la classe `Message` est enregistrée en tant que non-singleton&nbsp;:
 
 ```javascript {data-filename=app/initializers/notification.js}
 import EmberObject from '@ember/object';
@@ -134,11 +108,11 @@ export default {
 };
 ```
 
-## Factory Injections
+## Injections de _factory_
 
-Once a factory is registered, it can be "injected" where it is needed.
+Une fois qu'une _factory_ est enregistrée, elle peut être "injectée" là où elle est nécessaire.
 
-Factories can be injected into whole "types" of factories with _type injections_. For example:
+Les _factories_ peuvent être injectées dans des "types" entiers de _factories_ avec des "injections de type". Par exemple:
 
 ```javascript {data-filename=app/initializers/logger.js}
 import EmberObject from '@ember/object';
@@ -160,41 +134,36 @@ export default {
 };
 ```
 
-As a result of this type injection,
-all factories of the type `route` will be instantiated with the property `logger` injected.
-The value of `logger` will come from the factory named `logger:main`.
+Avec une telle injection de type, toutes les _factories_ de type `route` seront instanciées avec la propriété `logger` injectée. La valeur de `logger` viendra de la _factory_ nommée `logger:main`.
 
-Routes in this example application can now access the injected logger:
+Dans cet exemple d'application, les routes peuvent maintenant accéder au `logger` injecté&nbsp;:
 
 ```javascript {data-filename=app/routes/index.js}
 import Route from '@ember/routing/route';
 
 export default class IndexRoute extends Route {
   activate() {
-    // The logger property is injected into all routes
-    this.logger.log('Entered the index route!');
+    // La propiété logger est injectée dans toutes les routes
+    this.logger.log('Entrée dans la route d\'index !');
   }
 }
 ```
 
-Injections can also be made on a specific factory by using its full key:
+Les injections peuvent également être effectuées dans une _factory_ spécifique en utilisant sa clé complète&nbsp;:
 
 ```javascript
 application.inject('route:index', 'logger', 'logger:main');
 ```
 
-In this case, the logger will only be injected on the index route.
+Dans ce cas, le `logger` sera injecté seulement dans la route d'index.
 
-Injections can be made into any class that requires instantiation.
-This includes all of Ember's major framework classes, such as components, helpers, routes, and the router.
+Les injections peuvent être réalisées dans n'importe quelle classe qui nécessite une instanciation. Cela inclut toutes les principales classes du framework Ember, telles que les composants, les _helpers_, les routes et le routeur.
 
-### Ad Hoc Injections
+### Injections ad hoc
 
-Dependency injections can also be declared directly on Ember classes using `inject`.
-Currently, `inject` supports injecting controllers (via `import { inject } from '@ember/controller';`)
-and services (via `import { inject } from '@ember/service';`).
+Les injections de dépendances peuvent également être déclarées directement sur les classes Ember en utilisant `inject`. Actuellement, `inject` supporte l'injection de contrôleurs (via `import { inject } from '@ember/controller';`) et de services (via `import { inject } from '@ember/service';`).
 
-The following code injects the `shopping-cart` service on the `cart-contents` component as the property `cart`:
+Le code suivant injecte le service `shopping-cart` dans le composant `cart-contents` en tant que propriété `cart`&nbsp;:
 
 ```javascript {data-filename=app/components/cart-contents.js}
 import Component from '@glimmer/component';
@@ -205,8 +174,7 @@ export default class CartContentComponent extends Component {
 }
 ```
 
-If you'd like to inject a service with the same name as the property,
-simply leave off the service name (the dasherized version of the name will be used):
+Si vous souhaitez injecter un service portant le même nom que la propriété, il suffit de ne pas indiquer le nom du service (la version du nom avec tiret `-` sera utilisée)&nbsp;:
 
 ```javascript {data-filename=app/components/cart-contents.js}
 import Component from '@glimmer/component';
@@ -217,24 +185,19 @@ export default class CartContentComponent extends Component {
 }
 ```
 
-## Factory Instance Lookups
+## Rechercher une instance de _factory_ (_Lookups_)
 
-To fetch an instantiated factory from the running application you can call the
-[`lookup`](https://api.emberjs.com/ember/release/classes/ApplicationInstance/methods/lookup?anchor=lookup) method on an application instance. This method takes a string
-to identify a factory and returns the appropriate object.
+Pour récupérer une instance de _factory_ de l'application en cours d'exécution, on appelle la méthode [`lookup`](https://api.emberjs.com/ember/release/classes/ApplicationInstance/methods/lookup?anchor=lookup) de l'instance d'application. Cette méthode prend un `string` pour identifier la _factory_ et retourne l'objet demandé&nbsp;:
 
 ```javascript
 applicationInstance.lookup('factory-type:factory-name');
 ```
 
-The application instance is passed to Ember's instance initializer hooks and it
-is added as the "owner" of each object that was instantiated by the application
-instance.
+L'instance d'application est passée aux _instance initializers_ d'Ember et est ajoutée en tant que _owner_ de chaque objet instancié.
 
-### Using an Application Instance Within an Instance Initializer
+### Utiliser une instance d'application dans un _instance initializer_
 
-Instance initializers receive an application instance as an argument, providing
-an opportunity to look up an instance of a registered factory.
+Les _instance initializers_ reçoivent une instance d'application en argument, offrant ainsi l'opportunité de rechercher une instance de _factory_ enregistrée&nbsp;:
 
 ```javascript {data-filename=app/instance-initializers/logger.js}
 export function initialize(applicationInstance) {
@@ -249,15 +212,11 @@ export default {
 };
 ```
 
-### Getting an Application Instance from a Factory Instance
+### Obtenir une instance d'application depuis une instance de _factory_
 
-[`Ember.getOwner`](https://api.emberjs.com/ember/release/classes/@ember%2Fapplication/methods/getOwner?anchor=getOwner) will retrieve the application instance that "owns" an
-object. This means that framework objects like components, helpers, and routes
-can use [`Ember.getOwner`](https://api.emberjs.com/ember/release/classes/@ember%2Fapplication/methods/getOwner?anchor=getOwner) to perform lookups through their application
-instance at runtime.
+[`Ember.getOwner`](https://api.emberjs.com/ember/release/classes/@ember%2Fapplication/methods/getOwner?anchor=getOwner) retourne l'instance d'application qui "détient" un objet. Ça signifie que les objets fournis par le frameworks comme les composants, les _helpers_ ou les routes peuvent appeler [`Ember.getOwner`](https://api.emberjs.com/ember/release/classes/@ember%2Fapplication/methods/getOwner?anchor=getOwner) pour effectuer une recherche de leur instance d'application pendant l'exécution.
 
-For example, this component plays songs with different audio services based
-on a song's `audioType`.
+Par exemple, ce composant joue des chansons avec différents services audio en fonction de l'`audioType` de la chanson&nbsp;:
 
 ```javascript {data-filename=app/components/play-audio.js}
 import Component from '@glimmer/component';
