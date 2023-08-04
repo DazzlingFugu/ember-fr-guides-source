@@ -1,28 +1,26 @@
-<!-- Heads up! This is a generated file, do not edit directly. You can find the source at https://github.com/ember-learn/super-rentals-tutorial/blob/master/src/markdown/tutorial/part-1/02-building-pages.md -->
+Dans ce chapitre, vous allez construire les premières pages de votre app Ember et définir des liens entre elles. Une fois ce chapitre terminé, votre app devrait contenir deux nouvelles pages – une page d'à propos et une page de contact. Ces pages seront accessibles via des liens sur la page d'accueil.
 
-In this chapter, you will build the first few pages of your Ember app and set up links between them. By the end of this chapter, you should have two new pages – an about page and a contact page. These pages will be linked to from your landing page:
+<img src="/images/tutorial/part-1/building-pages/index-with-link@2x.png" alt="L'app Super Rentals (page d'accueil) à la fin du chapitre" width="1024" height="250">
 
-<img src="/images/tutorial/part-1/building-pages/index-with-link@2x.png" alt="The Super Rentals app (homepage) by the end of the chapter" width="1024" height="250">
+<img src="/images/tutorial/part-1/building-pages/about-with-link@2x.png" alt="L'app Super Rentals (page d'à propos) à la fin du chapitre" width="1024" height="274">
 
-<img src="/images/tutorial/part-1/building-pages/about-with-link@2x.png" alt="The Super Rentals app (about page) by the end of the chapter" width="1024" height="274">
+<img src="/images/tutorial/part-1/building-pages/contact-with-link@2x.png" alt="L'app Super Rentals (page de contact) à la fin du chapitre" width="1024" height="444">
 
-<img src="/images/tutorial/part-1/building-pages/contact-with-link@2x.png" alt="The Super Rentals app (contact page) by the end of the chapter" width="1024" height="444">
+Tandis que vous construirez ces pages, vous apprendrez à&nbsp;:
 
-While building these pages, you will learn about:
+- Définir des routes
+- Utiliser des _templates_ de routes
+- Paramétrer des URLs
+- Lier des pages avec le composant `<LinkTo>`
+- Passer des arguments et des attributs aux composants
 
-- Defining routes
-- Using route templates
-- Customizing URLs
-- Linking pages with the `<LinkTo>` component
-- Passing arguments and attributes to components
+## Définir des routes
 
-## Defining Routes
+Notre [première page](../orientation/) faite, ajoutons-en une seconde&nbsp;!
 
-With our [first page](../orientation/) down, let's add another one!
+Cette fois, nous aimerions que cette page soit servie sur l'URL `/about`. Pour cela, nous devrons dire à Ember que nous voulons ajouter une page à cette adresse. Sinon, Ember pensera que nous avons visité une URL invalide&nbsp;!
 
-This time, we would like the page to be served on the `/about` URL. In order to do this, we will need to tell Ember about our plan to add a page at that location. Otherwise, Ember will think we have visited an invalid URL!
-
-The place to manage what pages are available is the _router_. Go ahead and open `app/router.js` and make the following change:
+L'endroit où définir quelles pages sont disponible est le _router_. Ouvrez `app/router.js` et écrivez le changement suivant&nbsp;:
 
 ```js { data-filename="app/router.js" data-diff="-9,+10,+11,+12" }
 import EmberRouter from '@ember/routing/router';
@@ -39,35 +37,35 @@ Router.map(function () {
 });
 ```
 
-This adds a _[route](../../../routing/defining-your-routes/)_ named "about", which is served at the `/about` URL by default.
+Ce code ajoute une _[route](../../../routing/defining-your-routes/)_ appelée "_about_" (à propos), qui est servie par défaut à l'URL `/about`.
 
-## Using Route Templates
+## Utiliser des _templates_ de routes
 
-With that in place, we can create a new `app/templates/about.hbs` template with the following content:
+Ceci en place, nous pouvons créer un nouveau _template_ `app/templates/about.hbs` avec le contenu suivant&nbsp;:
 
 ```handlebars { data-filename="app/templates/about.hbs" }
 <div class="jumbo">
   <div class="right tomster"></div>
-  <h2>About Super Rentals</h2>
+  <h2>À propos de "Super Rentals"</h2>
   <p>
-    The Super Rentals website is a delightful project created to explore Ember.
-    By building a property rental site, we can simultaneously imagine traveling
-    AND building Ember applications.
+    Le site web "Super Rentals" est un projet très sympa créé pour explorer Ember.
+    En réalisant un site de location de propriétés, nous pouvons imaginer voyager
+    ET apprendre à construire des applications Ember en même temps.
   </p>
 </div>
 ```
 
-To see this in action, navigate to `http://localhost:4200/about`.
+Pour voir le résultat, naviguez sur `http://localhost:4200/about`.
 
-<img src="/images/tutorial/part-1/building-pages/about@2x.png" alt="About page" width="1024" height="250">
+<img src="/images/tutorial/part-1/building-pages/about@2x.png" alt="Page d'à propos" width="1024" height="250">
 
-With that, our second page is done!
+Avec ça, notre seconde page est terminée&nbsp;!
 
-## Defining Routes with Custom Paths
+## Définir des routes avec des chemins personnalisés
 
-We're on a roll! While we're at it, let's add our third page. This time, things are a little bit different. Everyone at the company calls this the "contact" page. However, the old website we are replacing already has a similar page, which is served at the legacy URL `/getting-in-touch`.
+Nous voilà lancés&nbsp;! Ne nous arrêtons pas en si bon chemin et créons une troisième page. Cette fois, la situation est un peu différente. Tout le monde dans notre entreprise appelle cette nouvelle page la page "contact". Mais le vieux site web que nous sommes en train de remplacer a déjà une page similaire, servie à l'ancienne URL `/getting-in-touch`.
 
-We want to keep the existing URLs for the new website, but we don't want to have to type `getting-in-touch` all over the new codebase! Fortunately, we can have the best of both worlds:
+Mettons que nous voulons garder les URLs existantes pour le nouveau site sans avoir à taper `getting-in-touch` dans toute la nouvelle base de code&nbsp;! Heureusement, nous pouvons garder le meilleur des deux monde&nbsp;:
 
 ```js { data-filename="app/router.js" data-diff="+11" }
 import EmberRouter from '@ember/routing/router';
@@ -84,20 +82,20 @@ Router.map(function () {
 });
 ```
 
-Here, we added the `contact` route, but explicitly specified a path for the route. This allows us to keep the legacy URL, but use the new, shorter name for the route, as well as the template filename.
+Ici, nous venons d'ajouter la route `contact`, mais nous spécifions explicitement un chemin pour cette route. Ça nous permet de garder l'ancienne URL, mais d'utiliser le nouveau nom plus court pour la route et le nom de fichier du template.
 
-Speaking of the template, let's create that as well. We'll add a `app/templates/contact.hbs` file:
+En parlant du template, créons-en un aussi. Ajoutons le fichier `app/templates/contact.hbs`&nbsp;:
 
 ```handlebars { data-filename="app/templates/contact.hbs" }
 <div class="jumbo">
   <div class="right tomster"></div>
-  <h2>Contact Us</h2>
+  <h2>Contactez-nous</h2>
   <p>
-    Super Rentals Representatives would love to help you<br>
-    choose a destination or answer any questions you may have.
+    Les représentants de "Super Rentals" aimeraient vous aider à<br>
+    choisir une destination ou répondre à toutes vos questions.
   </p>
   <address>
-    Super Rentals HQ
+    Siège social de Super Rentals
     <p>
       1212 Test Address Avenue<br>
       Testington, OR 97233
@@ -108,52 +106,52 @@ Speaking of the template, let's create that as well. We'll add a `app/templates/
 </div>
 ```
 
-Ember comes with strong _conventions_ and sensible defaults—if we were starting from scratch, we wouldn't mind the default `/contact` URL. However, if the defaults don't work for us, it is no problem at all to customize Ember for our needs!
+Ember s'appuie sur des conventions fortes et des valeurs par défaut intuitives. Si nous partions de zéro, l'URL par défaut `/contact` ne nous dérangerait pas. Cependant, si les valeurs par défaut ne fonctionnent pas pour nous, il n'y a aucun problème à personnaliser Ember pour nos besoins&nbsp;!
 
-Once you have added the route and the template above, we should have the new page available to us at `http://localhost:4200/getting-in-touch`.
+Une fois la route et le template ci-dessus ajoutés, notre nouvelle page devrait être disponible sur `http://localhost:4200/getting-in-touch`.
 
-<img src="/images/tutorial/part-1/building-pages/contact@2x.png" alt="Contact page" width="1024" height="394">
+<img src="/images/tutorial/part-1/building-pages/contact@2x.png" alt="Page de contact" width="1024" height="394">
 
-## Linking Pages with the `<LinkTo>` Component
+## Lier des pages avec le composant `<LinkTo>`
 
-We just put so much effort into making these pages, we need to make sure people can find them! The way we do that on the web is by using _[hyperlinks](https://developer.mozilla.org/docs/Learn/HTML/Introduction_to_HTML/Creating_hyperlinks)_, or _links_ for short.
+Nous avons mis tant d'effort dans ces pages, nous devons nous assurer que les utilisateurs les trouverons&nbsp;! Pour cela, en web, on utilise des [hyperliens](https://developer.mozilla.org/fr/docs/Learn/HTML/Introduction_to_HTML/Creating_hyperlinks) (_hyperlinks_), aussi appelés tout simplement liens.
 
-Since Ember offers great support for URLs out-of-the-box, we _could_ just link our pages together using the `<a>` tag with the appropriate `href`. However, clicking on those links would require the browser to make a _full-page refresh_, which means that it would have to make a trip back to the server to fetch the page, and then load everything from scratch again.
+Étant donné qu'Ember supporte très bien les URLs clé en main, nous pourrions "juste" lier nos pages ensemble à l'aide de la balise `<a>` et du `href` adéquat. Cependant, cliquer sur ces liens obligerait le navigateur à rafraîchir entièrement la page (_full-page refresh_), ce qui signifie qu'il devrait demander la page au serveur pour la récupérer, puis tout recharger à partir de zéro.
 
-With Ember, we can do better than that! Instead of the plain-old `<a>` tag, Ember provides an alternative called `<LinkTo>`. For example, here is how you would use it on the pages we just created:
+Avec Ember, on peut faire mieux que ça&nbsp;! Plutôt que d'utiliser la bonne vieille balise `<a>`, Ember fournit une alternative appelée `<LinkTo>`. Par exemple, voici comment l'utiliser sur la page créée plus tôt&nbsp;:
 
 ```handlebars { data-filename="app/templates/index.hbs" data-diff="+5" }
 <div class="jumbo">
   <div class="right tomster"></div>
-  <h2>Welcome to Super Rentals!</h2>
-  <p>We hope you find exactly what you're looking for in a place to stay.</p>
-  <LinkTo @route="about" class="button">About Us</LinkTo>
+  <h2>Bienvenue sur "Super Rentals"&nbsp;!</h2>
+  <p>Nous espérons que vous trouverez l'endroit parfait où séjourner.</p>
+  <LinkTo @route="about" class="button">À propos de nous</LinkTo>
 </div>
 ```
 
 ```handlebars { data-filename="app/templates/about.hbs" data-diff="+9" }
 <div class="jumbo">
   <div class="right tomster"></div>
-  <h2>About Super Rentals</h2>
+  <h2>À propos de "Super Rentals"</h2>
   <p>
-    The Super Rentals website is a delightful project created to explore Ember.
-    By building a property rental site, we can simultaneously imagine traveling
-    AND building Ember applications.
+    Le site web "Super Rentals" est un projet très sympa créé pour explorer Ember.
+    En réalisant un site de location de propriétés, nous pouvons imaginer voyager
+    ET apprendre à construire des applications Ember en même temps.
   </p>
-  <LinkTo @route="contact" class="button">Contact Us</LinkTo>
+  <LinkTo @route="contact" class="button">Contactez-nous</LinkTo>
 </div>
 ```
 
 ```handlebars { data-filename="app/templates/contact.hbs" data-diff="+17" }
 <div class="jumbo">
   <div class="right tomster"></div>
-  <h2>Contact Us</h2>
+  <h2>Contactez-nous</h2>
   <p>
-    Super Rentals Representatives would love to help you<br>
-    choose a destination or answer any questions you may have.
+    Les représentants de "Super Rentals" aimeraient vous aider à<br>
+    choisir une destination ou répondre à toutes vos questions.
   </p>
   <address>
-    Super Rentals HQ
+    Siège social de Super Rentals
     <p>
       1212 Test Address Avenue<br>
       Testington, OR 97233
@@ -165,28 +163,28 @@ With Ember, we can do better than that! Instead of the plain-old `<a>` tag, Embe
 </div>
 ```
 
-There is quite a bit going on here, so let's break it down.
+Pas mal de choses se passent ici, voyons ça point par point.
 
-`<LinkTo>` is an example of a _[component](../../../components/introducing-components/)_ in Ember—you can tell them apart from regular HTML tags because they start with an uppercase letter. Along with regular HTML tags, components are a key building block that we can use to build up an app's user interface.
+`<LinkTo>` est un exemple de [composant]((../../../components/introducing-components/)) (_component_). Vous pouvez les distinguer des balises HTML classiques car leur nom commence par une majuscule. Tout comme les balises HTML classiques, les composants sont un bloc de construction clé pour réaliser l'interface utilisateur d'une application.
 
-We have a lot more to say about components later, but for now, you can think of them as a way to provide _custom tags_ to supplement the built-in ones that came with the browser.
+Nous en dirons beaucoup plus sur les composants plus tard. Pour l'instant, vous pouvez les penser comme des "balises personnalisées" pour compléter celles existant nativement pour le navigateur.
 
-The `@route=...` part is how we pass _[arguments](../../../components/component-arguments-and-html-attributes/)_ into the component. Here, we use this argument to specify _which_ route we want to link to. (Note that this should be the _name_ of the route, not the path, which is why we specified `"about"` instead of `"/about"`, and `"contact"` instead of `"/getting-in-touch"`.)
+La syntaxe `@route=...` correspond à la façon de passer des [arguments](../../../components/component-arguments-and-html-attributes/) au composant. Ici, l'argument spécifie vers _quelle_ route nous voulons créer un lien. (Notez qu'il s'agit du _nom_ de la route et non pas du _chemin_, c'est pourquoi nous spécifions `"about"` et pas `"/about"`, et `"contact"` plutôt que `"/getting-in-touch"`.)
 
-In addition to arguments, components can also take the usual HTML attributes as well. In our example, we added a `"button"` class for styling purposes, but we could also specify other attributes as we see fit, such as the [ARIA](https://webaim.org/techniques/aria/) [`role` attribute](https://developer.mozilla.org/docs/Web/Accessibility/ARIA/Roles). These are passed without the `@` symbol (`class=...` as opposed to `@class=...`), so that Ember will know they are just regular HTML attributes.
+En plus des arguments, les composants supportent aussi les attributs HTML habituels. Dans notre exemple, nous avons ajouté une classe `"button"` pour appliquer un style, et nous pourrions également définir d'autres attributs comme l'attribut [ARIA](https://webaim.org/techniques/aria/) [`role`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles). On les passe sans le symbole `@` (`class=...` et non `@class=...`), ainsi Ember sait que ce sont des attributs HTML standards.
 
-Under the hood, the `<LinkTo>` component generates a regular `<a>` tag for us with the appropriate `href` for the specific route. This `<a>` tag works just fine with _[screen readers](https://webaim.org/projects/screenreadersurvey/)_, as well as allowing our users to bookmark the link or open it in a new tab.
+Sous le capot, le composant `<LinkTo>` génère pour nous une balise `<a>` standard avec le `href` adéquat pour la route spécifique. Cette balise `<a>` fonctionne avec les [lecteurs d'écran](https://webaim.org/projects/screenreadersurvey/) (_screen readers_) et les utilisateurs peuvent aussi bien enregistrer le lien dans leurs marque-pages ou l'ouvrir dans un nouvel onglet.
 
-However, when clicking on one of these special links, Ember will intercept the click, render the content for the new page, and update the URL—all performed locally without having to wait for the server, thus avoiding a full page refresh.
+Cependant, quand on clique sur ces liens spéciaux, Ember intercepte le clic, affiche le contenu de la nouvelle page et met à jour l'URL. Tout ça se fait localement, sans avoir à attendre le serveur, et évitant ainsi de recharger toute la page.
 
 <!-- TODO: make this a gif instead -->
 
-<img src="/images/tutorial/part-1/building-pages/index-with-link@2x.png" alt="Index page after adding the link" width="1024" height="250">
+<img src="/images/tutorial/part-1/building-pages/index-with-link@2x.png" alt="Page d'index après l'ajout du lien" width="1024" height="250">
 
-<img src="/images/tutorial/part-1/building-pages/about-with-link@2x.png" alt="About page after adding the link" width="1024" height="274">
+<img src="/images/tutorial/part-1/building-pages/about-with-link@2x.png" alt="Page d'à propos après l'ajout du lien" width="1024" height="274">
 
-<img src="/images/tutorial/part-1/building-pages/contact-with-link@2x.png" alt="Contact page after adding the link" width="1024" height="444">
+<img src="/images/tutorial/part-1/building-pages/contact-with-link@2x.png" alt="Page de contact après l'ajout du lien" width="1024" height="444">
 
-We will learn more about how all of this works soon. In the meantime, go ahead and click on the link in the browser. Did you notice how snappy that was?
+Nous en apprendront plus sur la manière dont tout cela fonctionne très bientôt. D'ici là, cliquez sur le lien dans le navigateur. Avez-vous remarqué à quel point c'était rapide&nbsp;?
 
-Congratulations, you are well on your way to becoming a master page-crafter!
+Félicitations&nbsp;! Vous êtes en chemin de devenir un·e grand·e artisan·e du web&nbsp;!
