@@ -9,6 +9,7 @@
 /node_modules/
 
 # misc
+/config/credentials.json
 /.env*
 /.pnp*
 /.sass-cache
