@@ -15,6 +15,7 @@ guides/**/*.md
 !guides/accessibility/page-template-considerations.md
 !guides/accessibility/testing.md
 !guides/addons-and-dependencies/index.md
+!guides/applications/ember-engines.md
 !guides/applications/index.md
 !guides/components/block-content.md
 !guides/components/built-in-components.md

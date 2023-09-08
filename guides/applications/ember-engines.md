@@ -1,23 +1,23 @@
-## What are Engines?
+## Que sont les _engines_ (moteurs)&nbsp;?
 
-[Ember Engines](http://ember-engines.com/) allow multiple logical applications to be composed together into a single application from the user's perspective, that provide functionality to their host applications. Engines are isolated, `composable applications`, they have almost all the same features as normal Ember applications, except an [Engine](https://api.emberjs.com/ember/release/classes/Engine) requires a host application to boot it and provide a Router instance.
+Les [_Ember Engines_](http://ember-engines.com/) (moteurs Ember) permettent de composer, à partir de multiples applications logiques, une application unique du point de vue de l'utilisateur, et offrent des fonctionnalités à leurs applications hôtes. Les _engines_ sont des applications isolées et "composables", ils ont presque les mêmes fonctionnalités que les apps Ember classiques, si ce n'est qu'un [_Engine_](https://api.emberjs.com/ember/release/classes/Engine) (moteur) a besoin d'une application hôte pour démarrer et lui fournir une instance de _Router_ (routeur).
 
-## Why use Engines?
+## Pourquoi utiliser les _engines_&nbsp;?
 
-Large organizations often use Ember.js to power sophisticated web applications. These apps may require collaboration among several teams, sometimes distributed around the world. Typically, responsibility is shared by dividing the application into one or more "sections". How this division is actually implemented varies from team to team. 
+Les grandes organisations utilisent souvent `Ember.js` pour réaliser des apps Web sophistiquées. Ces apps peuvent nécessiter une collaboration entre plusieurs équipes, parfois réparties dans le monde entier. Généralement, la responsabilité est partagée en divisant l'app en une ou plusieurs "sections". La manière dont cette division est mise en œuvre varie d’une équipe à l’autre. 
 
-Maintaining large monolithic applications poses the following challenges:
+Maintenir de lourdes applications monolithiques relève quelques défis&nbsp;:
 
-* `Side effects` - if you change something, it may be unclear how it could affect the rest of platform.
-* `Coordination` - when you develop a new feature or make big changes, many teams may need to be in sync to approve it.
-* `Complexity` - with a huge dependency tree and many layers of abstraction, developers cannot iterate quickly, and features suffer as a result.
-* `Killing Innovation` - a/b testing a cutting-edge feature is hard to do without disrupting the rest of the app and the teams working on it.
-* `Slow Onboarding` - new people coming into the team are overwhelmed.
+* `Effets de bord` - si vous changez quelque chose, les impacts sur le reste de la plateforme peuvent être flous.
+* `Coordination` - quand vous développez une nouvelle fonctionnalité ou faites des changements importants, un grand nombre d'équipes peuvent avoir besoin de se synchroniser pour les approuver.
+* `Complexité` - avec un énorme arbre de dépendance et de nombreuses couches d'abstraction, les devs ne peuvent pas itérer rapidement, et les fonctionnalités en souffrent.
+* `Mort de l'inovation` - Faire du test A/B sur une fonctionnalité de pointe sans perturber le reste de l'app et le travail des équipes est difficile.
+* `Onboarding lent` - les nouveaux arrivants dans l'équipe se sentent dépassés.
 
-Engines provide an antidote to these problems by allowing for distributed development, testing, and packaging of logically-grouped pieces of an application.
+Les _engines_ sont un antidote à ces problèmes en permettant de distribuer tant le développement que les tests, et d'empaqueter par groupes logiques les parties d'une app.
 
-Engines are good for organizations that have multiple teams, where each team has their own area that is clearly separated from the others. The isolation is good when it matches organizational boundaries, but adds unnecessary complexity when there is not a good match.
+Les _engines_ sont utiles aux organisations avec de multiples équipes, où chaque équipe possède son propre domaine clairement distinct des autres. L'isolation est utile lorsqu'elle répond aux limites organisationnelles, mais ajoute une complexité qui n'est pas nécessaire dans le cas contraire.
 
-Engines are used by a number of large organizations to power sites with millions of users.
+Les _engines_ sont utilisés par de nombreuses grandes organisations pour produire des sites aux millions d'utilisateurs.
 
-If you are considering splitting up your application into engines just to reduce the amount of data that needs to be initially downloaded and increase the performance, Engines are not the right solution. Please check out the section on tree shaking and code splitting in projects like [Embroider](https://github.com/embroider-build/embroider).
+Si vous envisagez de diviser votre app en _engines_ simplement pour réduire la quantité de données à télécharger à l'initialisation et augmenter les performances, les _engines_ ne sont pas la bonne solution. Regardez plutôt la section sur le _tree shaking_ (élimination du code mort) et la division du code dans les projets comme [Embroider](https://github.com/embroider-build/embroider).

@@ -261,6 +261,8 @@ ember-qunit
 ember-self-focused
 ember-styleguide
 ember-try
+Embroider
+engine/nombrable
 engineering/A
 enumerables
 erroring
@@ -412,6 +414,7 @@ serializer/nombrable
 server-sent
 serverless
 setter/nombrable
+shaking
 sideload/DG
 singularize
 skip
@@ -458,6 +461,7 @@ transitionTo
 transpilation
 transpile/DGS
 transpiler/nombrable
+tree
 triple-backtick
 truthy
 typeahead
