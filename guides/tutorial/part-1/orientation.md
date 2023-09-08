@@ -7,7 +7,7 @@ En construisant votre page d'accueil, vous apprendrez à&nbsp;:
 - Installer Ember CLI
 - Créer une nouvelle app Ember avec Ember CLI
 - Démarrer et arrêter le serveur de développement
-- Éditer des fichier et les recharger instantanément
+- Éditer des fichiers et les recharger automatiquement
 - Travailler avec HTML, CSS et des fichiers dans une app Ember
 
 ## Installer Ember CLI
@@ -31,7 +31,7 @@ Si un numéro de version s'affiche, vous êtes prêt pour la suite.
 
 ## Créer une nouvelle app Ember avec Ember CLI
 
-On crée un nouveau projet en utilisant la commande `new` de Ember CLI. Elle suit la syntaxe `ember new <project-name>`. Dans notre cas, le nom du projet serait `super-rentals`. Nous inclurons aussi une option `--lang en`, qui définit l'anglais comme langue principale de l'app et améliore l'[accessibilité](../../../accessibility/application-considerations/) du site web.
+On crée un nouveau projet en utilisant la commande `new` de Ember CLI. Elle suit la syntaxe `ember new <project-name>`. Dans notre cas, le nom du projet serait `super-rentals`. Nous utiliserons aussi l'option `--lang en`, qui définit l'anglais comme langue principale de l'app et améliore l'[accessibilité](../../../accessibility/application-considerations/) du site web.
 
 ```shell
 $ ember new super-rentals --lang en
@@ -156,14 +156,14 @@ super-rentals
 ├── package-lock.json
 └── testem.js
 
-17 directories, 36 files
+17 répertoires, 36 fichiers
 ```
 
 Nous apprendrons le rôle de ces fichiers et dossiers le long du tutoriel. Pour l'instant, sachez seulement que nous passerons la majeure partie du temps à travailler dans le dossier `app`.
 
 ## Démarrer et arrêter le serveur de développement
 
-Ember CLI fournit beaucoup de commandes différentes adaptées à de nombreuses tâches, comme la commande `ember new` que nous avons vues plus tôt. Ember CLI fournit aussi un serveur de développement ( _development server_), que nous pouvons lancer avec la commande `ember server`:
+Ember CLI fournit beaucoup de commandes différentes adaptées à de nombreuses tâches, comme la commande `ember new` que nous avons vue plus tôt. Ember CLI fournit aussi un serveur de développement ( _development server_), que nous pouvons démarrer avec la commande `ember server`:
 
 ```shell
 $ ember server
@@ -188,9 +188,9 @@ Le serveur de développement est chargé de compiler notre application puis de l
   </div>
 </div>
 
-Vous pouvez stopper le serveur de développement à tout moment en tapant `Ctrl + C` dans le terminal où `ember server` est lancé (c'est-à-dire taper le "C" de votre clavier _pendant_ que vous maintenez la touche "Ctrl" enfoncée). Une fois le serveur arrêté, vous pouvez le démarrer à nouveau avec la même commande `ember server`. Nous vous recommandons d'avoir deux fenêtres de terminal ouvertes&nbsp;: une dans laquelle vous lancez le serveur en tâche de fond, une autre pour taper les autres commandes Ember CLI.
+Vous pouvez stopper le serveur de développement à tout moment en tapant `Ctrl + C` dans le terminal où `ember server` a été lancé (c'est-à-dire taper le "C" de votre clavier _pendant_ que vous maintenez la touche "Ctrl" enfoncée). Une fois le serveur arrêté, vous pouvez le démarrer à nouveau avec la même commande `ember server`. Nous vous recommandons d'avoir deux fenêtres de terminal ouvertes&nbsp;: une dans laquelle vous lancez le serveur en tâche de fond, une autre pour taper les autres commandes Ember CLI.
 
-## Éditer des fichier et les recharger instantanément
+## Éditer des fichier et les recharger automatiquement
 
 Le serveur de développement possède une fonctionnalité appelée _live reload_ (rechargement en direct / instantané), qui monitore votre application pour savoir quand des fichiers sont modifiés, re-compile tout automatiquement et rafraîchit les pages ouvertes dans le navigateur s'il y en a. C'est très pratique durant le développement, alors essayons&nbsp;!
 
