@@ -159,7 +159,7 @@ Avec Ember, on peut faire mieux que ça&nbsp;! Plutôt que d'utiliser la bonne v
     <a href="tel:503.555.1212">+1 (503) 555-1212</a><br>
     <a href="mailto:superrentalsrep@emberjs.com">superrentalsrep@emberjs.com</a>
   </address>
-  <LinkTo @route="about" class="button">À propos de nous</LinkTo>
+  <LinkTo @route="about" class="button">À propos</LinkTo>
 </div>
 ```
 
