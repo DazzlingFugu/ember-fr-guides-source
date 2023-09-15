@@ -43,6 +43,12 @@ module.exports = function (environment) {
       sourceRepo: 'https://github.com/DazzlingFugu/ember-fr-guides-source',
     },
 
+    algolia: {
+      algoliaId: 'E44SKR9ZB0', 
+      algoliaKey: '74120f5066e6f82be903407a9883b44e', 
+      indexName: 'ember_french_guides'
+    },
+
     showdown: {
       ghCompatibleHeaderId: true,
       prefixHeaderId: 'toc_'
