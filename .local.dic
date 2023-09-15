@@ -22,6 +22,7 @@ Config
 Ctrl-C
 Customizable
 D3
+DI
 DNS
 DOM
 DX
@@ -224,6 +225,7 @@ decorator/nombrable
 defaultBlueprint
 demoURL
 deprecation/nombrable
+dependency
 deps
 deserialization
 deserialize/DG
@@ -271,6 +273,8 @@ enumerables
 erroring
 event/nombrable
 facto
+factory
+factories
 falsy
 favicon
 field/nombrable
@@ -307,6 +311,7 @@ iOS
 iframe/nombrable
 in-depth
 in-repo
+initialiseur/nombrable
 initializer/nombrable
 instantiation
 interop
@@ -361,6 +366,7 @@ normalizeResponse
 npm
 onboarding
 outputPaths
+owner/nombrable
 page-crafter
 parallelize
 param
@@ -395,6 +401,7 @@ readme
 readonly
 recognizers
 refresh
+registry
 relayout
 reload
 renderer
