@@ -144,8 +144,8 @@ XHR
 XSS
 ZEIT
 Zoey
-app/nombrable
 aXe
+acceptance
 accessor/nombrable
 activations
 acyclic
@@ -156,6 +156,7 @@ addon/nombrable
 afterInstall
 afterUninstall
 ajax
+app/nombrable
 assistive
 async
 asynchronicity
@@ -199,6 +200,7 @@ codemod
 codemods
 CoffeeScript
 ColorSafe
+command
 checkbox
 checksum/nombrable
 community
@@ -483,3 +485,4 @@ webpack
 webpage
 websocket
 wizard
+workflow/nombrable

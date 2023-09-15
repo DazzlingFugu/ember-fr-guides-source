@@ -1,33 +1,30 @@
-<!-- Heads up! This is a generated file, do not edit directly. You can find the source at https://github.com/ember-learn/super-rentals-tutorial/blob/master/src/markdown/tutorial/part-1/03-automated-testing.md -->
+Dans ce chapitre, vous utiliserez le framework de test fournit par Ember pour écrire des tests automatisés. À la fin du chapitre, vous aurez écrit une suite de tests automatisés à lancer pour vérifier que l'app fonctionne correctement&nbsp;:
 
-In this chapter, you will use Ember's built-in testing framework to write some automated tests for your app. By the end of this chapter, we will have an automated test suite that we can run to ensure our app is working correctly:
+<img src="/images/tutorial/part-1/automated-testing/pass-2@2x.png" alt="La suite de tests Super Rentals à la fin du chapitre" width="1024" height="512">
 
-<img src="/images/tutorial/part-1/automated-testing/pass-2@2x.png" alt="The Super Rentals test suite by the end of the chapter" width="1024" height="512">
+En chemin, vous apprendrez&nbsp;:
 
-In the process, you will learn about:
+- À quoi servent les tests automatisés
+- À écrire des tests d'acceptance
+- À utiliser les générateurs de Ember CLI
+- À travailler avec les _test helpers_ de Ember
+- La pratique des _workflow_ de test
 
-- The purpose of automated testing
-- Writing acceptance tests
-- Using generators in Ember CLI
-- Testing with the QUnit test framework
-- Working with Ember's test helpers
-- Practicing the testing workflow
+## À quoi servent les tests automatisés
 
-## The Purpose of Automated Testing
+Nous avons accompli beaucoup de choses dans les chapitres précédents&nbsp;! Résumons. Nous sommes partis d'une page blanche, nous avons ajouté quelques pages de contenu, des styles pour que le site soit joli, une image de Tomster, des liens entre nos différentes pages et, jusqu'à maintenant, tout fonctionne ensemble sans faille&nbsp;!
 
-We accomplished a lot in the last few chapters! Let's recap—we started with a blank canvas, added a few pages of content, styled everything to look pretty, dropped in a picture of Tomster, added links between our pages and amazingly, everything worked together flawlessly!
+Mais savons-nous avec certitude que tout fonctionne _vraiment_&nbsp;? Certes, nous avons cliqué un peu partout pour confirmer que tout se comporte comme ça devrait. Mais sommes-nous sûrs d'avoir revérifié _chaque_ page, même après les changements les plus récents que nous avons apportés&nbsp;?
 
-But do we _really_ know that everything is actually working? Sure, we clicked around a bit to confirm that things look as expected. But do we feel confident that we checked _every_ page after the most recent change that we made?
+Après tout, la plupart d'entre nous ont déjà expérimenté (ou connaissent d'effroyables histoires sur) le "petit réglage" dans un coin de l'app qui casse _tout le reste_ par inadvertance, là où nous ne regardions pas.
 
-After all, most of us have experienced (or heard horror stories about) making a Small Tweak™ in one area of the app that inadvertently broke _everything else_ when we weren't looking.
+Peut-être pourrions nous écrire quelque part une liste de choses à vérifier après avoir fait des changements sur le site. Mais ça deviendra sûrement incontrôlable à mesure que nous ajouterons plus de fonctionnalités à notre application. Elle va également devenir très rapidement obsolète - les tâches répétitives comme celles-ci, il est préférable de les laisser aux robots.
 
-Maybe we can write a checklist somewhere of all the things to check after making changes to our site. But surely, this will get out of hand as we add more features to our app. It is also going to get old really quickly—repetitive tasks like that are best left to robots.
+Hmm, des robots. En voilà une idée. Et si nous pouvions écrire cette fameuse liste et laisser l'ordinateur la vérifier pour nous&nbsp;? Je pense que nous venons d'inventer le concept de _[tests automatisés](../../../testing/)_&nbsp;! Bon, nous ne sommes peut-être pas les premiers à avoir cette idée, mais nous y avons pensé par nous-mêmes, donc nous méritons bien un peu de crédit.
 
-Hmm, robots. That's an idea. What if we can write this checklist and just get the computer to check everything for us? I think we just invented the idea of _[automated testing](../../../testing/)_! Okay, maybe we were not the first to come up with the concept, but we independently discovered it so we still deserve some credit.
+## Ajouter des tests d'acceptance avec des générateurs
 
-## Adding Acceptance Tests with Generators
-
-Once we are done patting ourselves on the back, go ahead and run the following command in the terminal:
+Si nous avons fini de nous féliciter, lançons la commande suivante dans le terminal&nbsp;:
 
 ```shell
 $ ember generate acceptance-test super-rentals
@@ -35,29 +32,29 @@ installing acceptance-test
   create tests/acceptance/super-rentals-test.js
 ```
 
-This is called a _[generator](https://cli.emberjs.com/release/basic-use/cli-commands/#generatemorefiles)_ command in Ember CLI. Generators automatically create files for us based on Ember's conventions and populate them with the appropriate boilerplate content, similar to how `ember new` initially created a skeleton app for us. It typically follows the pattern `ember generate <type> <name>`, where `<type>` is the kind of thing we are generating, and `<name>` is what we want to call it.
+Dans Ember CLI, on appelle ça un générateur (_[generator](https://cli.emberjs.com/release/basic-use/cli-commands/#generatemorefiles) command_). Les générateurs créent automatiquement des fichiers en se basant sur les conventions de Ember, puis ils y écrivent le contenu par défaut approprié, de la même manière que `ember new` a créé pour nous le squelette de l'app. Ils suivent typiquement la syntaxe `ember generate <type> <name>`, où `<type>` est le type de fichier que nous voulons générer, et `<name>` comment nous voulons l'appeler.
 
-In this case, we generated an _[acceptance test](../../../testing/test-types/#toc_application-tests)_ located at `tests/acceptance/super-rentals-test.js`.
+Dans le cas présent, nous générons un [test d'acceptance]((../../../testing/test-types/#toc_application-tests)) (_acceptance test_) dont le chemin est `tests/acceptance/super-rentals-test.js`.
 
-Generators aren't required; we _could_ have created the file ourselves which would have accomplished the exact same thing. But, generators certainly save us a lot of typing. Go ahead and take a peek at the acceptance test file and see for yourself.
+Les générateurs ne sont pas requis&nbsp;; nous aurions pu créé le fichier nous-mêmes, et nous aurions obtenu le même résultat. Les générateurs nous épargnent simplement beaucoup de caractères à taper. Jetez un coup d'œil au fichier de test d'acceptance et voyez par vous-même.
 
 <div class="cta">
   <div class="cta-note">
     <div class="cta-note-body">
-      <div class="cta-note-heading">Zoey says...</div>
+      <div class="cta-note-heading">Zoey dit...</div>
       <div class="cta-note-message">
-        <p>Want to save even more typing? <code>ember generate ...</code> can be shortened into <code>ember g ...</code>. That's 7 fewer characters!</p>
+        <p>Vous voulez encore moins de caractères à taper&nbsp;? <code>ember generate ...</code> peut être raccourci <code>ember g ...</code>. Et 7 caractères de moins&nbsp;!</p>
       </div>
     </div>
     <img src="/images/mascots/zoey.png" role="presentation" alt="">
   </div>
 </div>
 
-## Writing Acceptance Tests
+## Écrire des tests d'acceptance
 
-Acceptance tests, also known as _application tests_, are one of a few types of automated testing at our disposal in Ember. We will learn about the other types later, but what makes acceptance tests unique is that they test our app from the user's perspective—they are an automated version of the "click around and see if it works" testing we did earlier, which is exactly what we need.
+Les tests d'acceptance, aussi appelés "tests d'application", sont un des quelques types de test automatisé qu'Ember met à votre disposition. Nous apprendrons plus tard quels sont les autres types de tests, mais ce qui rend les tests d'acceptance unique, c'est qu'ils testent votre app d'un point de vue utilisateurs. Ils sont comme une version automatisée du "cliquer partout et voir si ça marche" que nous avons fait plus tôt, ce qui est exactement ce dont nous avons besoin.
 
-Let's open the generated test file and replace the boilerplate test with our own:
+Ouvrons le fichier de test généré et remplaçons le contenu par défaut avec le celui-ci&nbsp;:
 
 ```js { data-filename="tests/acceptance/super-rentals-test.js" data-diff="-2,+3,-9,-10,+11,+12,-14,+15,+16,+17,+18,+19,+20,+21" }
 import { module, test } from 'qunit';
@@ -75,9 +72,9 @@ module('Acceptance | super rentals', function (hooks) {
 
     assert.strictEqual(currentURL(), '/super-rentals');
     assert.strictEqual(currentURL(), '/');
-    assert.dom('h2').hasText('Welcome to Super Rentals!');
+    assert.dom('h2').hasText('Bienvenue sur "Super Rentals" !');
 
-    assert.dom('.jumbo a.button').hasText('About Us');
+    assert.dom('.jumbo a.button').hasText('À propos de nous');
     await click('.jumbo a.button');
 
     assert.strictEqual(currentURL(), '/about');
@@ -85,53 +82,53 @@ module('Acceptance | super rentals', function (hooks) {
 });
 ```
 
-First, we instruct the test robot to navigate to the `/` URL of our app by using the `visit` _test helper_ provided by Ember. This is akin to us typing `http://localhost:4200/` in the browser's address bar and hitting the `enter` key.
+D'abord, nous demandons au robot de test de naviguer à l'URL `/` de notre app en utilisant le _test helper_ `visit` fournit par Ember. C'est comme si nous tapions `http://localhost:4200/` dans la barre d'URL et que nous appuyions sur la touche `Entrée`. 
 
-Because the page is going to take some time to load, this is known as an _[async](https://developer.mozilla.org/docs/Learn/JavaScript/Asynchronous/Concepts)_ (short for _asynchronous_) step, so we will need to tell the test robot to wait by using JavaScript's `await` keyword. That way, it will wait until the page completely finishes loading before moving on to the next step.
+Parce que cette page va mettre un certain temps à charger, cette étape est dite _[async](https://developer.mozilla.org/docs/Learn/JavaScript/Asynchronous/Concepts)_ (l'abréviation de asynchrone), alors nous devons dire au robot de test d'attendre en utilisant le mot clé JavaScript `await`. De cette manière, il attendra que la page soit complètement chargée avant de passer à l'étape suivante. 
 
-This is almost always the behavior we want, so we will almost always use `await` and `visit` as a pair. This applies to other kinds of simulated interaction too, such as clicking on a button or a link, as they all take time to complete. Even though sometimes these actions may seem imperceptibly fast to us, we have to remember that our test robot has really, really fast hands, as we will see in a moment.
+Ce comportement sera presque toujours celui dont nous avons besoin, alors nous utiliserons presque toujours `await` et `visit` ensemble. Ça s'applique aussi aux autres types d'interactions simulées, comme cliquer sur un bouton ou un lien, étant donné qu'elles prennent un certain temps de complétion. Même si parfois ces actions peuvent nous sembler imperceptiblement rapides, nous devons nous rappeler que notre robot de test, lui, a des mains encore plus rapides, comme nous le verrons dans un instant.
 
-After navigating to the `/` URL and waiting for things to settle, we check that the current URL matches the URL that we expect (`/`). We can use the `currentURL` test helper here, as well as `equal` _[assertion](https://github.com/emberjs/ember-test-helpers/blob/master/API.md)_. This is how we encode our "checklist" into code—by specifying, or asserting how things _should_ behave, we will be alerted if our app does _not_ behave in the way that we expect.
+Après avoir naviguer sur l'URL `/` et attendu que l'app soit prête, nous vérifions que l'URL courante est bien l'URL prévue (`/`). Ici, il est possible d'utiliser le _test helper_ `currentURL` aussi bien que l'_[assertion](https://github.com/emberjs/ember-test-helpers/blob/master/API.md)_ `equal`. Voilà comment nous codons notre "liste de choses à vérifier". En spécifiant et en "affirmant" (_asserting_) comment l'app _devrait_ se comporter, nous serons alertés si notre app ne se comporte `pas` comme attendu.
 
-Next, we confirmed that the page has an `<h2>` tag that contains the text "Welcome to Super Rentals!". Knowing this is true means that we can be quite certain that the correct template has been rendered, without errors.
+Ensuite, nous confirmons que la page contient une balise `<h2>` dont le texte est `'Bienvenue sur "Super Rentals"&nbsp;!'`. En sachant que cette affirmation est vraie, nous pouvons être à peu près certains que le bon _template_ a été rendu, et sans erreur.
 
-Then, we looked for a link with the text `About Us`, located using the _[CSS selector](https://developer.mozilla.org/docs/Learn/CSS/Building_blocks/Selectors)_ `.jumbo a.button`. This is the same syntax we used in our stylesheet, which means "look inside the tag with the `jumbo` class for an `<a>` tag with the `button` class." This matches up with the HTML structure in our template.
+Puis nous recherchons un lien dont le texte est `'À propos de nous'`, localisé via le [sélecteur CSS](https://developer.mozilla.org/fr/docs/Learn/CSS/Building_blocks/Selectors) `.jumbo a.button`. C'est la même syntaxe que celle dans notre feuille de style, elle signifie "cherche à l'intérieur de la balise avec la classe `jumbo` une balise `<a>` ayant la classe `button`". Ça correspond à la structure HTML de notre template.
 
-Once the existence of this element on the page was confirmed, we told the test robot to click on this link. As mentioned above, this is a user interaction, so it needs to be `await`-ed.
+Une fois que l'existence de cet élément sur la page est confirmée, on demande au robot de test de cliquer sur le lien. Comme mentionné ci-dessus, il s'agit d'une interaction utilisateur, donc il faut "attendre" qu'elle soit terminée avec `await`.
 
-Finally, we asserted that clicking on the link should bring us to the `/about` URL.
+Enfin, nous "affirmons" que cliquer sur le lien nous amène sur l'URL `/about`.
 
 <div class="cta">
   <div class="cta-note">
     <div class="cta-note-body">
-      <div class="cta-note-heading">Zoey says...</div>
+      <div class="cta-note-heading">Zoey dit...</div>
       <div class="cta-note-message">
-        <p>Here, we are writing the tests in a framework called QUnit, which is where the functions <code>module</code>, <code>test</code> and <code>assert</code> come from. We also have additional helpers like <code>click</code>, <code>visit</code>, and <code>currentURL</code> provided by the <code>@ember/test-helpers</code> package. You can tell what comes from which package based on the <code>import</code> paths at the top of the file. Knowing this will be helpful when you need to search for documentation on the Internet or ask for help.</p>
+        <p>Ici, nous écrivons les tests avec un framework appelé QUnit, c'est lui qui définit les fonctions <code>module</code>, <code>test</code> et <code>assert</code>. Nous avons aussi des <em>helpers</em> additionnels, comme <code>click</code>, <code>visit</code> et <code>currentURL</code>, fournis par l'addon <code>@ember/test-helpers</code>. Vous pouvez comprendre quelle fontion vient de quelle dépendence en regardant les chemins d'<code>import</code> tout en haut du fichier. Cette connaissance vous sera utile quand vous aurez besoin de chercher de la documentation sur Internet ou de demander de l'aide.</p>
       </div>
     </div>
     <img src="/images/mascots/zoey.png" role="presentation" alt="">
   </div>
 </div>
 
-We can put our automated test into motion by running the _test server_ using the `ember test --server` command, or `ember t -s` for short. This server behaves much like the development server, but it is explicitly running for our tests. It may automatically open a browser window and take you to the test UI, or you can open `http://localhost:7357/` yourself.
+Mettons nos tests automatisés en action en exécutant le serveur de test à l'aide de la commande `ember test --server`, ou `ember t -s` pour faire plus court. Ce serveur ce comporte plus ou moins comme le serveur de développement, mais il est lancé explicitement pour nos tests. Il se peut qu'il ouvre automatiquement une fenêtre de navigateur et vous amène sur l'UI de test. Dans le cas contraire, vous pouvez ouvrir `http://localhost:7357/` vous-mêmes.
 
-If you watch really carefully, you can see our test robot roaming around our app and clicking links:
+Si vous regardez très attentivement, vous pouvez voir notre robot de test traîner un peu partout dans notre app et cliquer sur les liens&nbsp;:
 
 <!-- TODO: make this a gif instead -->
 
-<img src="/images/tutorial/part-1/automated-testing/pass@2x.png" alt="All tests passing" width="1024" height="512">
+<img src="/images/tutorial/part-1/automated-testing/pass@2x.png" alt="Tous les tests passent" width="1024" height="512">
 
-It happens really quickly though—blink and you might miss it! In fact, I had to slow this animation down by a hundred times just so you can see it in action. I told you the robot has really, really fast hands!
+Mais ça va très vite, clignez des yeux et vous risquez de le manquer&nbsp;! En fait, j’ai dû ralentir cette animation cent fois pour que vous puissiez la voir en action. Je vous l'ai dit, le robot est vraiment un rapide&nbsp;!
 
-As much as I enjoy watching this robot hard at work, the important thing here is that the test we wrote has _passed_, meaning everything is working exactly as we expect and the test UI is all green and happy. If you want, you can go to `index.hbs`, delete the `<LinkTo>` component and see what things look like when we have _a failing test_.
+Même si j'aime regarder ce robot travailler dur, le point important ici est que le test que nous avons écrit a _réussi_, ce qui signifie que tout fonctionne exactement comme prévu et que l'UI du test est toute verte et heureuse. Si vous le souhaitez, vous pouvez accéder à `index.hbs`, supprimer le composant `<LinkTo>` et voir à quoi elle ressemble quand _un test échoue_.
 
-<img src="/images/tutorial/part-1/automated-testing/fail@2x.png" alt="A failing test" width="1024" height="768">
+<img src="/images/tutorial/part-1/automated-testing/fail@2x.png" alt="Un test en échec" width="1024" height="768">
 
-Don't forget to put that line back in when you are done!
+N'oubliez pas de remettre la ligne en place quand vous avez terminé&nbsp;!
 
-## Practicing the Testing Workflow
+## Pratique du _workflow_ (flux de travail) de test
 
-Let's practice what we learned by adding tests for the remaining pages:
+Mettons en pratique ce que nous avons appris en ajoutant des tests pour les autres pages&nbsp;:
 
 ```js { data-filename="tests/acceptance/super-rentals-test.js" data-diff="+19,+20,+21,+22,+23,+24,+25,+26,+27,+28,+29,+30,+31,+32,+33,+34,+35,+36,+37,+38,+39,+40,+41,+42" }
 import { module, test } from 'qunit';
@@ -145,9 +142,9 @@ module('Acceptance | super rentals', function (hooks) {
     await visit('/');
 
     assert.strictEqual(currentURL(), '/');
-    assert.dom('h2').hasText('Welcome to Super Rentals!');
+    assert.dom('h2').hasText('Bienvenue sur "Super Rentals" !');
 
-    assert.dom('.jumbo a.button').hasText('About Us');
+    assert.dom('.jumbo a.button').hasText('À propos de nous');
     await click('.jumbo a.button');
 
     assert.strictEqual(currentURL(), '/about');
@@ -157,9 +154,9 @@ module('Acceptance | super rentals', function (hooks) {
     await visit('/about');
 
     assert.strictEqual(currentURL(), '/about');
-    assert.dom('h2').hasText('About Super Rentals');
+    assert.dom('h2').hasText('À propos de "Super Rentals"');
 
-    assert.dom('.jumbo a.button').hasText('Contact Us');
+    assert.dom('.jumbo a.button').hasText('Contactez-nous');
     await click('.jumbo a.button');
 
     assert.strictEqual(currentURL(), '/getting-in-touch');
@@ -169,9 +166,9 @@ module('Acceptance | super rentals', function (hooks) {
     await visit('/getting-in-touch');
 
     assert.strictEqual(currentURL(), '/getting-in-touch');
-    assert.dom('h2').hasText('Contact Us');
+    assert.dom('h2').hasText('Contactez-nous');
 
-    assert.dom('.jumbo a.button').hasText('About');
+    assert.dom('.jumbo a.button').hasText('À propos de nous');
     await click('.jumbo a.button');
 
     assert.strictEqual(currentURL(), '/about');
@@ -179,10 +176,10 @@ module('Acceptance | super rentals', function (hooks) {
 });
 ```
 
-As with the development server, the test UI should automatically reload and rerun the entire test suite as you save the files. It is recommended that you keep this page open as you develop your app. That way, you will get immediate feedback if you accidentally break something.
+Comme pour le serveur de développement, l'UI de test devrait se rafraîchir automatiquement et ré-exécuter toute la suite de tests quand vous enregistrez le fichier. Il est recommandé de garder cette page ouverte quand vous développez votre app. De cette façon, vous serez immédiatement alerté si vous cassez quelque chose accidentellement.
 
-<img src="/images/tutorial/part-1/automated-testing/pass-2@2x.png" alt="Tests still passing with the new tests" width="1024" height="512">
+<img src="/images/tutorial/part-1/automated-testing/pass-2@2x.png" alt="Les tests passent toujours une fois les nouveaux ajoutés" width="1024" height="512">
 
-For the rest of the tutorial, we will continue to add more automated tests as we develop new features. Testing is optional but highly recommended. Tests don't affect the functionality of your app, they just protect it from _regressions_, which is just a fancy way of saying "accidental breakages."
+Pour le reste du tutoriel, nous ajouterons de plus en plus de tests automatisés à mesure que nous développons de nouvelles fonctionnalités. Écrire des tests est optionnel mais fortement recommandé. Les tests n'impactent pas les fonctionnalités de votre app, ils la protègent simplement des "régressions", le terme d'usage pour parler d'une "fonctionnalité cassée accidentellement".
 
-If you are in a hurry, you can skip over the testing sections in this tutorial and still be able to follow along with everything else. But don't you find it super satisfying—_oddly satisfying_—to watch a robot click on things really, really fast?
+Si vous êtes pressé, vous pouvez sauter les sections sur les tests dans la suite du tutoriel, ça ne vous empêchera pas de suivre tout le reste. Mais ne trouvez-vous pas tellement satisfaisant - _étrangement satisfaisant_ - de regarder un robot cliquer sur des trucs super, super vite&nbsp;?
