@@ -1,24 +1,21 @@
 <!-- Heads up! This is a generated file, do not edit directly. You can find the source at https://github.com/ember-learn/super-rentals-tutorial/blob/master/src/markdown/tutorial/part-1/04-component-basics.md -->
 
-In this chapter, you will _[refactor](../../../components/introducing-components/#toc_breaking-it-into-pieces)_ your existing templates to use components. We will also be adding a site-wide navigation bar:
+Dans ce chapitre, vous ferez une [refactorisation](../../../components/introducing-components/#toc_breaking-it-into-pieces) de vos _templates_ existants pour y utiliser des composants. Vous ajouterez aussi une barre de navigation à l'échelle du site:
 
-<img src="/images/tutorial/part-1/component-basics/index-with-nav@2x.png" alt="The Super Rentals app by the end of the chapter" width="1024" height="314">
+<img src="/images/tutorial/part-1/component-basics/index-with-nav@2x.png" alt="L'app Super Rentals à la fin du chapitre" width="1024" height="314">
 
-In doing so, you will learn about:
+En faisant ça, vous apprendrez à&nbsp;:
+- Invoquer des composants
+- Passer du contenu aux composants
+- Retourner du contenu avec le mot-clé `{{yield}}`
+- Écrire des tests de composant
+- Utiliser le _template_ de l'application et son `{{outlet}}`
 
-- Extracting markup into components
-- Invoking components
-- Passing content to components
-- Yielding content with the `{{yield}}` keyword
-- Refactoring existing code
-- Writing component tests
-- Using the application template and `{{outlet}}`s
+## Extraire du balisage dans des composants
 
-## Extracting Markup into Components
+Dans un [chapitre précédent](../building-pages/), une courte introduction aux [composants (Components)](../../../components/introducing-components/) accompagnait l'usage de `<LinkTo>` pour connecter nos pages entre elles. Pour résumer, nous avons dit que les composants sont une manière, avec Ember, de créer des "balises personnalisées" en supplément des balises HTML natives du navigateur. À présent, nous allons créer nos propres composants&nbsp;!
 
-In a [previous chapter](../building-pages/), we got a light introduction to _[components](../../../components/introducing-components/)_ when using `<LinkTo>` to connect our pages. To recap, we said that components are Ember's way of creating _custom tags_ to supplement the built-in HTML tags from the browser. Now, we are going to create our own components!
-
-During the course of developing an app, it is pretty common to reuse the same UI element across different parts of the app. For example, we have been using the same "jumbo" header in all three pages so far. On every page we worked to follow the same basic structure:
+Pendant le développement d'une app, il est très courant de réutiliser les mêmes éléments d'_UI_ à travers les différentes parties de l'app. Par exemple, jusqu'ici, nous avons écrit la même entête "jumbo" dans chacune de nos trois pages. Sur chaque page, nous avons travaillé à réécrire la même structure de base&nbsp;:
 
 ```html
 <div class="jumbo">
@@ -27,9 +24,9 @@ During the course of developing an app, it is pretty common to reuse the same UI
 </div>
 ```
 
-Since it is not a lot of code, it may not seem like a big deal to duplicate this structure on each page. However, if our designer wanted us to make a change to the header, we would have to find and update every single copy of this code. As our app gets bigger, this will become even more of a problem.
+Étant donné que ce code est très court, dupliquer cette structure n'apparaît pas nécessairement comme un problème. Cependant, si nos _designers_ nous demandaient de modifier l'entête, nous aurions à retrouver et mettre à jour chaque copie de ce code. À mesure que notre app prendra de l'ampleur, le problème en prendra aussi. 
 
-Components are the perfect solution to this. In its most basic form, a component is just a piece of template that can be referred to by name. Let's start by creating a new file at `app/components/jumbo.hbs` with markup for the "jumbo" header:
+Les composants sont la solution parfaite. Dans sa forme la plus basique, un composant est juste un morceau de _template_ auquel on peut faire référence par nom. Commençons par créer un nouveau fichier `app/components/jumbo.hbs` avec le balisage de l'entête "jumbo"&nbsp;:
 
 ```handlebars { data-filename="app/components/jumbo.hbs" }
 <div class="jumbo">
@@ -38,58 +35,58 @@ Components are the perfect solution to this. In its most basic form, a component
 </div>
 ```
 
-That's it, we have created our first component! We can now _invoke_ this component anywhere in our app, using `<Jumbo>` as the tag name.
+Voilà, nous avons créé notre premier composant&nbsp;! Nous pouvons maintenant "l'invoquer" dans notre app, en utilisant `<Jumbo>` comme nom de balise.
 
 <div class="cta">
   <div class="cta-note">
     <div class="cta-note-body">
-      <div class="cta-note-heading">Zoey says...</div>
+      <div class="cta-note-heading">Zoey dit...</div>
       <div class="cta-note-message">
-        <p>Remember, when invoking components, we need to capitalize their names so Ember can tell them apart from regular HTML elements. The <code>jumbo.hbs</code> template corresponds to the <code>&#x3C;Jumbo></code> tag, just like <code>super-awesome.hbs</code> corresponds to <code>&#x3C;SuperAwesome></code>.</p>
+        <p>Rappelez-vous, quand on invoque des composants, il faut mettre une majuscule à leur nom pour qu'Ember sache que ce ne sont pas des éléments HTML classiques. Le <em>template</em> <code>jumbo.hbs</code> correspond à la balise <code>&#x3C;Jumbo></code>, tout comme <code>super-awesome.hbs</code> correspondrait à <code>&#x3C;SuperAwesome></code>.</p>
       </div>
     </div>
     <img src="/images/mascots/zoey.png" role="presentation" alt="">
   </div>
 </div>
 
-## Passing Content to Components with `{{yield}}`
+## Passer du contenu à des composants avec `{{yield}}`
 
-When invoking a component, Ember will replace the component tag with the content found in the component's template. Just like regular HTML tags, it is common to pass _[content](../../../components/block-content/)_ to components, like `<Jumbo>some content</Jumbo>`. We can enable this using the `{{yield}}` keyword, which will be replaced with the content that was passed to the component.
+Quand un composant est invoqué, Ember va remplacer la balise du composant avec le contenu trouvé dans le _template_ du composant. Tout comme avec les balises HTML classiques, il est courant de passer du [contenu](../../../components/block-content/) aux composants, par exemple `<Jumbo>some content</Jumbo>`. On s'accorde cette possibilité en utilisant le mot-clé `{{yield}}`, qui sera remplacé par le contenu passé au composant.
 
-Let's try it out by editing the index template:
+Essayons ça en éditant le _template_ d'index&nbsp;:
 
 ```js { data-filename="app/templates/index.hbs" data-diff="-1,-2,+3,-7,+8" }
 <div class="jumbo">
   <div class="right tomster"></div>
 <Jumbo>
-  <h2>Welcome to Super Rentals!</h2>
-  <p>We hope you find exactly what you're looking for in a place to stay.</p>
-  <LinkTo @route="about" class="button">About Us</LinkTo>
+  <h2>Bienvenue sur "Super Rentals" !</h2>
+  <p>Nous espérons que vous trouverez l'endroit parfait où séjourner.</p>
+  <LinkTo @route="about" class="button">À propos de nous</LinkTo>
 </div>
 </Jumbo>
 ```
 
-## Refactoring Existing Code
+## Refactorer du code existant
 
-After saving the changes, your page should automatically reload, and, _voilà_... nothing changed? Well, that's exactly what we wanted to happen this time! We successfully _[refactored](../../../components/introducing-components/#toc_breaking-components-down-further)_ our index template to use the `<Jumbo>` component, and everything still works as expected. And the tests still pass!
+Après avoir enregistré les changements, votre page devrait se rafraîchir automatiquement et, voilà... rien n'a changé&nbsp;? Eh bien c'est exactement ce que nous voulions cette fois&nbsp;! Nous avons bien [refactoré](../../../components/introducing-components/#toc_breaking-components-down-further) notre _template_ d'index pour qu'il utilise le composant `<Jumbo>`, et tout continue à fonctionner comme prévu. Et les tests passent toujours&nbsp;!
 
-<img src="/images/tutorial/part-1/component-basics/index@2x.png" alt="Index page – nothing changed" width="1024" height="250">
+<img src="/images/tutorial/part-1/component-basics/index@2x.png" alt="Page d'index – rien n'a changé" width="1024" height="250">
 
-<img src="/images/tutorial/part-1/component-basics/pass@2x.png" alt="Tests still passing after the refactor" width="1024" height="512">
+<img src="/images/tutorial/part-1/component-basics/pass@2x.png" alt="Les tests passent toujours après la refactorisation" width="1024" height="512">
 
-Let's do the same for our other two pages as well.
+Faisons la même chose pour les deux autre pages&nbsp;:
 
 ```js { data-filename="app/templates/about.hbs" data-diff="-1,-2,+3,-11,+12" }
 <div class="jumbo">
   <div class="right tomster"></div>
 <Jumbo>
-  <h2>About Super Rentals</h2>
+  <h2>À propos de "Super Rentals"</h2>
   <p>
-    The Super Rentals website is a delightful project created to explore Ember.
-    By building a property rental site, we can simultaneously imagine traveling
-    AND building Ember applications.
+    Le site web "Super Rentals" est un projet très sympa créé pour explorer Ember.
+    En réalisant un site de location de propriétés, nous pouvons imaginer voyager
+    ET apprendre à construire des applications Ember en même temps.
   </p>
-  <LinkTo @route="contact" class="button">Contact Us</LinkTo>
+  <LinkTo @route="contact" class="button">Contactez-nous</LinkTo>
 </div>
 </Jumbo>
 ```
@@ -98,13 +95,13 @@ Let's do the same for our other two pages as well.
 <div class="jumbo">
   <div class="right tomster"></div>
 <Jumbo>
-  <h2>Contact Us</h2>
+  <h2>Contactez-nous</h2>
   <p>
-    Super Rentals Representatives would love to help you<br>
-    choose a destination or answer any questions you may have.
+    Les représentants de "Super Rentals" aimeraient vous aider à<br>
+    choisir une destination ou répondre à toutes vos questions.
   </p>
   <address>
-    Super Rentals HQ
+    Siège social de Super Rentals
     <p>
       1212 Test Address Avenue<br>
       Testington, OR 97233
@@ -112,24 +109,24 @@ Let's do the same for our other two pages as well.
     <a href="tel:503.555.1212">+1 (503) 555-1212</a><br>
     <a href="mailto:superrentalsrep@emberjs.com">superrentalsrep@emberjs.com</a>
   </address>
-  <LinkTo @route="about" class="button">About</LinkTo>
+  <LinkTo @route="about" class="button">À propos</LinkTo>
 </div>
 </Jumbo>
 ```
 
-After saving, everything should look exactly the same as before, and all the tests should still pass. Very nice!
+Après avoir enregistré, tout devrait rester exactement comme avant, et tous les tests devraient continuer à passer. Chouette&nbsp;!
 
-<img src="/images/tutorial/part-1/component-basics/about@2x.png" alt="About page – nothing changed" width="1024" height="274">
+<img src="/images/tutorial/part-1/component-basics/about@2x.png" alt="Page d'à propos – rien n'a changé" width="1024" height="274">
 
-<img src="/images/tutorial/part-1/component-basics/contact@2x.png" alt="Contact page – nothing changed" width="1024" height="444">
+<img src="/images/tutorial/part-1/component-basics/contact@2x.png" alt="Page de contact – rien n'a changé" width="1024" height="444">
 
-<img src="/images/tutorial/part-1/component-basics/pass-2@2x.png" alt="Tests still passing another round of refactor" width="1024" height="512">
+<img src="/images/tutorial/part-1/component-basics/pass-2@2x.png" alt="Une nouvelle fois, les tests passent toujours après la refactorisation" width="1024" height="512">
 
-While it may not save you a lot of characters in this case, _[encapsulating](../../../components/component-arguments-and-html-attributes/)_ the implementation of the "jumbo" header into its own component makes the template slightly easier to read, as it allows the reader to focus on things that are unique to just that page. Further, if we need to make a change to the header, we can make it in a single place. Feel free to give that a try!
+Bien que dans le cas présent, ça n'ait pas tant raccourci le code, [encapsuler](../../../components/component-arguments-and-html-attributes/) l'implémentation de l'entête "jumbo" dans son propre composant rend le _template_ légèrement plus facile à lire, ça permet au lecteur de ce concentrer sur les éléments uniques à une page donnée. De plus, si nous avons besoin de faire un changement dans l'entête, nous n'aurons à le faire qu'à un seul endroit. 
 
-## Writing Component Tests
+## Écrire des tests de composant
 
-Before we move on to the next component, let's write an automated test for our `<Jumbo>` component. Run this command in your terminal:
+Avant de passer au composant suivant, écrivons un test automatisé pour notre composant `<Jumbo>`. Exécutez la commande suivante dans votre terminal&nbsp;:
 
 ```shell
 $ ember generate component-test jumbo
@@ -137,9 +134,9 @@ installing component-test
   create tests/integration/components/jumbo-test.js
 ```
 
-Here, we used the generator to generate a _[component test](../../../testing/testing-components/)_, also known as a rendering test. These are used to render and test a single component at a time. This is in contrast to the acceptance tests that we wrote earlier, which have to navigate and render entire pages worth of content.
+Ici, nous utilisons le générateur pour générer un [test de composant](../../../testing/testing-components/), ou _rendering test_ (test d'affichage). Ceux-ci permettent d'afficher et tester un seul composant à la fois. En cela, ils diffèrent des tests d'acceptance que nous avons écrits plus tôt, et qui eux permettent d'afficher et naviguer dans des pages entières de contenu.
 
-Let's replace the boilerplate code that was generated for us with our own test:
+Remplaçons le code par défaut qui a été généré pour nous avec notre propre test&nbsp;:
 
 ```js { data-filename="tests/integration/components/jumbo-test.js" data-diff="-9,-10,-11,+12,+13,-15,-16,-17,-18,-19,-20,-21,-22,-23,-24,-25,-26,+27,+28,+29" }
 import { module, test } from 'qunit';
@@ -154,7 +151,7 @@ module('Integration | Component | jumbo', function (hooks) {
     // Set any properties with this.set('myProperty', 'value');
     // Handle any actions with this.set('myAction', function(val) { ... });
   test('it renders the content inside a jumbo header with a tomster', async function (assert) {
-    await render(hbs`<Jumbo>Hello World</Jumbo>`);
+    await render(hbs`<Jumbo>Bonjour tout le monde</Jumbo>`);
 
     await render(hbs`<Jumbo />`);
 
@@ -169,21 +166,21 @@ module('Integration | Component | jumbo', function (hooks) {
 
     assert.dom(this.element).hasText('template block text');
     assert.dom('.jumbo').exists();
-    assert.dom('.jumbo').hasText('Hello World');
+    assert.dom('.jumbo').hasText('Bonjour tout le monde');
     assert.dom('.jumbo .tomster').exists();
   });
 });
 ```
 
-Instead of navigating to a URL, we start the test by rendering our `<Jumbo>` component on the test page. This is useful because it may otherwise require a lot of setup and interaction just to get to a page where your component is used. Component tests allows us to skip all of that and focus exclusively on testing the component in isolation.
+Au début du test, plutôt que de naviguer vers une URL, on commence par afficher notre composant `<Jumbo>` sur la page de test. Pouvoir faire ça est très utile, car autrement, de nombreuses configurations et interactions seraient nécessaires juste pour atteindre la page où le composant est utilisé. Les tests de composant permettent de sauter toutes ces étapes et de se concentrer exclusivement sur le test du composant isolé.
 
-Just like visit and click, which we used earlier, render is also an async step, so we need to pair it with the `await` keyword. Other than that, the rest of the test is very similar to the acceptance tests we wrote in the previous chapter. Make sure the test is passing by checking the tests UI in the browser.
+Tout comme `visit` et `click`, que nous avons utilisés plus tôt, `render` est aussi une instruction asynchrone, qui va de paire avec le mot-clé `await`. En dehors de ça, le reste du test est très similaire aux tests d'acceptance écrits dans le chapitre précédent. Assurez-vous que le test passe en vérifiant l'_UI_ des tests dans votre navigateur.
 
-<img src="/images/tutorial/part-1/component-basics/pass-3@2x.png" alt="Tests still passing with our component test" width="1024" height="512">
+<img src="/images/tutorial/part-1/component-basics/pass-3@2x.png" alt="Les tests passent toujours avec notre test de composant" width="1024" height="512">
 
-We've been refactoring our existing code for a while, so let's change gears and implement a new feature: the site-wide navigation bar.
+Voilà un moment que nous refactorons le code existant, changeons un peu de sujet et implémentons une nouvelle fonctionnalité&nbsp;: la barre de navigation du site.
 
-We can create a `<NavBar>` component at `app/components/nav-bar.hbs`:
+Créons un composant `<NavBar>` dans `app/components/nav-bar.hbs`&nbsp;:
 
 ```handlebars { data-filename="app/components/nav-bar.hbs" }
 <nav class="menu">
@@ -192,7 +189,7 @@ We can create a `<NavBar>` component at `app/components/nav-bar.hbs`:
   </LinkTo>
   <div class="links">
     <LinkTo @route="about" class="menu-about">
-      About
+      À propos
     </LinkTo>
     <LinkTo @route="contact" class="menu-contact">
       Contact
@@ -201,31 +198,31 @@ We can create a `<NavBar>` component at `app/components/nav-bar.hbs`:
 </nav>
 ```
 
-Next, we will add our `<NavBar>` component to the top of each page:
+Ensuite, ajoutons notre composant `<NavBar>` en haut de chaque page&nbsp;:
 
 ```js { data-filename="app/templates/about.hbs" data-diff="+1" }
 <NavBar />
 <Jumbo>
-  <h2>About Super Rentals</h2>
+  <h2>À propos de "Super Rentals"</h2>
   <p>
-    The Super Rentals website is a delightful project created to explore Ember.
-    By building a property rental site, we can simultaneously imagine traveling
-    AND building Ember applications.
+    Le site web "Super Rentals" est un projet très sympa créé pour explorer Ember.
+    En réalisant un site de location de propriétés, nous pouvons imaginer voyager
+    ET apprendre à construire des applications Ember en même temps.
   </p>
-  <LinkTo @route="contact" class="button">Contact Us</LinkTo>
+  <LinkTo @route="contact" class="button">Contactez-nous</LinkTo>
 </Jumbo>
 ```
 
 ```js { data-filename="app/templates/contact.hbs" data-diff="+1" }
 <NavBar />
 <Jumbo>
-  <h2>Contact Us</h2>
+  <h2>Contactez-nous</h2>
   <p>
-    Super Rentals Representatives would love to help you<br>
-    choose a destination or answer any questions you may have.
+    Les représentants de "Super Rentals" aimeraient vous aider à<br>
+    choisir une destination ou répondre à toutes vos questions.
   </p>
   <address>
-    Super Rentals HQ
+    Siège social de Super Rentals
     <p>
       1212 Test Address Avenue<br>
       Testington, OR 97233
@@ -233,38 +230,38 @@ Next, we will add our `<NavBar>` component to the top of each page:
     <a href="tel:503.555.1212">+1 (503) 555-1212</a><br>
     <a href="mailto:superrentalsrep@emberjs.com">superrentalsrep@emberjs.com</a>
   </address>
-  <LinkTo @route="about" class="button">About</LinkTo>
+  <LinkTo @route="about" class="button">À propos</LinkTo>
 </Jumbo>
 ```
 
 ```js { data-filename="app/templates/index.hbs" data-diff="+1" }
 <NavBar />
 <Jumbo>
-  <h2>Welcome to Super Rentals!</h2>
-  <p>We hope you find exactly what you're looking for in a place to stay.</p>
-  <LinkTo @route="about" class="button">About Us</LinkTo>
+  <h2>Bienvenue sur "Super Rentals"&nbsp;!</h2>
+  <p>Nous espérons que vous trouverez l'endroit parfait où séjourner.</p>
+  <LinkTo @route="about" class="button">À propos de nous</LinkTo>
 </Jumbo>
 ```
 
-Voilà, we made another component!
+Voilà, nous avons créé un autre composant!
 
-<img src="/images/tutorial/part-1/component-basics/index-with-nav@2x.png" alt="Index page with nav" width="1024" height="314">
+<img src="/images/tutorial/part-1/component-basics/index-with-nav@2x.png" alt="Page d'indew avec la navigation" width="1024" height="314">
 
 <div class="cta">
   <div class="cta-note">
     <div class="cta-note-body">
-      <div class="cta-note-heading">Zoey says...</div>
+      <div class="cta-note-heading">Zoey dit...</div>
       <div class="cta-note-message">
-        <p><code>&#x3C;NavBar /></code> is a shorthand for <code>&#x3C;NavBar>&#x3C;/NavBar></code>. Component tags must always be closed properly, even when you are not passing any content to them, as in this case. Since this is pretty common, Ember provides the alternative self-closing shorthand to save you some typing!</p>
+        <p><code>&#x3C;NavBar /></code> est un raccourci pour <code>&#x3C;NavBar>&#x3C;/NavBar></code>. Les balises de composant doivent être explicitement fermées, même quand vous ne leur passez aucun contenu. Puisque c'est un cas très commun, Ember fournit un raccourci de fermeture automatique (<em>self-closing</em>) pour vous épargner quelques caractères&nbsp;!</p>
       </div>
     </div>
     <img src="/images/mascots/zoey.png" role="presentation" alt="">
   </div>
 </div>
 
-Everything looks great in the browser, but as we know, we can never be too sure. So let's write some tests!
+Tout semble bon dans le navigateur, mais comme chacun sait, on n'est jamais trop prudent. Alors écrivons quelques tests&nbsp;!
 
-But what kind of test? We _could_ write a component test for the `<NavBar>` by itself, like we just did for the `<Jumbo>` component. However, since the job of `<NavBar>` is to _navigate_ us around the app, it would not make a lot of sense to test this particular component in isolation. So, let's go back to writing some acceptance tests!
+Mais quel genre de test&nbsp;? Nous pourrions écrire un test de composant pour la `<NavBar>` en elle-même, comme nous l'avons fait pour le composant `<Jumbo>`. Cela dit, puisque la fonction de la `<NavBar>` est de "naviguer" dans l'app, il ne ferait pas sens de tester ce composant spécifique en isolation. Alors, retournons plutôt écrire quelques tests d'acceptance&nbsp;!
 
 ```js { data-filename="tests/acceptance/super-rentals-test.js" data-diff="+12,+13,+26,+27,+40,+41,+49,+50,+51,+52,+53,+54,+55,+56,+57,+58,+59,+60,+61,+62,+63,+64,+65,+66" }
 import { module, test } from 'qunit';
@@ -280,9 +277,9 @@ module('Acceptance | super rentals', function (hooks) {
     assert.strictEqual(currentURL(), '/');
     assert.dom('nav').exists();
     assert.dom('h1').hasText('SuperRentals');
-    assert.dom('h2').hasText('Welcome to Super Rentals!');
+    assert.dom('h2').hasText('Bienvenue sur "Super Rentals" !');
 
-    assert.dom('.jumbo a.button').hasText('About Us');
+    assert.dom('.jumbo a.button').hasText('À propos de nous');
     await click('.jumbo a.button');
 
     assert.strictEqual(currentURL(), '/about');
@@ -294,9 +291,9 @@ module('Acceptance | super rentals', function (hooks) {
     assert.strictEqual(currentURL(), '/about');
     assert.dom('nav').exists();
     assert.dom('h1').hasText('SuperRentals');
-    assert.dom('h2').hasText('About Super Rentals');
+    assert.dom('h2').hasText('À propos de "Super Rentals"');
 
-    assert.dom('.jumbo a.button').hasText('Contact Us');
+    assert.dom('.jumbo a.button').hasText('Contactez-nous');
     await click('.jumbo a.button');
 
     assert.strictEqual(currentURL(), '/getting-in-touch');
@@ -308,9 +305,9 @@ module('Acceptance | super rentals', function (hooks) {
     assert.strictEqual(currentURL(), '/getting-in-touch');
     assert.dom('nav').exists();
     assert.dom('h1').hasText('SuperRentals');
-    assert.dom('h2').hasText('Contact Us');
+    assert.dom('h2').hasText('Contactez-nous');
 
-    assert.dom('.jumbo a.button').hasText('About');
+    assert.dom('.jumbo a.button').hasText('À propos');
     await click('.jumbo a.button');
 
     assert.strictEqual(currentURL(), '/about');
@@ -321,7 +318,7 @@ module('Acceptance | super rentals', function (hooks) {
 
     assert.dom('nav').exists();
     assert.dom('nav a.menu-index').hasText('SuperRentals');
-    assert.dom('nav a.menu-about').hasText('About');
+    assert.dom('nav a.menu-about').hasText('À propos');
     assert.dom('nav a.menu-contact').hasText('Contact');
 
     await click('nav a.menu-about');
@@ -336,21 +333,22 @@ module('Acceptance | super rentals', function (hooks) {
 });
 ```
 
-We updated the existing tests to assert that a `<nav>` element exists on each page. This is important for accessibility since screen readers will use that element to provide navigation. Then, we added a new test that verifies the behavior of the `<NavBar>` links.
+Nous avons mis à jour les tests existants pour nous assurer que l'élément `<nav>` existe sur chaque page. C'est important pour l'accessibilité, car les lecteurs d'écran vont utiliser cet élément pour fournir la navigation. Ensuite, nous avons ajouté un nouveau test qui vérifie le comportement des liens de la `<NavBar>`.
 
-All tests should pass at this point!
+À ce stade, tous les tests devraient passer&nbsp;!
 
-<img src="/images/tutorial/part-1/component-basics/pass-4@2x.png" alt="Tests still passing with our &lt;NavBar&gt; tests" width="1024" height="512">
+<img src="/images/tutorial/part-1/component-basics/pass-4@2x.png" alt="Les tests passent toujours avec nos tests de &lt;NavBar&gt;" width="1024" height="512">
 
-## Using the Application Template and `{{outlet}}`s
+## Utiliser le _template_ de l'application et son `{{outlet}}`
 
-Before we move on to the next feature, there is one more thing we could clean up. Since the `<NavBar>` is used for site-wide navigation, it really needs to be displayed on _every_ page in the app. So far, we have been adding the component on each page manually. This is a bit error-prone, as we could easily forget to do this the next time that we add a new page.
+Avant de passer à la fonctionnalité suivante, il y a encore une chose que nous pourrions "nettoyer". Puisque la `<NavBar>` sert la navigation à l'échelle du site, il est nécessaire de l'afficher sur _toutes_ les pages de l'app. Jusqu'ici, nous avons ajouté le composant manuellement sur chaque page. Cette approche est sujette aux erreurs, nous pourrions facilement oublier de l'ajouter la prochaine fois que nous créons une nouvelle page.
 
-We can solve this problem by moving the nav-bar into a special template called `application.hbs`. You may remember that it was generated for us when we first created the app but we deleted it. Now, it's time for us to bring it back!
+<!-- spell ignore -->
+Nous pouvons résoudre ce problème en déplaçant la `<NavBar>` dans un _template_ particulier appelé `application.hbs`. Vous vous rappelez peut-être qu'il a été généré pour nous lors de la création de l'app, mais nous l'avions supprimé. À présent, il est temps de le ramener à la vie&nbsp;!
 
-This template is special in that it does not have its own URL and cannot be navigated to on its own. Rather, it is used to specify a common layout that is shared by every page in your app. This is a great place to put site-wide UI elements, like a nav-bar and a site footer.
+Ce _template_ est spécial car il n'a pas sa propre URL et on ne peut pas y naviguer directement. Il sert plutôt à définir une mise en page commune, partagée par toutes les pages de votre app. C'est l'endroit idéal pour placer les éléments d'_UI_ à l'échelle du site, comme une barre de navigation ou un pied de page (_footer_).
 
-While we are at it, we will also add a container element that wraps around the whole page, as requested by our designer for styling purposes.
+Pendant que nous y sommes, ajoutons aussi un élément _container_ (conteneur) qui encapsule toute la page, c'est une requête de notre _designer_ pour des questions de style.
 
 ```handlebars { data-filename="app/templates/application.hbs" }
 <div class="container">
@@ -364,22 +362,22 @@ While we are at it, we will also add a container element that wraps around the w
 ```js { data-filename="app/templates/index.hbs" data-diff="-1" }
 <NavBar />
 <Jumbo>
-  <h2>Welcome to Super Rentals!</h2>
-  <p>We hope you find exactly what you're looking for in a place to stay.</p>
-  <LinkTo @route="about" class="button">About Us</LinkTo>
+  <h2>Bienvenue sur "Super Rentals" !</h2>
+  <p>Nous espérons que vous trouverez l'endroit parfait où séjourner.</p>
+  <LinkTo @route="about" class="button">À propos de nous</LinkTo>
 </Jumbo>
 ```
 
 ```js { data-filename="app/templates/contact.hbs" data-diff="-1" }
 <NavBar />
 <Jumbo>
-  <h2>Contact Us</h2>
+  <h2>Contactez-nous</h2>
   <p>
-    Super Rentals Representatives would love to help you<br>
-    choose a destination or answer any questions you may have.
+    Les représentants de "Super Rentals" aimeraient vous aider à<br>
+    choisir une destination ou répondre à toutes vos questions.
   </p>
   <address>
-    Super Rentals HQ
+    Siège social de Super Rentals
     <p>
       1212 Test Address Avenue<br>
       Testington, OR 97233
@@ -387,25 +385,25 @@ While we are at it, we will also add a container element that wraps around the w
     <a href="tel:503.555.1212">+1 (503) 555-1212</a><br>
     <a href="mailto:superrentalsrep@emberjs.com">superrentalsrep@emberjs.com</a>
   </address>
-  <LinkTo @route="about" class="button">About</LinkTo>
+  <LinkTo @route="about" class="button">À propos</LinkTo>
 </Jumbo>
 ```
 
 ```js { data-filename="app/templates/about.hbs" data-diff="-1" }
 <NavBar />
 <Jumbo>
-  <h2>About Super Rentals</h2>
+  <h2>À propos de "Super Rentals"</h2>
   <p>
-    The Super Rentals website is a delightful project created to explore Ember.
-    By building a property rental site, we can simultaneously imagine traveling
-    AND building Ember applications.
+    Le site web "Super Rentals" est un projet très sympa créé pour explorer Ember.
+    En réalisant un site de location de propriétés, nous pouvons imaginer voyager
+    ET apprendre à construire des applications Ember en même temps.
   </p>
-  <LinkTo @route="contact" class="button">Contact Us</LinkTo>
+  <LinkTo @route="contact" class="button">Contactez-nous</LinkTo>
 </Jumbo>
 ```
 
-The `{{outlet}}` keyword denotes the place where our site's pages should be rendered into, similar to the `{{yield}}` keyword we saw [earlier](#toc_passing-content-to-components-with-yield).
+Le mot-clé `{{outlet}}` désigne l'endroit où les pages de notre site doivent s'afficher, un peu comme le mot-clé `{{yield}}` que nous avons vu [plus tôt](#toc_passing-content-to-components-with-yield).
 
-This is much nicer! We can run our test suite, which confirms that everything still works after our refactor. We are ready to move on to the next feature!
+Voilà qui est mieux&nbsp;! Nous pouvons exécuter notre suite de test, qui confirme que tout continue à fonctionner après notre refactorisation. Nous sommes prêts à passer à la fonctionnalité suivante&nbsp;!
 
-<img src="/images/tutorial/part-1/component-basics/pass-5@2x.png" alt="Tests still passing with {{outlet}}" width="1024" height="512">
+<img src="/images/tutorial/part-1/component-basics/pass-5@2x.png" alt="Les tests passent toujours avec {{outlet}}" width="1024" height="512">
