@@ -19,7 +19,7 @@ module.exports = function(deployTarget) {
       tagsToExclude: '.edit-page,code,pre,img,div.cta,div.filename',
       cssSelector: 'section',
       versionPattern: /^(v\d+\.\d+\.\d+)\//,
-      pathPattern: /^v\d+\.\d+\.\d+\/(.*)\/index.html$/,
+      pathPattern: /^release\/(.*)\/index.html$/,
     }
   };
 
