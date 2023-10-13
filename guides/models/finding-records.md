@@ -1,9 +1,9 @@
-The EmberData store provides an interface for retrieving records of a single type.
+Le _store_ (magasin, réserve) d'EmberData fournit une interface pour récupérer les _records_ (enregistrements) d'un type donné.
 
-### Retrieving a Single Record
+### Récupération d'un seul _record_
 
-Use [`store.findRecord()`](https://api.emberjs.com/ember-data/release/classes/Store/methods/findRecord?anchor=findRecord) to retrieve a record by its type and ID.
-This will return a promise that fulfills with the requested record:
+Utilisez [`store.findRecord()`](https://api.emberjs.com/ember-data/release/classes/Store/methods/findRecord?anchor=findRecord) pour récupérer un _record_ via son type et son ID.
+Cela renverra une promesse qui sera résolue avec le _record_ demandé:
 
 ```javascript
 // GET /blog-posts/1
@@ -13,16 +13,16 @@ this.store.findRecord('blog-post', 1)  // => GET /blog-posts/1
   });
 ```
 
-Use [`store.peekRecord()`](https://api.emberjs.com/ember-data/release/classes/Store/methods/peekRecord?anchor=peekRecord) to retrieve a record by its type and ID, without making a network request.
-This will return the record only if it is already present in the store:
+Utilisez [`store.peekRecord()`](https://api.emberjs.com/ember-data/release/classes/Store/methods/peekRecord?anchor=peekRecord) pour récupérer un _record_ via son type et son ID, sans déclencher de requête réseau.
+Cela renverra le _record_ uniquement s'il est déjà présent dans le _store_:
 
 ```javascript
 let blogPost = this.store.peekRecord('blog-post', 1); // => no network request
 ```
 
-### Retrieving Multiple Records
+### Récupération de plusieurs _records_
 
-Use [`store.findAll()`](https://api.emberjs.com/ember-data/release/classes/Store/methods/findAll?anchor=findAll) to retrieve all of the records for a given type:
+Utilisez [`store.findAll()`](https://api.emberjs.com/ember-data/release/classes/Store/methods/findAll?anchor=findAll) pour récupérer tous les _records_ d'un type donné&nbsp;:
 
 ```javascript
 // GET /blog-posts
@@ -32,26 +32,26 @@ this.store.findAll('blog-post') // => GET /blog-posts
   });
 ```
 
-Use [`store.peekAll()`](https://api.emberjs.com/ember-data/release/classes/Store/methods/peekAll?anchor=peekAll) to retrieve all of the records for a given type that are already loaded into the store, without making a network request:
+Utilisez [`store.peekAll()`](https://api.emberjs.com/ember-data/release/classes/Store/methods/peekAll?anchor=peekAll) pour récupérer tous les _records_ d'un type donné qui sont déjà chargés dans le _store_, sans déclencher de requête réseau :
 
 ```javascript
 let blogPosts = this.store.peekAll('blog-post'); // => no network request
 ```
 
-`store.findAll()` returns a `PromiseArray` that fulfills to a `RecordArray` and `store.peekAll` directly returns a `RecordArray`.
+`store.findAll()` retourne une `PromiseArray` qui est résolue avec un `RecordArray` et `store.peekAll` retourne directement un `RecordArray`.
 
-It's important to note that `RecordArray` is not a JavaScript array, it's an object that implements [`MutableArray`](https://api.emberjs.com/ember/release/classes/MutableArray).
-This is important because, for example, if you want to retrieve records by index,
-the `[]` notation will not work--you'll have to use `objectAt(index)` instead.
+Il est important de noter que `RecordArray` n'est pas un tableau JavaScript, mais un objet qui implémente [`MutableArray`](https://api.emberjs.com/ember/release/classes/MutableArray).
+C'est important car, par exemple, si vous voulez récupérer des _records_ via leur index,
+la notation `[]` ne fonctionnera pas (vous devez utiliser `objectAt(index)` à la place).
 
-### Querying for Multiple Records
+### Requêter plusieurs _records_
 
-EmberData provides the ability to query for records that meet certain criteria.
-Calling [`store.query()`](https://api.emberjs.com/ember-data/release/classes/Store/methods/query?anchor=query) will make a `GET` request with the passed object serialized as query params.
-This method returns a `PromiseArray` in the same way as `findAll`.
+EmberData offre la possibilité de rechercher des _records_ qui répondent à certains critères.
+Appelez [`store.query()`](https://api.emberjs.com/ember-data/release/classes/Store/methods/query?anchor=query) fera une requête `GET` avec l'objet qui lui est passé sérialisé en tant que paramètre de requête (_query params_).
+Cette méthode retourne un `PromiseArray` de la même manière que `findAll`.
 
-For example, we could search for all `person` models who have the name of
-`Peter`:
+Par exemple, on peut rechercher tous les modèles `person` qui portent le nom de
+`Peter`&nbsp;:
 
 ```javascript
 // GET to /persons?filter[name]=Peter
@@ -64,13 +64,13 @@ this.store.query('person', {
 });
 ```
 
-### Querying for A Single Record
+### Requêter un seul _record_
 
-If you are using an adapter that supports server requests capable of returning a single model object,
-EmberData provides a convenience method [`store.queryRecord()`](https://api.emberjs.com/ember-data/release/classes/Store/methods/queryRecord?anchor=queryRecord) that will return a promise that resolves with that single record.
-The request is made via a method `queryRecord()` defined by the adapter.
+Si vous utilisez un adaptateur prenant en charge les requêtes capables de renvoyer un seul modèle,
+EmberData fournit une méthode pratique, [`store.queryRecord()`](https://api.emberjs.com/ember-data/release/classes/Store/methods/queryRecord?anchor=queryRecord), qui retourne une promesse résolue avec un unique _record_.
+La requête est faite via la méthode `queryRecord()` définie par l'adapteur.
 
-For example, if your server API provides an endpoint for the currently logged in user:
+Par exemple, si l'API de votre serveur fournit un _endpoint_ pour l'utilisateur actuellement connecté&nbsp;:
 
 ```text
 // GET /api/current_user
@@ -82,7 +82,7 @@ For example, if your server API provides an endpoint for the currently logged in
 }
 ```
 
-And if the adapter for the `User` model defines a `queryRecord()` method that targets that endpoint:
+Et si l'adapteur du modèle `User` définit une méthode `queryRecord()` qui cible le _endpoint_&nbsp;:
 
 ```javascript {data-filename=app/adapters/user.js}
 import Adapter from '@ember-data/adapter';
@@ -95,7 +95,7 @@ export default class UserAdapter extends Adapter {
 }
 ```
 
-Then, calling [`store.queryRecord()`](https://api.emberjs.com/ember-data/release/classes/Store/methods/queryRecord?anchor=queryRecord) will retrieve that object from the server:
+Puis, appeler [`store.queryRecord()`](https://api.emberjs.com/ember-data/release/classes/Store/methods/queryRecord?anchor=queryRecord) récupérera cet objet depuis le serveur&nbsp;:
 
 ```javascript
 store.queryRecord('user', {}).then(function(user) {
@@ -104,13 +104,13 @@ store.queryRecord('user', {}).then(function(user) {
 });
 ```
 
-As in the case of `store.query()`, a query object can also be passed to `store.queryRecord()` and is available for the adapter's `queryRecord()` to use to qualify the request.
-However the adapter must return a single model object, not an array containing one element,
-otherwise EmberData will throw an exception.
+Tout comme `store.query()`, un objet peut également être transmis à `store.queryRecord()` qui peut alors être utilisé par la méthode `queryRecord()` de l'Adapteur afin de qualifier la requête.
+Cependant, l'adapteur doit renvoyer un seul modèle et non un tableau contenant un élément,
+sinon EmberData lèvera une exception.
 
-Note that Ember's default [JSON:API adapter](https://api.emberjs.com/ember-data/release/classes/JSONAPIAdapter) does not provide the functionality needed to support `queryRecord()` directly as it relies on REST request definitions that return result data in the form of an array.
+Notez que [l'adapteur JSON:API](https://api.emberjs.com/ember-data/release/classes/JSONAPIAdapter) par défaut d'Ember ne fournit pas la fonctionnalité nécessaire pour prendre en charge directement `queryRecord()` car il se repose sur des requêtes REST qui retournent les données sous la forme d'un tableau.
 
-If your server API or your adapter only provides array responses but you wish to retrieve just a single record, you can alternatively use the `query()` method as follows:
+Si l'API de votre serveur ou votre adapteur ne fournit que des réponses sous forme de tableau mais que vous souhaitez récupérer un seul _record_, vous pouvez également utiliser la méthode `query()` comme suit&nbsp;:
 
 ```javascript
 // GET to /users?filter[email]=tomster@example.com
