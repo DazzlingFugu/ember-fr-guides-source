@@ -163,6 +163,7 @@ async
 asynchronicity
 asynchrony
 auto-rollup
+auto-track/auto
 autoRun
 autocomplete
 autoruns
@@ -195,6 +196,7 @@ checkboxes
 checksum/nombrable
 class
 classic
+click
 coc-ember
 codebase/nombrable
 codemod
@@ -202,6 +204,7 @@ codemods
 CoffeeScript
 ColorSafe
 command
+component/nombrable
 checkbox
 checksum/nombrable
 community
@@ -209,6 +212,7 @@ componentized
 composable
 config
 configPath
+context
 cron
 customizable
 customizations
@@ -277,6 +281,7 @@ factory
 factories
 falsy
 favicon
+fetch
 field/nombrable
 fileMapTokens
 filesPath
@@ -292,10 +297,12 @@ geocode/GS
 geocoding
 geolocation
 getter/nombrable
+Glimmer
 globals
 globbing
 guidemaker
 hackable
+handler
 hardcode
 hardcode/D
 hasMany
@@ -350,6 +357,7 @@ minifyJS
 misspelt
 mixin
 mixins
+mocker/bricoler
 mockup
 model/nombrable
 modifier
@@ -358,16 +366,19 @@ modularity
 monopage
 namespace/DG
 namespace/nombrable
+namespaced
 natively
 nav
 nav-bar
 normalizeEntityName
 normalizeResponse
 npm
+ok
 onboarding
 outputPaths
 owner/nombrable
 page-crafter
+pairer/bricoler
 parallelize
 param
 parameterizing
@@ -393,6 +404,7 @@ preprocess/DGS
 preprocessor/nombrable
 presentational
 présentationnel/sensationnel
+properties
 pseudocode
 querySelectorAll
 quotes
@@ -472,6 +484,7 @@ treesitter
 triple-backtick
 tooltip
 trackable
+tracked
 transitionTo
 transpilation
 transpile/DGS

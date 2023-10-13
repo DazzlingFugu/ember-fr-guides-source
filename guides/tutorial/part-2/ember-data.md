@@ -21,7 +21,7 @@ A while back, we added the `rental` route. If memory serves us well, we didn't d
 ```js { data-filename="app/routes/index.js" }
 import Route from '@ember/routing/route';
 
-const COMMUNITY_CATEGORIES = ['Condo', 'Townhouse', 'Apartment'];
+const COMMUNITY_CATEGORIES = ['Copropriété', 'Maison de ville', 'Appartement'];
 
 export default class IndexRoute extends Route {
   async model() {
@@ -33,9 +33,9 @@ export default class IndexRoute extends Route {
       let type;
 
       if (COMMUNITY_CATEGORIES.includes(attributes.category)) {
-        type = 'Community';
+        type = 'Dans une copropriété';
       } else {
-        type = 'Standalone';
+        type = 'Propriété indépendante';
       }
 
       return { id, type, ...attributes };
@@ -47,7 +47,7 @@ export default class IndexRoute extends Route {
 ```js { data-filename="app/routes/rental.js" }
 import Route from '@ember/routing/route';
 
-const COMMUNITY_CATEGORIES = ['Condo', 'Townhouse', 'Apartment'];
+const COMMUNITY_CATEGORIES = ['Copropriété', 'Maison de ville', 'Appartement'];
 
 export default class RentalRoute extends Route {
   async model(params) {
@@ -58,9 +58,9 @@ export default class RentalRoute extends Route {
     let type;
 
     if (COMMUNITY_CATEGORIES.includes(attributes.category)) {
-      type = 'Community';
+      type = 'Dans une copropriété';
     } else {
-      type = 'Standalone';
+      type = 'Propriété indépendante';
     }
 
     return { id, type, ...attributes };
@@ -85,7 +85,7 @@ Enough talking, why don't we give that a try!
 ```js { data-filename="app/models/rental.js" }
 import Model, { attr } from '@ember-data/model';
 
-const COMMUNITY_CATEGORIES = ['Condo', 'Townhouse', 'Apartment'];
+const COMMUNITY_CATEGORIES = ['Copropriété', 'Maison de ville', 'Appartement'];
 
 export default class RentalModel extends Model {
   @attr title;
@@ -99,9 +99,9 @@ export default class RentalModel extends Model {
 
   get type() {
     if (COMMUNITY_CATEGORIES.includes(this.category)) {
-      return 'Community';
+      return 'Dans une copropriété';
     } else {
-      return 'Standalone';
+      return 'Propriété indépendante';
     }
   }
 }
@@ -117,17 +117,17 @@ We used the `@attr` decorator to declare the attributes of a rental property. Th
     "type": "rentals",
     "id": "grand-old-mansion",
     "attributes": {
-      "title": "Grand Old Mansion",
+      "title": "Le Manoir Ancien",
       "owner": "Veruca Salt",
       "city": "San Francisco",
       "location": {
         "lat": 37.7749,
         "lng": -122.4194
       },
-      "category": "Estate",
+      "category": "Domaine",
       "bedrooms": 15,
       "image": "https://upload.wikimedia.org/wikipedia/commons/c/cb/Crane_estate_(5).jpg",
-      "description": "This grand old mansion sits on over 100 acres of rolling hills and dense redwood forests."
+      "description": "Ce manoir ancien et spatieux se trouve sur un domaine de plus de 100 acres de collines et de forêts de séquoias denses."
     }
   }
 }
@@ -178,34 +178,34 @@ module('Unit | Model | rental', function (hooks) {
     assert.ok(model);
     let rental = store.createRecord('rental', {
       id: 'grand-old-mansion',
-      title: 'Grand Old Mansion',
+      title: 'Le Manoir Ancien',
       owner: 'Veruca Salt',
       city: 'San Francisco',
       location: {
         lat: 37.7749,
         lng: -122.4194,
       },
-      category: 'Estate',
+      category: 'Domaine',
       bedrooms: 15,
       image:
         'https://upload.wikimedia.org/wikipedia/commons/c/cb/Crane_estate_(5).jpg',
       description:
-        'This grand old mansion sits on over 100 acres of rolling hills and dense redwood forests.',
+        'Ce manoir ancien et spatieux se trouve sur un domaine de plus de 100 acres de collines et de forêts de séquoias denses.',
     });
 
-    assert.strictEqual(rental.type, 'Standalone');
+    assert.strictEqual(rental.type, 'Propriété indépendante');
 
-    rental.category = 'Condo';
-    assert.strictEqual(rental.type, 'Community');
+    rental.category = 'Copropriété';
+    assert.strictEqual(rental.type, 'Dans une copropriété');
 
-    rental.category = 'Townhouse';
-    assert.strictEqual(rental.type, 'Community');
+    rental.category = 'Maison de ville';
+    assert.strictEqual(rental.type, 'Dans une copropriété');
 
-    rental.category = 'Apartment';
-    assert.strictEqual(rental.type, 'Community');
+    rental.category = 'Appartement';
+    assert.strictEqual(rental.type, 'Dans une copropriété');
 
-    rental.category = 'Estate';
-    assert.strictEqual(rental.type, 'Standalone');
+    rental.category = 'Domaine';
+    assert.strictEqual(rental.type, 'Propriété indépendante');
   });
 });
 ```
@@ -225,7 +225,7 @@ Alright, now that we have our model set up, it's time to refactor our route hand
 ```js { data-filename="app/routes/index.js" data-diff="-2,-3,+4,-7,-8,-9,-10,-11,-12,-13,+14,-16,-17,-18,-19,-20,-21,-22,-23,+24,+25" }
 import Route from '@ember/routing/route';
 
-const COMMUNITY_CATEGORIES = ['Condo', 'Townhouse', 'Apartment'];
+const COMMUNITY_CATEGORIES = ['Copropriété', 'Maison de ville', 'Appartement'];
 import { service } from '@ember/service';
 
 export default class IndexRoute extends Route {
@@ -239,9 +239,9 @@ export default class IndexRoute extends Route {
   @service store;
 
       if (COMMUNITY_CATEGORIES.includes(attributes.category)) {
-        type = 'Community';
+        type = 'Dans une copropriété';
       } else {
-        type = 'Standalone';
+        type = 'Propriété indépendante';
       }
 
       return { id, type, ...attributes };
@@ -255,7 +255,7 @@ export default class IndexRoute extends Route {
 ```js { data-filename="app/routes/rental.js" data-diff="-2,-3,+4,-7,-8,-9,-10,-11,-12,+13,-15,-16,-17,-18,-19,-20,-21,+22,+23" }
 import Route from '@ember/routing/route';
 
-const COMMUNITY_CATEGORIES = ['Condo', 'Townhouse', 'Apartment'];
+const COMMUNITY_CATEGORIES = ['Copropriété', 'Maison de ville', 'Appartement'];
 import { service } from '@ember/service';
 
 export default class RentalRoute extends Route {
@@ -268,9 +268,9 @@ export default class RentalRoute extends Route {
   @service store;
 
     if (COMMUNITY_CATEGORIES.includes(attributes.category)) {
-      type = 'Community';
+      type = 'Dans une copropriété';
     } else {
-      type = 'Standalone';
+      type = 'Propriété indépendante';
     }
 
     return { id, type, ...attributes };

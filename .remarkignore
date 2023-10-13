@@ -30,5 +30,10 @@ guides/**/*.md
 !guides/tutorial/part-1/automated-testing.md
 !guides/tutorial/part-1/building-pages.md
 !guides/tutorial/part-1/component-basics.md
-!guides/tutorial/part-1/orientation.md
 !guides/tutorial/part-1/index.md
+!guides/tutorial/part-1/interactive-components.md
+!guides/tutorial/part-1/more-about-components.md
+!guides/tutorial/part-1/orientation.md
+!guides/tutorial/part-1/recap.md
+!guides/tutorial/part-1/reusable-components.md
+!guides/tutorial/part-1/working-with-data.md

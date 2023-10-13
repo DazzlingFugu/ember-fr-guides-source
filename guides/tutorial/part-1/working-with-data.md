@@ -1,28 +1,26 @@
-<!-- Heads up! This is a generated file, do not edit directly. You can find the source at https://github.com/ember-learn/super-rentals-tutorial/blob/master/src/markdown/tutorial/part-1/08-working-with-data.md -->
+Dans ce chapitre, nous supprimerons les données en dur du composant `<Rental>`. À la fin, votre app affichera enfin de vraies données venant du serveur&nbsp;:
 
-In this chapter, we will remove the hard-coded data from our `<Rental>` component. By the end, your app would finally be displaying real data that came from the server:
+<img src="/images/tutorial/part-1/working-with-data/three-properties@2x.png" alt="L'app Super Rentals à la fin du chapitre" width="1024" height="1129" />
 
-<img src="/images/tutorial/part-1/working-with-data/three-properties@2x.png" alt="The Super Rentals app by the end of the chapter" width="1024" height="1129">
+Dans ce chapitre, vous apprendrez à&nbsp;:
 
-In this chapter, you will learn about:
+- Travailler avec les fichiers de route
+- Retourner des données locales à partir du _model hook_
+- Accéder aux modèles des routes depuis les _templates_
+- _Mocker_ les données du serveur avec des fichiers JSON statiques
+- Récupérer les données distantes à partir du _model hook_
+- Adapter les données du serveur
+- Créer des boucles et des variables locales dans les _templates_ avec `{{#each}}`
 
-- Working with route files
-- Returning local data from the model hook
-- Accessing route models from templates
-- Mocking server data with static JSON files
-- Fetching remote data from the model hook
-- Adapting server data
-- Loops and local variables in templates with `{{#each}}`
+## Travailler avec les fichiers de route
 
-## Working with Route Files
+Jusque-là, nous avons tout codé en dur dans notre composant `<Rental>`. Mais ce n'est probablement pas très maintenable, surtout qu'à terme, nous voulons que nos données proviennent plutôt d'un serveur. Allons-y, déplaçons une partie des valeurs en dur en dehors du composant pour préparer le terrain. 
 
-So far, we've been hard-coding everything into our `<Rental>` component. But that's probably not very sustainable, since eventually, we want our data to come from a server instead. Let's go ahead and move some of those hard-coded values out of the component in preparation for that.
+Ce que nous voulons à terme, c'est que l'app récupère les données du serveur, puis les affiche en tant que contenu dynamique depuis les _templates_. Pour faire ça, il nous faut un endroit où écrire le code qui va récupérer les données et les charger dans les routes.
 
-We want to start working towards a place where we can eventually fetch data from the server, and then render the requested data as dynamic content from the templates. In order to do that, we will need a place where we can write the code for fetching data and loading it into the routes.
+Dans Ember, [les fichiers de route](../../../routing/defining-your-routes/) sont l'endroit idéal. Nous n'en avions pas eu besoin jusqu'ici car toutes nos routes ne faisaient essentiellement qu'afficher des pages statiques, mais nous sommes sur le point de changer ça.
 
-In Ember, _[route files](../../../routing/defining-your-routes/)_ are the place to do that. We haven't needed them yet, because all our routes are essentially just rendering static pages up until this point, but we are about to change that.
-
-Let's start by creating a route file for the index route. We will create a new file at `app/routes/index.js` with the following content:
+Commençons par créer un ficher de route pour la route d'index. Créons-le au chemin `app/routes/index.js` avec le contenu suivant&nbsp;:
 
 ```js { data-filename="app/routes/index.js" }
 import Route from '@ember/routing/route';
@@ -30,48 +28,48 @@ import Route from '@ember/routing/route';
 export default class IndexRoute extends Route {
   async model() {
     return {
-      title: 'Grand Old Mansion',
+      title: 'Le Manoir Ancien',
       owner: 'Veruca Salt',
       city: 'San Francisco',
-      location: {
+      Adresse : {
         lat: 37.7749,
         lng: -122.4194,
       },
-      category: 'Estate',
-      type: 'Standalone',
+      category: 'Domaine',
+      type: 'Indépendant',
       bedrooms: 15,
       image: 'https://upload.wikimedia.org/wikipedia/commons/c/cb/Crane_estate_(5).jpg',
-      description: 'This grand old mansion sits on over 100 acres of rolling hills and dense redwood forests.',
+      description: 'Ce manoir ancien et spatieux se trouve sur un domaine de plus de 100 acres de collines et de forêts de séquoias denses.',
     };
   }
 }
 ```
 
-There's a lot happening here that we haven't seen before, so let's walk through this. First, we're importing the _[`Route` class](https://api.emberjs.com/ember/release/classes/Route)_ into the file. This class is used as a starting point for adding functionality to a route, such as loading data.
+Ça fait beaucoup de nouvelles choses d'un seul coup, alors voyons ça. D'abord, nous importons la [classe Route](https://api.emberjs.com/ember/release/classes/Route) dans le fichier. Cette classe est utilisée comme point de départ pour ajouter des fonctionnalités à une route, comme charger des données.
 
-Then, we are extending the `Route` class into our _own_ `IndexRoute`, which we also _[`export`](https://javascript.info/import-export#export-default)_ so that the rest of the application can use it.
+Ensuite, nous étendons la classe `Route` à notre propre `IndexRoute`, que nous [exportons](https://javascript.info/import-export#export-default) également afin que le reste de l'application puisse l'utiliser.
 
-## Returning Local Data from the Model Hook
+## Retourner des données locales à partir du _model hook_
 
-So far, so good. But what's happening inside of this route class? We implemented an _[async](https://developer.mozilla.org/docs/Learn/JavaScript/Asynchronous/Concepts)_ method called `model()`. This method is also known as the _model hook_.
+Jusque-là, tout va bien. Mais que se passe-t-il dans cette classe de route&nbsp;? Nous avons implémenté une méthode _[async](https://developer.mozilla.org/docs/Learn/JavaScript/Asynchronous/Concepts)_ appelée `model()`. Cette méthode est aussi appelée le _model hook_ (_hook_ signifie littéralement "un crochet" mais se traduit mal dans un contexte technique. On peut voir le _hook_ comme une fonction mise à disposition et exécutée en interne par le framework, et dont on définit le contenu, on y "accroche" du code).
 
-The model hook is responsible for fetching and preparing any data that you need for your route. Ember will automatically call this hook when entering a route, so that you can have an opportunity to run your own code to get the data you need. The object returned from this hook is known as the _[model](../../../routing/specifying-a-routes-model/)_ for the route (surprise!).
+Le _model hook_ est responsable de la récupération et de la préparation de toutes les données dont la route a besoin. Ember va appeler ce _hooK_ automatiquement en entrant dans une route, afin que vous ayez l'opportunité d'exécuter votre propre code pour obtenir les données qu'il vous faut. L'objet retourné par le _hook_ est appelé le [_model_ (modèle)](../../../routing/specifying-a-routes-model/) de la route (sans blague&nbsp;!)
 
-Usually, this is where we'd fetch data from a server. Since fetching data is usually an asynchronous operation, the model hook is marked as `async`. This gives us the option of using the `await` keyword to wait for the data fetching operations to finish.
+Habituellement, c'est là qu'on récupère les données d'un serveur. Puisque la récupération des données est une opération asynchrone, le _model hook_ est marqué `async`. Ceci nous donne la possibilité d'utiliser le mot-clé `await` pour attendre la fin de l'opération.
 
-We'll get to that bit later on. At the moment, we are just returning the same hard-coding model data, extracted from the `<Rental>` component, but in a _[JavaScript object](https://developer.mozilla.org/docs/Learn/JavaScript/Objects/Basics)_ format.
+Nous y viendrons un peu plus tard. Pour le moment, nous retournons simplement le même modèle de données codé en dur, extrait du composant `<Rental>`, mais au format d'un [objet JavaScript](https://developer.mozilla.org/docs/Learn/JavaScript/Objects/Basics)
 
-## Accessing Route Models from Templates
+## Accéder aux modèles des routes depuis les _templates_
 
-So, now that we've prepared some model data for our route, let's use it in our template. In route templates, we can access the model for the route as `@model`. In our case, that would contain the POJO returned from our model hook.
+Maintenant que nous avons préparé un modèle de données pour notre route, utilisons-le dans notre _template_. Dans les _templates_ de route, nous pouvons accéder au modèle de la route en tant que `@model`. Dans notre cas, il contiendra le [POJO](https://fr.wikipedia.org/wiki/Plain_old_Java_object) retourné par notre _model hook_.
 
-To test that this is working, let's modify our template and try to render the `title` property from our model:
+Pour tester ça, modifions notre _template_ et essayons d'afficher la propriété `title` du modèle&nbsp;:
 
 ```handlebars { data-filename="app/templates/index.hbs" data-diff="+7,+8" }
 <Jumbo>
-  <h2>Welcome to Super Rentals!</h2>
-  <p>We hope you find exactly what you're looking for in a place to stay.</p>
-  <LinkTo @route="about" class="button">About Us</LinkTo>
+  <h2>Bienvenue sur "Super Rentals" !</h2>
+  <p>Nous espérons que vous trouverez l'endroit parfait où séjourner.</p>
+  <LinkTo @route="about" class="button">À propos de nous</LinkTo>
 </Jumbo>
 
 <h1>{{@model.title}}</h1>
@@ -85,23 +83,23 @@ To test that this is working, let's modify our template and try to render the `t
 </div>
 ```
 
-If we look at our page in the browser, we should see our model data reflected as a new header.
+En regardant la page dans le navigateur, nous devrions voir la donnée `title` de notre modèle reflétée par un nouveau titre.
 
-<img src="/images/tutorial/part-1/working-with-data/model-header@2x.png" alt="New header using the @model data" width="1024" height="512">
+<img src="/images/tutorial/part-1/working-with-data/model-header@2x.png" alt="Nouveau titre utilisant une des données de @model" width="1024" height="512" />
 
-Awesome!
+Super&nbsp;!
 
-Okay, now that we know that we have a model to use at our disposal, let's remove some of the hard-coding that we did earlier! Instead of explicitly hard-coding the rental information into our `<Rental>` component, we can pass the model object to our component instead.
+Ok, maintenant que nous sommes certains d'avoir un modèle à notre disposition, supprimons le code en dur écrit plus tôt&nbsp;! Plutôt que de coder explicitement en dur les informations sur la location dans le composant `<Rental>`, passons-lui l'objet modèle.
 
-Let's try it out.
+Essayons.
 
-First, let's pass in our model to our `<Rental>` component as the `@rental` argument. We will also remove the extraneous `<h1>` tag we added earlier, now that we know things are working:
+D'abord, passons le modèle au composant `<Rental>` sous la forme de l'argument `@rental`. Nous supprimerons aussi la balise `<h1>` ajoutée pour le test, maintenant que nous savons que ça fonctionne&nbsp;:
 
 ```handlebars { data-filename="app/templates/index.hbs" data-diff="-7,-8,-11,-12,-13,+14,+15,+16" }
 <Jumbo>
-  <h2>Welcome to Super Rentals!</h2>
-  <p>We hope you find exactly what you're looking for in a place to stay.</p>
-  <LinkTo @route="about" class="button">About Us</LinkTo>
+  <h2>Bienvenue sur "Super Rentals" !</h2>
+  <p>Nous espérons que vous trouverez l'endroit parfait où séjourner.</p>
+  <LinkTo @route="about" class="button">À propos de nous</LinkTo>
 </Jumbo>
 
 <h1>{{@model.title}}</h1>
@@ -118,34 +116,34 @@ First, let's pass in our model to our `<Rental>` component as the `@rental` argu
 </div>
 ```
 
-By passing in `@model` into the `<Rental>` component as the `@rental` argument, we will have access to our "Grand Old Mansion" model object in the `<Rental>` component's template! Now, we can replace our hard-coded values in this component by using the values that live on our `@rental` model.
+En passant `@model` au composant `<Rental>` sous la forme de l'argument `@rental`, nous aurons accès à l'objet modèle "Le Manoir Ancien" dans le _template_ de `<Rental>`&nbsp;! À présent, nous pouvons remplacer nos valeurs en dur par les valeurs à l'intérieur de notre modèle `@rental`.
 
 ```handlebars { data-filename="app/components/rental.hbs" data-diff="-3,-4,+5,+6,-9,+10,-12,+13,-16,+17,-20,+21,-24,+25,-29,-30,+31,+32,-36,+37" }
 <article class="rental">
   <Rental::Image
     src="https://upload.wikimedia.org/wikipedia/commons/c/cb/Crane_estate_(5).jpg"
-    alt="A picture of Grand Old Mansion"
+    alt="A picture of Le Manoir Ancien"
     src={{@rental.image}}
     alt="A picture of {{@rental.title}}"
   />
   <div class="details">
-    <h3>Grand Old Mansion</h3>
+    <h3>Le Manoir Ancien</h3>
     <h3>{{@rental.title}}</h3>
     <div class="detail owner">
-      <span>Owner:</span> Veruca Salt
-      <span>Owner:</span> {{@rental.owner}}
+      <span>Propriétaire :</span> Veruca Salt
+      <span>Propriétaire :</span> {{@rental.owner}}
     </div>
     <div class="detail type">
       <span>Type:</span> Standalone
       <span>Type:</span> {{@rental.type}}
     </div>
     <div class="detail location">
-      <span>Location:</span> San Francisco
-      <span>Location:</span> {{@rental.city}}
+      <span>Adresse :</span> San Francisco
+      <span>Adresse :</span> {{@rental.city}}
     </div>
     <div class="detail bedrooms">
-      <span>Number of bedrooms:</span> 15
-      <span>Number of bedrooms:</span> {{@rental.bedrooms}}
+      <span>Nombre de chambres :</span> 15
+      <span>Nombre de chambres :</span> {{@rental.bedrooms}}
     </div>
   </div>
   <Map
@@ -156,21 +154,21 @@ By passing in `@model` into the `<Rental>` component as the `@rental` argument, 
     @zoom="9"
     @width="150"
     @height="150"
-    alt="A map of Grand Old Mansion"
+    alt="A map of Le Manoir Ancien"
     alt="A map of {{@rental.title}}"
   />
 </article>
 ```
 
-Since the model object contains exactly the same data as the previously-hard-coded "Grand Old Mansion", the page should look exactly the same as before the change.
+Puisque l'objet modèle contient exactement les mêmes données que celles, précédemment codées en dur, de "Le Manoir Ancien", la page devrait rester exactement telle qu'elle était avant les changements.
 
-<img src="/images/tutorial/part-1/working-with-data/using-model-data@2x.png" alt="New header using the @model data" width="1024" height="512">
+<img src="/images/tutorial/part-1/working-with-data/using-model-data@2x.png" alt="Nouvelle entête utilisant les données de @model" width="1024" height="512" />
 
-Now, we have one last thing to do: update the tests to reflect this change.
+Il ne nous reste plus qu'une chose à faire&nbsp;: mettre à jour les tests pour refléter les changements.
 
-Because component tests are meant to render and test a single component in isolation from the rest of the app, they do not perform any routing, which means we won't have access to the same data returned from the `model` hook.
+Parce que les tests des composants sont supposés afficher et tester un seul composant en isolation du reste de l'app, ils ne peuvent pas effectuer de navigation, ce qui signifie qu'ils n'ont pas accès aux données du _model hook_.
 
-Therefore, in our `<Rental>` component's test, we will have to feed the data into it some other way. We can do this using the `setProperties` we learned about from the [previous chapter](../reusable-components/).
+Ainsi, dans le test de notre composant `<Rental>`, nous devons créer les données d'une autre manière. Nous pouvons le faire en utilisant la méthode `setProperties` apprise dans le [chapitre précédent](../reusable-components/).
 
 ```js { data-filename="tests/integration/components/rental-test.js" data-diff="-10,+11,+12,+13,+14,+15,+16,+17,+18,+19,+20,+21,+22,+23,+24,+25,+26,+27,+28,+29,+30" }
 import { module, test } from 'qunit';
@@ -185,29 +183,29 @@ module('Integration | Component | rental', function (hooks) {
     await render(hbs`<Rental />`);
     this.setProperties({
       rental: {
-        title: 'Grand Old Mansion',
+        title: 'Le Manoir Ancien',
         owner: 'Veruca Salt',
         city: 'San Francisco',
-        location: {
+        Adresse : {
           lat: 37.7749,
           lng: -122.4194,
         },
-        category: 'Estate',
-        type: 'Standalone',
+        category: 'Domaine',
+        type: 'Propriété indépendante',
         bedrooms: 15,
         image:
           'https://upload.wikimedia.org/wikipedia/commons/c/cb/Crane_estate_(5).jpg',
         description:
-          'This grand old mansion sits on over 100 acres of rolling hills and dense redwood forests.',
+          'Ce manoir ancien et spatieux se trouve sur un domaine de plus de 100 acres de collines et de forêts de séquoias denses.',
       },
     });
 
     await render(hbs`<Rental @rental={{this.rental}} />`);
 
     assert.dom('article').hasClass('rental');
-    assert.dom('article h3').hasText('Grand Old Mansion');
+    assert.dom('article h3').hasText('Le Manoir Ancien');
     assert.dom('article .detail.owner').includesText('Veruca Salt');
-    assert.dom('article .detail.type').includesText('Standalone');
+    assert.dom('article .detail.type').includesText('Propriété indépendante');
     assert.dom('article .detail.location').includesText('San Francisco');
     assert.dom('article .detail.bedrooms').includesText('15');
     assert.dom('article .image').exists();
@@ -216,19 +214,19 @@ module('Integration | Component | rental', function (hooks) {
 });
 ```
 
-Notice that we also need to update the invocation of the `<Rental>` component in the `render` function call to also have a `@rental` argument passed into it. If we run our tests now, they should all pass!
+Notez que nous devons aussi mettre à jour l'invocation du composant `<Rental>` dans l'appel à la fonction `render`, pour lui passer l'argument `@rental` ici aussi. Si nous relançons nos tests, ils devraient tous passer&nbsp;!
 
-<img src="/images/tutorial/part-1/working-with-data/pass@2x.png" alt="All our tests are passing" width="1024" height="768">
+<img src="/images/tutorial/part-1/working-with-data/pass@2x.png" alt="Tous nos tests passent" width="1024" height="768" />
 
-## Mocking Server Data with Static JSON Files
+## _Mocker_ les données du serveur avec des fichiers JSON statiques
 
-Now that we have things in place, let's do the fun part of removing _all_ our hard-coded values from the model hook and actually fetch some data from the server!
+Maintenant que nous avons préparé le terrain, attaquons la partie amusante en supprimant _toutes_ les valeurs en dur du _model hook_ et récupérons des données provenant du serveur&nbsp;!
 
-In a production app, the data that we'd fetch would most likely come from a remote API server. To avoid setting up an API server just for this tutorial, we will put some JSON data into the `public` folder instead. That way, we can still request this JSON data with regular HTTP requests—just like we would with a real API server —but without having to write any server logic.
+Dans une app en production, les données que nous récupérons proviendraient probablement d'un serveur d'API distant. Pour éviter de configurer un serveur d'API juste pour ce tutoriel, nous placerons des données JSON dans le dossier `public`. De cette manière, nous pouvons toujours demander ces données JSON avec des requêtes HTTP classiques (mais sans avoir à écrire de la logique serveur).
 
-But where will the data come from? You can <a href="/downloads/data.zip" download="data.zip">download this data file</a>, where we have prepared some JSON data and bundled it into a `.zip` file format. Extract its content into the `public` folder.
+Mais d'où proviendrons ces données&nbsp;? Vous pouvez  <a href="/downloads/data.zip" download="data.zip">télécharger ce fichier de données</a>, dans lequel nous avons préparé quelques données JSON et les avons groupées dans un fichier au format `.zip`. Extrayez ce contenu dans votre dossier `public`.
 
-When you are done, your `public` folder should now have the following content:
+Quand vous aurez fini, votre dossier `public` devrait avoir le contenu suivant&nbsp;:
 
 ```plain
 public
@@ -246,15 +244,15 @@ public
 4 directories, 6 files
 ```
 
-You can verify that everything is working correctly by navigating to `http://localhost:4200/api/rentals.json`.
+Vous pouvez vérifier que tout fonctionne correctement en navigant sur `http://localhost:4200/api/rentals.json`.
 
-<img src="/images/tutorial/part-1/working-with-data/data@2x.png" alt="Our server serving up our rental properties as JSON data" width="1024" height="512">
+<img src="/images/tutorial/part-1/working-with-data/data@2x.png" alt="Notre serveur servant les propriétés à louer en tant que données JSON" width="1024" height="512" />
 
-Awesome! Our "server" is now up and running, serving up our rental properties as JSON data.
+Super&nbsp;! Notre "serveur" est maintenant prêt et en marche, il sert nos propriétés à louer en tant que données JSON.
 
-## Fetching Remote Data from the Model Hook
+## Récupérer les données distantes à partir du _model hook_
 
-Now, let's turn our attention to our model hook again. We need to change it so that we actually fetch the data from the server.
+Maintenant, tournons de nouveau notre attention vers le _model hook_. Nous devons le modifier afin qu'il récupère effectivement les données du serveur.
 
 ```js { data-filename="app/routes/index.js" data-diff="-5,-6,-7,-8,-9,-10,-11,-12,-13,-14,-15,-16,-17,-18,+19,+20,+21" }
 import Route from '@ember/routing/route';
@@ -262,18 +260,18 @@ import Route from '@ember/routing/route';
 export default class IndexRoute extends Route {
   async model() {
     return {
-      title: 'Grand Old Mansion',
+      title: 'Le Manoir Ancien',
       owner: 'Veruca Salt',
       city: 'San Francisco',
-      location: {
+      Adresse : {
         lat: 37.7749,
         lng: -122.4194,
       },
-      category: 'Estate',
-      type: 'Standalone',
+      category: 'Domaine',
+      type: 'Propriété indépendante',
       bedrooms: 15,
       image: 'https://upload.wikimedia.org/wikipedia/commons/c/cb/Crane_estate_(5).jpg',
-      description: 'This grand old mansion sits on over 100 acres of rolling hills and dense redwood forests.',
+      description: 'Ce manoir ancien et spatieux se trouve sur un domaine de plus de 100 acres de collines et de forêts de séquoias denses.',
     };
     let response = await fetch('/api/rentals.json');
     let parsed = await response.json();
@@ -282,17 +280,15 @@ export default class IndexRoute extends Route {
 }
 ```
 
-What's happening here?
+Que se passe-t-il ici&nbsp;? D'abord, nous utilisons l'[API Fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) du navigateur pour demander nos données JSON situées à l'adresse `public/api/rentals.json`, la même URL que nous avons visité plus tôt.
 
-First off, we're using the browser's _[Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)_ to request that JSON data from our server's API at `public/api/rentals.json`, the same URL we visited earlier.
+Comme mentionné ci-dessus, récupérer les données provenant du serveur est généralement une opération asynchrone. L'API Fetch prend ça en compte, c'est pourquoi `fetch` est une fonction `async`, tout comme notre _model hook_. Pour exploiter la réponse, nous devons la pairer avec le mot-clé `await`.
 
-As mentioned above, fetching data from the server is usually an asynchronous operation. The Fetch API takes this into account, which is why `fetch` is an `async` function, just like our model hook. To consume its response, we will have to pair it with the `await` keyword.
+L'API Fetch retourne un [objet réponse](https://developer.mozilla.org/docs/Web/API/Response) de façon asynchrone. Une fois que nous avons cet objet, nous pouvons convertir la réponse du serveur au format dont nous avons besoin&nbsp;; dans notre cas, nous savons que le serveur envoie les données au format JSON, donc nous pouvons utiliser la méthode `json()` pour ["parser"](https://developer.mozilla.org/docs/Web/API/Body/json) les données de réponses en conséquence. Parser les données de réponse est aussi une opération asynchrone, donc nous employons le mot-clé `await` ici aussi.
 
-The Fetch API returns a _[response object](https://developer.mozilla.org/docs/Web/API/Response)_ asynchronously. Once we have this object, we can convert the server's response into whatever format we need; in our case, we knew the server sent the data using the JSON format, so we can use the `json()` method to _[parse](https://developer.mozilla.org/docs/Web/API/Body/json)_ the response data accordingly. Parsing the response data is _also_ an asynchronous operation, so we'll just use the `await` keyword here, too.
+## Adapter les données du serveur
 
-## Adapting Server Data
-
-Before we go any further, let's pause for a second to look at the server's data again.
+Avant d'aller plus loin, prenons une seconde pour regarder à nouveau les données du serveur.
 
 ```json { data-filename="public/api/rentals.json" }
 {
@@ -301,17 +297,17 @@ Before we go any further, let's pause for a second to look at the server's data 
       "type": "rentals",
       "id": "grand-old-mansion",
       "attributes": {
-        "title": "Grand Old Mansion",
+        "title": "Le Manoir Ancien",
         "owner": "Veruca Salt",
         "city": "San Francisco",
         "location": {
           "lat": 37.7749,
           "lng": -122.4194
         },
-        "category": "Estate",
+        "category": "Domaine",
         "bedrooms": 15,
         "image": "https://upload.wikimedia.org/wikipedia/commons/c/cb/Crane_estate_(5).jpg",
-        "description": "This grand old mansion sits on over 100 acres of rolling hills and dense redwood forests."
+        "description": "Ce manoir ancien et spatieux se trouve sur un domaine de plus de 100 acres de collines et de forêts de séquoias denses."
       }
     },
     {
@@ -325,10 +321,10 @@ Before we go any further, let's pause for a second to look at the server's data 
           "lat": 47.6062,
           "lng": -122.3321
         },
-        "category": "Condo",
+        "category": "Copropriété",
         "bedrooms": 1,
         "image": "https://upload.wikimedia.org/wikipedia/commons/2/20/Seattle_-_Barnes_and_Bell_Buildings.jpg",
-        "description": "A commuters dream. This rental is within walking distance of 2 bus stops and the Metro."
+        "description": "Un rêve pour les banlieusards. Cette location est à distance de marche de 2 arrêts de bus et du métro."
       }
     },
     {
@@ -342,32 +338,32 @@ Before we go any further, let's pause for a second to look at the server's data 
           "lat": 45.5175,
           "lng": -122.6801
         },
-        "category": "Apartment",
+        "category": "Appartement",
         "bedrooms": 3,
         "image": "https://upload.wikimedia.org/wikipedia/commons/f/f7/Wheeldon_Apartment_Building_-_Portland_Oregon.jpg",
-        "description": "Convenience is at your doorstep with this charming downtown rental. Great restaurants and active night life are within a few feet."
+        "description": "La commodité est à votre porte avec cette charmante location du centre-ville. D'excellents restaurants et une vie nocturne active se trouvent à quelques mètres."
       }
     }
   ]
 }
 ```
 
-This data follows the _[JSON:API](https://jsonapi.org/)_ format, which is _slightly_ different than the hard-coded data that we were returning from the model hook before.
+Ces données suivent le format [JSON:API](https://jsonapi.org/), qui est "légèrement" différent des données en dur que nous retournions du _model hook_ auparavant.
 
-First off, the JSON:API format returns an array nested under the `"data"` key, rather than just the data for a single rental property. If we think about this, though, it makes sense; we now want to show a whole list of rental properties that are coming from our server, not just one, so an array of rental property objects is just what we need.
+Tout d'abord, le format JSON:API retourne un tableau imbriqué sous la clé `"data"`, plutôt qu'un objet pour une seule propriété à louer. Quand on y pense, ça fait sens&nbsp;; à ce stade nous voulons afficher une liste entière de locations provenant du serveur, et non plus une seule, donc un tableau d'objets représentant les propriétés à louer est exactement ce qu'il nous faut.
 
-The rental property objects contained in the array also have a slightly different structure. Every data object has a `type` and `id`, which we don't intend to use in our template (yet!). For now, the only data we really need is nested within the `attributes` key.
+Les objets représentant les locations, contenus dans le tableau, ont également une structure légèrement différente. Chaque objet de données possède un `type` et un `id`, que nous n'avons pas (encore&nbsp;!) l'intention d'utiliser dans notre _template_. Pour l'instant, les seules données dont nous avons vraiment besoin sont celles imbriquées dans la clé `attributes`.
 
-There's one more key difference here, which perhaps only those with very sharp eyes will be able to catch: the data coming from the server is missing the `type` property, which previously existed on our hard-coded model object. The `type` property could either be `"Standalone"` or `"Community"`, depending on the type of rental property, which is required by our `<Rental>` component.
+Il y a une autre différence clé ici, et il faut avoir le regard aiguisé pour la détecter&nbsp;: les données provenant du serveur n'ont pas la propriété `type` qui existait dans notre objet modèle codé en dur. La propriété `type` pouvait être `"Propriété indépendante"` ou `"Dans une copropriété"` en fonction du type de location, et elle est requise par notre composant `<Rental>`.
 
-In [Part 2](../../part-2/) of this tutorial, we will learn about a more convenient way to consume data in the JSON:API format. For now, we can just fix up the data and deal with these differences in formats ourselves.
+Dans la [Partie 2](../../part-2/) de ce tutoriel, nous apprendrons un moyen plus pratique d'exploiter les données au format JSON:API. Pour l'instant, fixons simplement les données en gérant nous-mêmes les différences dans entre les formats.
 
-We can handle it all in our model hook:
+Nous pouvons gérer ça dans le _model hook_&nbsp;:
 
 ```js { data-filename="app/routes/index.js" data-diff="+3,+4,-8,-9,+10,+11,+12,+13,+14,+15,+16,+17,+18,+19,+20,+21,+22,+23" }
 import Route from '@ember/routing/route';
 
-const COMMUNITY_CATEGORIES = ['Condo', 'Townhouse', 'Apartment'];
+const COMMUNITY_CATEGORIES = ['Copropriété', 'Maison de ville', 'Appartement'];
 
 export default class IndexRoute extends Route {
   async model() {
@@ -381,9 +377,9 @@ export default class IndexRoute extends Route {
       let type;
 
       if (COMMUNITY_CATEGORIES.includes(attributes.category)) {
-        type = 'Community';
+        type = 'Dans une copropriété';
       } else {
-        type = 'Standalone';
+        type = 'Propriété indépendante';
       }
 
       return { type, ...attributes };
@@ -392,21 +388,21 @@ export default class IndexRoute extends Route {
 }
 ```
 
-After parsing the JSON data, we extracted the nested `attributes` object, added back the missing `type` attribute manually, then returned it from the model hook. That way, the rest of our app will have no idea that this difference ever existed.
+Après avoir parser les données JSON, nous extrayons l'objet `attributes`, nous y rajoutons l'attribut `type` manquant manuellement, puis nous le retournons du _model hook_. De cette manière, le reste de l'app n'y verra que du feu.
 
-Awesome! Now we're in business.
+Super&nbsp;! Maintenant, passons à la suite.
 
-## Loops and Local Variables in Templates with `{{#each}}`
+## Créer des boucles et des variables locales dans les _templates_ avec `{{#each}}`
 
-The last change we'll need to make is to our `index.hbs` route template, where we invoke our `<Rental>` components. Previously, we were passing in `@rental` as `@model` to our components. However, `@model` is no longer a single object, but rather, an array! So, we'll need to change this template to account for that.
+Le dernier changement à faire se situe dans le _template_ de route `index.hbs`, où nous invoquons les composants `<Rental>`. Précédemment, nous passions `@model` à nos composants via `@rental`. Sauf que `@model` n'est plus un objet simple, mais un tableau&nbsp;! Ainsi, il faut changer le _template_ pour prendre ça en compte.
 
-Let's see how.
+Voyons comment&nbsp;:
 
 ```handlebars { data-filename="app/templates/index.hbs" data-diff="-9,-10,-11,+12,+13,+14" }
 <Jumbo>
-  <h2>Welcome to Super Rentals!</h2>
-  <p>We hope you find exactly what you're looking for in a place to stay.</p>
-  <LinkTo @route="about" class="button">About Us</LinkTo>
+  <h2>Bienvenue sur "Super Rentals" !</h2>
+  <p>Nous espérons que vous trouverez l'endroit parfait où séjourner.</p>
+  <LinkTo @route="about" class="button">À propos de nous</LinkTo>
 </Jumbo>
 
 <div class="rentals">
@@ -421,16 +417,16 @@ Let's see how.
 </div>
 ```
 
-We can use the `{{#each}}...{{/each}}` syntax to iterate and loop through the array returned by the model hook. For each iteration through the array—for each item in the array—we will render the block that is passed to it once. In our case, the block is our `<Rental>` component, surrounded by `<li>` tags.
+Nous utilisons la syntaxe `{{#each}}...{{/each}}` pour itérer et boucler sur le tableau retourné par le _model hook_. Pour chaque itération sur le tableau (c'est-à-dire pour chaque élément à l'intérieur du tableau), nous affichons le bloc qui lui est passé une seule fois. Dans notre cas, le bloc est notre composant `<Rental>`, entouré de balises `<li>`.
 
-Inside of the block we have access to the item of the _current_ iteration with the `{{rental}}` variable. But why `rental`? Well, because we named it that! This variable comes from the `as |rental|` declaration of the `each` loop. We could have just as easily called it something else, like `as |property|`, in which case we would have to access the current item through the `{{property}}` variable.
+À l'intérieur du bloc, nous avons accès à l'élément de l'itération "courante" via la variable `{{rental}}`. Pourquoi&nbsp;`rental`? Eh bien, parce que c'est le nom que nous avons choisi de lui donner&nbsp;! Cette variable vient de la déclaration `as |rental|` de la boucle `each`. Nous aurions très bien pu l'appeler autrement, comme `as |property|`, auquel cas nous aurions accédé à l'élément courant via la variable `{{property}}`.
 
-Now, let's go over to our browser and see what our index route looks like with this change.
+Maintenant, regardons notre navigateur et voyons à quoi ressemble notre route d'index avec ce changement.
 
-<img src="/images/tutorial/part-1/working-with-data/three-properties@2x.png" alt="Three different rental properties" width="1024" height="1129">
+<img src="/images/tutorial/part-1/working-with-data/three-properties@2x.png" alt="Trois propriétés à louer différentes" width="1024" height="1129" />
 
-Hooray! Finally we're seeing different rental properties in our list. And we got to play with `fetch` and write a loop. Pretty productive, if you ask me.
+Hourra&nbsp;! Nous voyons enfin différentes propriétés à louer dans notre liste. Et nous avons joué avec `fetch` et écrit une boucle. Plutôt productif, si vous voulez mon avis.
 
-Better yet, all of our tests are still passing too!
+Et encore mieux, nos tests passent toujours&nbsp;!
 
-<img src="/images/tutorial/part-1/working-with-data/pass-2@2x.png" alt="All our tests are passing" width="1024" height="768">
+<img src="/images/tutorial/part-1/working-with-data/pass-2@2x.png" alt="Tous nos tests passent" width="1024" height="768" />

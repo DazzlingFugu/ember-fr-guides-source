@@ -1,28 +1,26 @@
-<!-- Heads up! This is a generated file, do not edit directly. You can find the source at https://github.com/ember-learn/super-rentals-tutorial/blob/master/src/markdown/tutorial/part-1/07-reusable-components.md -->
+La dernière fonctionnalité manquante au composant `<Rental>` est la carte pour montrer l'adresse de la location, c'est ce sur quoi nous allons travailler maintenant&nbsp;:
 
-The last missing feature for the `<Rental>` component is a map to show the location of the rental, which is what we're going to work on next:
+<img src="/images/tutorial/part-1/reusable-components/three-old-mansions@2x.png" alt="L'app Super Rentals à la fin du chapitre" width="1024" height="1129" />
 
-<img src="/images/tutorial/part-1/reusable-components/three-old-mansions@2x.png" alt="The Super Rentals app by the end of the chapter" width="1024" height="1129">
+En ajoutant la carte, vous apprendrez à&nbsp;:
 
-While adding the map, you will learn about:
+- Gérer les configurations à l'échelle de l'app
+- Paramétrer des composants avec des arguments
+- Accéder aux arguments d'un composant
+- Interpoler des valeurs dans les _templates_
+- Surcharger des attributs HTML avec `...attributes`
+- Refactorer avec des _getters_ et l'_auto-track_
+- Récupérer des valeurs JavaScript dans le contexte d'un test
 
-- Managing application-level configurations
-- Parameterizing components with arguments
-- Accessing component arguments
-- Interpolating values in templates
-- Overriding HTML attributes in `...attributes`
-- Refactoring with getters and auto-track
-- Getting JavaScript values into the test context
+## Gérer les configurations à l'échelle de l'app
 
-## Managing Application-level Configurations
+Nous utiliserons l'API de [Mapbox](https://www.mapbox.com) pour générer nos locations. Vous pouvez [vous inscrire](https://www.mapbox.com/signup/) gratuitement sans entrer de données bancaires.
 
-We will use the [Mapbox](https://www.mapbox.com) API to generate maps for our rental properties. You can [sign up](https://www.mapbox.com/signup/) for free and without a credit card.
+Mapbox fournit une [API d'images de carte statiques](https://docs.mapbox.com/api/maps/#static-images), qui sert des images représentant une carte au format PNG. Ça signifie qu'on peut générer l'URL appropriée pour les paramètres de notre choix et afficher la carte à l'aide d'une balise `<img>` standard. Voilà qui est pratique&nbsp;!
 
-Mapbox provides a [static map images API](https://docs.mapbox.com/api/maps/#static-images), which serves map images in PNG format. This means that we can generate the appropriate URL for the parameters we want and render the map using a standard `<img>` tag. Pretty neat!
+Si vous êtes curieux, vous pouvez explorer les options disponibles sur Mapbox en utilisant [le bac à sable interactif](https://docs.mapbox.com/help/interactive-tools/static-api-playground/).
 
-If you're curious, you can explore the options available on Mapbox by using the [interactive playground](https://docs.mapbox.com/help/interactive-tools/static-api-playground/).
-
-Once you have signed up for the service, grab your _[default public token](https://account.mapbox.com/access-tokens/)_ and paste it into `config/environment.js`:
+Une fois votre inscription sur le service effectuée, récupérez votre [_token_ public par défaut](https://account.mapbox.com/access-tokens/) et collez-le dans `config/environment.js`&nbsp;:
 
 ```js { data-filename="config/environment.js" data-diff="+47,+48" }
 'use strict';
@@ -77,25 +75,25 @@ module.exports = function (environment) {
 };
 ```
 
-As its name implies, `config/environment.js` is used to _configure_ our app and store API keys like these. These values can be accessed from other parts of our app, and they can have different values depending on the current environment (which might be development, test, or production).
+Comme son nom l'indique, `config/environment.js` est utilisé pour "configurer" notre app et stocker les clés d'API comme celle-ci. On peut ensuite accéder à ces valeurs depuis d'autres parties de l'app, et elles peuvent être différentes selon l'environnement courant (`development`, `test` ou `production`).
 
 <div class="cta">
   <div class="cta-note">
     <div class="cta-note-body">
-      <div class="cta-note-heading">Zoey says...</div>
+      <div class="cta-note-heading">Zoey dit...</div>
       <div class="cta-note-message">
-        <p>If you prefer, you can <a href="https://account.mapbox.com/access-tokens/">create different Mapbox access tokens</a> for use in different environments. At a minimum, the tokens will each need to have the "styles:tiles" scope in order to use Mapbox's static images API.</p>
+        <p>Si vous préférez, vous pouvez <a href="https://account.mapbox.com/access-tokens/">créer différents <em>token</em> d'accès à Mapbox</a> pour les différents environnements. Au minimum, chaque <em>token</em> devra avoir le scope "styles:tiles" afin d'utiliser l'API des images statiques.</p>
       </div>
     </div>
     <img src="/images/mascots/zoey.png" role="presentation" alt="">
   </div>
 </div>
 
-After saving the changes to our configuration file, we will need to restart our development server to pick up these file changes. Unlike the files we have edited so far, `config/environment.js` is not automatically reloaded.
+Après avoir sauvegardé les changements apportés à notre fichier de configuration, nous devons redémarrer le serveur de développement pour qu'ils soient appliqués. Au contraire des fichiers que nous avons édités jusqu'ici, `config/environment.js` n'est pas rechargé automatiquement.
 
 <!-- TODO: https://github.com/ember-cli/ember-cli/issues/8782 -->
 
-You can stop the server by finding the terminal window where `ember server` is running, then type `Ctrl + C`. That is, typing the "C" key on your keyboard _while_ holding down the "Ctrl" key at the same time. Once it has stopped, you can start it back up again with the same `ember server` command.
+Vous pouvez arrêter le serveur en retrouvant la fenêtre de terminal où `ember server` est en cours d'exécution et en y tapant `Ctrl + C`, c'est-à-dire en tapant la touche `C` de votre clavier pendant que vous maintenez la touche `Ctrl` enfoncée. Une fois le serveur arrêté, démarrez-le à nouveau avec la même commande `ember server`.
 
 ```shell
 $ ember server
@@ -104,9 +102,9 @@ building...
 Build successful (13286ms) – Serving on http://localhost:4200/
 ```
 
-## Generating a Component with a Component Class
+## Générer un composant avec une classe de composant
 
-With the Mapbox API key in place, let's generate a new component for our map.
+Avec la clé d'API de Mapbox en place, générons un nouveau composant pour notre carte.
 
 ```shell
 $ ember generate component map --with-component-class
@@ -117,25 +115,25 @@ installing component-test
   create tests/integration/components/map-test.js
 ```
 
-Since not every component will necessarily have some defined behavior associated with it, the component generator does not generate a JavaScript file for us by default. As we saw earlier, we can always use the `component-class` generator to add a JavaScript file for a component later on.
+Puisque tous les composants n'ont pas nécessairement de comportement associé, le générateur de composant ne génère pas de fichier JavaScript par défaut. Comme nous l'avons vu précédemment, nous pouvons toujours utiliser le générateur `component-class` pour générer le fichier JavaScript plus tard.
 
-However, in the case of our `<Map>` component, we are pretty sure that we are going to need a JavaScript file for some behavior that we have yet to define! To save a step later, we can pass the `--with-component-class` flag to the component generator so that we have everything we need from the get-go.
+Cela dit, dans le cas du composant `<Map>`, nous sommes sûrs et certains d'avoir besoin d'un fichier JavaScript pour le comportement que nous avons à définir&nbsp;! Pour gagner du temps, nous passons l'option `--with-component-class` au générateur de composant pour générer tous ce dont nous avons besoin dès le départ.
 
 <div class="cta">
   <div class="cta-note">
     <div class="cta-note-body">
-      <div class="cta-note-heading">Zoey says...</div>
+      <div class="cta-note-heading">Zoey dit...</div>
       <div class="cta-note-message">
-        <p>Too much typing? Use <code>ember g component map -gc</code> instead. The <code>-gc</code> flag stands for <strong>G</strong>limmer <strong>c</strong>omponent, but you may also remember it as <strong>g</strong>enerate <strong>c</strong>lass.</p>
+        <p>Trop de caractère à taper&nbsp;? Utilisez <code>ember g component map -gc</code> à la place. L'option <code>-gc</code> signifie <em><strong>G</strong>limmer <strong>c</strong>omponent</em>, mais vous pouvez aussi la retenir en tant que <em><strong>g</strong>enerate <strong>c</strong>lass.</em></p>
       </div>
     </div>
     <img src="/images/mascots/zoey.png" role="presentation" alt="">
   </div>
 </div>
 
-## Parameterizing Components with Arguments
+## Paramétrer des composants avec des arguments
 
-Let's start with our JavaScript file:
+Commençons par notre fichier JavaScript&nbsp;:
 
 ```js { data-filename="app/components/map.js" data-diff="+2,-4,+5,+6,+7,+8,+9" }
 import Component from '@glimmer/component';
@@ -149,17 +147,17 @@ export default class MapComponent extends Component {
 }
 ```
 
-Here, we import the access token from the config file and return it from a `token` _[getter](https://javascript.info/property-accessors)_. This allows us to access our token as `this.token` both inside the `MapComponent` class body, as well as the component's template. It is also important to [URL-encode](https://javascript.info/url#encoding-strings) the token, just in case it contains any special characters that are not URL-safe.
+Ici, nous importons le _token_ d'accès du fichier de configuration et nous le retournons à l'aide d'un  _[getter](https://javascript.info/property-accessors)_ (accesseur) `token`. Celui-ci nous permet "d'accéder" à notre _token_ avec `this.token` non seulement dans le corps de la classe `MapComponent`, mais aussi dans le _template_ du composant. Il est aussi important [d'encoder l'URL](https://javascript.info/url#encoding-strings) du _token_, au cas où elle contiendrait des caractères spéciaux non sécurisés pour les URL.
 
-## Interpolating Values in Templates
+## Interpoler des valeurs dans les _templates_
 
-Now, let's move from the JavaScript file to the template:
+Maintenant, passons du fichier JavaScript au _template_&nbsp;:
 
 ```handlebars { data-filename="app/components/map.hbs" data-diff="-1,+2,+3,+4,+5,+6,+7,+8,+9" }
 {{yield}}
 <div class="map">
   <img
-    alt="Map image at coordinates {{@lat}},{{@lng}}"
+    alt="Image de la carte aux coordonnées {{@lat}},{{@lng}}"
     ...attributes
     src="https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/{{@lng}},{{@lat}},{{@zoom}}/{{@width}}x{{@height}}@2x?access_token={{this.token}}"
     width={{@width}} height={{@height}}
@@ -167,29 +165,29 @@ Now, let's move from the JavaScript file to the template:
 </div>
 ```
 
-First, we have a container element for styling purposes.
+D'abord, nous avons un élément conteneur pour des questions de style.
 
-Then we have an `<img>` tag to request and render the static map image from Mapbox.
+Ensuite, nous avons une balise `<img>` pour demander à Mapbox et afficher l'image de carte statique.
 
-Our template contains several values that don't yet exist—`@lat`, `@lng`, `@zoom`, `@width`, and `@height`. These are _[arguments](../../../components/component-arguments-and-html-attributes/#toc_arguments)_ to the `<Map>` component that we will supply when invoking it.
+Notre _template_ contient plusieurs valeurs qui n'existent pas encore&nbsp;: `@lat`, `@lng`, `@zoom`, `@width` (largeur) et `@height` (hauteur). Ce sont des [arguments](../../../components/component-arguments-and-html-attributes/#toc_arguments) à passer au composant `<Map>` que nous fournirons quand nous l'invoquerons.
 
-By _parameterizing_ our component using arguments, we made a reusable component that can be invoked from different parts of the app and customized to meet the needs for those specific contexts. We have already seen this in action when using the `<LinkTo>` component [earlier](../building-pages/); we had to specify a `@route` argument so that it knew what page to navigate to.
+En "paramètrant" notre composant à l'aide d'arguments, nous en faisons un composant réutilisable qui peut être invoqué depuis différentes partie de l'app et personnalisé en fonctions des besoins spécifiques du contexte. Nous avons déjà vu ce principe en action quand nous avons utilisé le composant `<LinkTo>` [plus tôt](../building-pages/)&nbsp;; nous avions spécifié un argument `@route` pour que le `<LinkTo>` sache sur quelle page naviguer.
 
-We supplied a reasonable default value for the `alt` attribute based on the values of the `@lat` and `@lng` arguments. You may notice that we are directly _interpolating_ values into the `alt` attribute's value. Ember will automatically concatenate these interpolated values into a final string value for us, including doing any necessary HTML-escaping.
+Nous avons fourni une valeur par défaut raisonnable à l'attribut `alt`, qui se base sur les arguments `@lat` et `@lng`. Vous noterez que nous "interpolons" directement les valeurs dans celle de l'attribut `alt`. Ember va concaténer automatiquement ces valeurs interpolées dans une chaîne de caractère finale, incluant l'échappement du HTML si nécessaire.
 
-## Overriding HTML Attributes in `...attributes`
+## Surcharger des attributs HTML avec `...attributes`
 
-Next, we used `...attributes` to allow the invoker to further customize the `<img>` tag, such as passing extra attributes such as `class`, as well as _overriding_ our default `alt` attribute with a more specific or human-friendly one.
+Ensuite, nous utilisons `...attributes` pour permettre à l'invocateur de personnaliser la balise `<img>`, en lui passant des attributs supplémentaires comme `class`, ou encore en surchargeant le `alt` par défaut avec un autre plus spécifique et intelligible.
 
-_The ordering is important here!_ Ember applies the attributes in the order that they appear. By assigning the default `alt` attribute first (_before_ `...attributes` is applied), we are explicitly providing the invoker the _option_ to provide a more tailored `alt` attribute according to their use case.
+**Ici, l'ordre est important&nbsp;** Ember applique les attributs dans l'ordre dans lequel ils apparaissent. En assignant l'attribut `alt` par défaut en premier (c'est-à-dire avant que `...attributes` ne soit appliqué), nous donnons consciemment à l'invocateur la possibilité de fournir un `alt` plus adapté à son cas d'usage.
 
-Since the passed-in `alt` attribute (if any exists) will appear _after_ ours, it will override the value we specified. On the other hand, it is important that we assign `src`, `width`, and `height` after `...attributes`, so that they don't get accidentally overwritten by the invoker.
+Puisque l'attribut `alt` passé (s'il existe) apparaîtra après celui par défaut, il surchargera sa valeur. D'un autre côté, il est important d'assigner `src`, `width` et `height` après `...attributes`, de manière à ce qu'ils ne soient pas surchargés accidentellement par l'invocateur.
 
-The `src` attribute interpolates all the required parameters into the URL format for Mapbox's [static map image API](https://docs.mapbox.com/api/maps/#static-images), including the URL-escaped access token from `this.token`.
+L'attribut `src` interpole tous les paramètres requis dans une URL formatée pour l'[API d'images de carte statiques](https://docs.mapbox.com/api/maps/#static-images) de Mapbox, y compris le _token_ d'accès `this.token` échappé pour les URL.
 
-Finally, since we are using the `@2x` "retina" image, we should specify the `width` and `height` attributes. Otherwise, the `<img>` will be rendered at twice the size than what we expected!
+Enfin, puisque nous utilisons l'image `@2x` "retina", nous devrions spécifier les attributs `width` et `height`. Sans ça, la balise `<img>` sera affichée en deux fois plus grand que prévu&nbsp;!
 
-We just added a lot of behavior into a single component, so let's write some tests! In particular, we should make sure to have some _[test coverage](../../../testing/)_ for the overriding-HTML-attributes behavior we discussed above.
+Nous venons d'ajouter beaucoup de comportements à un seul composant, alors écrivons quelques tests&nbsp;! En particulier, nous devrions nous assurer d'avoir une [couverture de test](../../../testing/) pour les attributs qui peuvent surcharger le HTML, ce dont nous avons discuté ci-dessus.
 
 ```js { data-filename="tests/integration/components/map-test.js" data-diff="-3,+4,+6,-11,-12,-13,+14,+15,+16,+17,+18,+19,+20,+21,-23,+24,+25,+26,+27,+28,+29,+30,-32,+33,+34,-36,-37,-38,-39,-40,-41,+42,+43,+44,+45,-47,+48,+49,+50,+51,+52,+53,+54,+55,+56,+57,+58,+59,+60,+61,+62,+63,+64,+65,+66,+67,+68,+69,+70,+71,+72,+73,+74,+75,+76,+77,+78,+79,+80,+81,+82,+83,+84,+85,+86,+87,+88,+89,+90,+91,+92,+93" }
 import { module, test } from 'qunit';
@@ -218,7 +216,7 @@ module('Integration | Component | map', function (hooks) {
     assert
       .dom('.map img')
       .exists()
-      .hasAttribute('alt', 'Map image at coordinates 37.7797,-122.4184')
+      .hasAttribute('alt', 'Image de la carte aux coordonnées 37.7797,-122.4184')
       .hasAttribute('src')
       .hasAttribute('width', '150')
       .hasAttribute('height', '120');
@@ -289,33 +287,33 @@ module('Integration | Component | map', function (hooks) {
 });
 ```
 
-Note that the `hasAttribute` test helper from [`qunit-dom`](https://github.com/simplabs/qunit-dom/blob/master/API.md) supports using _[regular expressions](https://javascript.info/regexp-introduction)_. We used this feature to confirm that the `src` attribute starts with `https://api.mapbox.com/`, as opposed to requiring it to be an exact match against a string. This allows us to be reasonably confident that the code is working correctly, without being overly-detailed in our tests.
+Notez que le _test helper_ `hasAttribute` de [`qunit-dom`](https://github.com/simplabs/qunit-dom/blob/master/API.md) supporte les [expressions régulières](https://javascript.info/regexp-introduction). Nous en avons utilisé une pour vérifié que l'attribut `src` commence par `https://api.mapbox.com/` plutôt que de chercher une correspondance exacte avec une chaîne de caractère. Avec cette approche nous permet d'être raisonnablement confiant quant au fonctionnement du code, sans surcharger les tests de détails.
 
-_Fingers crossed..._ Let's run our tests.
+_Croisons les doigts..._ Lançons nos tests.
 
-<img src="/images/tutorial/part-1/reusable-components/pass@2x.png" alt="Tests passing with the new &lt;Map&gt; tests" width="1024" height="768">
+<img src="/images/tutorial/part-1/reusable-components/pass@2x.png" alt="Les tests passent avec le nouveau test de &lt;Map&gt;" width="1024" height="768" />
 
-Hey, all the tests passed! But does that mean it actually works in practice? Let's find out by invoking the `<Map>` component from the `<Rental>` component's template:
+Hé, tous les tests sont passés&nbsp;! Est-ce que ça signifie pour autant que tout fonctionne en pratique&nbsp;? Vérifions en invoquant le composant `<Map>` depuis le _template_ du composant `<Rental>`&nbsp;:
 
 ```handlebars { data-filename="app/components/rental.hbs" data-diff="+21,+22,+23,+24,+25,+26,+27,+28" }
 <article class="rental">
   <Rental::Image
     src="https://upload.wikimedia.org/wikipedia/commons/c/cb/Crane_estate_(5).jpg"
-    alt="A picture of Grand Old Mansion"
+    alt="A picture of Le Manoir Ancien"
   />
   <div class="details">
-    <h3>Grand Old Mansion</h3>
+    <h3>Le Manoir Ancien</h3>
     <div class="detail owner">
-      <span>Owner:</span> Veruca Salt
+      <span>Propriétaire :</span> Veruca Salt
     </div>
     <div class="detail type">
       <span>Type:</span> Standalone
     </div>
     <div class="detail location">
-      <span>Location:</span> San Francisco
+      <span>Adresse :</span> San Francisco
     </div>
     <div class="detail bedrooms">
-      <span>Number of bedrooms:</span> 15
+      <span>Nombre de chambres :</span> 15
     </div>
   </div>
   <Map
@@ -324,30 +322,30 @@ Hey, all the tests passed! But does that mean it actually works in practice? Let
     @zoom="9"
     @width="150"
     @height="150"
-    alt="A map of Grand Old Mansion"
+    alt="A map of Le Manoir Ancien"
   />
 </article>
 ```
 
-Hey! That's a map!
+Hé&nbsp;! C'est une carte&nbsp;!
 
-<img src="/images/tutorial/part-1/reusable-components/three-old-mansions@2x.png" alt="Three Grand Old Mansions" width="1024" height="1129">
+<img src="/images/tutorial/part-1/reusable-components/three-old-mansions@2x.png" alt="Trois Le Manoir Anciens" width="1024" height="1129" />
 
 <!-- TODO: https://github.com/ember-cli/ember-cli/issues/8782 -->
 
 <div class="cta">
   <div class="cta-note">
     <div class="cta-note-body">
-      <div class="cta-note-heading">Zoey says...</div>
+      <div class="cta-note-heading">Zoey dit...</div>
       <div class="cta-note-message">
-        <p>If the map image failed to load, make sure you have the correct <code>MAPBOX_ACCESS_TOKEN</code> set in <code>config/environment.js</code>. Don't forget to restart the development and test servers after editing your config file!</p>
+        <p>Si l'image de la carte ne charge pas, assurez-vous que vous avez le bon <code>MAPBOX_ACCESS_TOKEN</code> dans <code>config/environment.js</code>. N'oubliez pas de redémarrer les serveurs de développement et de test après avoir édité votre fichier de config &nbsp;!</p>
       </div>
     </div>
     <img src="/images/mascots/zoey.png" role="presentation" alt="">
   </div>
 </div>
 
-For good measure, we will also add an assertion to the `<Rental>` tests to make sure we rendered the `<Map>` component successfully.
+Pour faire bonne mesure, ajoutons aussi une assertion dans les tests de `<Rental>` pour nous assurer que le composant `<Map>` s'affiche correctement.
 
 ```js { data-filename="tests/integration/components/rental-test.js" data-diff="+19" }
 import { module, test } from 'qunit';
@@ -362,9 +360,9 @@ module('Integration | Component | rental', function (hooks) {
     await render(hbs`<Rental />`);
 
     assert.dom('article').hasClass('rental');
-    assert.dom('article h3').hasText('Grand Old Mansion');
+    assert.dom('article h3').hasText('Le Manoir Ancien');
     assert.dom('article .detail.owner').includesText('Veruca Salt');
-    assert.dom('article .detail.type').includesText('Standalone');
+    assert.dom('article .detail.type').includesText('Propriété indépendante');
     assert.dom('article .detail.location').includesText('San Francisco');
     assert.dom('article .detail.bedrooms').includesText('15');
     assert.dom('article .image').exists();
@@ -373,18 +371,18 @@ module('Integration | Component | rental', function (hooks) {
 });
 ```
 
-## Refactoring with Getters and Auto-track
+## Refactorer avec des _getters_ et l'_auto-track_
 
-At this point, a big part of our `<Map>` template is devoted to the `<img>` tag's `src` attribute, which is getting pretty long. One alternative is to move this computation into the JavaScript class instead.
+Jusqu'ici, la majeure partie de notre _template_ `<Map>` est dévolue à l'attribut `src` de la balise `<img>`, qui est plutôt long. Une alternative serait de le calculer dans la classe JavaScript.
 
-From within our JavaScript class, we have access to our component's arguments using the `this.args.*` API. Using that, we can move the URL logic from the template into a new getter.
+Depuis le corps de la classe JavaScript, nous avons accès aux arguments du composant vis l'API `this.args.*`. En utilisant ça, nous pouvons bouger la logique derrière l'URL du _template_ à un nouveau _getter_.
 
 <div class="cta">
   <div class="cta-note">
     <div class="cta-note-body">
-      <div class="cta-note-heading">Zoey says...</div>
+      <div class="cta-note-heading">Zoey dit...</div>
       <div class="cta-note-message">
-        <p><code>this.args</code> is an API provided by the Glimmer component superclass. You may come across other component superclasses, such as "classic" components in legacy codebases, that provide different APIs for accessing component arguments from JavaScript code.</p>
+        <p><code>this.args</code> est une API fournie par la super-classe <em>Glimmer component</em>. Vous pourriez croiser d'autres super-classes de composants, comme les composants "classic", dans les bases de codes plus anciennes. Celles-ci fournissent différentes API pour accéder aux arguments des composants depuis le code JavaScript.</p>
       </div>
     </div>
     <img src="/images/mascots/zoey.png" role="presentation" alt="">
@@ -417,7 +415,7 @@ export default class MapComponent extends Component {
 ```handlebars { data-filename="app/components/map.hbs" data-diff="-5,+6" }
 <div class="map">
   <img
-    alt="Map image at coordinates {{@lat}},{{@lng}}"
+    alt="Image de la carte aux coordonnées {{@lat}},{{@lng}}"
     ...attributes
     src="https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/{{@lng}},{{@lat}},{{@zoom}}/{{@width}}x{{@height}}@2x?access_token={{this.token}}"
     src={{this.src}}
@@ -426,19 +424,19 @@ export default class MapComponent extends Component {
 </div>
 ```
 
-Much nicer! And all of our tests still pass!
+Voilà qui est mieux&nbsp;! Et nos tests passent toujours&nbsp;!
 
-<img src="/images/tutorial/part-1/reusable-components/pass-2@2x.png" alt="Tests passing after the src getter refactor" width="1024" height="768">
+<img src="/images/tutorial/part-1/reusable-components/pass-2@2x.png" alt="Les tests passent après la refactorisation du getter src" width="1024" height="768" />
 
-Note that we did not mark our getter as `@tracked`. Unlike instance variables, getters cannot be "assigned" a new value directly, so it does not make sense for Ember to monitor them for changes.
+Notez que nous avons marqué notre _getter_ comme étant `@tracked` (suivi, tracé). Au contraire des variables d'instance, on ne peut pas "assigner" de nouvelle valeur aux _getters_ directement, donc ça ne fait pas sens pour Ember de les monitorer pour détecter des changements. 
 
-That being said, the values _produced_ by getters can certainly change. In our case, the value produced by our `src` getter depends on the values of `lat`, `lng`, `width`, `height` and `zoom` from `this.args`. Whenever these _dependencies_ get updated, we would expect `{{this.src}}` from our template to be updated accordingly.
+Ceci dit, les valeurs "produites" par les _getters_, elles, peuvent changer. Dans notre cas, la valeur produite par le _getter_ `src` dépend des valeurs de `lat`, `lng`, `width`, `height` et `zoom` de `this.args`. Chaque fois que des "dépendances" sont mises à jour, on s'attend à ce que `{{this.src}}`, dans notre _template_, soit mis à jour aussi.
 
-Ember does this by automatically tracking any variables that were accessed while computing a getter's value. As long as the dependencies themselves are marked as `@tracked`, Ember knows exactly when to invalidate and re-render any templates that may potentially contain any "stale" and outdated getter values. This feature is also known as _[auto-track](../../../in-depth-topics/autotracking-in-depth/)_. All arguments that can be accessed from `this.args` (in other words, `this.args.*`) are implicitly marked as `@tracked` by the Glimmer component superclass. Since we inherited from that superclass, everything Just Works™.
+Ember fait ça automatiquement en "suivant" toute variable à laquelle il a accédé pendant le calcul d'une valeur de _getter_. Tant que les dépendances en elles-mêmes sont marquées comme `@tracked`, Ember sait exactement quand invalider et ré-afficher les _templates_ qui peuvent contenir potentiellement des valeurs de _getter_ obsolètes ("_stale_"). Cette fonctionnalité est aussi appelées _[auto-track](../../../in-depth-topics/autotracking-in-depth/)_. Tous les arguments auxquels on peut accéder depuis `this.args.*` sont implicitement marqués comme `@tracked` par la super-classe _Glimmer component_. Puisque notre composant hérite de cette super-classe, tout fonctionne "comme par magie".
 
-## Getting JavaScript Values into the Test Context
+## Récupérer des valeurs JavaScript dans le contexte d'un test
 
-Just to be sure, we can add a test for this behavior:
+Juste pour être sûrs, nous pouvons tester ce comportement&nbsp;:
 
 ```js { data-filename="tests/integration/components/map-test.js" data-diff="+51,+52,+53,+54,+55,+56,+57,+58,+59,+60,+61,+62,+63,+64,+65,+66,+67,+68,+69,+70,+71,+72,+73,+74,+75,+76,+77,+78,+79,+80,+81,+82,+83,+84,+85,+86,+87,+88,+89,+90,+91,+92,+93,+94,+95,+96,+97,+98,+99,+100,+101,+102,+103,+104,+105,+106,+107,+108,+109,+110,+111" }
 import { module, test } from 'qunit';
@@ -462,7 +460,7 @@ module('Integration | Component | map', function (hooks) {
     assert
       .dom('.map img')
       .exists()
-      .hasAttribute('alt', 'Map image at coordinates 37.7797,-122.4184')
+      .hasAttribute('alt', 'Image de la carte aux coordonnées 37.7797,-122.4184')
       .hasAttribute('src')
       .hasAttribute('width', '150')
       .hasAttribute('height', '120');
@@ -586,12 +584,12 @@ module('Integration | Component | map', function (hooks) {
 });
 ```
 
-Using the special `this.setProperties` testing API, we can pass arbitrary values into our component.
+En utilisant l'API de test `this.setProperties`, nous pouvons passer des valeurs arbitraires à notre composant.
 
-Note that the value of `this` here does _not_ refer to the component instance. We are not directly accessing or modifying the component's internal states (that would be extremely rude!).
+Notez qu'ici, la valeur de `this` ne réfère **pas** l'instance du composant. Nous ne lisons pas directement ni ne modifions les états internes (voilà qui serait très impoli&nbsp;!)
 
-Instead, `this` refers to a special _test context_ object, which we have access to inside the `render` helper. This provides a "bridge" for us to pass dynamic values, in the form of arguments, into our invocation of the component. This allows us to update these values as needed from the test function.
+En fait, `this` réfère un objet particulier, le _test context_ (contexte du test), qui a accès au contenu du _helper_ `render`. Il agit comme un "pont" qui nous permet de passer des valeurs dynamiques, sous forme d'arguments, dans l'invocation de notre composant. Ça nous permet de mettre à jour ces valeurs depuis la fonction de test selon nos besoins.
 
-With all our tests passing, we are ready to move on!
+Avec tous nos tests qui passent, nous sommes prêts pour la suite&nbsp;!
 
-<img src="/images/tutorial/part-1/reusable-components/pass-3@2x.png" alt="All our tests are passing" width="1024" height="768">
+<img src="/images/tutorial/part-1/reusable-components/pass-3@2x.png" alt="Tous nos tests passent" width="1024" height="768" />
