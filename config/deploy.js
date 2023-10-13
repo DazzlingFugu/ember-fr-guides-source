@@ -16,11 +16,10 @@ module.exports = function(deployTarget) {
       indexName: credentials.algoliaIndex || process.env.ALGOLIA_INDEX,
       applicationId: credentials.algoliaApplication || process.env.ALGOLIA_APPLICATION,
       apiKey: credentials.algoliaKey || process.env.ALGOLIA_KEY,
-      tagsToExclude: '.old-version-warning,.edit-page,code,pre',
+      tagsToExclude: '.edit-page,code,pre,img,div.cta,div.filename',
       cssSelector: 'section',
-      versionsToIgnore: ['1.x', '2.x'],
       versionPattern: /^(v\d+\.\d+\.\d+)\//,
-      pathPattern: /^v\d+\.\d+\.\d+\/(.*)\/index.html$/,
+      pathPattern: /^release\/(.*)\/index.html$/,
     }
   };
 
