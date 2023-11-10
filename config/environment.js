@@ -41,6 +41,12 @@ module.exports = function (environment) {
         discordLink: 'https://discord.com/channels/480462759797063690/486235962700201984'
       },
       sourceRepo: 'https://github.com/DazzlingFugu/ember-fr-guides-source',
+      texts: {
+        searchInputPlaceholder: 'Rechercher dans le Guide',
+        searchResultsPlaceholder: 'Résultats de la recherche',
+        currentChapter: 'Nous avons couvert',
+        nextChapter: 'Chapitre suivant',
+      },
     },
 
     algolia: {
