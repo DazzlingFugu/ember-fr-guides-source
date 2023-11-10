@@ -1,0 +1,2952 @@
+diff --git b/guides/addons-and-dependencies/index.md a/guides/addons-and-dependencies/index.md
+index 92a485b87..f47c65b1f 100644
+--- b/guides/addons-and-dependencies/index.md
++++ a/guides/addons-and-dependencies/index.md
+@@ -15,7 +15,7 @@ is an addon that allows you to use SASS/SCSS in your applications. You can insta
+ ember install ember-cli-sass
+ ```
+ 
+-This will modify your `package.json` (and `package-lock.json` or `yarn.lock`), typically bringing in other dependencies. Some addons will also add
++This will modify your `package.json` (and `package-lock.json` or `yarn.lock` or `pnpm-lock.yaml`), typically bringing in other dependencies. Some addons will also add
+ additional files to your projects when relevant.
+ 
+ There are many addons that cover all kinds of use cases. For more detail, as well as examples of what addons can do,
+diff --git b/guides/code-editors/index.md a/guides/code-editors/index.md
+index 33f8ac56a..d2a038baf 100644
+--- b/guides/code-editors/index.md
++++ a/guides/code-editors/index.md
+@@ -7,12 +7,13 @@ many of which are created and maintained by the developer community:
+ Visual Studio Code is a code editor optimized for building and debugging modern web applications.
+ Visual Studio Code is one of the most popular text editors among Ember developers.
+ 
+-### Syntax Highlighting
++### Extension Pack
++
++Install the extension pack to get everything you need to work on Ember.js projects.
+ 
+-Only one of these is needed.
++[Ember.js Extension Pack](https://marketplace.visualstudio.com/items?itemName=EmberTooling.emberjs) - It will install the following addons
+ 
+-[VSCode Glimmer](https://marketplace.visualstudio.com/items?itemName=chiragpat.vscode-glimmer) -
+-Provides embedded template highlighting support.
++### Syntax Highlighting
+ 
+ [Glimmer Templates Syntax](https://marketplace.visualstudio.com/items?itemName=lifeart.vscode-glimmer-syntax) -
+ Syntax formatting for glimmer templates.
+@@ -22,10 +23,9 @@ Syntax formatting for glimmer templates.
+ [Stable Ember Language Server](https://marketplace.visualstudio.com/items?itemName=lifeart.vscode-ember-unstable) -
+ Stable Ember Language Server is a stable, full-featured language server. Its name comes from its history as a fork of Ember Language Server and the efforts to keep up with changes in Ember.
+ 
+-### Snippets / Workflow
++### Workflow
+ 
+-[Ember JS (ES6) and Handlebars code snippets](https://marketplace.visualstudio.com/items?itemName=phanitejakomaravolu.EmberES6Snippets) -
+-Enables Ember.js and Handlebars snippets to let you to type less and code more.
++[ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) - Integrates ESLint into VS Code.
+ 
+ [EditorConfig for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig) -
+ Attempts to override user/workspace settings with settings found in `.editorconfig` files.
+@@ -35,9 +35,21 @@ and maintain consistent coding styles between different editors and IDEs.
+ [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) -
+ Prettier is an opinionated code formatting tool. It enforces a consistent style by parsing your code and re-printing it with its own rules that take the maximum line length into account, wrapping code when necessary. Prettier supports Handlebars, Ember and Glimmer out of the box.
+ 
+-### Glimmer templates
++### Typed Glimmer Templates
++
++<div class="cta">
++  <div class="cta-note">
++    <div class="cta-note-body">
++      <div class="cta-note-heading">Zoey says...</div>
++      <div class="cta-note-message">
++        This is not installed as part of the extension pack but should be considered for Ember projects built with TypeScript. Learn more about <a href="https://typed-ember.gitbook.io/glint/">Glint here</a>.
++      </div>
++    </div>
++    <img src="/images/mascots/zoey.png" role="presentation" alt="">
++  </div>
++</div>
+ 
+-[Glint](https://marketplace.visualstudio.com/items?itemName=typed-ember.glint-vscode) is a set of tools to aid in developing code that uses the Glimmer VM for rendering, such as Ember.js v3.24+ and GlimmerX projects. 
++[Glint](https://marketplace.visualstudio.com/items?itemName=typed-ember.glint-vscode) is a set of tools to aid in developing code that uses the Glimmer VM for rendering, such as Ember.js v3.24+ and GlimmerX projects.
+ 
+ ## Vim and Neovim
+ 
+@@ -63,10 +75,10 @@ or
+ [vim-ember-hbs](https://github.com/joukevandermaas/vim-ember-hbs) -
+ Add Ember template syntax highlighting and indentation to Vim.
+ To get embedded highlighting will involve these additional plugins:
++
+ - [vim-javascript](https://github.com/pangloss/vim-javascript)
+ - [vim-js-pretty-template](https://github.com/Quramy/vim-js-pretty-template)
+ 
+-
+ ### Language Server
+ 
+ Only one of these solutions should be used at a time.
+@@ -78,21 +90,18 @@ Example mason+LSP config [can be found here](https://github.com/NullVoxPopuli/do
+ or
+ 
+ [Conquer for Completion (COC) for Neovim](https://github.com/neoclide/coc.nvim) -
+-An Intellisense engine which takes control over all linting, hinting, and language-server integration.
++An IntelliSense engine which takes control over all linting, hinting, and language-server integration.
+ With the ember plugin [coc-ember](https://github.com/NullVoxPopuli/coc-ember) -
+ Ember.js language server extension including useful configuration instructions.
+ 
+ ### Snippets / Workflow
+ 
+-
+ [ember.vim](https://github.com/dsawardekar/ember.vim) -
+ Shortcuts to navigate related files with Ember.js projects.
+ 
+-
+ [Ember Tools](https://github.com/AndrewRadev/ember_tools.vim) -
+ Various tools for working with Ember.js projects.
+ 
+-
+ ## Atom
+ 
+ Atom is hackable text editor for the 21st Century.
+diff --git b/guides/components/template-lifecycle-dom-and-modifiers.md a/guides/components/template-lifecycle-dom-and-modifiers.md
+index b8fb711cf..13fa0e8c5 100644
+--- b/guides/components/template-lifecycle-dom-and-modifiers.md
++++ a/guides/components/template-lifecycle-dom-and-modifiers.md
+@@ -293,10 +293,17 @@ The modifier that we're going to build will allow us to say:
+ 
+ Pretty nice, right?
+ 
+-To accomplish that, we'll create a modifier in `app/modifiers/autofocus.js`. First, install [`ember-modifier`](https://github.com/ember-modifier/ember-modifier) and then generate an `autofocus` modifier for your app:
++New Ember apps ship with a dependency on
++[ember-modifier](https://github.com/ember-modifier/ember-modifier), which
++provides a friendly API for writing your own element modifiers. This library is
++in turn based on a low level API named _modifier managers_. Managers are a
++framework-development level feature, and not something most developers need to
++interact with. You'll see in the following examples that the modifier API is
++imported from the `ember-modifier` package.
++
++First generate the `autofocus` modifier for your application:
+ 
+ ```bash
+-ember install ember-modifier
+ ember generate modifier autofocus
+ ```
+ 
+@@ -308,9 +315,10 @@ import { modifier } from "ember-modifier";
+ export default modifier(element => element.focus());
+ ```
+ 
+-And that's it!
++And that's it! Now we can use our custom `{{autofocus}}` modifier throughout our application.
+ 
+-Now we can use our custom `{{autofocus}}` modifier throughout our application.
++Read more about the `ember-modifier` APIs at [ember-modifiers:
++Usage](https://github.com/ember-modifier/ember-modifier#usage).
+ 
+ ## Communicating Between Elements in a Component
+ 
+@@ -390,7 +398,6 @@ export default class AudioPlayerComponent extends Component {
+ That's it for the component: we're translating the user's interactions into _state_. Now we need to build a modifier to translate the state into the appropriate DOM method calls!
+ 
+ ```bash
+-ember install ember-modifier
+ ember generate modifier play-when
+ ```
+ 
+@@ -448,12 +455,11 @@ document.addEventListener("click", event => {
+ 
+ The most important difference between this example and the cases we've seen so far is that we need to remove the `click` event handler from the document when this element is destroyed.
+ 
+-To accomplish this, we can use [`ember-modifier`](https://github.com/ember-modifier/ember-modifier) to create a `on-click-outside` modifier that sets up the event listener after the element is first inserted and removes the event listener when the element is removed. 
++To accomplish this, we can use [`ember-modifier`](https://github.com/ember-modifier/ember-modifier) (which is already installed in newly generated Ember apps) to create a `on-click-outside` modifier that sets up the event listener after the element is first inserted and removes the event listener when the element is removed. 
+ 
+-Run the following commands to install the addon and generate a new modifier:
++Generate the new modifier:
+ 
+ ```bash
+-ember install ember-modifier
+ ember generate modifier on-click-outside
+ ```
+ 
+diff --git b/guides/pages.yml a/guides/pages.yml
+index e60257a73..b3904879c 100644
+--- b/guides/pages.yml
++++ a/guides/pages.yml
+@@ -249,6 +249,50 @@
+   pages:
+     - title: "Managing Dependencies"
+       url: "index"
++- title: "Using TypeScript"
++  url: "typescript"
++  pages:
++    - title: "Using TypeScript with Ember"
++      url: "index"
++    - title: "TypeScript: Getting Started"
++      url: "getting-started"
++    - title: "TypeScript: Core Concepts"
++      url: "core-concepts"
++      pages:
++        - title: "TypeScript and Ember"
++          url: "index"
++        - title: "TypeScript: Invokables"
++          url: "invokables"
++        - title: "TypeScript: Routing"
++          url: "routing"
++        - title: "TypeScript: Services"
++          url: "services"
++        - title: "TypeScript and EmberData"
++          url: "ember-data"
++    - title: "TypeScript: Application Development"
++      url: "application-development"
++      pages:
++        - title: "Introduction"
++          url: "index"
++        - title: "TypeScript: Configuration"
++          url: "configuration"
++        - title: "TypeScript: Testing"
++          url: "testing"
++        - title: "TypeScript: Converting an Existing Ember App"
++          url: "converting-an-app"
++        - title: "TypeScript: Addons"
++          url: "addons"
++    - title: "TypeScript: Additional Resources"
++      url: "additional-resources"
++      pages:
++        - title: "Introduction"
++          url: "index"
++        - title: "TypeScript: Gotchas and Troubleshooting"
++          url: "gotchas"
++        - title: "TypeScript: FAQ and Tips"
++          url: "faq"
++        - title: "TypeScript: Working with Ember Classic"
++          url: "legacy"
+ - title: "Developer Tools"
+   url: "toc-heading_developer-tools"
+   is_heading: true
+diff --git b/guides/testing/index.md a/guides/testing/index.md
+index af9460b05..46eb499a6 100644
+--- b/guides/testing/index.md
++++ a/guides/testing/index.md
+@@ -34,7 +34,7 @@ ember t -s
+ 
+ When you are working on a single component or page, you will want only a small subset of tests to run after every file change. To specify which tests to run, you can add `--module` or `--filter` option to your command.
+ 
+-The `--module` option allows you to select a **module**—a group of tests that you specified in `module()` in QUnit, or `describe()` in Mocha.
++The `--module` option allows you to select a **module**—a group of tests that you specified in `module()` in QUnit.
+ 
+ ```bash
+ # Button component example
+@@ -44,7 +44,7 @@ ember test --server --module="Integration | Component | simple-button"
+ ember t -s -m="Unit | Service | location"
+ ```
+ 
+-The `--filter` option is more versatile. You can provide a phrase to match against the modules and test descriptions. A test description is what appears in `test()` in QUnit, or `it()` in Mocha.
++The `--filter` option is more versatile. You can provide a phrase to match against the modules and test descriptions. A test description is what appears in `test()` in QUnit.
+ 
+ ```bash
+ # Button component example
+@@ -57,7 +57,7 @@ ember t -s -f="Dashboard"
+ ember t -s -f="Integration"
+ ```
+ 
+-In QUnit, you can exclude tests by adding an exclamation point to the beginning of the filter, e.g. `ember test --filter="!Acceptance"`. In Mocha, `ember test --filter="Acceptance" --invert`.
++In QUnit, you can exclude tests by adding an exclamation point to the beginning of the filter, e.g. `ember test --filter="!Acceptance"`.
+ 
+ To learn more about options for testing, you can visit [Ember CLI Documentation](https://ember-cli.com/testing) or type `ember help test` in the command line.
+ 
+diff --git b/guides/testing/testing-tools.md a/guides/testing/testing-tools.md
+index 222e82d45..71e50bfa3 100644
+--- b/guides/testing/testing-tools.md
++++ a/guides/testing/testing-tools.md
+@@ -164,6 +164,6 @@ While we don't recommend this practice in general, you might also use Percy in l
+ 
+ ## Summary
+ 
+-Ember provides easy paths to integrate QUnit and Mocha, also it supports a variety of addons and debugging tools to improve your developer experience in testing.
++Ember provides easy paths to integrate QUnit and it also supports a variety of addons and debugging tools to improve your developer experience in testing.
+ 
+ In the next section, we will study 3 types of tests that Ember supports—unit, rendering, and application tests. We will look at each type and when you might use one over another.
+diff --git b/guides/typescript/additional-resources/faq.md a/guides/typescript/additional-resources/faq.md
+new file mode 100644
+index 000000000..561555734
+--- /dev/null
++++ a/guides/typescript/additional-resources/faq.md
+@@ -0,0 +1,89 @@
++## What about missing types?
++
++### Gradually typing your app
++
++See ["Gradual Typing Hacks"][gradual-typing-hacks] for strategies for incrementally adding types to your app.
++
++### Install types for libraries
++
++You'll want to use library type definitions as much as possible. Many packages ship their own type definitions, and many others have community-maintained definitions from [DefinitelyTyped][], available in the `@types` name space. The first thing you should do is to look for types from other libraries: it will mean using fewer ["Gradual Typing Hacks"][gradual-typing-hacks] and getting a lot more help both from your editor and from the compiler.
++
++### The `types` directory
++
++During installation, we create a `types` directory in the root of your application and add a [`"paths"`][tsconfig-paths] mapping to your `tsconfig.json` that includes that directory in any type lookups TypeScript tries to do. This is convenient for a few things:
++
++- global types for your project (see the next section)
++- writing types for libraries that do not have any types
++
++These are all fallbacks, of course, you should use the types supplied directly with a package when possible.
++
++#### Global types for your project
++
++At the root of your application or addon, we include a `types/<your project>` directory with an `index.d.ts` file in it. Anything which is part of your project but which must be declared globally can go in this file. For example, if you have data attached to the `Window` object when the page is loaded (for bootstrapping or whatever other reason), this is a good place to declare it.
++
++We automatically configure `index.d.ts` to be ready for [Glint][], which will make type checking work with Ember's templates. The default configuration only supports Ember's classic pairing of separate `.ts` and `.hbs` files, but Glint also supports the `<template>` format with `.gts` files. See the [corresponding package README][glint-environment-ember-template-imports] for more details. (Once Ember enables `<template>` by default, so will our Glint configuration!)
++
++### Environment configuration typings
++
++Along with the `@types/` files mentioned above, we add a starter interface for `config/environment.js` in `app/config/environment.d.ts`. This interface will likely require some changes to match your app.
++
++We install this file because the actual `config/environment.js` is (a) not actually identical with the types as you inherit them in the content of an application, but rather a superset of what an application has access to, and (b) not in the same location as the path at which you look it up. The actual `config/environment.js` file executes in Node during the build, and Ember CLI writes its result as `<my-app>/config/environment` into your build for consumption at runtime.
++
++## Type Narrowing with Ember Debug Assert
++
++Ember's `assert` function from `@ember/debug` is super useful for ["type narrowing"][type-narrowing]—TypeScript's process of refining types to more specific types than originally declared. If you're not familiar with `assert`, you might want to take a look at its [API docs][debug-assert]! It's a development-and-test-only helper that gets stripped from production builds, and is very helpful for this kind of thing!
++
++For example, let's pretend we're writing an addon that provides a `totalLength` helper to tally up the total length of an array of strings passed to it. Because addon authors cannot guarantee that their users will be using TypeScript, we've typed the positional arguments as an array of `unknown` so that TypeScript will ensure we've handled every possible valid or invalid argument a user might pass.
++
++We can use `assert` to ensure that if a user passes an array containing non-string values, our addon will error in tests and development.
++
++```typescript
++import { assert } from '@ember/debug';
++
++function totalLength(positional: unknown[]) {
++  assert(
++    'all positional args to `total-length` must be strings',
++    positional.every((arg): arg is string => typeof arg === 'string')
++  );
++
++  // TypeScript now knows that `positional` is a `string[]` because we asserted above
++  return positional.reduce((sum, s) => sum + s.length, 0);
++}
++```
++
++And, the types for `assert` ensure that TypeScript can use the condition you pass to properly narrow the types, because `assert` is typed as an [assertion function][assertion-function].
++
++```typescript
++export interface AssertFunc {
++  (desc: string, condition: unknown): asserts condition;
++  (desc: string): never;
++}
++```
++
++## Strictness
++
++You can enable TypeScript's current strictest configuration by including the `@tsconfig/strictest` base _before_ the `@tsconfig/ember` base in your `tsconfig.json`:
++
++```json5 {data-filename="tsconfig.json" data-diff="+3"}
++{
++  extends: [
++    '@tsconfig/strictest/tsconfig.json',
++    '@tsconfig/ember/tsconfig.json',
++  ],
++  // ...
++}
++```
++
++<!-- Internal links -->
++
++[gradual-typing-hacks]: ../../application-development/converting-an-app/#toc_gradual-typing-hacks
++
++<!-- External links -->
++
++[assertion-function]: https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-7.html#assertion-functions
++[debug-assert]: https://api.emberjs.com/ember/release/functions/@ember%2Fdebug/assert
++[DefinitelyTyped]: https://github.com/DefinitelyTyped/DefinitelyTyped
++[glint-environment-ember-template-imports]: https://github.com/typed-ember/glint/tree/main/packages/environment-ember-template-imports#readme
++[glint]: https://typed-ember.gitbook.io/glint
++[tsconfig-paths]: https://www.typescriptlang.org/tsconfig#paths
++[type-narrowing]: https://www.typescriptlang.org/docs/handbook/2/narrowing.html
+diff --git b/guides/typescript/additional-resources/gotchas.md a/guides/typescript/additional-resources/gotchas.md
+new file mode 100644
+index 000000000..bb42f460a
+--- /dev/null
++++ a/guides/typescript/additional-resources/gotchas.md
+@@ -0,0 +1,169 @@
++This section covers the common details and "gotchas" of using TypeScript with Ember.
++
++## Registries
++
++Ember makes heavy use of string-based APIs to allow for a high degree of dynamicness. With some [limitations][get-set], you can nonetheless use TypeScript very effectively to get auto-complete/IntelliSense as well as to accurately type-check your applications by using **registries**.
++
++Here's an example defining a Shopping Cart Service in the Ember Service registry:
++
++```typescript {data-filename="app/services/shopping-cart.ts"}
++export default class ShoppingCartService extends Service {
++  //...
++}
++
++declare module '@ember/service' {
++  interface Registry {
++    'shopping-cart': ShoppingCartService;
++  }
++}
++```
++
++This registry definition allows for type-safe lookups in string-based APIs. For example, [the `Owner.lookup` method][owner-lookup] uses this "registration"—a mapping from the string `'shopping-cart'` to the service type, `ShoppingCartService`—to provide the correct type:
++
++```typescript
++import type Owner from '@ember/owner';
++
++function dynamicLookup(owner: Owner) {
++  let cart = owner.lookup('service:shopping-cart');
++  cart.add('hamster feed');
++}
++```
++
++For examples, see:
++
++- [Service][service] registry
++- [Controller][controller] registry
++- EmberData [Model][model] registry
++- EmberData [Transform][transform] registry
++- EmberData [Serializer][serializers-and-adapters] registry
++- EmberData [Adapter][serializers-and-adapters] registry
++
++## Decorators
++
++Ember makes heavy use of decorators, and TypeScript does not support deriving type information from Ember's legacy decorators.
++
++As a result, whenever using a decorator to declare a class field the framework sets up for you, you should mark it with [`declare`][declare]. That includes all service injections (`@service`), controller injections (`@inject`) as well as all EmberData attributes (`@attr`) and relationships (`@belongsTo` and `@hasMany`).
++
++Normally, `TypeScript` determines whether a property is definitely not `null` or `undefined` by checking what you do in the constructor. In the case of legacy decorators, though, TypeScript does not have visibility into how the decorated properties are initialized. The `declare` annotation informs TypeScript that a declaration is defined somewhere else, outside its scope.
++
++Additionally, _you_ are responsible to write the type correctly. TypeScript does not use legacy decorator information at all in its type information. If you write `@service foo` or even `@service('foo') foo`, _Ember_ knows that this resolves at runtime to the service `Foo`, but TypeScript does not and—for now—_cannot_.
++
++This means that you are responsible to provide this type information, and that you are responsible to make sure that the information remains correct and up-to-date.
++
++For examples, see:
++
++- [`@service`][service]
++- [`@inject`][controller]
++- EmberData [`@attr`][model-attr]
++- EmberData [`@belongsTo`][model-belongsto]
++- EmberData [`@hasMany`][model-hasmany]
++
++## Templates
++
++Templates are currently totally non-type-checked. This means that you lose any safety when moving into a template context, even if using a Glimmer `Component` in Ember Octane. (Looking for type-checking in templates? Try [Glint][]!)
++
++For example, TypeScript won't detect a mismatch between this action and the corresponding call in the template:
++
++```typescript {data-filename="app/components/my-game.ts"}
++import Component from '@ember/component';
++import { action } from '@ember/object';
++
++export default class MyGame extends Component {
++  @action turnWheel(degrees: number) {
++    // ...
++  }
++}
++```
++
++```handlebars {data-filename="app/components/my-game.hbs"}
++<button {{on 'click' (fn this.turnWheel 'potato')}}>
++  Click Me
++</button>
++```
++
++## Hook Types and Autocomplete
++
++Let's imagine a component which just logs the names of its arguments when it is first constructed. First, we must define the [Signature][] and pass it into our component, then we can use the `Args` member in our Signature to set the type of `args` in the constructor:
++
++```typescript {data-filename="app/components/args-display.ts"}
++import Component from '@glimmer/component';
++
++const log = console.log.bind(console);
++
++export interface ArgsDisplaySignature {
++  Args: {
++    arg1: string;
++    arg2: number;
++    arg3: boolean;
++  };
++}
++
++export default class ArgsDisplay extends Component<ArgsDisplaySignature> {
++  constructor(owner: unknown, args: ArgsDisplaySignature['Args']) {
++    super(owner, args);
++    Object.keys(args).forEach(log);
++  }
++}
++```
++
++Notice that we have to start by calling `super` with `owner` and `args`. This may be a bit different from what you're used to in Ember or other frameworks, but is normal for sub-classes in TypeScript today. If the compiler just accepted any `...arguments`, a lot of potentially _very_ unsafe invocations would go through. So, instead of using `...arguments`, we explicitly pass the _specific_ arguments and make sure their types match up with what the super-class expects.
++
++The types for `owner` here and `args` line up with what the `constructor` for Glimmer components expects. The `owner` is specified as `unknown` because this is a detail we explicitly _don't_ need to know about. The `args` are the `Args` from the Signature we defined.
++
++Additionally, the types of the arguments passed to subclassed methods will _not_ autocomplete as you may expect. This is because in JavaScript, a subclass may legally override a superclass method to accept different arguments. Ember's lifecycle hooks, however, are called by the framework itself, and thus the arguments and return type should always match the superclass. Unfortunately, TypeScript does not and _cannot_ know that, so we have to provide the types directly.
++
++Accordingly, we have to provide the types for hooks ourselves:
++
++```typescript {data-filename="app/routes/my.ts"}
++import Route from '@ember/routing/route';
++import Transition from '@ember/routing/transition';
++
++export default class MyRoute extends Route {
++  beforeModel(transition: Transition) {
++    // ...
++  }
++}
++```
++
++## Fixing the EmberData `error TS2344` problem
++
++If you're developing an Ember app or addon and _not_ using EmberData (and accordingly not even have the EmberData types installed), you may see an error like this and be confused:
++
++```text
++node_modules/@types/ember-data/index.d.ts(920,56): error TS2344: Type 'any' does not satisfy the constraint 'never'.
++```
++
++This happens because the types for Ember's _test_ tooling includes the types for EmberData because the `this` value in several of Ember's test types can include a reference to the EmberData `Store` class.
++
++**The fix:** add a declaration like this in a new file named `ember-data.d.ts` in your `types` directory:
++
++```typescript {data-filename="types/ember-data.d.ts"}
++declare module 'ember-data/types/registries/model' {
++  export default interface ModelRegistry {
++    [key: string]: unknown;
++  }
++}
++```
++
++This works because (a) we include things in your types directory automatically and (b) TypeScript will merge this module and interface declaration with the main definitions for EmberData from DefinitelyTyped behind the scenes.
++
++If you're developing an addon and concerned that this might affect consumers, it won't. Your types directory will never be referenced by consumers at all!
++
++<!-- Internal links -->
++
++[controller]: ../../core-concepts/routing/#toc_controller-injections-and-lookups
++[get-set]: ../../additional-resources/legacy/#toc_classic-get-or-set-methods
++[model-attr]: ../../core-concepts/ember-data/#toc_attr
++[model-belongsto]: ../../core-concepts/ember-data/#toc_belongsto
++[model-hasmany]: ../../core-concepts/ember-data/#toc_hasMany
++[model]: ../../core-concepts/ember-data/#toc_models
++[owner-lookup]: https://api.emberjs.com/ember/release/classes/Owner/methods/lookup?anchor=lookup
++[serializers-and-adapters]: ../../core-concepts/ember-data/#toc_serializers-and-adapters
++[service]: ../../core-concepts/services/#toc_using-services
++[signature]: ../../core-concepts/invokables/#toc_signature-basics
++[transform]: ../../core-concepts/ember-data/#toc_transforms
++
++<!-- External links -->
++
++[declare]: https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-7.html#the-usedefineforclassfields-flag-and-the-declare-property-modifier
++[glint]: https://typed-ember.gitbook.io/glint/
+diff --git b/guides/typescript/additional-resources/index.md a/guides/typescript/additional-resources/index.md
+new file mode 100644
+index 000000000..1fa1ece05
+--- /dev/null
++++ a/guides/typescript/additional-resources/index.md
+@@ -0,0 +1,18 @@
++Here are some additional resources that should be useful for using Ember with TypeScript:
++
++- Tips for working with (pre-Octane) [Ember Classic][legacy] and TypeScript together.
++- Common details and ["gotchas"][gotchas] of using TypeScript with Ember.
++- [Troubleshooting][gotchas] common issues when using TypeScript with Ember.
++- [Frequently Asked Questions][faq] users have when using TypeScript with Ember.
++- Miscellaneous [tips][faq] for using TypeScript with Ember.
++- Looking for type-checking in Ember templates? Check out [Glint][].
++
++<!-- Internal links -->
++
++[faq]: ./faq
++[gotchas]: ./gotchas
++[legacy]: ./legacy
++
++<!-- External links -->
++
++[glint]: https://typed-ember.gitbook.io/glint/
+diff --git b/guides/typescript/additional-resources/legacy.md a/guides/typescript/additional-resources/legacy.md
+new file mode 100644
+index 000000000..2517e479d
+--- /dev/null
++++ a/guides/typescript/additional-resources/legacy.md
+@@ -0,0 +1,205 @@
++In the rest of this guide, we emphasize the happy path of working with Ember in the [Octane Edition][octane]. However, there are times you'll need to understand these details:
++
++1. Most existing applications make heavy use of the pre-Octane (“legacy”) Ember programming model, and we support that model—with caveats.
++2. Several parts of Ember Octane (specifically: routes, controllers, services, and class-based helpers) continue to use these concepts under the hood, and our types support that—so understanding them may be important at times.
++
++The rest of this page is dedicated to helping you understand how Ember's types and the classic Ember system interact.
++
++## Classic Ember Components
++
++Many of the same considerations as discussed in the [TypeScript Guides for Glimmer Components][components] apply to classic Ember Components. However, there are several additional considerations:
++
++- Classic Ember Components support both named and positional arguments. If you supply `Args` in the component signature as an object shape the same way you would for a Glimmer component, those arguments will be treated as _named_ arguments. If you are using _positional_ arguments, you must specify the `Positional` key in the `Args` interface and specify any named arguments under the `Named` key.
++
++- Classic Ember component arguments are merged with the properties on the class, rather than being supplied separately as `this.args`. As a result, they require more boilerplate to incorporate: we must use [interface merging][merge] to represent that the arguments and the properties of the class are the same. (This also means that there is no support for type-powered completion with JSDoc for classic Ember Components, because TypeScript does not support interface merging with JSDoc.)
++
++- The `Element` for a classic Ember component should be the same as the [`tagName`][tagName] for the component—but this is not type-checked.
++
++If the `AudioPlayer` component shown above were a classic Ember component, we would define its signature and backing class like this:
++
++```typescript {data-filename="app/components/audio-player.ts"}
++import Component from '@ember/component';
++import { tracked } from '@glimmer/tracking';
++import { action } from '@ember/object';
++
++interface AudioPlayerNamedArgs {
++  /** The url for the audio to be played */
++  srcUrl: string;
++}
++
++interface AudioPlayerSignature {
++  Args: AudioPlayerNamedArgs;
++  Blocks: {
++    fallback: [srcUrl: string];
++    title: [];
++  };
++  Element: HTMLAudioElement;
++}
++
++export default interface AudioPlayer extends AudioPlayerNamedArgs {}
++export default class AudioPlayer extends Component<AudioPlayerSignature> {
++  tagName = 'audio';
++
++  @tracked isPlaying = false;
++
++  @action
++  play() {
++    this.isPlaying = true;
++  }
++
++  @action
++  pause() {
++    this.isPlaying = false;
++  }
++}
++```
++
++And if we add a positional argument, things get even funkier because there isn't a way to splat the `Positional` arguments tuple onto the class interface:
++
++```typescript {data-filename="app/components/audio-player.ts"}
++import Component from '@ember/component';
++import { tracked } from '@glimmer/tracking';
++import { action } from '@ember/object';
++
++interface AudioPlayerNamedArgs {
++  /** The url for the audio to be played */
++  srcUrl: string;
++}
++
++interface AudioPlayerSignature {
++  Args: {
++    Named: AudioPlayerNamedArgs;
++    Positional: [myPositionalArg: string];
++  };
++  Blocks: {
++    fallback: [srcUrl: string];
++    title: [];
++  };
++  Element: HTMLAudioElement;
++}
++
++export default interface AudioPlayer extends AudioPlayerNamedArgs {}
++export default class AudioPlayer extends Component<AudioPlayerSignature> {
++  tagName = 'audio';
++  static positionalParams = ['myPositionalArg'];
++  declare myPositionalArg: string;
++
++  // ...the same code as before
++}
++```
++
++In general, while we do support classic Ember Components for the sake of backwards compatibility and migration, we strongly recommend that you [migrate away from classic Ember Components][migrating-from-classic-components] to Glimmer Components.
++
++## EmberObject
++
++When working with the legacy Ember object model, `EmberObject`, there are a number of caveats and limitations you need to be aware of. For today, these caveats and limitations apply to any classes which extend directly from `EmberObject`, or which extend classes which _themselves_ extend `EmberObject`.
++
++Additionally, Ember's mixin system is deeply linked to the semantics and implementation details of `EmberObject`, and it has the most caveats and limitations.
++
++### Failure Modes
++
++When using mixins and classic class syntax, you will often need to define `this` in actions hashes, computed properties, etc. That in turn often leads to problems with self-referential `this`: TypeScript simply cannot figure out how to stop recursing through the definitions of the type.
++
++Additionally, even when you get past the endlessly-recursive type definition problems, when enough mixins are resolved, TypeScript will occasionally just give up because it cannot resolve the property or method you're interested in across the many shared base classes.
++
++Finally, when you have "zebra-striping" of your classes between classic classes and native classes, your types will often stop resolving.
++
++### Mixins
++
++The Ember mixin system is the legacy Ember construct TypeScript supports _least_ well. Mixins are fundamentally hostile to robust typing with TypeScript. While you can supply types for them, you will regularly run into problems with self-referentiality in defining properties within the mixins.
++
++As a stopgap, you can refer to the type of a mixin using the `typeof` operator. In general, however, we strongly recommend you [migrate away from mixins][migrate-from-mixins] before attempting to convert code which relies on them to TypeScript.
++
++### Classic Class Syntax
++
++While this may not be intuitively obvious, the classic class syntax simply _is_ the mixin system. Every classic class creation is a case of mixing together multiple objects to create a new base class with a shared prototype. The result is that any time you see the classic `.extend({ ... })` syntax, regardless of whether there is a named mixin involved, you are dealing with Ember's legacy mixin system. This in turn means that you are dealing with the parts of Ember which TypeScript is _least_ able to handle well.
++
++While we describe here how to use types with classic (mixin-based) classes insofar as they _do_ work, there are many failure modes. As a result, we strongly recommend you [migrate away from classic classes][migrating-from-classic-classes] as quickly as possible. This is the direction the Ember ecosystem as a whole is moving, but it is _especially_ important for TypeScript users.
++
++## Computed Properties
++
++There are two variants of Ember's computed properties you may encounter:
++
++- the decorator form used with native classes
++- the callback form used with classic classes (based on `EmberObject`)
++
++### Decorator form
++
++```typescript {data-filename="app/components/user-profile.ts"}
++import Component from '@ember/component';
++import { computed } from '@ember/object/computed';
++
++export default class UserProfile extends Component {
++  name = 'Chris';
++  age = 33;
++
++  @computed('name', 'age')
++  get bio() {
++    return `${this.name} is `${this.age}` years old!`;
++  }
++}
++```
++
++Note that it is impossible for `@computed` to know whether the keys you pass to it are allowed or not. For this reason, we recommend you [migrate away from computed properties][migrate-from-computed].
++
++### Callback form
++
++Computed properties in the classic object model take a callback instead. In these cases, you will need to explicitly write out a `this` type for computed property callbacks for `get` and `set` to type-check correctly:
++
++```typescript {data-filename="app/components/user-profile.ts" data-diff="-8,+9"}
++import Component from '@ember/component';
++import { computed } from '@ember/object/computed';
++
++const UserProfile = Component.extend({
++  name: 'Chris',
++  age: 32,
++
++  bio: computed('name', 'age', function() {
++  bio: computed('name', 'age', function(this: UserProfile) {
++    return `${this.get('name')} is `${this.get('age')}` years old!`;
++  }),
++})
++
++export default UserProfile;
++```
++
++The [`this` type][this], tells TS to use `UserProfile` for `get` and `set` lookups; otherwise `this.get` would not know the types of `'name'` or `'age'` or even be able to suggest them for autocompletion.
++
++Note that this _does not always work_: you may get warnings from TypeScript about the item being defined in terms of itself.
++
++For this reason, we strongly recommend you [migrate away from computed properties][migrate-from-computed] and [migrate away from classic classes][migrating-from-classic-classes] before converting to TypeScript.
++
++## Classic `get` or `set` methods
++
++In general, the `this.get` and `this.set` methods on `EmberObject` subclasses and the standalone `get` and `set` functions will work as you'd expect _if_ you're doing lookups only a single layer deep. We do not provide support for deep key lookups like `get(someObj, 'a.b.c')`, because normal property access works correctly across the whole Ember ecosystem since at least Ember and EmberData 3.28.
++
++Since regular property access “just works”, you should migrate to using normal property access instead. TypeScript will help make this a smooth process by identifying where you need to handle null and undefined intermediate properties.
++
++In the few cases where you _do_ need to use `get`, you can chain `get` calls instead of using deep key lookups. So `this.get('a.b.c')` becomes `this.get('a').get('b').get('c')`. In reality, though, it's unlikely you've got that many nested proxies, so the code might end up looking more like `this.get('a').b.c`.
++
++## Prototype Extensions
++
++You can enable types for Ember's prototype extensions by adding the following to your [global types][global-types]:
++
++```typescript {data-filename="types/global.d.ts"}
++declare global {
++  interface Array<T> extends Ember.ArrayPrototypeExtensions<T> {}
++  interface Function extends Ember.FunctionPrototypeExtensions {}
++}
++```
++
++<!-- Internal links -->
++
++[components]: ../../core-concepts/invokables/#toc_glimmer-components
++[global-types]: ../../additional-resources/faq/#toc_global-types-for-your-project
++[migrate-from-computed]: ../../../upgrading/current-edition/tracked-properties/
++[migrate-from-mixins]: ../../../upgrading/current-edition/native-classes/#toc_mixins
++[migrating-from-classic-classes]: ../../../upgrading/current-edition/native-classes/
++[migrating-from-classic-components]: ../../../upgrading/current-edition/glimmer-components/
++
++<!-- External links -->
++
++[merge]: https://www.typescriptlang.org/docs/handbook/declaration-merging.html#merging-interfaces
++[octane]: https://emberjs.com/editions/octane/
++[tagName]: https://api.emberjs.com/ember/release/classes/Component#html-tag
++[this]: https://www.typescriptlang.org/docs/handbook/2/functions.html#declaring-this-in-a-function
+diff --git b/guides/typescript/application-development/addons.md a/guides/typescript/application-development/addons.md
+new file mode 100644
+index 000000000..e1035498d
+--- /dev/null
++++ a/guides/typescript/application-development/addons.md
+@@ -0,0 +1,174 @@
++Building addons in TypeScript offers many of the same benefits as building apps in TypeScript: it puts an extra tool at your disposal to help document your code and ensure its correctness. For addons, though, there's one additional bonus: publishing type information for your addons enables autocomplete and inline documentation for your consumers, even if they're not using TypeScript themselves.
++
++## Create a New TypeScript Addon
++
++To start a new Ember addon with TypeScript, add the `--typescript` flag when you run [`ember addon`][ember-addon]:
++
++```shell
++ember addon my-typescript-addon --typescript
++```
++
++Using the `--typescript` flag changes the output of `ember addon` in a few ways:
++
++### TypeScript Project Files
++
++Project files will be generated with `.ts` extensions instead of `.js`.
++
++### Packages to Support TypeScript
++
++In addition to the usual packages added with `ember addon`, the following packages will be added at their current "latest" value:
++
++- `typescript`
++- `@tsconfig/ember`
++- `@typescript-eslint/*`
++- `@types/ember`
++- `@types/ember-data`
++- `@types/ember__*` – `@types/ember__object` for `@ember/object`, etc.
++- `@types/ember-data__*` – `@types/ember-data__model` for `@ember-data/model`, etc.
++- `@types/qunit`
++- `@types/rsvp`
++
++The `typescript` package provides tooling to support TypeScript type checking and compilation. The `@types` packages from [DefinitelyTyped][] provide TypeScript type definitions for all of the Ember and EmberData modules.
++
++<div class="cta">
++  <div class="cta-note">
++    <div class="cta-note-body">
++      <div class="cta-note-heading">Zoey says...</div>
++      <div class="cta-note-message">
++        Ember also publishes its own native types compiled directly from its source code, as described <a href="https://blog.emberjs.com/stable-typescript-types-in-ember-5-1/">in this blog post</a>. For now, we continue to use the <code>@types</code> packages by default for the sake of compatibility with EmberData, because EmberData is not yet compatible with Ember's native official types. However, if you do not use EmberData, we <i>highly</i> recommend following the instructions in that blog post to switch to the native types, which are guaranteed to always be 100% correct and 100% up to date!
++      </div>
++    </div>
++    <img src="/images/mascots/zoey.png" role="presentation" alt="">
++  </div>
++</div>
++
++### Files and Config to Support TypeScript
++
++In addition to the usual files added with `ember addon`, we also add:
++
++- [`tsconfig.json`][tsconfig] – configuration to set up TypeScript for your project
++- `tsconfig.declarations.json` (v1 addons only) – configures the compiler options for emitting declaration files as described below in ["Publishing Notes for V1 Addons"][publishing-v1]
++- [`types/global.d.ts`][global-types] (v1 addons only) or `unpublished-development-types/index.d.ts` (v2 addons only) – the location for any global type declarations you need to write
++
++Additionally:
++
++- `package.json` will have a `lint:types` script to check types with the command line.
++- (v1 addons only) `package.json` will also have a `prepack` script, a `postpack` script, and a default entry for `typesVersions` as described below in ["Publishing Notes for V1 Addons"][publishing-v1].
++- `ember-cli-build.js` (v1 addons) or `babel.config.json` (v2 addons) will be configured to transform TypeScript at build-time.
++- `.ember-cli` has `isTypeScriptProject` set to true, which will force the blueprint generators to generate TypeScript rather than JavaScript by default.
++- `.eslintrc.js` will be configured for TypeScript.
++
++## Publishing
++
++When you publish an addon written in TypeScript, the `.ts` files will be consumed and transpiled by Babel as part of building the host application the same way `.js` files are, in order to meet the requirements of the application's `config/targets.js`. This means that no special steps are required for your source code to be consumed by users of your addon.
++
++### Publishing Notes for V1 Addons
++
++Even though you publish the source `.ts` files, by default your consumers who also use TypeScript won't be able to benefit from those types, because the TS compiler isn't aware of how `ember-cli` resolves import paths for addon files. For instance, if you write `import { foo } from 'my-addon/bar';`, the typechecker has no way to know that the actual file on disk for that import path is at `my-addon/addon/bar.ts`.
++
++Because addons have no control over how files in `app/` are transpiled, **you cannot have `.ts` files in your addon's `app/` folder**.
++
++In order for your addon's users to benefit from type information from your addon, you need to put [`.d.ts` _declaration files_][dts] at the location on disk where the compiler expects to find them. This addon provides two scripts to help with that: `prepack` and `postpack`. Additionally, the entry for [`typesVersions`][typesVersions] added to your `package.json` tell consuming apps where to find the types for the addon.
++
++The `prepack` script will populate the overall structure of your package with `.d.ts` files laid out to match their import paths. For example, `addon/index.ts` would produce an `index.d.ts` file in the root of your package.
++
++The `postpack` script will remove the generated `.d.ts` files, leaving your working directory back in a pristine state.
++
++The TypeScript compiler has very particular rules when generating declaration files to avoid letting private types leak out unintentionally. You may find it useful to run `prepack` yourself as you're getting a feel for these rules to ensure everything will go smoothly when you publish.
++
++## Linking V1 Addons
++
++Often when developing an addon, it can be useful to run that addon in the context of some other host app so you can make sure it will integrate the way you expect, e.g. using [`yarn link`][yarn-link] or [`npm link`][npm-link].
++
++When you do this for a TypeScript addon, the source files will be picked up in the host app build and everything will execute at runtime as you'd expect. If the host app is also using TypeScript, though, it won't be able to resolve imports from your addon by default, for the reasons outlined above in the ["Publishing Notes for V1 Addons"][publishing-v1] section.
++
++You could run `prepack` in your addon any time you change a file, but for development a simpler option is to temporarily update the `paths` configuration in the host application so that it knows how to resolve types from your linked addon.
++
++Add entries for `<addon-name>` and `<addon-name>/*` in your `tsconfig.json` like so:
++
++```json {data-filename="tsconfig.json"}
++"compilerOptions": {
++  // ...other options
++  "paths": {
++    // ...other paths, e.g. for your app/ and tests/ trees
++    // resolve: import x from 'my-addon';
++    "my-addon": [
++      "node_modules/my-addon/addon"
++    ],
++    // resolve: import y from 'my-addon/utils/y';
++    "my-addon/*": [
++      "node_modules/my-addon/addon/*"
++    ]
++  }
++}
++```
++
++## In-Repo V1 Addons
++
++[In-repo addons][] work in much the same way as linked ones. Their `.ts` files are managed automatically by `ember-cli-typescript` in their `dependencies`, and you can ensure imports resolve correctly from the host by adding entries in `paths` in the base `tsconfig.json` file.
++
++```json {data-filename="tsconfig.json"}
++{
++  // ...other options
++  "compilerOptions": {
++    // ...other options
++    "paths": {
++      // ...other paths, e.g. for your tests/ tree
++      "my-app": [
++        "app/*",
++        // add addon app directory that will be merged with the host application
++        "lib/my-addon/app/*"
++      ],
++      // resolve: import x from 'my-addon';
++      "my-addon": ["lib/my-addon/addon"],
++      // resolve: import y from 'my-addon/utils/y';
++      "my-addon/*": ["lib/my-addon/addon/*"]
++    }
++  }
++}
++```
++
++One difference as compared to regular published addons: you know whether or not the host app is also using TypeScript, and if it is, **you can safely put `.ts` files in an in-repo addon's `app/` folder**.
++
++## Templates
++
++Templates are _currently_ totally non-type-checked. (Looking for type-checking in templates? Try [Glint][]!) This means that you lose any safety when moving into a template context.
++
++Addons need to import templates from the associated `.hbs` file to bind to the layout of any components they export. The TypeScript compiler will report that it cannot resolve the module, since it does not know how to resolve files ending in `.hbs`. To resolve this, you can provide this set of definitions to `my-addon/types/global.d.ts`, which will allow the import to succeed:
++
++```typescript {data-filename="my-addon/types/global.d.ts"}
++declare module '*/template' {
++  import { TemplateFactory } from 'ember-cli-htmlbars';
++  const template: TemplateFactory;
++  export default template;
++}
++
++declare module 'app/templates/*' {
++  import { TemplateFactory } from 'ember-cli-htmlbars';
++  const template: TemplateFactory;
++  export default template;
++}
++
++declare module 'addon/templates/*' {
++  import { TemplateFactory } from 'ember-cli-htmlbars';
++  const template: TemplateFactory;
++  export default template;
++}
++```
++
++<!-- Internal links -->
++
++[global-types]: ../../additional-resources/faq/#toc_global-types-for-your-project
++[publishing-v1]: ./#toc_publishing-notes-for-v1-addons
++[tsconfig]: ../configuration/#toc_tsconfigjson
++
++<!-- External links -->
++
++[DefinitelyTyped]: https://github.com/DefinitelyTyped/DefinitelyTyped
++[dts]: https://www.typescriptlang.org/docs/handbook/declaration-files/introduction.html
++[ember-addon]: https://cli.emberjs.com/release/writing-addons/
++[glint]: https://typed-ember.gitbook.io/glint/
++[In-repo addons]: https://cli.emberjs.com/release/writing-addons/in-repo-addons/
++[npm-link]: https://docs.npmjs.com/cli/link
++[typesVersions]: https://www.typescriptlang.org/docs/handbook/declaration-files/publishing.html#version-selection-with-typesversions
++[yarn-link]: https://classic.yarnpkg.com/en/docs/cli/link
+diff --git b/guides/typescript/application-development/configuration.md a/guides/typescript/application-development/configuration.md
+new file mode 100644
+index 000000000..de891407f
+--- /dev/null
++++ a/guides/typescript/application-development/configuration.md
+@@ -0,0 +1,75 @@
++## `tsconfig.json`
++
++If you use the `--typescript` flag when generating your Ember app, we generate a good default [`tsconfig.json`][tsconfig], which will usually make everything _Just Work™_:
++
++```json {data-filename="tsconfig.json"}
++{
++  "extends": "@tsconfig/ember/tsconfig.json",
++  "compilerOptions": {
++    "baseUrl": ".",
++    "paths": {
++      "my-app/tests/*": ["tests/*"],
++      "my-app/*": ["app/*"],
++      "*": ["types/*"]
++    }
++  }
++}
++```
++
++The default `tsconfig.json` extends the [`"@tsconfig/ember/tsconfig.json"`][ember-tsconfig] base, which includes TypeScript compiler options to enable TypeScript development in an Ember app plus some useful default configurations for strictness to ensure type-safety and compatibility with Ember's types.
++
++Additionally, the generated `tsconfig.json` includes [`"baseUrl"`][tsconfig-baseUrl] and [`"paths"`][tsconfig-paths] configuration specific to your app. This configuration allows Ember's classic package layout, which is not resolvable with the Node resolution algorithm, to work with TypeScript.
++
++In general, you may customize your TypeScript build process as usual using the `tsconfig.json` file. There are a few things worth noting, however, if you're looking to make further or more advanced customizations (but _most_ users can just ignore this section!):
++
++1. The Ember build pipeline uses Babel's TypeScript support instead of the TypeScript compiler. For this reason, the generated `tsconfig.json` file does not set [`"outDir"`][tsconfig-outDir] and sets [`"noEmit"`][tsconfig-noEmit] to `true`. This configuration allows you to run editors which use the compiler without creating extraneous `.js` files throughout your codebase, leaving the compilation to Babel to manage.
++
++   You _can_ still customize `"outDir"` and `"noEmit"` if your use case requires it, however. For example, to see the output of the compilation in a separate folder you are welcome to set `"outDir"` to some path and set `"noEmit"` to `false`. Then tools which use the TypeScript compiler (e.g. the watcher tooling in JetBrains IDEs) will now generate files at that location.
++
++   Note that any changes you _do_ make to `"outDir"` and `"noEmit"` won't have any effect on how _Ember_ builds your application. The build pipeline will continue to use its own temp folder.
++
++1. Since your application is built by Babel, and only _type-checked_ by TypeScript, we set the [`"target"`][tsconfig-target] key in [`"@tsconfig/ember/tsconfig.json"`][ember-tsconfig] to the current version of the ECMAScript standard so that type-checking uses the latest and greatest from the JavaScript standard library. The Babel configuration in your app's `config/targets.js` and any included polyfills will determine the final build output.
++
++1. If you make changes to the paths included in or excluded from the build via your `tsconfig.json` (using the [`"include"`][tsconfig-include], [`"exclude"`][tsconfig-exclude], or [`"files"`][tsconfig-files] keys), you will need to restart the server to take the changes into account: the build pipeline does not currently watch the `tsconfig.json` file.
++
++## Enabling Sourcemaps
++
++To enable TypeScript sourcemaps, you'll need to add the corresponding configuration for Babel to your `ember-cli-build.js` file:
++
++```javascript {data-filename="ember-cli-build.js" data-diff="+3"}
++const app = new EmberApp(defaults, {
++  'ember-cli-babel': { enableTypeScriptTransform: true },
++  babel: { sourceMaps: 'inline' },
++});
++```
++
++(Note that this _will_ noticeably slow down your app rebuilds.)
++
++If you are using [Embroider][], you might need to include [`devtool`][devtool] in your webpack configuration:
++
++```javascript {data-filename="ember-cli-build.js" data-diff="+4"}
++return require('@embroider/compat').compatBuild(app, Webpack, {
++  packagerOptions: {
++    webpackConfig: {
++      devtool: 'source-map'
++    }
++  }
++}
++```
++
++<!-- Internal links -->
++
++<!-- External links -->
++
++[devtool]: https://webpack.js.org/configuration/devtool/
++[ember-tsconfig]: https://www.npmjs.com/package/@tsconfig/ember
++[embroider]: https://github.com/embroider-build/embroider
++[tsconfig-baseUrl]: https://www.typescriptlang.org/tsconfig#baseUrl
++[tsconfig-exclude]: https://www.typescriptlang.org/tsconfig#exclude
++[tsconfig-files]: https://www.typescriptlang.org/tsconfig#files
++[tsconfig-include]: https://www.typescriptlang.org/tsconfig#include
++[tsconfig-noEmit]: https://www.typescriptlang.org/tsconfig#noEmit
++[tsconfig-outDir]: https://www.typescriptlang.org/tsconfig#outDir
++[tsconfig-paths]: https://www.typescriptlang.org/tsconfig#paths
++[tsconfig-target]: https://www.typescriptlang.org/tsconfig#target
++[tsconfig]: https://www.typescriptlang.org/docs/handbook/tsconfig-json.html
+diff --git b/guides/typescript/application-development/converting-an-app.md a/guides/typescript/application-development/converting-an-app.md
+new file mode 100644
+index 000000000..bf2f3b163
+--- /dev/null
++++ a/guides/typescript/application-development/converting-an-app.md
+@@ -0,0 +1,105 @@
++These directions are for converting an _existing_ Ember app to TypeScript. If you are starting a new app, you can use the directions in [Getting Started][].
++
++## Enable TypeScript Features
++
++### A Bit of a Hack
++
++Since `ember-cli` _currently_ has no flag to convert your project to TypeScript, we're going to use a bit of a hack and _temporarily_ install the legacy `ember-cli-typescript` addon to complete most of the migration:
++
++```shell
++ember install ember-cli-typescript@latest
++```
++
++The `ember-cli-typescript` addon will install _most_ of the necessary packages and create or update _most_ of the necessary files as described in [Getting Started][].
++
++You can then immediately remove the `ember-cli-typescript` dependency and follow the rest of this guide.
++
++### Manually Enable TypeScript Transpilation
++
++To enable TypeScript transpilation in your app, simply add the corresponding configuration for Babel to your `ember-cli-build.js` file.
++
++```javascript {data-filename="ember-cli-build.js" data-diff="+2"}
++const app = new EmberApp(defaults, {
++  'ember-cli-babel': { enableTypeScriptTransform: true },
++});
++```
++
++### Manually Add `lint:types` Script
++
++To easily check types with the command line, add the `lint:types` script as shown [here][lint-types].
++
++The default `lint` script generated by Ember CLI will include the `lint:types` script automatically.
++
++### Manually Force Blueprint Generators to Use TypeScript
++
++With the following configuration, project files will be generated with `.ts` extensions instead of `.js`:
++
++```javascript {data-filename=".ember-cli" data-diff="-2,+3"}
++{
++  "isTypeScriptProject": false,
++  "isTypeScriptProject": true,
++}
++```
++
++### Manually Set Up `@typescript-eslint`
++
++```shell
++npm add --save-dev @typescript-eslint/eslint-plugin @typescript-eslint/parser
++```
++
++Then, update your `.eslintrc.js` to include the [current output from the Ember CLI blueprints][eslintrc]. You might consider using ESLint [overrides][] configuration to separately configure your JavaScript and TypeScript files during the migration.
++
++## Migrate Existing Code to TypeScript
++
++Once you have set up TypeScript following the guides above, you can begin to migrate your files incrementally by changing their extensions from `.js` to `.ts`. Fortunately, TypeScript allows for gradual typing. This means that you can use TypeScript and JavaScript files interchangeably, so you can convert your app piecemeal.
++
++Some specific tips for success on the technical front:
++
++### Strictness
++
++Use the [_strictest_ strictness][strictness] settings that our typings allow. While it may be tempting to start with the _loosest_ strictness settings and then to tighten them down as you go, this will actually mean that "getting your app type-checking" will become a repeated process—getting it type-checking with every new strictness setting you enable—rather than something you do just once.
++
++### Gradual Typing Hacks
++
++Many of your files might reference types in other files that haven't been converted yet. There are several strategies you can employ to avoid a chain-reaction resulting in having to convert your entire app at once:
++
++The [`unknown`][unknown] type—You can sometimes get pretty far just by annotating types as `unknown`. If `unknown` is too wide of a type, however, you'll need a more robust solution.
++
++[TypeScript declaration files][dts] (`.d.ts`)—These files are a straightforward way to document TypeScript types for JavaScript files without converting them. One downside of declaration files, however, is that they can easily get out-of-sync with the corresponding JavaScript file, so we only recommend this option as a temporary step.
++
++[JSDoc][] and [`allowJs`][allowJs]—Another way to document TypeScript types for JavaScript files without converting them is to add JSDoc "type hints" to the files and enable the `allowJs` compiler option in your `tsconfig.json`. While the JSDoc type syntax can be a bit cumbersome, it is much more likely to stay in sync. You can even type-check your JavaScript files using the [`@ts-check`][ts-check] directive.
++
++The [`any`][any] type—Opt out of type checking altogether for a value by annotating it as `any`.
++
++The [`@ts-expect-error`][ts-expect-error] directive—A better strategy than `any`, however, is to mark offending parts of your code with a `@ts-expect-error` directive. This comment will ignore a type-checking error and allow the TypeScript compiler to assume that the value is of the type `any`. If the code stops triggering the error, TypeScript will let you know.
++
++### Outer Leaves First
++
++A good approach to gradual typing is to start at your outer "leaf" modules (the ones that don't import anything else from your app, only from Ember or third-party libraries) and then work your way "inward" (toward the modules with many internal imports). Often the highest-value modules are your EmberData models and any core services that are used everywhere else in the app–and those are also the ones that tend to have the most cascading effects (having to update _tons_ of other places in your app) when you type them later in the process. By starting with the outer leaves, you won't have to use as many of our gradual typing hacks.
++
++### Prefer Octane Idioms
++
++In general, we recommend migrating to Octane idioms before, or in conjunction with, your migration to TypeScript. See ["Working With Ember Classic"][legacy] for more details.
++
++## ember-cli-typescript
++
++If you're migrating from `ember-cli-typescript`, particularly an older version, to Ember's out-of-the-box TypeScript support, you may also need to update your `tsconfig.json`. Current versions of `ember-cli-typescript` generate the correct config at installation. You do _not_ need `ember-cli-typescript` installed for new apps or addons.
++
++<!-- Internal links -->
++
++[getting started]: ../../getting-started/
++[legacy]: ../../additional-resources/legacy/
++[strictness]: ../../additional-resources/faq/#toc_strictness
++
++<!-- External links -->
++
++[allowJs]: https://www.typescriptlang.org/tsconfig/#allowJs
++[any]: https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#any
++[dts]: https://www.typescriptlang.org/docs/handbook/declaration-files/introduction.html
++[eslintrc]: https://github.com/ember-cli/editor-output/blob/stackblitz-app-output-typescript/.eslintrc.js
++[lint-types]: https://github.com/ember-cli/editor-output/blob/stackblitz-app-output-typescript/package.json
++[JSDoc]: https://www.typescriptlang.org/docs/handbook/jsdoc-supported-types.html#handbook-content
++[overrides]: https://eslint.org/docs/latest/use/configure/configuration-files#configuration-based-on-glob-patterns
++[ts-check]: https://www.typescriptlang.org/docs/handbook/intro-to-js-ts.html#ts-check
++[ts-expect-error]: https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-9.html
++[unknown]: https://www.typescriptlang.org/docs/handbook/2/functions.html
+diff --git b/guides/typescript/application-development/index.md a/guides/typescript/application-development/index.md
+new file mode 100644
+index 000000000..93b9ae3be
+--- /dev/null
++++ a/guides/typescript/application-development/index.md
+@@ -0,0 +1,15 @@
++Once you've got your Ember project up and running with TypeScript, this chapter can help you with:
++
++- Advanced [configuration][] of your TypeScript project.
++- [Testing][] of your TypeScript project.
++
++Alternatively, you may have an existing Ember project, and you're wondering how to convert it to TypeScript. In that case, check out ["Converting an Existing Ember App to TypeScript"][converting-an-app].
++
++Or perhaps, you're creating an addon and you'd like it to be written in TypeScript. We've got you covered [here][addons].
++
++<!-- Internal links -->
++
++[addons]: ./addons
++[configuration]: ./configuration
++[converting-an-app]: ./converting-an-app
++[testing]: ./testing
+diff --git b/guides/typescript/application-development/testing.md a/guides/typescript/application-development/testing.md
+new file mode 100644
+index 000000000..d47c9e308
+--- /dev/null
++++ a/guides/typescript/application-development/testing.md
+@@ -0,0 +1,303 @@
++When working with TypeScript in [Ember tests][testing], your workflow will be essentially the same as testing with JavaScript. There will be a few differences in your testing experience, however, and there will also be differences in how you should handle testing app code vs. addon code.
++
++## Testing Experience
++
++### The `TestContext`
++
++A common scenario in Ember tests, especially integration tests, is setting some value on the `this` context of the tests, so that it can be used in the context of the test. The Ember types refer to this as the `TestContext`.
++
++For example, we might need to set up a `User` type to pass into a `Profile` component. We're going to start by defining a basic `User` and `Profile` so that we have a good idea of what we're testing. The `User` type is very simple, just an `interface`:
++
++```typescript {data-filename="app/types/user.ts"}
++export default interface User {
++  displayName: string;
++  avatarUrl?: string;
++}
++```
++
++Then our component might be defined like this:
++
++```handlebars {data-filename="app/components/profile.hbs"}
++<div class='user-profile' ...attributes>
++  <img
++    src={{this.avatarUrl}}
++    alt={{this.description}}
++    class='avatar'
++    data-test-avatar
++  />
++  <span class='name' data-test-name>{{@user.displayName}}</span>
++</div>
++```
++
++```typescript {data-filename="app/components/profile.ts"}
++import Component from '@glimmer/component';
++import type User from 'app/types/user';
++import { randomAvatarURL } from 'app/utils/avatar';
++
++interface ProfileSignature {
++  Args: {
++    user: User;
++  };
++}
++
++export default class Profile extends Component<ProfileSignature> {
++  get avatarUrl() {
++    return this.args.user.avatarUrl ?? randomAvatarURL();
++  }
++
++  get description() {
++    return this.args.user.avatarUrl
++      ? `${this.args.user.displayName}'s custom profile picture`
++      : 'a randomly generated placeholder avatar';
++  }
++}
++```
++
++To test the `Profile` component, we need to set up a `User` on `this` to pass into the component as an argument. With TypeScript on our side, we can even make sure our user actually has the correct type!
++
++```typescript {data-filename="tests/integration/components/profile.ts"}
++import { module, test } from 'qunit';
++import { render } from '@ember/test-helpers';
++import { hbs } from 'ember-cli-htmlbars';
++
++import { setupRenderingTest } from 'app/tests/helpers';
++import type User from 'app/types/user';
++
++module('Integration | Component | Profile', function (hooks) {
++  setupRenderingTest(hooks);
++
++  test('given a user with an avatar', async function (assert) {
++    const user: User = {
++      displayName: 'Rey',
++      avatarUrl: 'https://example.com/star-wars/rey',
++    };
++    this.user = user;
++
++    await render(hbs`<Profile @user={{this.user}}`);
++
++    assert.dom('[data-test-name]').hasText(this.user.displayName);
++    assert
++      .dom('[data-test-avatar]')
++      .hasAttribute('src', this.user.avatarUrl!)
++      .hasAttribute('alt', `${this.user.displayName}'s custom profile picture`);
++  });
++
++  test('given a user without an avatar', async function (assert) {
++    const user: User = {
++      displayName: 'Rey',
++    };
++    this.user = user;
++
++    await render(hbs`<Profile @user={{this.user}}`);
++
++    assert.dom('[data-test-name]').hasText(this.user.displayName);
++    assert
++      .dom('[data-test-avatar]')
++      .hasAttribute('src', /rando-avatars-yo/)
++      .hasAttribute('alt', 'a randomly generated placeholder avatar');
++  });
++});
++```
++
++This is a lovely test. Unfortunately, though, it won't type-check. TypeScript reports that `Property 'user' does not exist on type 'TestContext'`. Now, TypeScript _does_ know that QUnit sets up that helpfully-named `TestContext`—so a lot of the things we can do in tests work out of the box—but we haven't told TypeScript that `this` now has a `user` property on it.
++
++To inform TypeScript about this, we need to tell it that the type of `this` in each test assertion includes the `user` property, of type `User`. We'll start by importing the `TestContext` defined by Ember's test helpers, and extending it:
++
++```typescript {data-filename="tests/integration/components/profile.ts"}
++import type { TestContext } from '@ember/test-helpers';
++import type User from 'app/types/user';
++
++interface Context extends TestContext {
++  user: User;
++}
++```
++
++Then, in every `test` callback, we need to specify the [`this` type][this]:
++
++```typescript
++test('...', function (this: Context, assert) {});
++```
++
++Putting it all together, this is what our updated test definition would look like:
++
++```typescript {data-filename="tests/integration/components/profile.ts"}
++import { module, test } from 'qunit';
++import { render } from '@ember/test-helpers';
++import type { TestContext } from '@ember/test-helpers';
++import { hbs } from 'ember-cli-htmlbars';
++
++import { setupRenderingTest } from 'app/tests/helpers';
++import type User from 'app/types/user';
++
++interface Context extends TestContext {
++  user: User;
++}
++
++module('Integration | Component | Profile', function (hooks) {
++  setupRenderingTest(hooks);
++
++  test('given a user with an avatar', async function (this: Context, assert) {
++    this.user = {
++      displayName: 'Rey',
++      avatarUrl: 'https://example.com/star-wars/rey',
++    };
++
++    await render(hbs`<Profile @user={{this.user}}`);
++
++    assert.dom('[data-test-name]').hasText(this.user.displayName);
++    assert
++      .dom('[data-test-avatar]')
++      .hasAttribute('src', this.user.avatarUrl!)
++      .hasAttribute('alt', `${this.user.displayName}'s custom profile picture`);
++  });
++
++  test('given a user without an avatar', async function (this: Context, assert) {
++    this.user = {
++      displayName: 'Rey',
++    };
++
++    await render(hbs`<Profile @user={{this.user}}`);
++
++    assert.dom('[data-test-name]').hasText(this.user.displayName);
++    assert
++      .dom('[data-test-avatar]')
++      .hasAttribute('src', /rando-avatars-yo/)
++      .hasAttribute('alt', 'a randomly generated placeholder avatar');
++  });
++});
++```
++
++Now everything type-checks, and we get the nice auto-completion we're used to when dealing with `this.user` in the test body.
++
++There are still a couple things to be careful about here, however. First, we didn't specify that the `this.user` property was _optional_. That means that TypeScript won't warn you if you do `this.user` _before_ assigning to it. Second, every test in our module gets the same `Context`. Depending on what you're doing, that may be fine, but you may end up needing to define multiple distinct test context extensions. If you _do_ end up needing to define a bunch of different test context extensions, that may be a sign that this particular set of tests is doing too much. That in turn is probably a sign that this particular _component_ is doing too much!
++
++## Testing Philosophy
++
++### App tests
++
++One major difference when working with TypeScript in _app_ code is that **once your app is _fully_ converted**, there is a whole category of tests you no longer need to write: bad inputs to functions. We'll use an admittedly silly and contrived example here, an `add` function to add two numbers together, so that we can focus on the differences between JavaScript and TypeScript, rather than getting hung up on the details of this particular function.
++
++First, the function we're testing might look like this:
++
++```javascript {data-filename="app/utils/math.js"}
++import { assert } from '@ember/debug';
++
++export function add(a, b) {
++  assert(
++    'arguments must be numbers',
++    typeof a === number && typeof b === number
++  );
++
++  return a + b;
++}
++```
++
++Note that before we add `b` to `a`, we first check that both values are numbers using [`assert` from `@ember/debug`][assert].
++
++The test for our function might look something like this:
++
++```javascript {data-filename="tests/unit/utils/math-test.js"}
++import { module, test } from 'qunit';
++import { add } from 'app/utils/math';
++
++module('the `add` function', function (hooks) {
++  test('adds numbers correctly', function (assert) {
++    assert.strictEqual(add(2, 2), 4, '2 + 2 = 4');
++  });
++
++  test('throws an error with strings', function (assert) {
++    assert.throws(
++      () => add('nope', 1),
++      'throws when the first arg is a string and the second is a number'
++    );
++    assert.throws(
++      () => add(0, 'nope'),
++      'throws when the first arg is a number and the second is a string'
++    );
++    assert.throws(
++      () => add('nope', 'also nope'),
++      'throws when both args are strings'
++    );
++  });
++});
++```
++
++In the TypeScript version of the function, we simply add the types to the function declaration:
++
++```typescript {data-filename="app/utils/math.ts"}
++export function add(a: number, b: number): number {
++  return a + b;
++}
++```
++
++We can also drop the assertion from our function definition, because the _compiler_ will check this for us. In this example, testing bad inputs to the function wouldn't make any sense at all because, once again, the _compiler_ will check this for us. We would still write tests, however, to make sure we actually got back what we expected:
++
++```typescript {data-filename="tests/unit/utils/math-test.ts"}
++import { module, test } from 'qunit';
++import { add } from 'app/utils/math';
++
++module('the `add` function', function (hooks) {
++  test('adds numbers correctly', function (assert) {
++    assert.strictEqual(add(2, 2), 4, '2 + 2 = 4');
++  });
++});
++```
++
++### Addon tests
++
++Note, however, that only _app code_ can omit this category of tests. If you're writing an Ember addon (or any other library), you cannot assume that everyone consuming your code is using TypeScript, so you still need to account for these kinds of cases.
++
++Let's return to our silly example with an `add` function. Our setup will look a lot like it did in the JavaScript-only example—but with some extra type coercion along the way so that we can invoke it the way JavaScript-only users might.
++
++First, notice that in this case we've added back in our `assert` in the body of the function. The inputs to our function here will get checked for us by any TypeScript users, but this way we are still doing the work of helping out our JavaScript users.
++
++```typescript {data-filename="app/utils/math.ts"}
++import { assert } from '@ember/debug';
++
++function add(a: number, b: number): number {
++  assert(
++    'arguments must be numbers',
++    typeof a === number && typeof b === number
++  );
++
++  return a + b;
++}
++```
++
++Now, in our test file, we're similarly back to testing all those extra scenarios, but here TypeScript would actually stop us from passing the bad inputs _at all_. Working around this will require you to do something that might feel uncomfortable for some enthusiastic TypeScript users: casting a bunch of values [`as any`][any] for your tests to throw away what TypeScript knows about our code!
++
++```typescript {data-filename="tests/unit/utils/math-test.ts"}
++import { module, test } from 'qunit';
++import { add } from 'app/utils/math';
++
++module('the `add` function', function (hooks) {
++  test('adds numbers correctly', function (assert) {
++    assert.strictEqual(add(2, 2), 4, '2 + 2 = 4');
++  });
++
++  test('throws an error with strings', function (assert) {
++    assert.throws(
++      () => add('nope' as any, 1),
++      'throws when the first arg is a string and the second is a number'
++    );
++    assert.throws(
++      () => add(0, 'nope' as any),
++      'throws when the first arg is a number and the second is a string'
++    );
++    assert.throws(
++      () => add('nope' as any, 'also nope' as any),
++      'throws when both args are strings'
++    );
++  });
++});
++```
++
++<!-- Internal links -->
++
++[assert]: ../../additional-resources/faq/#toc_type-narrowing-with-ember-debug-assert
++[testing]: ../../../testing/
++
++<!-- External links -->
++
++[any]: https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#any
++[this]: https://www.typescriptlang.org/docs/handbook/2/functions.html#declaring-this-in-a-function
+diff --git b/guides/typescript/core-concepts/ember-data.md a/guides/typescript/core-concepts/ember-data.md
+new file mode 100644
+index 000000000..4290b52ee
+--- /dev/null
++++ a/guides/typescript/core-concepts/ember-data.md
+@@ -0,0 +1,259 @@
++In this section, we cover how to use TypeScript effectively with specific EmberData APIs (anything you'd find under the `@ember-data` package namespace).
++
++We do _not_ cover general usage of EmberData; instead, we assume that as background knowledge. Please see the [EmberData Guides][ED-guides] and [API docs][ED-api-docs]!
++
++## Models
++
++EmberData models are normal TypeScript classes, but with properties decorated to define how the model represents an API resource and relationships to other resources. The decorators the library supplies "just work" with TypeScript at runtime, but require type annotations to be useful with TypeScript. Additionally, you must register each model with the [`ModelRegistry`][ED-registry] as shown in the examples below.
++
++### `@attr`
++
++The type returned by the `@attr` [decorator][] is whatever [Transform][transform-api-docs] is applied via the invocation. See our [overview of Transforms][transforms] for more information.
++
++If you supply no argument to `@attr`, the value is passed through without transformation.
++
++If you supply one of the built-in transforms, you will get back a corresponding type:
++
++- `@attr('string')` → `string`
++- `@attr('number')` → `number`
++- `@attr('boolean')` → `boolean`
++- `@attr('date')` → `Date`
++
++If you supply a custom transform, you will get back the type returned by your transform.
++
++So, for example, you might write a class like this:
++
++```typescript {data-filename="app/models/user.ts"}
++import Model, { attr } from '@ember-data/model';
++import CustomType from '../transforms/custom-transform';
++
++export default class User extends Model {
++  @attr
++  declare name?: string;
++
++  @attr('number')
++  declare age: number;
++
++  @attr('boolean')
++  declare isAdmin: boolean;
++
++  @attr('custom-transform')
++  declare myCustomThing: CustomType;
++}
++
++declare module 'ember-data/types/registries/model' {
++  export default interface ModelRegistry {
++    user: User;
++  }
++}
++```
++
++#### Type Safety for Model Attributes
++
++Even more than with decorators in general, you should be careful when deciding whether to mark a property as [optional `?`][optional] or definitely present (no annotation): EmberData will default to leaving a property empty if it is not supplied by the API or by a developer when creating it. That is: the _default_ for EmberData corresponds to an optional field on the model.
++
++The _safest_ type you can write for an EmberData model, therefore, leaves every property optional: this is how models _actually_ behave. If you choose to mark properties as definitely present by leaving off the `?`, you should take care to guarantee that this is a guarantee your API upholds, and that ever time you create a record from within the app, _you_ uphold those guarantees.
++
++One way to make this safer is to supply a default value using the `defaultValue` on the options hash for the attribute:
++
++```typescript {data-filename="app/models/user.ts"}
++import Model, { attr } from '@ember-data/model';
++
++export default class User extends Model {
++  @attr
++  declare name?: string;
++
++  @attr('number', { defaultValue: 13 })
++  declare age: number;
++
++  @attr('boolean', { defaultValue: false })
++  declare isAdmin: boolean;
++}
++
++declare module 'ember-data/types/registries/model' {
++  export default interface ModelRegistry {
++    user: User;
++  }
++}
++```
++
++### Relationships
++
++Relationships between models in EmberData rely on importing the related models, like `import User from './user';`. This, naturally, can cause a recursive loop, as `/app/models/post.ts` imports `User` from `/app/models/user.ts`, and `/app/models/user.ts` imports `Post` from `/app/models/post.ts`. Recursive importing triggers an [`import/no-cycle`][import-no-cycle] error from ESLint.
++
++To avoid these errors, use [type-only imports][type-only-imports]:
++
++```typescript
++import type User from './user';
++```
++
++#### `@belongsTo`
++
++The type returned by the `@belongsTo` decorator depends on whether the relationship is `{ async: true }` (which it is by default).
++
++- If the value is `true`, the type you should use is `AsyncBelongsTo<Model>`, where `Model` is the type of the model you are creating a relationship to.
++- If the value is `false`, the type is `Model`, where `Model` is the type of the model you are creating a relationship to.
++
++So, for example, you might define a class like this:
++
++```typescript {data-filename="app/models/post.ts"}
++import Model, { belongsTo, type AsyncBelongsTo } from '@ember-data/model';
++import type User from './user';
++import type Site from './site';
++
++export default class Post extends Model {
++  @belongsTo('user')
++  declare user: AsyncBelongsTo<User>;
++
++  @belongsTo('site', { async: false })
++  declare site: Site;
++}
++
++declare module 'ember-data/types/registries/model' {
++  export default interface ModelRegistry {
++    post: Post;
++  }
++}
++```
++
++These are _type_-safe to define as always present, that is to leave off the `?` optional marker:
++
++- accessing an async relationship will always return an `AsyncBelongsTo<Model>` object, which itself may or may not ultimately resolve to a value—depending on the API response—but will always be present itself.
++- accessing a non-async relationship which is known to be associated but has not been loaded will trigger an error, so all access to the property will be safe _if_ it resolves at all.
++
++Note, however, that this type-safety is not a guarantee of there being no runtime error: you still need to uphold the contract for non-async relationships (that is: loading the data first, or side-loading it with the request) to avoid throwing an error!
++
++#### `@hasMany`
++
++The type returned by the `@hasMany` decorator depends on whether the relationship is `{ async: true }` (which it is by default).
++
++- If the value is `true`, the type you should use is `AsyncHasMany<Model>`, where `Model` is the type of the model you are creating a relationship to.
++- If the value is `false`, the type is `SyncHasMany<Model>`, where `Model` is the type of the model you are creating a relationship to.
++
++So, for example, you might define a class like this:
++
++```typescript {data-filename="app/models/thread.ts"}
++import Model, {
++  hasMany,
++  type AsyncHasMany,
++  type SyncHasMany,
++} from '@ember-data/model';
++import type Comment from './comment';
++import type User from './user';
++
++export default class Thread extends Model {
++  @hasMany('comment')
++  declare comments: AsyncHasMany<Comment>;
++
++  @hasMany('user', { async: false })
++  declare participants: SyncHasMany<User>;
++}
++
++declare module 'ember-data/types/registries/model' {
++  export default interface ModelRegistry {
++    thread: Thread;
++  }
++}
++```
++
++The same basic rules about the safety of these lookups as with `@belongsTo` apply to these types. The difference is just that in `@hasMany` the resulting types are _arrays_ rather than single objects.
++
++## Transforms
++
++In EmberData, `@attr` defines an [attribute on a Model][model-attrs]. By default, attributes are passed through as-is, however you can specify an optional type to have the value automatically transformed. EmberData ships with four basic transform types: `string`, `number`, `boolean` and `date`.
++
++You can define your own transforms by sub-classing [Transform][transform-guides]. EmberData transforms are normal TypeScript classes. The return type of `deserialize` method becomes type of the model class property.
++
++You may define your own transforms in TypeScript like so:
++
++```typescript {data-filename="app/transforms/coordinate-point.ts"}
++import Transform from '@ember-data/serializer/transform';
++
++export type CoordinatePoint = {
++  x: number;
++  y: number;
++};
++
++export default class CoordinatePointTransform extends Transform {
++  deserialize(serialized): CoordinatePoint {
++    return { x: value[0], y: value[1] };
++  }
++
++  serialize(value): number {
++    return [value.x, value.y];
++  }
++}
++
++declare module 'ember-data/types/registries/transform' {
++  export default interface TransformRegistry {
++    'coordinate-point': CoordinatePointTransform;
++  }
++}
++```
++
++```typescript {data-filename="app/models/cursor.ts"}
++import Model, { attr } from '@ember-data/model';
++import { CoordinatePoint } from 'my-app/transforms/coordinate-point';
++
++export default class Cursor extends Model {
++  @attr('coordinate-point') declare position: CoordinatePoint;
++}
++
++declare module 'ember-data/types/registries/model' {
++  export default interface ModelRegistry {
++    cursor: Cursor;
++  }
++}
++```
++
++Note that you should declare your own transform under [`TransformRegistry`][ED-registry] to make `@attr` to work with your transform.
++
++## Serializers and Adapters
++
++EmberData serializers and adapters are normal TypeScript classes. The only related gotcha is that you must [register][ED-registry] them with a declaration:
++
++```typescript {data-filename="app/serializers/user-meta.ts"}
++import Serializer from '@ember-data/serializer';
++
++export default class UserMeta extends Serializer {}
++
++declare module 'ember-data/types/registries/serializer' {
++  export default interface SerializerRegistry {
++    'user-meta': UserMeta;
++  }
++}
++```
++
++```typescript {data-filename="app/adapters/user.ts"}
++import Adapter from '@ember-data/adapter';
++
++export default class User extends Adapter {}
++
++declare module 'ember-data/types/registries/adapter' {
++  export default interface AdapterRegistry {
++    user: User;
++  }
++}
++```
++
++## EmberData Registries
++
++We use [registry][] approach for EmberData type lookups with string keys. As a result, once you add the module and interface definitions for each model, transform, serializer, and adapter in your app, you will automatically get type-checking and autocompletion and the correct return types for functions like `findRecord`, `queryRecord`, `adapterFor`, `serializerFor`, etc. No need to try to write out those types; just write your EmberData calls like normal and everything _should_ just work. That is, writing `this.store.findRecord('user', 1)` will give you back a `Promise<User | undefined>`.
++
++<!-- Internal links -->
++
++[decorator]: ../../additional-resources/gotchas/#toc_decorators
++[ED-guides]: ../../../models/
++[ED-registry]: ./#toc_emberdata-registries
++[model-attrs]: ../../../models/defining-models/
++[registry]: ../../additional-resources/gotchas/#toc_registries
++[transforms]: ./#toc_transforms
++[transform-guides]: ../../../models/defining-models/#toc_custom-transforms
++
++<!-- External links -->
++
++[ED-api-docs]: https://api.emberjs.com/ember-data/release
++[import-no-cycle]: https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/no-cycle.md
++[optional]: https://www.typescriptlang.org/docs/handbook/2/objects.html#optional-properties
++[transform-api-docs]: https://api.emberjs.com/ember-data/release/classes/Transform
++[type-only-imports]: https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-8.html
+diff --git b/guides/typescript/core-concepts/index.md a/guides/typescript/core-concepts/index.md
+new file mode 100644
+index 000000000..1643db646
+--- /dev/null
++++ a/guides/typescript/core-concepts/index.md
+@@ -0,0 +1,11 @@
++In the next sections, we will cover how to use TypeScript effectively with specific Ember.js APIs.
++
++We do _not_ cover general usage of Ember; instead, we assume that as background knowledge. Please see other sections of the [Ember Guides][ember-guides] and [API docs][api-docs]!
++
++<!-- Internal links -->
++
++[ember-guides]: ../../
++
++<!-- External links -->
++
++[api-docs]: https://api.emberjs.com
+diff --git b/guides/typescript/core-concepts/invokables.md a/guides/typescript/core-concepts/invokables.md
+new file mode 100644
+index 000000000..e14f50083
+--- /dev/null
++++ a/guides/typescript/core-concepts/invokables.md
+@@ -0,0 +1,733 @@
++In Ember templates, **“invokables”** are things you can _invoke_ in a template. These include [components][], [helpers][], and [modifiers][].
++
++The same way that functions have [signatures][fn-sig] which define the arguments they take and the values they return, so do Ember template invokables.
++
++In this chapter, we will walk through how to use TypeScript with each type of invokable. But first, we'll discuss signatures in more detail.
++
++## Signature Basics
++
++Ember template invokables have a shared set of potential API features, each of which is captured in the signature:
++
++- `Args`—the arguments the invokable accepts (which may be positional or named)
++- `Return`—the value(s) the invokable returns
++- `Blocks`—the block(s) yielded by the invokable
++- `Element`—the element associated with the invokable
++
++```typescript
++interface InvokableSignature {
++  Args?: {
++    Positional?: Array<unknown>;
++    Named?: {
++      [argName: string]: unknown;
++    };
++  };
++  Return?: unknown;
++  Blocks?: {
++    [blockName: string]: {
++      Params?: {
++        Positional?: Array<unknown>;
++      };
++    };
++  };
++  Element?: Element | null;
++}
++```
++
++Ember uses the signature to provide both editor support for the invokable with TypeScript and [Glint][] and documentation using any tool which understands type annotations or JSDoc.
++
++A few things to note about these signatures:
++
++First, while you _can_ write a full signature like this for any invokable, you never _need_ to. Different kinds of invokables care about different subsets of this set of features:
++
++- Helpers may have arguments and return values, but do not yield blocks and do not have an associated element.
++- Components may have arguments, blocks, and an associated element, but never return values.
++- Modifiers may have arguments and always have an associated element, but do not return values or have blocks.
++- Accordingly, we supply simpler forms of signatures appropriate to each type of invokable.
++
++Second, any given component, modifier, or helper may only use a subset of the items it _can_ use, so many signatures will be even simpler.
++
++And last, a signature can be defined in both TypeScript types and JSDoc annotations. The examples below will show each.
++
++## Glimmer Components
++
++Glimmer Components are defined in one of three ways:
++
++- with templates only,
++- with a template and a backing class,
++- or with only a backing class (i.e. a [provider component][provider-component]).
++
++As always, you should start by reading and understanding the [Ember Guide on Components][components]!
++
++When using a backing class, you get a first-class experience using TypeScript with a component signature. For type-checking Glimmer templates as well, see [Glint][].
++
++The normal form of a Glimmer component signature is:
++
++```typescript
++interface ComponentSignature {
++  Args: {
++    [argName: string]: unknown;
++  };
++  Blocks: {
++    [blockName: string]: Array<unknown>;
++  };
++  Element: Element;
++}
++```
++
++This signature handles all aspects of a Glimmer component: its arguments, any blocks it yields, and the element to which it will apply `...attributes`.
++
++For example, consider the `AudioPlayer` described in the
++[Communicating Between Elements in a Component][audio-player-section] of the [Template Lifecycle, DOM, and Modifiers guide][modifiers].
++
++There, we defined component which accepted a `srcUrl` argument and used a `play-when` modifier to manage the behavior of the element:
++
++```typescript {data-filename="app/components/audio-player.ts"}
++import Component from '@glimmer/component';
++import { tracked } from '@glimmer/tracking';
++import { action } from '@ember/object';
++
++export default class AudioPlayer extends Component {
++  @tracked isPlaying = false;
++
++  @action
++  play() {
++    this.isPlaying = true;
++  }
++
++  @action
++  pause() {
++    this.isPlaying = false;
++  }
++}
++```
++
++```handlebars {data-filename="app/components/audio-player.hbs"}
++<audio src={{@srcURL}} {{play-when this.isPlaying}} />
++
++<button type='button' {{on 'click' this.play}}>Play</button>
++<button type='button' {{on 'click' this.pause}}>Pause</button>
++```
++
++What elements do we need to build a signature for this component?
++
++- It takes a single argument, the `srcUrl` for the `audio` element.
++- It does not use `...attributes`, so it does not need an `Element`.
++- It does not yield any blocks, so it also does not need `Blocks`.
++
++We can define a signature with those `Args` on it and apply it to the component definition by adding it as a type parameter to the `extends Component` clause:
++
++```typescript {data-filename="app/components/audio-player.ts" data-diff="+5,+6,+7,+8,+9,+10,+11,-12,+13"}
++import Component from "@glimmer/component";
++import { tracked } from "@glimmer/tracking";
++import { action } from "@ember/object";
++
++interface AudioPlayerSignature {
++  Args: {
++    /** The url for the audio to be played */
++    srcUrl: string;
++  };
++}
++
++export default class AudioPlayer extends Component {
++export default class AudioPlayer extends Component<AudioPlayerSignature> {
++  @tracked isPlaying = false;
++
++  @action
++  play() {
++    this.isPlaying = true;
++  }
++
++  @action
++  pause() {
++    this.isPlaying = false;
++  }
++}
++```
++
++Now, let's expand on this example to give callers the ability to apply attributes to the audio element with an `Element`:
++
++```typescript {data-filename="app/components/audio-player.ts" data-diff="+10"}
++import Component from '@glimmer/component';
++import { tracked } from '@glimmer/tracking';
++import { action } from '@ember/object';
++
++interface AudioPlayerSignature {
++  Args: {
++    /** The url for the audio to be played */
++    srcUrl: string;
++  };
++  Element: HTMLAudioElement;
++}
++
++export default class AudioPlayer extends Component<AudioPlayerSignature> {
++  @tracked isPlaying = false;
++
++  @action
++  play() {
++    this.isPlaying = true;
++  }
++
++  @action
++  pause() {
++    this.isPlaying = false;
++  }
++}
++```
++
++```handlebars {data-filename="app/components/audio-player.hbs" data-diff="-1,+2"}
++<audio src={{@srcURL}} {{play-when this.isPlaying}} />
++<audio ...attributes src={{@srcURL}} {{play-when this.isPlaying}} />
++
++<button type='button' {{on 'click' this.play}}>Play</button>
++<button type='button' {{on 'click' this.pause}}>Pause</button>
++```
++
++We can also let the user provide a fallback for the case where the audio element does not load, using the default block. We have to name the default block explicitly in the new `Blocks` type we add to our signature. Since blocks yield out a list of items, we can use a [tuple type][tuple] to represent them. In this case, we will just yield out the same URL we loaded, to let the caller use it for the fallback.
++
++```typescript {data-filename="app/components/audio-player.ts" data-diff="+10,+11,+12"}
++import Component from '@glimmer/component';
++import { tracked } from '@glimmer/tracking';
++import { action } from '@ember/object';
++
++interface AudioPlayerSignature {
++  Args: {
++    /** The url for the audio to be played */
++    srcUrl: string;
++  };
++  Blocks: {
++    default: [srcUrl: string];
++  };
++  Element: HTMLAudioElement;
++}
++
++export default class AudioPlayer extends Component<AudioPlayerSignature> {
++  @tracked isPlaying = false;
++
++  @action
++  play() {
++    this.isPlaying = true;
++  }
++
++  @action
++  pause() {
++    this.isPlaying = false;
++  }
++}
++```
++
++```handlebars {data-filename="app/components/audio-player.hbs" data-diff="-1,+2,+3,+4"}
++<audio ...attributes src={{@srcURL}} {{play-when this.isPlaying}} />
++<audio ...attributes src={{@srcURL}} {{play-when this.isPlaying}}>
++  {{yield @srcUrl}}
++</audio>
++
++<button type='button' {{on 'click' this.play}}>Play</button>
++<button type='button' {{on 'click' this.pause}}>Pause</button>
++```
++
++Let's go one step further and switch to supporting for two [named blocks][named-blocks]: an optional `title` block for a caption for the audio element, and a `fallback` block for the audio fallback where we previously used a `default` block.
++
++```handlebars {data-filename="app/components/audio-player.hbs" data-diff="+1,+2,+3,+4,+5,-7,+8"}
++<figure>
++  {{#if (has-block 'title')}}
++    <figcaption>{{yield to='title'}}</figcaption>
++  {{/if}}
++
++  <audio ...attributes src={{@srcUrl}} {{play-when this.isPlaying}}>
++    {{yield @srcUrl}}
++    {{yield @srcUrl to='fallback'}}
++  </audio>
++</figure>
++
++<button type='button' {{on 'click' this.play}}>Play</button>
++<button type='button' {{on 'click' this.pause}}>Pause</button>
++```
++
++To represent this, we will update the `default` block to be named `fallback` instead and add the `title` block. We do not yield anything to the `title` block, so we use an empty tuple, `[]`, to represent it.
++
++```typescript {data-filename="app/components/audio-player.ts" data-diff="-11,+12,+13"}
++import Component from '@glimmer/component';
++import { tracked } from '@glimmer/tracking';
++import { action } from '@ember/object';
++
++interface AudioPlayerSignature {
++  Args: {
++    /** The url for the audio to be played */
++    srcUrl: string;
++  };
++  Blocks: {
++    default: [srcUrl: string];
++    fallback: [srcUrl: string];
++    title: [];
++  };
++  Element: HTMLAudioElement;
++}
++
++export default class AudioPlayer extends Component<AudioPlayerSignature> {
++  @tracked isPlaying = false;
++
++  @action
++  play() {
++    this.isPlaying = true;
++  }
++
++  @action
++  pause() {
++    this.isPlaying = false;
++  }
++}
++```
++
++### Types in JavaScript with JSDoc
++
++When working in JavaScript, we can provide the exact same information using JSDoc comments. Here is how our final component definition would look if it were written in JavaScript rather than TypeScript, and using comments for this documentation information:
++
++```js {data-filename="app/components/audio-player.js"}
++import Component from '@glimmer/component';
++import { tracked } from '@glimmer/tracking';
++import { action } from '@ember/object';
++
++/**
++ * @typedef AudioPlayerSignature
++ * @property {AudioPlayerArgs} Args
++ * @property {AudioPlayerBlocks} Blocks
++ * @property {HTMLAudioElement} Element
++ */
++
++/**
++ * @typedef AudioPlayerArgs
++ * @property {string} src
++ */
++
++/**
++ * @typedef AudioPlayerBlocks
++ * @property {[srcUrl: string]} audio
++ * @property {[]} title
++ */
++
++/**
++ * @extends Component<AudioPlayerSignature>
++ */
++export default class AudioPlayer extends Component {
++  @tracked isPlaying = false;
++
++  @action
++  play() {
++    this.isPlaying = true;
++  }
++
++  @action
++  pause() {
++    this.isPlaying = false;
++  }
++}
++```
++
++## Classic Ember Components
++
++See ["Working With Ember Classic"][classic-components].
++
++## Helpers
++
++Helpers in Ember are just functions or classes with a well-defined interface, which means they largely Just Work™ with TypeScript. However, there are a couple things you'll want to watch out for.
++
++(As always, you should start by reading and understanding the [Ember Guide on Helpers][helpers]!)
++
++The signature for a helper includes its named and/or positional arguments and its return type:
++
++```typescript
++interface HelperSignature {
++  Args?: {
++    Positional?: Array<unknown>;
++    Named?: {
++      [argName: string]: unknown;
++    };
++  };
++  Return?: unknown;
++}
++```
++
++### Function-based helpers
++
++You never have to write a signature when working with function-based helpers—whether using a standalone function as a helper or using the legacy `helper()` definition. Instead, you can write a function definition as usual, providing types and documentation for its arguments and return types the way you would any other function. Tools like Glint and documentation generators can synthesize all the information required from those definitions, and in general work _better_ with normal function definitions than with signatures for function-based helpers.
++
++For example, you might define a `parseInt` helper like this using a normal function:
++
++- In TypeScript:
++
++      ```typescript {data-filename="app/helpers/parse-int.ts"}
++      /**
++       * @param value - the value to parse
++       * @param options - how to parse the value
++       */
++      function parseInt(value: string, options: { radix?: number }): number {
++        let radix = options?.radix ?? 10;
++        return Number.parseInt(value, radix);
++      }
++      ```
++
++- With JSDoc:
++
++      ```js {data-filename="app/helpers/parse-int.js"}
++      /**
++       * @param {string} value - the value to parse
++       * @param {{ radix?: number }} named - how to parse the value
++       * @returns {number}
++       */
++      export default function parseInt(value, named) {
++        let radix = named?.radix ?? 10;
++        return Number.parseInt(value, radix);
++      }
++      ```
++
++Using `helper()`, you would define it very similarly:
++
++- In TypeScript:
++
++      ```typescript {data-filename="app/helpers/parse-int.ts"}
++      import { helper } from '@ember/component/helper';
++
++      export default helper(function parseInt(
++        positional: [string],
++        named: { radix?: number }
++      ): number {
++        let value = positional[0];
++        let radix = named.radix ?? 10;
++        return Number.parseInt(value, radix);
++      });
++      ```
++
++- With JSDoc:
++
++      ```typescript {data-filename="app/helpers/parse-int.js"}
++      import { helper } from '@ember/component/helper';
++
++      export default helper(
++        /**
++         * @param {string} value - the value to parse
++         * @param {{ radix?: number }} named - how to parse the value
++         * @returns {number}
++         */
++        function parseInt(positional, named): number {
++          let value = positional[0];
++          let radix = named.radix ?? 10;
++          return Number.parseInt(value, radix);
++        }
++      );
++      ```
++
++For completeness and backwards-compatibility, helpers defined with `helper()` do accept signatures as a type parameter as well. The `parseInt` helper might look like this if using an explicit signature:
++
++```typescript {data-filename="app/helpers/parse-int.ts"}
++import { helper } from '@ember/component/helper';
++
++interface ParseIntSignature {
++  Args: {
++    Positional: [
++      /** The value to parse */
++      string
++    ];
++    Named: {
++      /** The radix to use when parsing the value */
++      radix?: number;
++    };
++  };
++  Return: number;
++}
++
++export default helper<ParseIntSignature>(function parseInt(positional, named) {
++  let value = positional[0];
++  let radix = named.radix ?? 10;
++  return Number.parseInt(value, radix);
++});
++```
++
++However, you _cannot_ provide a signature for the `helper()` definition from with JSDoc. This is an additional reason to avoid signatures with function-based helpers, and to prefer using normal function declarations and definitions.
++
++### Class-based helpers
++
++Signatures are more useful for class-based helpers, where they are the only way to provide the type information for Glint/TypeScript.
++
++Consider here a helper for formatting strings, which uses an injected `locale` service. (This kind of service injection is one of the main reasons to use a class-based helper.) Assume that the `locale` service has a `format` method which accepts a string to format and an optional locale override.
++
++Our helper will accept the same arguments, so we will use it like this:
++
++```handlebars
++{{format 'some-string'}}
++{{format 'some-string' localeOverride='en-GB'}}
++```
++
++```typescript {data-filename="app/helpers/format.ts"}
++import Helper from '@ember/component/helper';
++import { service } from '@ember/service';
++import type LocaleService from '../services/locale';
++
++interface FormatSignature {
++  Args: {
++    Positional: [string];
++    Named: {
++      locale?: string;
++    };
++  };
++  Return: string;
++}
++
++export default class Format extends Helper<FormatSignature> {
++  @service declare locale: LocaleService;
++
++  compute(positional: [string], named: { locale?: string }): string {
++    let [value] = positional;
++    return this.locale.format(value, { override: named.locale });
++  }
++}
++```
++
++Here, the arguments and return type for `compute` match the types in `Args` in `FormatSignature`.
++
++You might be wondering: Given that we already have a signature, can TypeScript infer the types for the method from the signature, like it can for the `helper()` form?
++
++```typescript
++export default class Format extends Helper<FormatSignature> {
++  @service declare locale: LocaleService;
++
++  compute(positional, named): string {
++    let [value] = positional;
++    return this.locale.format(value, { override: named.locale });
++  }
++}
++```
++
++Unfortunately, TypeScript does not infer the types for class methods like this. As a result, we have to write out the full types for the method, and have to keep these definitions in sync manually.
++
++From a type checking perspective, these types must be _compatible_ with the types in the signature, though they do not have to be identical. The rule for “compatibility” here is that your function signature types must be more general (“wider” in TypeScript terms) than the corresponding parts of the signature type.
++
++<!-- TODO: Glint will type check that any types you write to make sure they are compatible. -->
++
++For example, we could define the type of the positional arguments in the method body as `Array<unknown>` instead of `[string]`, while keeping the original signature's `Positional: [string]`:
++
++```typescript
++  compute(positional: Array<unknown>, named: { locale?: string }): string {
++    // ...
++  }
++```
++
++Because the signature set on the class, callers would still have to pass a single string argument, but we would need to change the behavior of the body to [narrow the type][narrowing] for the first item in the array.
++
++Accordingly, the best practice is to keep the types matching.
++
++## Modifiers
++
++Modifiers in Ember are just functions or classes with a well-defined interface, which means they largely Just Work™ with TypeScript. However, there are a couple things you'll want to watch out for.
++
++(As always, you should start by reading and understanding the [Ember Guide on Modifiers][modifiers]!)
++
++The signature for a modifier consists of any named or positional arguments along with the kind of element it can be applied to. The arguments are optional, but the element is required.
++
++```typescript
++interface ModifierSignature {
++  Args?: {
++    Positional?: Array<unknown>;
++    Named?: {
++      [argName: string]: unknown;
++    };
++  };
++  Element: Element;
++}
++```
++
++### Function-based modifiers
++
++Function-based modifiers do not require writing out a signature manually. Instead, you can—and should!—write the types directly on the function which defines them.
++
++Using our `play-when` modifier example used with the `AudioPlayer` above, we might define the modifier like this:
++
++- In TypeScript:
++
++      ```typescript {data-filename="app/modifiers/play-when.ts"}
++      import { modifier } from 'ember-modifier';
++
++      export default modifier(function playWhen(
++        element: HTMLAudioElement,
++        positional: [shouldPlay: boolean]
++      ): void {
++        let [shouldPlay] = positional;
++        if (shouldPlay) {
++          element.play();
++        } else {
++          element.pause();
++        }
++      });
++      ```
++
++- With JSDoc:
++
++      ```js {data-filename="app/modifiers/play-when.js"}
++      import { modifier } from 'ember-modifier';
++
++      export default modifier(
++        /**
++         * @param {HTMLAudioElement} element
++         * @param {[shouldPlay: boolean]} positional
++         */
++        (element, positional): void => {
++          let [shouldPlay] = positional;
++          if (shouldPlay) {
++            element.play();
++          } else {
++            element.pause();
++          }
++        }
++      );
++      ```
++
++For the sake of backward compatibility and completeness, using a signature explicitly as a type parameter to `modifier()` is also supported. In that case, we could write the modifier like this:
++
++```typescript {data-filename="app/modifiers/play-when.ts"}
++import { modifier } from 'ember-modifier';
++
++interface Signature {
++  Args: {
++    Positional: [shouldPlay: boolean];
++  };
++  Element: HTMLAudioElement;
++}
++
++export default modifier<Signature>((element, positional) => {
++  let [shouldPlay] = positional;
++  if (shouldPlay) {
++    element.play();
++  } else {
++    element.pause();
++  }
++});
++```
++
++### Class-based modifiers
++
++Signatures are more useful for class-based modifiers, where they are the only way to provide the type information for Glint/TypeScript. For example, when using `IntersectionObserver`s, you might want to improve your app's performance by observing (`.observe()`) multiple elements in the same `IntersectionObserver`, all coordinated by a service.
++
++Given an `IntersectionObserverManager` service with an `observe` method, we might provide a signature defining `onEnter` and `onExit` callbacks and an `options` object to specify the `IntersectionObserver` options. Then we would supply the signature on the class definition with a type parameter to the super class. With all the pieces put together, we would have this:
++
++```typescript {data-filename="app/modifiers/did-intersect.ts"}
++import Modifier from 'ember-modifier';
++import { service } from '@ember/service';
++import type IntersectionObserverManager from '../services/intersection-observer-manager';
++
++interface DidIntersectSignature {
++  Args: {
++    Named: {
++      onEnter: (entry: IntersectionObserverEntry) => void;
++      onExit: (entry: IntersectionObserverEntry) => void;
++      options: IntersectionObserverInit;
++    };
++  };
++  Element: Element;
++}
++
++export default class DidIntersect extends Modifier<DidIntersectSignature> {
++  @service declare manager: IntersectionObserverManager;
++
++  modify(el: Element, _: [], named: DidIntersectSignature['Args']['Named']) {
++    let { onEnter, onExit, options } = named;
++    this.manager.observe(el, options, { onEnter, onExit });
++  }
++}
++```
++
++Notice that we can just skip the positional arguments entirely in this case, and give them a name like `_` to indicate we are doing nothing with it. If we had positional arguments, we would supply them like normal.
++
++## Advanced signature techniques
++
++We can also define signatures in more complicated ways using more advanced TypeScript features.
++Nearly anything you can do with a “regular” TypeScript function or class, you can also do with signatures for Glimmer invokables.
++We can make a component accept a [generic][generic] type, or use [union][union] types.
++With these tools at our disposal, we can even define our signatures to [make illegal states un-representable][illegal].
++
++To see this in practice, consider a list component which yields back out instances of the same type it provides, and provides the appropriate element target based on a `type` argument.
++Yielding back out the same type passed in will use generics, and providing an appropriate element target for `...attributes` can use a union type.
++
++Here is how that might look, using a class-backed component rather than a template-only component, since the only places TypeScript allows us to name new generic types are on functions and classes:
++
++```typescript
++import Component from '@glimmer/component';
++
++interface OrderedList<T> {
++  Args: {
++    items: Array<T>;
++    type: 'ordered';
++  };
++  Blocks: {
++    default: [item: T];
++  };
++  Element: HTMLOListElement;
++}
++
++interface UnorderedList<T> {
++  Args: {
++    items: Array<T>;
++    type: 'unordered';
++  };
++  Blocks: {
++    default: [item: T];
++  };
++  Element: HTMLUListElement;
++}
++
++type ListSignature<T> = OrderedList<T> | UnorderedList<T>;
++
++export default class List<T> extends Component<ListSignature<T>> {
++  <template>
++    {{#if (isOrdered @type)}}
++      <ol ...attributes>
++        {{#each @items as |item|}}
++          <li>{{yield item}}</li>
++        {{/each}}
++      </ol>
++    {{else}}
++      <ul ...attributes>
++        {{#each @items as |item|}}
++          <li>{{yield item}}</li>
++        {{/each}}
++      </ul>
++    {{/if}}
++  </template>
++}
++
++function isOrdered(type: 'ordered' | 'unordered'): type is 'ordered' {
++  return type === 'ordered';
++}
++```
++
++If you are using Glint, when this component is invoked, the `@type` argument will determine what kinds of modifiers are legal to apply to it. For example, if you defined a modifier `reverse` which required an `HTMLOListElement`, this invocation would be rejected:
++
++```handlebars
++<List @items={{array 1 2 3}} @type='unordered' {{reverse}} as |item|>
++  The item is
++  {{item}}.
++</List>
++```
++
++The same approach with generics works for class-based helpers and class-based modifiers.
++Function-based helpers and modifiers can also use generics, but by using them on the function definition rather than via a signature.
++One caveat: particularly complicated union types in signatures can sometimes become too complex for Glint/TypeScript to resolve when invoking in a template.
++In those cases, your best bet is to find a simpler way to structure the types while preserving type safety.
++
++<!-- Internal links -->
++
++[audio-player-section]: ../../../components/template-lifecycle-dom-and-modifiers/#toc_communicating-between-elements-in-a-component
++[classic-components]: ../../additional-resources/legacy/#toc_classic-ember-components
++[components]: ../../../components/introducing-components/
++[helpers]: ../../../components/helper-functions/
++[modifiers]: ../../../components/template-lifecycle-dom-and-modifiers/
++[named-blocks]: ../../../components/block-content/
++[provider-component]: ../../../tutorial/part-2/provider-components/
++
++<!-- External links -->
++
++[fn-sig]: https://developer.mozilla.org/en-US/docs/Glossary/Signature/Function
++[generic]: https://www.typescriptlang.org/docs/handbook/2/generics.html
++[glint]: https://github.com/typed-ember/glint
++[illegal]: https://v5.chriskrycho.com/journal/making-illegal-states-unrepresentable-in-ts/
++[narrowing]: http://www.typescriptlang.org/docs/handbook/2/narrowing.html
++[tuple]: https://www.typescriptlang.org/docs/handbook/2/objects.html#tuple-types
++[union]: https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#union-types
+diff --git b/guides/typescript/core-concepts/routing.md a/guides/typescript/core-concepts/routing.md
+new file mode 100644
+index 000000000..83a5cf886
+--- /dev/null
++++ a/guides/typescript/core-concepts/routing.md
+@@ -0,0 +1,132 @@
++## Routes
++
++Since Ember [Routes][] are just regular JavaScript classes with a few special Ember lifecycle hooks and properties available, TypeScript should "Just Work." Ember's types supply the definitions for the various methods available within route subclasses, which will provide autocomplete and type-checking along the way.
++
++## Controllers
++
++Like routes, [Controllers][] are just normal JavaScript classes with a few special Ember lifecycle hooks and properties available.
++
++The main thing to be aware of is special handling around query params. In order to provide type safety for query param configuration, Ember's types specify that when defining a query param's `type` attribute, you must supply one of the allowed types: `'boolean'`, `'number'`, `'array'`, or `'string'` (the default). However, if you supply these types as you would in JS, like this:
++
++```typescript {data-filename="app/controllers/my.ts"}
++import Controller from '@ember/controller';
++
++export default class MyController extends Controller {
++  queryParams = [
++    {
++      category: { type: 'array' },
++    },
++  ];
++}
++```
++
++Then you will see a type error like this:
++
++```text
++Property 'queryParams' in type 'MyController' is not assignable to the same property in base type 'Controller'.
++  Type '{ category: { type: string; }; }[]' is not assignable to type '(string | Record<string, string | QueryParamConfig | undefined>)[]'.
++    Type '{ category: { type: string; }; }' is not assignable to type 'string | Record<string, string | QueryParamConfig | undefined>'.
++      Type '{ category: { type: string; }; }' is not assignable to type 'Record<string, string | QueryParamConfig | undefined>'.
++        Property 'category' is incompatible with index signature.
++          Type '{ type: string; }' is not assignable to type 'string | QueryParamConfig | undefined'.
++            Type '{ type: string; }' is not assignable to type 'QueryParamConfig'.
++              Types of property 'type' are incompatible.
++                Type 'string' is not assignable to type '"string" | "number" | "boolean" | "array" | undefined'.ts(2416)
++```
++
++This is because TS currently infers the type of `type: "array"` as `type: string`. You can work around this by supplying [`as const`][const-assertions] after the declaration:
++
++```typescript {data-filename="app/controllers/my.ts", data-diff="-6,+7"}
++import Controller from '@ember/controller';
++
++export default class MyController extends Controller {
++  queryParams = [
++    {
++      category: { type: 'array' },
++      category: { type: 'array' as const },
++    },
++  ];
++}
++```
++
++Now it will type-check.
++
++## Working with Route Models
++
++We often use routes' models throughout our application, since they're a core ingredient of our application's data. As such, we want to make sure that we have good types for them!
++
++We can start by defining a type utility to let us get the resolved value returned by a route's model hook:
++
++```typescript {data-filename="app/lib/type-utils.ts"}
++import type Route from '@ember/routing/route';
++
++/** Get the resolved model value from a route. */
++export type ModelFrom<R extends Route> = Awaited<ReturnType<R['model']>>;
++```
++
++How that works:
++
++- [`Awaited<P>`][awaited] says "if this is a promise, the type here is whatever the promise resolves to; otherwise, it's just the value"
++- [`ReturnType<T>`][return-type] gets the return value of a given function
++- `R['model']` (where `R` has to be `Route` itself or a subclass) says "the property named `model` on Route `R`"
++
++`ModelFrom<Route>` ends up giving you the resolved value returned from the `model` hook for a given route. We can use this functionality to guarantee that the `model` on a `Controller` is always exactly the type returned by `Route::model` by writing something like this:
++
++```typescript {data-filename="app/controllers/controller-with-model.ts"}
++import Controller from '@ember/controller';
++import MyRoute from 'my-app/routes/my-route';
++import { ModelFrom } from 'my-app/lib/type-utils';
++
++export default class ControllerWithModel extends Controller {
++  declare model: ModelFrom<MyRoute>;
++}
++```
++
++Now, our controller's `model` property will _always_ stay in sync with the corresponding route's model hook.
++
++<div class="cta">
++  <div class="cta-note">
++    <div class="cta-note-body">
++      <div class="cta-note-heading">Zoey says...</div>
++      <div class="cta-note-message">
++        <p>
++        The <code>ModelFrom</code> type utility <i>only</i> works if you do not mutate the <code>model</code> in either the <code>afterModel</code> or <code>setupController</code> hooks on the route! That's generally considered to be a bad practice anyway.
++        </p>
++      </div>
++    </div>
++    <img src="/images/mascots/zoey.png" role="presentation" alt="">
++  </div>
++</div>
++
++## Controller Injections and Lookups
++
++If you are using controller injections via the `@inject` decorator from `@ember/controller`, see the ["Decorators"][decorators] documentation.
++
++If you need to lookup a controller with `Owner.lookup`, you'll need to first register your controller in Ember's TypeScript Controller registry as described in ["Registries"][registries]:
++
++```typescript {data-filename="app/controllers/my.ts"}
++import Controller from '@ember/controller';
++
++export default class MyController extends Controller {
++  //...
++}
++
++declare module '@ember/controller' {
++  interface Registry {
++    my: MyController;
++  }
++}
++```
++
++<!-- Internal links -->
++
++[controllers]: ../../../routing/controllers/
++[decorators]: ../../additional-resources/gotchas/#toc_decorators
++[registries]: ../../additional-resources/gotchas/#toc_registries
++[routes]: ../../../routing/defining-your-routes/
++
++<!-- External links -->
++
++[awaited]: https://www.typescriptlang.org/docs/handbook/utility-types.html#awaitedtype
++[const-assertions]: https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-4.html#const-assertions
++[return-type]: https://www.typescriptlang.org/docs/handbook/utility-types.html#returntypetype
+diff --git b/guides/typescript/core-concepts/services.md a/guides/typescript/core-concepts/services.md
+new file mode 100644
+index 000000000..257f81a99
+--- /dev/null
++++ a/guides/typescript/core-concepts/services.md
+@@ -0,0 +1,115 @@
++Ember [Services][] are global singleton classes that can be made available to different parts of an Ember application via dependency injection. Due to their global, shared nature, writing services in TypeScript gives you a build-time-enforceable API for some of the most central parts of your application.
++
++## A Basic Service
++
++Let's take this example from elsewhere in the [Ember Guides][example-location]:
++
++```typescript {data-filename="app/services/shopping-cart.ts"}
++import Service from '@ember/service';
++import { TrackedSet } from 'tracked-built-ins';
++
++export default class ShoppingCartService extends Service {
++  items = new TrackedSet();
++
++  add(item) {
++    this.items.add(item);
++  }
++
++  remove(item) {
++    this.items.remove(item);
++  }
++
++  empty() {
++    this.items.clear();
++  }
++}
++```
++
++Just making this a TypeScript file gives us some type safety without having to add any additional type information. We'll see this when we use the service elsewhere in the application.
++
++## Using Services
++
++Ember looks up services with the `@service` decorator at runtime, using the name of the service being injected as the default value—a clever bit of metaprogramming that makes for a nice developer experience. TypeScript cannot do this, because the name of the service to inject isn't available at compile time in the same way.
++
++Since legacy decorators do not have access to enough information to produce an appropriate type by themselves, we need to import and add the type explicitly. Also, we must use the [`declare`][declare] property modifier to tell the TypeScript compiler to trust that this property will be set up by something outside this component—namely, the decorator. (Learn more about using Ember's decorators with TypeScript [here][decorators].) Here's an example using the `ShoppingCartService` we defined above in a component:
++
++```typescript {data-filename="app/components/cart-contents.ts"}
++import Component from '@glimmer/component';
++import { service } from '@ember/service';
++import { action } from '@ember/object';
++
++import ShoppingCartService from 'my-app/services/shopping-cart';
++
++export default class CartContentsComponent extends Component {
++  @service declare shoppingCart: ShoppingCartService;
++
++  @action
++  remove(item) {
++    this.shoppingCart.remove(item);
++  }
++}
++```
++
++Any attempt to access a property or method not defined on the service will fail type-checking:
++
++```typescript {data-filename="app/components/cart-contents.ts"}
++import Component from '@glimmer/component';
++import { service } from '@ember/service';
++import { action } from '@ember/object';
++
++import ShoppingCartService from 'my-app/services/shopping-cart';
++
++export default class CartContentsComponent extends Component {
++  @service declare shoppingCart: ShoppingCartService;
++
++  @action
++  remove(item) {
++    // Error: Property 'saveForLater' does not exist on type 'ShoppingCartService'.
++    this.shoppingCart.saveForLater(item);
++  }
++}
++```
++
++Services can also be loaded from the dependency injection container manually:
++
++```typescript {data-filename="app/components/cart-contents.ts"}
++import Component from '@glimmer/component';
++import { getOwner } from '@ember/owner';
++import { action } from '@ember/object';
++
++export default class CartContentsComponent extends Component {
++  get cart() {
++    return getOwner(this)?.lookup('service:shopping-cart');
++  }
++
++  @action
++  remove(item) {
++    this.cart.remove(item);
++  }
++}
++```
++
++In order for TypeScript to infer the correct type for the `ShoppingCartService` from the call to `Owner.lookup`, we must first [register][registries] the `ShoppingCartService` type with `declare module`:
++
++```typescript {data-filename="app/services/shopping-cart.ts"}
++export default class ShoppingCartService extends Service {
++  //...
++}
++
++declare module '@ember/service' {
++  interface Registry {
++    'shopping-cart': ShoppingCartService;
++  }
++}
++```
++
++<!-- Internal links -->
++
++[example-location]: ../../../services/#toc_defining-services
++[decorators]: ../../additional-resources/gotchas/#toc_decorators
++[registries]: ../../additional-resources/gotchas/#toc_registries
++[services]: ../../../services/
++
++<!-- External links -->
++
++[declare]: https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-7.html#the-usedefineforclassfields-flag-and-the-declare-property-modifier
+diff --git b/guides/typescript/getting-started.md a/guides/typescript/getting-started.md
+new file mode 100644
+index 000000000..88f045e84
+--- /dev/null
++++ a/guides/typescript/getting-started.md
+@@ -0,0 +1,72 @@
++## Create a New TypeScript Application
++
++To start a new Ember project with TypeScript, add the `--typescript` flag when you run [`ember new`][ember-new]:
++
++```shell
++ember new my-typescript-app --typescript
++```
++
++Using the `--typescript` flag changes the output of `ember new` in a few ways:
++
++### TypeScript Project Files
++
++Project files will be generated with `.ts` extensions instead of `.js`.
++
++### Packages to Support TypeScript
++
++In addition to the usual packages added with `ember new`, the following packages will be added at their current "latest" value:
++
++- `typescript`
++- `@tsconfig/ember`
++- `@typescript-eslint/*`
++- `@types/ember`
++- `@types/ember-data`
++- `@types/ember__*` – `@types/ember__object` for `@ember/object`, etc.
++- `@types/ember-data__*` – `@types/ember-data__model` for `@ember-data/model`, etc.
++- `@types/qunit`
++- `@types/rsvp`
++
++The `typescript` package provides tooling to support TypeScript type checking and compilation. The `@types` packages from [DefinitelyTyped][] provide TypeScript type definitions for all of the Ember and EmberData modules.
++
++<div class="cta">
++  <div class="cta-note">
++    <div class="cta-note-body">
++      <div class="cta-note-heading">Zoey says...</div>
++      <div class="cta-note-message">
++        Ember also publishes its own native types compiled directly from its source code, as described <a href="https://blog.emberjs.com/stable-typescript-types-in-ember-5-1/">in this blog post</a>. For now, we continue to use the <code>@types</code> packages by default for the sake of compatibility with EmberData, because EmberData is not yet compatible with Ember's native official types. However, if you do not use EmberData, we <i>highly</i> recommend following the instructions in that blog post to switch to the native types, which are guaranteed to always be 100% correct and 100% up to date!
++      </div>
++    </div>
++    <img src="/images/mascots/zoey.png" role="presentation" alt="">
++  </div>
++</div>
++
++### Files and Config to Support TypeScript
++
++In addition to the usual files added with `ember new`, we also add:
++
++- [`tsconfig.json`][tsconfig] – configuration to set up TypeScript for your project
++- [`types/global.d.ts`][global-types] – the location for any global type declarations you need to write
++- [`app/config/environment.d.ts`][environment-types] – a basic set of types defined for the contents of your `config/environment.js` file
++
++Additionally:
++
++- `package.json` will have a `lint:types` script to check types with the command line.
++- `ember-cli-build.js` will be configured to transform TypeScript at build-time.
++- `.ember-cli` has `isTypeScriptProject` set to true, which will force the blueprint generators to generate TypeScript rather than JavaScript by default.
++- `.eslintrc.js` will be configured for TypeScript.
++
++## Convert an Existing App to TypeScript
++
++To convert an existing app to TypeScript, you'll need to make the changes described above manually (for now). To facilitate this, we've included a guide [here][converting].
++
++<!-- Internal links -->
++
++[converting]: ../application-development/converting-an-app/
++[ember-new]: ../../getting-started/quick-start/
++[environment-types]: ../additional-resources/faq/#toc_environment-configuration-typings
++[global-types]: ../additional-resources/faq/#toc_global-types-for-your-project
++[tsconfig]: ../application-development/configuration/#toc_tsconfigjson
++
++<!-- External links -->
++
++[DefinitelyTyped]: https://github.com/DefinitelyTyped/DefinitelyTyped
+diff --git b/guides/typescript/index.md a/guides/typescript/index.md
+new file mode 100644
+index 000000000..956e9d151
+--- /dev/null
++++ a/guides/typescript/index.md
+@@ -0,0 +1,43 @@
++This guide is designed to help you get up and running with TypeScript in an Ember app.
++
++This is _not_ an introduction to TypeScript _or_ Ember. Throughout this guide, we'll link back to [the TypeScript docs][typescript-docs] and to other sections of [the Ember Guides][ember-guides] when there are specific concepts that we will not explain here but which are important for understanding what we're covering!
++
++Not sure where to get started? Here's an overview of the content within:
++
++- If you're totally new to using TypeScript with Ember, start with [Core Concepts: TypeScript and Ember][core-concepts].
++- To create a new Ember app or addon with TypeScript, check out [Getting Started with TypeScript][getting-started] and [Building Addons in TypeScript][addons].
++- If you're looking to convert an existing Ember app to TypeScript, check out [Converting an Existing Ember App to TypeScript][converting-an-app].
++- If you're working with legacy (pre-Octane) Ember and TypeScript together, you should read [TypeScript and Ember Classic][legacy].
++- Not ready to switch to TypeScript? You can get many of TypeScript's benefits by [adding types with JSDoc comments][types-with-jsdoc]. We'll talk a bit about this over in the [Signatures][] section.
++- Looking for type-checking in Ember templates? Check out [Glint][].
++
++## Why TypeScript?
++
++What is TypeScript, and why should you adopt it?
++
++> TypeScript is a strongly typed programming language that builds on JavaScript, giving you better tooling at any scale.
++>
++> — [typescriptlang.org][typescript]
++
++TypeScript lets you build _ambitious web applications_ with confidence—so it's a perfect fit for Ember apps!
++
++- Get rid of `undefined is not a function` and `null is not an object` once and for all.
++- Enjoy API docs… that are always up-to-date.
++- Experience better developer productivity through top-notch editor support, including incredible autocomplete, guided refactoring, automatic imports, and more.
++
++<!-- Internal links -->
++
++[addons]: ./application-development/addons/
++[converting-an-app]: ./application-development/converting-an-app
++[core-concepts]: ./core-concepts
++[ember-guides]: ..
++[getting-started]: ./getting-started
++[legacy]: ./additional-resources/legacy
++[signatures]: ./core-concepts/invokables/#toc_signature-basics
++
++<!-- External links -->
++
++[glint]: https://typed-ember.gitbook.io/glint/
++[types-with-jsdoc]: https://www.typescriptlang.org/docs/handbook/jsdoc-supported-types.html
++[typescript]: http://www.typescriptlang.org
++[typescript-docs]: https://www.typescriptlang.org/docs/
+diff --git b/guides/upgrading/current-edition/glimmer-components.md a/guides/upgrading/current-edition/glimmer-components.md
+index c58b94010..b6781b926 100644
+--- b/guides/upgrading/current-edition/glimmer-components.md
++++ a/guides/upgrading/current-edition/glimmer-components.md
+@@ -784,15 +784,17 @@ functionality that lifecycle hooks contained.
+ 
+ #### Writing your own modifiers
+ 
+-There are also community APIs available for writing your own modifiers, such as
+-[ember-modifier](https://github.com/ember-modifier/ember-modifier).
+-Ember itself has low level APIs known as _modifier managers_ which can be used
+-to write these higher level APIs. In general, it's recommended to use a
+-community addon to write modifiers, and _not_ to write your own modifier
+-manager.
++New Ember apps ship with a dependency on
++[ember-modifier](https://github.com/ember-modifier/ember-modifier), which
++provides a friendly API for writing your own element modifiers. This library is
++in turn based on a low level API named _modifier managers_. Managers are a
++framework-development level feature, and not something most developers need to
++interact with.
+ 
+-Let's see what our first example would look like if we were to write it as a
+-modifier using `ember-modifier`:
++Custom modifiers based on the `ember-modifier` API can be a more expressive
++interface for your logic, and can better encapsulate an implementation.
++
++Let's write a modifier that implements adding an event listener.
+ 
+ ```js {data-filename=app/modifiers/add-event-listener.js}
+ import { modifier } from 'ember-modifier';
+@@ -825,12 +827,16 @@ export default class ScrollComponent extends Component {
+ </div>
+ ```
+ 
+-This modifier generalizes the functionality that the component implemented using
+-lifecycle hooks before, so we can use this modifier whenever we need to in _any_
+-component. This is a much better solution than manually managing event listeners
+-every time we need one! At this point, the modifier is effectively the same as
+-the `{{on}}` modifier as well, so we could get rid of it altogether and replace
+-it with `on`:
++The new `add-event-listener` modifier presents a more expressive interface to
++the `hbs` template: There is only a single modifier to apply instead of two, the
++implementation always tears down after itself upon teardown of the target element,
++and the only JavaScript you have to write during re-user is the implementation
++of the business logic.
++
++At this point, it is worth noting that the custom `{{add-event-listener}}`
++modifier is effectively a re-implementation of the Ember built-in `{{on}}`
++modifier (See the
++[documentation](https://api.emberjs.com/ember/5.1/classes/Ember.Templates.helpers/methods/on?anchor=on)). Using that built-in looks like:
+ 
+ ```handlebars {data-filename=app/components/scroll-component.hbs}
+ <div {{on "scroll" this.listener}}>
+diff --git b/guides/upgrading/current-edition/native-classes.md a/guides/upgrading/current-edition/native-classes.md
+index 83f0db308..ab53879a6 100644
+--- b/guides/upgrading/current-edition/native-classes.md
++++ a/guides/upgrading/current-edition/native-classes.md
+@@ -432,10 +432,11 @@ support Ember mixins at all. In the future, mixins will be removed from the
+ framework, and will not be replaced directly. For apps that use mixins, the
+ recommended path is to refactor the mixins to other patterns, including:
+ 
+-* Pure native classes, sharing functionality via class inheritance.
+-* Utility functions which can be imported and used in multiple classes.
+-* Services which can be injected into multiple classes, sharing functionality
+-  and state between them.
++1. For functionality which encapsulates DOM modification, rewrite as a custom modifier using [ember-modifier](https://github.com/ember-modifier/ember-modifier).
++1. If the mixin is a way of supplying shared behavior (not data), extract the behavior to utility functions, usually just living in module scope and imported and exported as needed.
++1. If the mixin is a way of supplying long-lived, shared state, replace it with a service and inject it where it was used before. This pattern is uncommon, but sometimes appears when mixing functionality into multiple controllers or services.
++1. If the mixin is a way of supplying non-shared state which follows the lifecycle of a given object, replace it with a utility class instantiated in the owning class's `constructor` (or `init` for legacy classes).
++1. If none of the above, extract to pure native classes, sharing functionality via class inheritance.
+ 
+ ## Cheatsheet
+ 

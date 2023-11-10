@@ -1,3 +1,4 @@
+var fs = require('fs');
 var shell = require('shelljs');
 
 // Fetch the latest updates in the official Ember Guides
@@ -23,3 +24,16 @@ if (shell.exec('git diff -R upstream/master -- guides/release > english.diff').c
 }
 
 shell.echo('shelljs: "git diff -R upstream/master -- guides/release > english.diff" executed');
+
+// Find and replace the paths to markdonw files to adjust it to our Guidemaker scaffolding
+fs.readFile('english.diff', 'utf8', function (error, data) {
+  if (error) {
+    return console.log(error);
+  }
+
+  var result = data.replace(/guides\/release/g, 'guides');
+
+  fs.writeFile('english.diff', result, 'utf8', function (error) {
+     if (error) return console.log(error);
+  });
+});
