@@ -28,7 +28,8 @@
     "test:ember": "ember test",
     "test:node": "mocha node-tests --exclude node-tests/local/**",
     "test:node-local": "mocha node-tests/local",
-    "test:node-local-exclude-api-urls": "FOLLOW_API_URLS=false npm run test:node-local"
+    "test:node-local-exclude-api-urls": "FOLLOW_API_URLS=false npm run test:node-local",
+    "catchup": "node scripts/catchup.js"
   },
   "devDependencies": {
     "@ember/optional-features": "^2.0.0",
@@ -99,6 +100,7 @@
     "retext-spell": "^5.3.0",
     "retext-syntax-urls": "^3.1.2",
     "sass": "^1.62.1",
+    "shelljs": "^0.8.5",
     "unified": "^10.1.2",
     "walk-sync": "^2.0.2"
   },
