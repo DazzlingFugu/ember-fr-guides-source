@@ -10,27 +10,28 @@ This contributing guide will focus on the translation.
 
 Please note that no attempt is made to translate content for older versions of the Guides. We focus only on the latest release.
 
-### 1. Assign yourself a page: 
-- Find one page you want to translate in the list of [issues](https://github.com/DazzlingFugu/ember-fr-guides-source/issues) to make sure no one is already working on it.
+### 1. Assign yourself a page
+
+- Find a page you want to translate in the list of [issues](https://github.com/DazzlingFugu/ember-fr-guides-source/issues) to make sure no one is already working on it.
 - If you find the issue and it's free, assign yourself to it or leave a comment to notify people you're going to start the translation.
 - If the file you wish to translate is missing from the issues list (which can happen), open a new issue using the template "File to translate".
 - Translate the page entirely and submit it for review before starting another page.
 
 ### 2. Clone the repository / Keep your fork updated
 
-If it's your first contribution, fork this repository from GitHub interface. Then on your machine:
+If it's your first contribution, fork this repository from GitHub interface, then on your machine:
 ```
 git clone <your fork's url>
 git remote add upstream https://github.com/dazzlingfugu/ember-fr-guides-source.git
 ```
 
-As you tackle new issues, you'll want to be sure that you always start by working on the most recent code. The second command is to set an upstream. By pulling from it, you can sync up your fork's `master` with a parent repository's `master`. For this to work, you should make sure you're always committing to a branch, not `master`.
+As you tackle new issues, you'll want to be sure that you always start by working on the most recent code. The second command sets an upstream. By pulling from it, you can sync up your fork's `master` branch with its upstream repository's `master` branch. For this to work, make sure you're always committing to a different branch, not `master`.
 
 Each time you want to start a new page:
 ```
-git checkout master
+git switch master
 git pull upstream master
-git checkout -b some-branch-name
+git switch --create some-branch-name
 ```
 
 ### 3. Translate and lint the page
@@ -45,9 +46,9 @@ Once you have translated the `.md` page of your choice, you need to run the lint
 - Add the path to your page in `.remarkignore` (respect the alphabetical order for readability)
 - Run `npm run lint`
 
-If there are errors because "a word is written twice", but it's expected in French (Je vais vous "faire faire" une jolie traduction), make sure to fix all the other errors of the same paragraph before adding `<!-- spell ignore -->` above the paragraph.
+If there are errors such as "a word is written twice" but it's expected in French (“Je vais vous "faire faire" une jolie traduction”), make sure to fix all the other errors of the same paragraph before adding `<!-- spell ignore -->` above the paragraph.
 
-If there are errors because you kept an English term commonly used in French, add this word the the `.local.dic` file (respect the alphabetical order for readability, lowercase words are below uppercase acronyms).
+If there are errors because you kept an English term commonly used in French, add this word to the `.local.dic` file (respect the alphabetical order for readability, lowercase words are below uppercase acronyms).
 
 ### 4. Label your PR
 
@@ -59,7 +60,7 @@ Once you're at the point that you'd like feedback:
 
 ### 1. Don't translate the code / translate the UI data
 
-Don't translate variable names in code blocks. Most French-speaker devs have their code base in English, the purpose of this translation is to explain Ember concepts in a more accessible language. In the code blocks, translate the UI-related elements, what a French user would see on the page or would hear when using a screen reader.
+Don't translate variable names in code blocks. Most French-speaker devs have their codebase in English, the purpose of these translations is to explain Ember concepts in a more accessible language. In the code blocks, translate the UI-related elements, what a French user would see on the page or would hear when using a screen reader.
 
 ```diff
   <button type="button" class="image large" {{on "click" this.toggleSize}}>
@@ -72,9 +73,9 @@ Don't translate variable names in code blocks. Most French-speaker devs have the
 
 ### 2. Use _italics_ for English terms / explain English terms
 
-Some technical terms can be intuitively translated into French. For instance, we will translate "tag" to "balise" or "generator" to "générateur" and that won't be chocking for the reader. We should translate as soon as it's intuitive enough. 
+Some technical terms can be intuitively translated into French. For instance, we will translate "tag" to "balise" or "generator" to "générateur, this won't be shocking to the reader. We should translate as soon as it's intuitive enough. 
 
-On the other hand, some terms are not intuitive at all to translate and we generally use the English one. For instance, we wouldn't naturally say "assistant" for "helper" or "fabrique" for "factory".
+On the other hand, some terms are not intuitive to translate and we generally keep the English one. For instance, we wouldn't naturally say "assistant" for "helper" or "fabrique" for "factory".
 
 In any case, when you encounter a technical term:
 - Put the English in _italic_ style and keep the regular style for French.
@@ -89,10 +90,10 @@ In this example, we will stick to "espace de nom" in the rest of the page:
 In this example, we will go for "store" and "record" in the rest of the page:
 ```diff
 - The EmberData store provides an interface for retrieving records of a single type. Use `store.findRecord()` to retrieve a record.
-+ Le _store_ (magasin, réserve) d'EmberData fournit une interface pour retrouver les _records_ (enregistrements) d'un seul type. Utilisez `store.findRecord()` pour récupérer un _record_.
++ Le _store_ (magasin, réserve) d'EmberData fournit une interface pour récupérer les _records_ (enregistrements) d'un type donné. Utilisez `store.findRecord()` pour récupérer un _record_.
 ```
 
-If the literal translation of a term is _reeeeally_ convoluted, don't hesitate to be wordy about it. The purpose is to make this understandable to non-English speakers:
+If the literal translation of a term is _reeeeally_ convoluted, don't hesitate to be wordy about it. The purpose is to make it understandable to non-English speakers:
 
 ```diff
 - This method is also known as the _model hook_.
@@ -103,7 +104,7 @@ If the literal translation of a term is _reeeeally_ convoluted, don't hesitate t
 
 Some pages of the Guides reference articles, introduced with a title and sometimes a description. If this resource is also available in French (for instance, a lot of pages from MDN website are translated), then use the French URL in the translation (be careful with that MDN example though, because some pages are not translated entirely and it can be better to keep the English).
 
-If the resource is not translated or if the translation is incomplete, keep the English link and translate only the description, not the title of the resource itself, because we need to make clear to the reader that it's an English document:
+If the resource is not translated or if the translation is incomplete, keep the English link and translate only the description, not the title of the resource itself, because we need to make clear to the reader it's an English document:
 ```diff
 - [Using ARIA:](https://www.w3.org/TR/using-aria/) a practical guide for developers on how to add accessibility information to HTML element
 + <!-- spell ignore -->
@@ -112,7 +113,7 @@ If the resource is not translated or if the translation is incomplete, keep the 
 
 ### 4. Set non-breakable spaces
 
-`&nbsp;` is the HTML sign for "non-breakable space" and can be used in markdown as well. If the space is not set non-breakable, then a punctuation sign like ":" or ";" could be separated from the previous word and moved to the next line, which is incorrect.
+`&nbsp;` is the HTML sign for "non-breakable space" and can be used in markdown as well. If the space is not set non-breakable, then a punctuation mark like ":" or ";" could be separated from the previous word and moved to the next line, which is incorrect.
 ```diff
 - Using ARIA: a practical guide (...)
 + Using ARIA&nbsp;: un guide pratique (...)
@@ -129,7 +130,7 @@ To stick to the official Guides tone, try to find the right balance to be "relax
 
 ### 2. Inclusive writing
 
-We generally avoid the "·" character in the translation because all screen readers don't handle it very well. However, there are other ways to be inclusive in your writing. Be aware of all masculine endings and don't hesitate to rephrase the sentence in order to use a more neutral tone.
+We avoid the "·" character in the translation because all screen readers don't handle it very well. However, there are other ways to be inclusive in your writing. Be aware of all masculine endings and don't hesitate to rephrase the sentence in order to use a more neutral tone.
 
 ```diff
 If (...), the developer would need to write the following additional code
@@ -144,7 +145,7 @@ If you don't see how to make the sentence neutral and it's only one spot on the 
 
 You are free to use the method and tools you like to translate the file, what matters is the result. 
 
-Tools like [Google Translate](https://translate.google.fr/?hl=fr&sl=en&tl=fr&op=translate) can set up an approximative translation for you, then you can fix the mistakes with your own words. But keep in mind you could have _a lot_ of things to fix because it produces very literal translations. Most of the time translating yourself directly is just faster (believe me I tried).
+Tools like [DeepL](https://www.deepl.com) can set up an approximative translation for you, then you can fix the mistakes with your own words. But keep in mind you could have _a lot_ of things to fix because it produces very literal translations. Most of the time translating yourself directly is just faster.
 
 In the end, the point is to "sound French".
 
