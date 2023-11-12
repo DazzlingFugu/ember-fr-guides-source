@@ -41,3 +41,4 @@ guides/**/*.md
 !guides/tutorial/part-1/working-with-data.md
 !guides/tutorial/part-2/index.md
 !guides/tutorial/part-2/recap.md
+!guides/models/relationships.md
