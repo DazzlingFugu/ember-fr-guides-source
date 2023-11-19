@@ -1,21 +1,22 @@
-Imagine we are writing a web app for managing a blog. At any given time, we
-should be able to answer questions like _What post are they looking at?_ and
-_Are they editing it?_ In Ember.js, the answer to these questions is determined
-by the URL.
+Imaginons que l'on soit en train de créer une application web pour gérer un blog. À tout moment, on 
+devrait être en mesure de répondre à des questions telles que "Quel article l'utilisateur est en
+train de lire ?" et "Est-il en train de le modifier ?". Avec Ember.js, la réponse à ces questions
+est déterminée par l'URL.
 
-The URL can be set in a few ways:
+L'URL peut être définie de plusieurs façons&nbsp;:
 
-* The user loads the app for the first time.
-* The user changes the URL manually, such as by clicking the back button or by
-editing the address bar.
-* The user clicks a link within the app.
-* Some other event in the app causes the URL to change.
+- L'utilisateur charge l'application pour la première fois.
+- L'utilisateur modifie l'URL manuellement, par exemple en cliquant sur le bouton "Retour" de son
+  navigateur, ou bien en modifiant directement la barre d'adresse.
+- L'utilisateur clique sur un des liens de l'application.
+- Un autre évènement de l'application provoque une modification de l'URL.
 
-Regardless of how the URL becomes set, the Ember router then maps the current
-URL to one or more route handlers. A route handler can do several things:
+Qu'importe la manière dont l'URL est définie, le _Router_ d'Ember.js fera un lien entre l'URL 
+actuelle et un ou plusieurs gestionnaires de route. Un gestionnaire de route a plusieurs 
+fonctions&nbsp;:
 
-* It can render a template.
-* It can load a model that is then available to the template.
-* It can redirect to a new route, such as if the user isn't allowed to visit
-that part of the app.
-* It can handle actions that involve changing a model or transitioning to a new route.
+- Il peut afficher un _template_.
+- Il peut charger un modèle, qui est ensuite accessible dans le _template_.
+- Il peut rediriger vers une autre route, par exemple si l'utilisateur n'est pas autorisé à voir
+  une certaine partie de l'application.
+- Il peut gérer des actions qui impliquent de changer le modèle ou de naviguer vers une autre route.
