@@ -48,52 +48,75 @@ if (shell.exec('git switch catchup').code !== 0) {
 console.log('shelljs: "git switch catchup" executed');
 
 // Find and replace the paths to markdonw files to adjust it to our Guidemaker scaffolding
-fs.readFile('english.diff', 'utf8', function (error, data) {
-  if (error) {
-    return console.log(error);
-  }
+const renameDiffPath = (cbSplitDiff, cbRemoveAutoDiff) => {
+  fs.readFile('english.diff', 'utf8', function (error, data) {
+    if (error) {
+      return console.log(error);
+    }
 
-  var result = data.replace(/guides\/release/g, 'guides');
+    var result = data.replace(/guides\/release/g, 'guides');
 
-  fs.writeFile('english.diff', result, 'utf8', function (error) {
-     if (error) return console.log(error);
+    fs.writeFile('english.diff', result, 'utf8', function (error) {
+      if (error) return console.log(error);
+      cbSplitDiff(cbRemoveAutoDiff);
+    });
   });
-});
-
-let aplyAuto = [];
+}
 
 // Separate the diff into multiple files and try to apply
-fs.readFile('english.diff', 'utf8', function (error, data) {
-  if (error) {
-    return console.log(error);
-  }
-  // Consider a line starting with "diff --git b/" should be a diff block
-  let search = /diff --git b\//;
-  let blocks = data.split(search);
-
-  blocks.forEach((block, index) => {
-    if (block.length) {
-      // Create a file scripts/diff-N containing only the current diff block
-      fs.writeFile(`scripts/diff--${index}.diff`, `diff --git b/${block}`, function (err) {
-        if (err) throw err;
-        console.log(`scripts/diff--${index}.diff created`);
-        if (shell.exec(`git apply scripts/diff--${index}.diff`).code !== 0) {
-          console.log(`shelljs: "git apply" command failed for diff--${index}.diff`);
-        } else {
-          // If git apply worked, push the handled diff in the list of handled files
-          aplyAuto.push(`scripts/diff--${index}.diff`)
-        }
-      });
+const splitDiff = (cbRemoveAutoDiff) => {
+  fs.readFile('english.diff', 'utf8', function (error, data) {
+    if (error) {
+      return console.log(error);
     }
+    // Consider a line starting with "diff --git b/" should be a diff block
+    let search = /diff --git b\//;
+    let blocks = data.split(search);
+
+    // As files operations are not synchronous, let's keep track of the number of handled files
+    let blockLength = blocks.length;
+    let blockCounter = 0;
+
+    // We'll keep in this array the "children diff" to remove after auto apply
+    let autoApplyDone = [];
+
+    blocks.forEach((block, index) => {
+      if (block.length) {
+        // Create a file scripts/diff-N containing only the current diff block
+        fs.writeFile(`scripts/diff--${index}.diff`, `diff --git b/${block}`, function (err) {
+          if (err) throw err;
+          console.log(`scripts/diff--${index}.diff created`);
+          if (shell.exec(`git apply scripts/diff--${index}.diff`).code !== 0) {
+            console.log(`shelljs: "git apply" command failed for diff--${index}.diff`);
+          } else {
+            // If git apply worked, push the handled diff in the list of handled files
+            autoApplyDone.push(`scripts/diff--${index}.diff`);
+            console.log(`scripts/diff--${index}.diff applied automatically`);
+          }
+          blockCounter++;
+          if (blockCounter >= blockLength - 1) {
+            cbRemoveAutoDiff(autoApplyDone);
+          }
+        });
+      }
+    });
   });
-});
+}
 
 // Remove applied diff
-aplyAuto.forEach((filename) => {
-  fs.unlink(filename, function(err) {
-    if (err) {
-       return console.error(err);
-    }
-    console.log(`scripts/diff--${index}.diff handled and deleted`);
- });
-});
+const removeAutoDiff = (autoApplyDone) => {
+  autoApplyDone.forEach((filename) => {
+    fs.unlink(filename, function(err) {
+      if (err) {
+         return console.error(err);
+      }
+      console.log(`${filename} handled and deleted`);
+   });
+  });
+}
+
+// Execute the functions to manage the diff one by one
+renameDiffPath(
+  splitDiff,
+  removeAutoDiff
+);
