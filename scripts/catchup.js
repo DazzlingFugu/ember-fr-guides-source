@@ -31,6 +31,22 @@ if (shell.exec('git diff -R upstream/master -- guides/release > english.diff').c
 
 console.log('shelljs: "git diff -R upstream/master -- guides/release > english.diff" executed');
 
+// Stash the english diff to ref-upstream so we can re-switch to catchup
+if (shell.exec('git stash').code !== 0) {
+  console.log('shelljs: "git stash" command failed');
+  shell.exit(1);
+}
+
+console.log('shelljs: "git stash" executed');
+
+// Go back to catchup branch where we want to actually apply the diff
+if (shell.exec('git switch catchup').code !== 0) {
+  console.log('shelljs: "git switch catchup" command failed');
+  shell.exit(1);
+}
+
+console.log('shelljs: "git switch catchup" executed');
+
 // Find and replace the paths to markdonw files to adjust it to our Guidemaker scaffolding
 fs.readFile('english.diff', 'utf8', function (error, data) {
   if (error) {
@@ -43,14 +59,6 @@ fs.readFile('english.diff', 'utf8', function (error, data) {
      if (error) return console.log(error);
   });
 });
-
-// Go back to catchup branch where we want to actually apply the diff
-if (shell.exec('git switch catchup').code !== 0) {
-  console.log('shelljs: "git switch catchup" command failed');
-  shell.exit(1);
-}
-
-console.log('shelljs: "git switch catchup" executed');
 
 let aplyAuto = [];
 
