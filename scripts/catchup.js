@@ -1,5 +1,5 @@
-var fs = require('fs');
-var shell = require('shelljs');
+const fs = require('fs');
+const shell = require('shelljs');
 
 // Create a catchup branch out of the current branch (should be up to date master)
 if (shell.exec('git checkout -b catchup').code !== 0) {
