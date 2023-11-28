@@ -119,20 +119,20 @@ module('Integration | Component | rentals', function (hooks) {
       rentals: [
         {
           id: 'grand-old-mansion',
-          title: 'Grand Old Mansion',
+          title: 'Le Manoir Ancien',
           owner: 'Veruca Salt',
           city: 'San Francisco',
           location: {
             lat: 37.7749,
             lng: -122.4194,
           },
-          category: 'Estate',
-          type: 'Standalone',
+          category: 'Domaine',
+          type: 'Propriété indépendante',
           bedrooms: 15,
           image:
             'https://upload.wikimedia.org/wikipedia/commons/c/cb/Crane_estate_(5).jpg',
           description:
-            'This grand old mansion sits on over 100 acres of rolling hills and dense redwood forests.',
+            'Ce manoir ancien et spatieux se trouve sur un domaine de plus de 100 acres de collines et de forêts de séquoias denses.',
         },
         {
           id: 'urban-living',
@@ -143,13 +143,13 @@ module('Integration | Component | rentals', function (hooks) {
             lat: 47.6062,
             lng: -122.3321,
           },
-          category: 'Condo',
-          type: 'Community',
+          category: 'Copropriété',
+          type: 'Dans une copropriété',
           bedrooms: 1,
           image:
             'https://upload.wikimedia.org/wikipedia/commons/2/20/Seattle_-_Barnes_and_Bell_Buildings.jpg',
           description:
-            'A commuters dream. This rental is within walking distance of 2 bus stops and the Metro.',
+            'Un rêve pour les banlieusards. Cette location est à distance de marche de 2 arrêts de bus et du métro.',
         },
         {
           id: 'downtown-charm',
@@ -160,13 +160,13 @@ module('Integration | Component | rentals', function (hooks) {
             lat: 45.5175,
             lng: -122.6801,
           },
-          category: 'Apartment',
-          type: 'Community',
+          category: 'Appartement',
+          type: 'Dans une copropriété',
           bedrooms: 3,
           image:
             'https://upload.wikimedia.org/wikipedia/commons/f/f7/Wheeldon_Apartment_Building_-_Portland_Oregon.jpg',
           description:
-            'Convenience is at your doorstep with this charming downtown rental. Great restaurants and active night life are within a few feet.',
+            'La commodité est à votre porte avec cette charmante location du centre-ville. D'excellents restaurants et une vie nocturne active se trouvent à quelques mètres.',
         },
       ],
     });
@@ -181,7 +181,7 @@ module('Integration | Component | rentals', function (hooks) {
 
     assert
       .dom('.rentals .results li:nth-of-type(1)')
-      .containsText('Grand Old Mansion');
+      .containsText('Le Manoir Ancien');
 
     assert
       .dom('.rentals .results li:nth-of-type(2)')
@@ -350,20 +350,20 @@ module('Integration | Component | rentals', function (hooks) {
       rentals: [
         {
           id: 'grand-old-mansion',
-          title: 'Grand Old Mansion',
+          title: 'Le Manoir Ancien',
           owner: 'Veruca Salt',
           city: 'San Francisco',
           location: {
             lat: 37.7749,
             lng: -122.4194,
           },
-          category: 'Estate',
-          type: 'Standalone',
+          category: 'Domaine',
+          type: 'Propriété indépendante',
           bedrooms: 15,
           image:
             'https://upload.wikimedia.org/wikipedia/commons/c/cb/Crane_estate_(5).jpg',
           description:
-            'This grand old mansion sits on over 100 acres of rolling hills and dense redwood forests.',
+            'Ce manoir ancien et spatieux se trouve sur un domaine de plus de 100 acres de collines et de forêts de séquoias denses.',
         },
         {
           id: 'urban-living',
@@ -374,13 +374,13 @@ module('Integration | Component | rentals', function (hooks) {
             lat: 47.6062,
             lng: -122.3321,
           },
-          category: 'Condo',
-          type: 'Community',
+          category: 'Copropriété',
+          type: 'Dans une copropriété',
           bedrooms: 1,
           image:
             'https://upload.wikimedia.org/wikipedia/commons/2/20/Seattle_-_Barnes_and_Bell_Buildings.jpg',
           description:
-            'A commuters dream. This rental is within walking distance of 2 bus stops and the Metro.',
+            'Un rêve pour les banlieusards. Cette location est à distance de marche de 2 arrêts de bus et du métro.',
         },
         {
           id: 'downtown-charm',
@@ -391,13 +391,13 @@ module('Integration | Component | rentals', function (hooks) {
             lat: 45.5175,
             lng: -122.6801,
           },
-          category: 'Apartment',
-          type: 'Community',
+          category: 'Appartement',
+          type: 'Dans une copropriété',
           bedrooms: 3,
           image:
             'https://upload.wikimedia.org/wikipedia/commons/f/f7/Wheeldon_Apartment_Building_-_Portland_Oregon.jpg',
           description:
-            'Convenience is at your doorstep with this charming downtown rental. Great restaurants and active night life are within a few feet.',
+            'La commodité est à votre porte avec cette charmante location du centre-ville. D'excellents restaurants et une vie nocturne active se trouvent à quelques mètres.',
         },
       ],
     });
@@ -414,7 +414,7 @@ module('Integration | Component | rentals', function (hooks) {
 
     assert
       .dom('.rentals .results li:nth-of-type(1)')
-      .containsText('Grand Old Mansion');
+      .containsText('Le Manoir Ancien');
 
     assert
       .dom('.rentals .results li:nth-of-type(2)')
@@ -441,7 +441,7 @@ module('Integration | Component | rentals', function (hooks) {
 
     assert.dom('.rentals .results').exists();
     assert.dom('.rentals .results li').exists({ count: 1 });
-    assert.dom('.rentals .results li').containsText('Grand Old Mansion');
+    assert.dom('.rentals .results li').containsText('Le Manoir Ancien');
   });
 });
 ```

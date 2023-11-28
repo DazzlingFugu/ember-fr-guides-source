@@ -96,7 +96,7 @@ If we look at the JSON data here, we can see that the `id` is included right alo
 ```js { data-filename="app/routes/index.js" data-diff="-11,+12,-21,+22" }
 import Route from '@ember/routing/route';
 
-const COMMUNITY_CATEGORIES = ['Condo', 'Townhouse', 'Apartment'];
+const COMMUNITY_CATEGORIES = ['Copropriété', 'Maison de ville', 'Appartement'];
 
 export default class IndexRoute extends Route {
   async model() {
@@ -109,9 +109,9 @@ export default class IndexRoute extends Route {
       let type;
 
       if (COMMUNITY_CATEGORIES.includes(attributes.category)) {
-        type = 'Community';
+        type = 'Dans une copropriété';
       } else {
-        type = 'Standalone';
+        type = 'Propriété indépendante';
       }
 
       return { type, ...attributes };
@@ -140,32 +140,32 @@ module('Integration | Component | rental', function (hooks) {
     this.setProperties({
       rental: {
         id: 'grand-old-mansion',
-        title: 'Grand Old Mansion',
+        title: 'Le Manoir Ancien',
         owner: 'Veruca Salt',
         city: 'San Francisco',
         location: {
           lat: 37.7749,
           lng: -122.4194,
         },
-        category: 'Estate',
-        type: 'Standalone',
+        category: 'Domaine',
+        type: 'Propriété indépendante',
         bedrooms: 15,
         image:
           'https://upload.wikimedia.org/wikipedia/commons/c/cb/Crane_estate_(5).jpg',
         description:
-          'This grand old mansion sits on over 100 acres of rolling hills and dense redwood forests.',
+          'Ce manoir ancien et spatieux se trouve sur un domaine de plus de 100 acres de collines et de forêts de séquoias denses.',
       },
     });
 
     await render(hbs`<Rental @rental={{this.rental}} />`);
 
     assert.dom('article').hasClass('rental');
-    assert.dom('article h3').hasText('Grand Old Mansion');
+    assert.dom('article h3').hasText('Le Manoir Ancien');
     assert
       .dom('article h3 a')
       .hasAttribute('href', '/rentals/grand-old-mansion');
     assert.dom('article .detail.owner').includesText('Veruca Salt');
-    assert.dom('article .detail.type').includesText('Standalone');
+    assert.dom('article .detail.type').includesText('Propriété indépendante');
     assert.dom('article .detail.location').includesText('San Francisco');
     assert.dom('article .detail.bedrooms').includesText('15');
     assert.dom('article .image').exists();
@@ -180,14 +180,14 @@ If we run the tests in the browser, everything should just pass!
 
 ## Accessing Parameters from Dynamic Segments
 
-Awesome! We're making such great progress.
+Super&nbsp;! We're making such great progress.
 
 Now that we have our `rental` route, let's finish up our `rental` page. The first step to doing this is making our route actually _do_ something. We added the route, but we haven't actually implemented it. So let's do that first by creating the route file.
 
 ```js { data-filename="app/routes/rental.js" }
 import Route from '@ember/routing/route';
 
-const COMMUNITY_CATEGORIES = ['Condo', 'Townhouse', 'Apartment'];
+const COMMUNITY_CATEGORIES = ['Copropriété', 'Maison de ville', 'Appartement'];
 
 export default class RentalRoute extends Route {
   async model(params) {
@@ -198,9 +198,9 @@ export default class RentalRoute extends Route {
     let type;
 
     if (COMMUNITY_CATEGORIES.includes(attributes.category)) {
-      type = 'Community';
+      type = 'Dans une copropriété';
     } else {
-      type = 'Standalone';
+      type = 'Propriété indépendante';
     }
 
     return { id, type, ...attributes };
@@ -305,20 +305,20 @@ module('Integration | Component | rental/detailed', function (hooks) {
     this.setProperties({
       rental: {
         id: 'grand-old-mansion',
-        title: 'Grand Old Mansion',
+        title: 'Le Manoir Ancien',
         owner: 'Veruca Salt',
         city: 'San Francisco',
         location: {
           lat: 37.7749,
           lng: -122.4194,
         },
-        category: 'Estate',
-        type: 'Standalone',
+        category: 'Domaine',
+        type: 'Propriété indépendante',
         bedrooms: 15,
         image:
           'https://upload.wikimedia.org/wikipedia/commons/c/cb/Crane_estate_(5).jpg',
         description:
-          'This grand old mansion sits on over 100 acres of rolling hills and dense redwood forests.',
+          'Ce manoir ancien et spatieux se trouve sur un domaine de plus de 100 acres de collines et de forêts de séquoias denses.',
       },
     });
   });
@@ -329,7 +329,7 @@ module('Integration | Component | rental/detailed', function (hooks) {
 
     assert.dom(this.element).hasText('');
     assert.dom('.jumbo').exists();
-    assert.dom('.jumbo h2').containsText('Grand Old Mansion');
+    assert.dom('.jumbo h2').containsText('Le Manoir Ancien');
     assert
       .dom('.jumbo p')
       .containsText('a nice place to stay near San Francisco');
@@ -347,7 +347,7 @@ module('Integration | Component | rental/detailed', function (hooks) {
 
     assert.dom(this.element).hasText('template block text');
     assert.dom('article').hasClass('rental');
-    assert.dom('article h3').containsText('About Grand Old Mansion');
+    assert.dom('article h3').containsText('About Le Manoir Ancien');
     assert.dom('article .detail.owner').containsText('Veruca Salt');
     assert.dom('article .detail.type').containsText('Standalone – Estate');
     assert.dom('article .detail.location').containsText('San Francisco');
@@ -418,7 +418,7 @@ module('Acceptance | super rentals', function (hooks) {
     assert.strictEqual(currentURL(), '/rentals/grand-old-mansion');
     assert.dom('nav').exists();
     assert.dom('h1').containsText('SuperRentals');
-    assert.dom('h2').containsText('Grand Old Mansion');
+    assert.dom('h2').containsText('Le Manoir Ancien');
     assert.dom('.rental.detailed').exists();
   });
 
@@ -472,7 +472,7 @@ module('Acceptance | super rentals', function (hooks) {
 
 Now, when we visit `http://localhost:4200/rentals/grand-old-mansion`, this is what we see:
 
-<img src="/images/tutorial/part-2/route-params/grand-old-mansion@2x.png" alt="A dedicated page for the Grand Old Mansion" width="1024" height="1381">
+<img src="/images/tutorial/part-2/route-params/grand-old-mansion@2x.png" alt="A dedicated page for the Le Manoir Ancien" width="1024" height="1381">
 
 And if we run our tests now...
 

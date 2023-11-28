@@ -1,85 +1,81 @@
-<!-- Heads up! This is a generated file, do not edit directly. You can find the source at https://github.com/ember-learn/super-rentals-tutorial/blob/master/src/markdown/tutorial/part-1/recap.md -->
+Félicitations, vous avez terminé la première partie de ce tutoriel !
 
-Congratulations, you finished the first part of this tutorial!
+C’était ce que j'appelle un voyage&nbsp;! Pour résumer, voici ce que vous avez appris&nbsp;:<!-- Using ### \[Chapter 1\](../orientation/) triggers some sort of rendering bug -->
 
-It was quite a journey! To recap, here is what you have learned:
+<h3><a href="../orientation/">Chapitre 1</a></h3>
 
-<!-- Using ### [Chapter 1](../orientation/) triggers some sort of rendering bug -->
+- Installer Ember CLI
+- Créer une nouvelle app Ember avec Ember CLI
+- Démarrer et arrêter le serveur de développement
+- Éditer des fichiers et les recharger automatiquement
+- Travailler avec HTML, CSS et des fichiers dans une app Ember
 
-<h3><a href="../orientation/">Chapter 1</a></h3>
+<h3><a href="../building-pages/">Chapitre 2</a></h3>
 
-- Installing Ember CLI
-- Creating a new Ember app with Ember CLI
-- Starting and stopping the development server
-- Editing files and live reload
-- Working with HTML, CSS and assets in an Ember app
+- Définir des routes
+- Utiliser des _templates_ de routes
+- Paramétrer des URLs
+- Lier des pages avec le composant `<LinkTo>`
+- Passer des arguments et des attributs aux composants
 
-<h3><a href="../building-pages/">Chapter 2</a></h3>
+<h3><a href="../automated-testing/">Chapitre 3</a></h3>
 
-- Defining routes
-- Using route templates
-- Customizing URLs
-- Linking pages with the `<LinkTo>` component
-- Passing arguments and attributes to components
+- À quoi servent les tests automatisés
+- Écrire des tests d'acceptance
+- Utiliser les générateurs de Ember CLI
+- Tester avec le _framework_ de test QUnit
+- Travailler avec les _test helpers_ de Ember
+- La pratique des _workflow_ de test
 
-<h3><a href="../automated-testing/">Chapter 3</a></h3>
+<h3><a href="../component-basics/">Chapitre 4</a></h3>
 
-- The purpose of automated testing
-- Writing acceptance tests
-- Using generators in Ember CLI
-- Testing with the QUnit test framework
-- Working with Ember's test helpers
-- Practicing the testing workflow
+- Extraire du balisage dans des composants
+- Invoquer des composants
+- Passer du contenu aux composants
+- Retourner du contenu avec le mot-clé `{{yield}}`
+- Refactorer du code existant
+- Écrire des tests de composant
+- Utiliser le _template_ de l'application et son `{{outlet}}`
 
-<h3><a href="../component-basics/">Chapter 4</a></h3>
+<h3><a href="../more-about-components/">Chapitre 5</a></h3>
 
-- Extracting markup into components
-- Invoking components
-- Passing content to components
-- Yielding content with the `{{yield}}` keyword
-- Refactoring existing code
-- Writing component tests
-- Using the application template and `{{outlet}}`s
+- Générer des composants
+- Organiser le code avec des composants à espaces de noms (_namespaced components_)
+- Transférer des attributs HTML avec `...attributes`
+- Déterminer le niveau approprié de couverture de test
 
-<h3><a href="../more-about-components/">Chapter 5</a></h3>
+<h3><a href="../interactive-components/">Chapitre 6</a></h3>
 
-- Generating components
-- Organizing code with namespaced components
-- Forwarding HTML attributes with `...attributes`
-- Determining the appropriate amount of test coverage
+- Ajouter un comportement aux composants à l'aide de classes
+- Accéder aux états de l'instance à partir des _templates_
+- Gérer l'état avec les _tracked properties_
+- Utiliser des syntaxes conditionnelles dans les _templates_
+- Répondre à l'interaction de l'utilisateur avec des actions
+- Invoquer des modificateurs d'élément (_modifiers_)
+- Tester les interactions utilisateur
 
-<h3><a href="../interactive-components/">Chapter 6</a></h3>
+<h3><a href="../reusable-components/">Chapitre 7</a></h3>
 
-- Adding behavior to components with classes
-- Accessing instance states from templates
-- Managing state with tracked properties
-- Using conditionals syntaxes in templates
-- Responding to user interaction with actions
-- Invoking element modifiers
-- Testing user interactions
+- Gérer les configurations à l'échelle de l'app
+- Paramétrer des composants avec des arguments
+- Accéder aux arguments d'un composant
+- Interpoler des valeurs dans les _templates_
+- Surcharger des attributs HTML avec `...attributes`
+- Refactorer avec des _getters_ et l'_auto-track_
+- Récupérer des valeurs JavaScript dans le contexte d'un test
 
-<h3><a href="../reusable-components/">Chapter 7</a></h3>
+<h3><a href="../working-with-data/">Chapitre 8</a></h3>
 
-- Managing application-level configurations
-- Parameterizing components with arguments
-- Accessing component arguments
-- Interpolating values in templates
-- Overriding HTML attributes in `...attributes`
-- Refactoring with getters and auto-track
-- Getting JavaScript values into the test context
+- Travailler avec les fichiers de route
+- Retourner des données locales à partir du _model hook_
+- Accéder aux modèles des routes depuis les _templates_
+- _Mocker_ les données du serveur avec des fichiers JSON statiques
+- Récupérer les données distantes à partir du _model hook_
+- Adapter les données du serveur
+- Créer des boucles et des variables locales dans les _templates_ avec `{{#each}}`
 
-<h3><a href="../working-with-data/">Chapter 8</a></h3>
+Ça fait beaucoup&nbsp;! À ce stade, vous êtes bien équipé pour accomplir une grande variété de tâches de développement avec Ember&nbsp;!
 
-- Working with route files
-- Returning local data from the model hook
-- Accessing route models from templates
-- Mocking server data with static JSON files
-- Fetching remote data from the model hook
-- Adapting server data
-- Loops and local variables in templates with `{{#each}}`
+Allez-y, faites donc une pause, ou bien expérimentez la création de votre propre app Ember en utilisant les compétences que vous venez d'obtenir.
 
-That's a lot! At this point, you are well equipped to perform a wide variety of development tasks in Ember!
-
-Go ahead and take a break, or experiment with creating your own unique Ember app using the skills you just learned.
-
-When you come back, we build upon what we learned in Part 1 and take things to the next level!
+Quand vous serez de retour, nous construirons sur ce que nous avons appris dans la Partie 1 et nous passerons au niveau supérieur&nbsp;!

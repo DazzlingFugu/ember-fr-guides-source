@@ -22,7 +22,7 @@ Conveniently, this API doesn't require us to procure any API keys; all we need t
 For instance, let's say we would like to suggest a tweet with the following content:
 
 ```plain
-Check out Grand Old Mansion on Super Rentals! https://super-rentals.example/rentals/grand-old-mansion
+Check out Le Manoir Ancien on Super Rentals! https://super-rentals.example/rentals/grand-old-mansion
 #vacation #travel #authentic #blessed #superrentals via @emberjs
 ```
 
@@ -227,7 +227,7 @@ module('Acceptance | super rentals', function (hooks) {
     assert.strictEqual(currentURL(), '/rentals/grand-old-mansion');
     assert.dom('nav').exists();
     assert.dom('h1').containsText('SuperRentals');
-    assert.dom('h2').containsText('Grand Old Mansion');
+    assert.dom('h2').containsText('Le Manoir Ancien');
     assert.dom('.rental.detailed').exists();
     assert.dom('.share.button').hasText('Share on Twitter');
 

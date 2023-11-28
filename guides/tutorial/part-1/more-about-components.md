@@ -1,19 +1,17 @@
-<!-- Heads up! This is a generated file, do not edit directly. You can find the source at https://github.com/ember-learn/super-rentals-tutorial/blob/master/src/markdown/tutorial/part-1/05-more-about-components.md -->
+Il est temps de travailler enfin sur la liste des locations&nbsp;:
 
-It's time to finally work on the rentals listing:
+<img src="/images/tutorial/part-1/more-about-components/rental-image@2x.png" alt="L'app Super Rentals à la fin du chapitre" width="1024" height="1129" />
 
-<img src="/images/tutorial/part-1/more-about-components/rental-image@2x.png" alt="The Super Rentals app by the end of the chapter" width="1024" height="1129">
+Lors de la construction de cette liste de propriétés à louer, vous en apprendrez plus sur :
 
-While building this list of rental properties, you will learn about:
+- Générer des composants
+- Organiser le code avec des composants à espaces de noms (_namespaced components_)
+- Transférer des attributs HTML avec `...attributes`
+- Déterminer le niveau approprié de couverture de test
 
-- Generating components
-- Organizing code with namespaced components
-- Forwarding HTML attributes with `...attributes`
-- Determining the appropriate amount of test coverage
+## Générer des composants
 
-## Generating Components
-
-Let's start by creating the `<Rental>` component. This time, we will use the component generator to create the template and test file for us:
+Commençons par créer le composant `<Rental>`. Cette fois, nous utiliserons le générateur de composant pour créer le _template_ et le fichier de test pour nous&nbsp;:
 
 ```shell
 $ ember generate component rental
@@ -25,32 +23,32 @@ installing component-test
   create tests/integration/components/rental-test.js
 ```
 
-The generator created two new files for us, a component template at `app/components/rental.hbs`, and a component test file at `tests/integration/components/rental-test.js`.
+Le générateur crée deux nouveaux fichiers pour nous, un _template_ de composant `app/components/rental.hbs`, et un fichier de test de composant `tests/integration/components/rental-test.js`.
 
-We will start by editing the template. Let's _[hard-code](https://en.wikipedia.org/wiki/Hard_coding)_ the details for one rental property for now, and replace it with the real data from the server later on.
+Commençons par éditer le _template_. Dans un premier temps, écrivons en dur (_[hard-code](https://en.wikipedia.org/wiki/Hard_coding)_) les détails d'une propriété à louer, et nous les remplacerons plus tard par les vraies données venant du serveur.  
 
 ```handlebars { data-filename="app/components/rental.hbs" data-diff="-1,+2,+3,+4,+5,+6,+7,+8,+9,+10,+11,+12,+13,+14,+15,+16,+17,+18" }
 {{yield}}
 <article class="rental">
   <div class="details">
-    <h3>Grand Old Mansion</h3>
+    <h3>Le Manoir Ancien</h3>
     <div class="detail owner">
-      <span>Owner:</span> Veruca Salt
+      <span>Propriétaire :</span> Veruca Salt
     </div>
     <div class="detail type">
-      <span>Type:</span> Standalone
+      <span>Type :</span> Standalone
     </div>
     <div class="detail location">
-      <span>Location:</span> San Francisco
+      <span>Adresse :</span> San Francisco
     </div>
     <div class="detail bedrooms">
-      <span>Number of bedrooms:</span> 15
+      <span>Nombre de chambres :</span> 15
     </div>
   </div>
 </article>
 ```
 
-Then, we will write a test to ensure all of the details are present. We will replace the boilerplate test generated for us with our own assertions, just like we did for the `<Jumbo>` component earlier:
+Ensuite, écrivons un test pour nous assurer que les détails sont présents. Remplaçons le contenu par défaut du test généré avec nos propres assertions, comme nous l'avons fait plus tôt pour le composant `<Jumbo>`&nbsp;:
 
 ```js { data-filename="tests/integration/components/rental-test.js" data-diff="-9,-10,-11,-12,+13,-16,-17,-18,-19,-20,-21,-22,-23,-24,-25,+26,+27,+28,+29,+30,+31" }
 import { module, test } from 'qunit';
@@ -79,26 +77,26 @@ module('Integration | Component | rental', function (hooks) {
 
     assert.dom(this.element).hasText('template block text');
     assert.dom('article').hasClass('rental');
-    assert.dom('article h3').hasText('Grand Old Mansion');
+    assert.dom('article h3').hasText('Le Manoir Ancien');
     assert.dom('article .detail.owner').includesText('Veruca Salt');
-    assert.dom('article .detail.type').includesText('Standalone');
+    assert.dom('article .detail.type').includesText('Propriété indépendante');
     assert.dom('article .detail.location').includesText('San Francisco');
     assert.dom('article .detail.bedrooms').includesText('15');
   });
 });
 ```
 
-The test should pass.
+Le test devrait passer.
 
-<img src="/images/tutorial/part-1/more-about-components/pass@2x.png" alt="Tests passing with the new &lt;Rental&gt; test" width="1024" height="512">
+<img src="/images/tutorial/part-1/more-about-components/pass@2x.png" alt="Les tests passent avec le nouveau test &lt;Rental&gt;" width="1024" height="512" />
 
-Finally, let's invoke this a couple of times from our index template to populate the page.
+Enfin, invoquons le composant une paire de fois dans notre _template_ d'index pour alimenter la page.
 
 ```js { data-filename="app/templates/index.hbs" data-diff="+6,+7,+8,+9,+10,+11,+12,+13" }
 <Jumbo>
-  <h2>Welcome to Super Rentals!</h2>
-  <p>We hope you find exactly what you're looking for in a place to stay.</p>
-  <LinkTo @route="about" class="button">About Us</LinkTo>
+  <h2>Bienvenue sur "Super Rentals" !</h2>
+  <p>Nous espérons que vous trouverez l'endroit parfait où séjourner.</p>
+  <LinkTo @route="about" class="button">À propos de nous</LinkTo>
 </Jumbo>
 
 <div class="rentals">
@@ -110,15 +108,15 @@ Finally, let's invoke this a couple of times from our index template to populate
 </div>
 ```
 
-With that, we should see the `<Rental>` component showing our Grand Old Mansion three times on the page:
+Avec ça, nous devrions voir le composant `<Rental>` afficher notre Le Manoir Ancien trois fois sur la page&nbsp;:
 
-<img src="/images/tutorial/part-1/more-about-components/three-old-mansions@2x.png" alt="Three Grand Old Mansions" width="1024" height="1129">
+<img src="/images/tutorial/part-1/more-about-components/three-old-mansions@2x.png" alt="Trois Le Manoir Anciens" width="1024" height="1129" />
 
-Things are looking pretty convincing already; not bad for just a little bit of work!
+Voilà qui est déjà plutôt convainquant&nbsp;; pas mal pour juste un tout petit peu de travail&nbsp;!
 
-## Organizing Code with Namespaced Components
+## Organiser le code avec des composants à espaces de noms (_namespaced components_)
 
-Next, let's add the image for the rental property. We will use the component generator for this again:
+Ensuite, ajoutons l'image pour la propriété à louer. Utilisons à nouveau le générateur de composant&nbsp;:
 
 ```shell
 $ ember generate component rental/image
@@ -130,13 +128,13 @@ installing component-test
   create tests/integration/components/rental/image-test.js
 ```
 
-This time, we had a `/` in the component's name. This resulted in the component being created at `app/components/rental/image.hbs`, which can be invoked as `<Rental::Image>`.
+Cette fois, nous avons un `/` dans le nom du composant. Par conséquent, le composant est créé au chemin `app/components/rental/image.hbs`, et peut être invoqué en tant que `<Rental::Image>`.
 
-Components like these are known as _[namespaced](https://en.wikipedia.org/wiki/Namespace)_ components. Namespacing allows us to organize our components by folders according to their purpose. This is completely optional—namespaced components are not special in any way.
+Les composants comme ceux-ci sont appelés composants à [espace de nom](https://fr.wikipedia.org/wiki/Espace_de_noms) (_namespaced components_). Les espaces de nom permettent d'organiser les composants par dossiers selon leur fonction. C'est complètement optionnel, les composants à espaces de noms n'ont aucune particularité.
 
-## Forwarding HTML Attributes with `...attributes`
+## Transférer des attributs HTML avec `...attributes`
 
-Let's edit the component's template:
+Éditons le template du composant&nbsp;:
 
 ```handlebars { data-filename="app/components/rental/image.hbs" data-diff="-1,+2,+3,+4" }
 {{yield}}
@@ -145,41 +143,42 @@ Let's edit the component's template:
 </div>
 ```
 
-Instead of hard-coding specific values for the `src` and `alt` attributes on the `<img>` tag, we opted for the `...attributes` keyword instead, which is also sometimes referred to as the _["splattributes"](../../../components/component-arguments-and-html-attributes/#toc_html-attributes)_ syntax. This allows arbitrary HTML attributes to be passed in when invoking this component, like so:
+Plutôt que de coder en dur les valeurs pour les attributs `src` et `alt` sur la balise `<img>`, nous avons opté pour le mot-clé `...attributes`, parfois appelé la syntaxe _["splattributes"](../../../components/component-arguments-and-html-attributes/#toc_html-attributes)_. Cette syntaxe permet de passer des attributs HTML arbitraires quand lors de l'invocation du composant, comme ceci&nbsp;:
 
 ```handlebars { data-filename="app/components/rental.hbs" data-diff="+2,+3,+4,+5" }
 <article class="rental">
   <Rental::Image
     src="https://upload.wikimedia.org/wikipedia/commons/c/cb/Crane_estate_(5).jpg"
-    alt="A picture of Grand Old Mansion"
+    alt="Une photo du Le Manoir Ancien"
   />
   <div class="details">
-    <h3>Grand Old Mansion</h3>
+    <h3>Le Manoir Ancien</h3>
     <div class="detail owner">
-      <span>Owner:</span> Veruca Salt
+      <span>Propriétaire :</span> Veruca Salt
     </div>
     <div class="detail type">
       <span>Type:</span> Standalone
     </div>
     <div class="detail location">
-      <span>Location:</span> San Francisco
+      <span>Adresse :</span> San Francisco
     </div>
     <div class="detail bedrooms">
-      <span>Number of bedrooms:</span> 15
+      <span>Nombre de chambres :</span> 15
     </div>
   </div>
 </article>
 ```
 
-We specified a `src` and an `alt` HTML attribute here, which will be passed along to the component and attached to the element where `...attributes` is applied in the component template. You can think of this as being similar to `{{yield}}`, but for HTML attributes specifically, rather than displayed content. In fact, we have already used this feature [earlier](../building-pages/) when we passed a `class` attribute to `<LinkTo>`.
+Nous spécifions des attributs `src` et `alt` ici, qui seront passés au composant et attachés à l'élément sur lequel `...attributes` est appliqué dans le template. Vous pouvez voir cette fonctionnalité comme étant similaire à `{{yield}}`, mais spécifiquement pour les attributs HTML plutôt que pour afficher du contenu. En fait, nous l'avons déjà utilisés [plus tôt](../building-pages/) quand nous avons passé un attribut `class` à `<LinkTo>`.
 
-<img src="/images/tutorial/part-1/more-about-components/rental-image@2x.png" alt="The &lt;Rental::Image&gt; component in action" width="1024" height="1129">
+<img src="/images/tutorial/part-1/more-about-components/rental-image@2x.png" alt="Le composant &lt;Rental::Image&gt; en action" width="1024" height="1129" />
 
-This way, our `<Rental::Image>` component is not coupled to any specific rental property on the site. Of course, the hard-coding problem still exists (we simply moved it to the `<Rental>` component), but we will deal with that soon. We will limit all the hard-coding to the `<Rental>` component, so that we will have an easier time cleaning it up when we switch to fetching real data.
+<!-- spell ignore -->
+Avec cette approche, notre composant `<Rental::Image>` n'est pas couplé à une location spécifique sur le site. Bien entendu, le code en dur existe toujours (nous l'avons simplement déplacé sur le composant `<Rental>`), mais nous nous occuperons de ce problème bientôt. Nous limiterons le code en dur au composant `<Rental>` afin de rendre plus facile le nettoyage du code quand nous récupéreront de vraies données.
 
-In general, it is a good idea to add `...attributes` to the primary element in your component. This will allow for maximum flexibility, as the invoker may need to pass along classes for styling or ARIA attributes to improve accessibility.
+De manière générale, c'est une bonne idée d'ajouter `...attributes` à l'élément principale de votre composant. Ça permettra un maximum de flexibilité, car l'élément qui invoque le composant pourrait avoir besoin de lui passer des classes de style ou des attributs ARIA pour améliorer l'accessibilité.
 
-Let's write a test for our new component!
+Écrivons un test pour notre nouveau composant&nbsp;!
 
 ```js { data-filename="tests/integration/components/rental/image-test.js" data-diff="-9,-10,-11,-12,-13,-14,-15,-16,-17,+18,-20,-21,-22,+23,+24,+25,+26,-29,+30,+31,+32,+33,+34" }
 import { module, test } from 'qunit';
@@ -202,27 +201,27 @@ module('Integration | Component | rental/image', function (hooks) {
   test('it renders the given image', async function (assert) {
     await render(hbs`
       <Rental::Image>
-        template block text
+        bloc de texte
       </Rental::Image>
       <Rental::Image
         src="/assets/images/teaching-tomster.png"
-        alt="Teaching Tomster"
+        alt="Professeur Tomster"
       />
     `);
 
-    assert.dom(this.element).hasText('template block text');
+    assert.dom(this.element).hasText('bloc de texte');
     assert
       .dom('.image img')
       .exists()
       .hasAttribute('src', '/assets/images/teaching-tomster.png')
-      .hasAttribute('alt', 'Teaching Tomster');
+      .hasAttribute('alt', 'Professeur Tomster');
   });
 });
 ```
 
-## Determining the Appropriate Amount of Test Coverage
+## Déterminer le niveau approprié de couverture de test
 
-Finally, we should also update the tests for the `<Rental>` component to confirm that we successfully invoked `<Rental::Image>`.
+Enfin, nous devrions aussi mettre à jour les tests du composant `<Rental>` pour confirmer que `<Rental::Image>` est invoqué avec succès.
 
 ```js { data-filename="tests/integration/components/rental-test.js" data-diff="+18" }
 import { module, test } from 'qunit';
@@ -237,9 +236,9 @@ module('Integration | Component | rental', function (hooks) {
     await render(hbs`<Rental />`);
 
     assert.dom('article').hasClass('rental');
-    assert.dom('article h3').hasText('Grand Old Mansion');
+    assert.dom('article h3').hasText('Le Manoir Ancien');
     assert.dom('article .detail.owner').includesText('Veruca Salt');
-    assert.dom('article .detail.type').includesText('Standalone');
+    assert.dom('article .detail.type').includesText('Propriété indépendante');
     assert.dom('article .detail.location').includesText('San Francisco');
     assert.dom('article .detail.bedrooms').includesText('15');
     assert.dom('article .image').exists();
@@ -247,6 +246,6 @@ module('Integration | Component | rental', function (hooks) {
 });
 ```
 
-Because we already tested `<Rental::Image>` extensively on its own, we can omit the details here and keep our assertion to the bare minimum. That way, we won't  _also_ have to update the `<Rental>` tests whenever we make changes to `<Rental::Image>`.
+Comme nous avons déjà très bien testé le composant `<Rental::Image>` en lui-même, nous pouvons omettre les détails ici et écrire le minimum d'assertions. De cette façon, nous n'aurons pas à mettre _aussi_ à jour les tests de `<Rental>` si jamais nous faisons des changements dans `<Rental::Image>`.
 
-<img src="/images/tutorial/part-1/more-about-components/pass-2@2x.png" alt="Tests passing with the new &lt;Rental::Image&gt; test" width="1024" height="512">
+<img src="/images/tutorial/part-1/more-about-components/pass-2@2x.png" alt="Les tests passent avec le nouveau test &lt;Rental::Image&gt;" width="1024" height="512" />
