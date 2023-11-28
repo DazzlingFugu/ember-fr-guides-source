@@ -37,10 +37,8 @@ git switch --create some-branch-name
 ### 3. Translate and lint the page
 
 Each PR should have:
-- 1 commit
-- 2~3 files changed (`[some-page].md`, `.remarkignore`, optionally `.local.dic`)
-
-While you are working, keep your commit stack clean with one commit, for instance: `git commit -m "feat: translate guides/release/index.md`.
+- **1 commit** (keep the commit stack clean with one commit, and make the message clear enough to identify the issue number or the file at first glance)
+- **2~3 files changed** (`[some-page].md`, `.remarkignore`, optionally `.local.dic`)
 
 Once you have translated the `.md` page of your choice, you need to run the linter to make sure there's no typo:
 - Add the path to your page in `.remarkignore` (respect the alphabetical order for readability)
