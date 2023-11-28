@@ -22,7 +22,7 @@ Please note that no attempt is made to translate content for older versions of t
 If it's your first contribution, fork this repository from GitHub interface, then on your machine:
 ```
 git clone <your fork's url>
-git remote add upstream https://github.com/dazzlingfugu/ember-fr-guides-source.git
+git remote add upstream https://github.com/ember-learn/guides-source.git
 ```
 
 As you tackle new issues, you'll want to be sure that you always start by working on the most recent code. The second command sets an upstream. By pulling from it, you can sync up your fork's `master` branch with its upstream repository's `master` branch. For this to work, make sure you're always committing to a different branch, not `master`.
@@ -58,7 +58,7 @@ Once you're at the point that you'd like feedback:
 
 ## What syntax rules should I follow?
 
-### 1. Don't translate the code / translate the UI data
+### 1. Translate the UI data, but not the code
 
 Don't translate variable names in code blocks. Most French-speaker devs have their codebase in English, the purpose of these translations is to explain Ember concepts in a more accessible language. In the code blocks, translate the UI-related elements, what a French user would see on the page or would hear when using a screen reader.
 
@@ -71,7 +71,7 @@ Don't translate variable names in code blocks. Most French-speaker devs have the
   </button>
   ```
 
-### 2. Use _italics_ for English terms / explain English terms
+### 2. Use _italics_ for English terms, and explain them
 
 Some technical terms can be intuitively translated into French. For instance, we will translate "tag" to "balise" or "generator" to "générateur, this won't be shocking to the reader. We should translate as soon as it's intuitive enough. 
 
@@ -100,7 +100,7 @@ If the literal translation of a term is _reeeeally_ convoluted, don't hesitate t
 + Cette méthode est aussi appelée le _model hook_ (_hook_ signifie littéralement "un crochet" mais se traduit mal dans un contexte technique. On peut voir le _hook_ comme une fonction mise à disposition et exécutée en interne par le framework, et dont on définit le contenu, on y "accroche" du code).
 ```
 
-### 3. Don't translate articles titles / translate descriptions
+### 3. Translate article descriptions, but not their titles
 
 Some pages of the Guides reference articles, introduced with a title and sometimes a description. If this resource is also available in French (for instance, a lot of pages from MDN website are translated), then use the French URL in the translation (be careful with that MDN example though, because some pages are not translated entirely and it can be better to keep the English).
 
