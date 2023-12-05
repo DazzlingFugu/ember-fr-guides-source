@@ -1,49 +1,150 @@
 # Contributing
 
-The French Ember Guides are maintained by a (small) all-volunteer group of the Ember French community members. We'd love to have you join our efforts to translate the Guides and make Ember more accessible to French developers!
+The French Ember Guides are maintained by a (very small) all-volunteer group of the Ember French community members. We'd love to have you join our efforts to translate the Guides and make Ember more accessible to French developers!
 
-Here are a few ways you can help:
+There are essentially two ways to contribute to this repository: you can work on the translation itself, or you can work on a more technical topic to ease our life with the maintenance. You can choose one or the other depending on your preferences, you can also just review PRs.
 
-* _Contributing to the Guides' translation_: Visit the repository issues and pick one labeled "**Guides FR trad**". Assigned it to yourself or post a comment as soon as you start working to let maintainers know you are on it. If the file you wish to translate is missing in the issues, open a new issue using the template "File to translate".
+This contributing guide will focus on the translation.
 
-* _Writing infrastructure code_: You can also help out with the French Guides by improving the code that is used to build the content. The French Guides rely almost entirely on [ember-learn/guides-source](https://github.com/ember-learn/guides-source) sources, a script clones `guide-source` repository to build the app using the French content instead of the official English one. If you have a specific issue that you are trying to fix and you're not sure which repo to work on then it is worth opening an issue on this repo and we can help to point you in the right direction.
+## I want to translate a page of the guide!
 
-Please note that no attempt is made to translate content for older versions of the Guides. We focus only on the current release.
+Please note that no attempt is made to translate content for older versions of the Guides. We focus only on the latest release.
 
-If you have questions, want a suggestion of what to work on, or would like a buddy to pair with, you can join the #-lang-french channel in the [Ember Community Discord](https://discordapp.com/invite/zT3asNS).
+### 1. Assign yourself a page
 
-## Making Your First Translation PR
+- Find a page you want to translate in the list of [issues](https://github.com/DazzlingFugu/ember-fr-guides-source/issues) to make sure no one is already working on it.
+- If you find the issue and it's free, assign yourself to it or leave a comment to notify people you're going to start the translation.
+- If the file you wish to translate is missing from the issues list (which can happen), open a new issue using the template "File to translate".
+- Translate the page entirely and submit it for review before starting another page.
 
-- Fork this repository (click "fork" on the repository's home page in GitHub)
+### 2. Clone the repository / Keep your fork updated
 
-- Clone the forked repository with `git clone <your fork's url>` and create a branch with `git checkout -b some-branch-name`.
-
-- Keep your commit stack clean with one commit, for instance: `git commit -m "feat: translate guides/release/index.md`
-
-- Once you're at the point that you'd like feedback, submit a Pull Request (new Pull Request button). Choose `master` for the base and your branch name for `compare`, then submit it!
-
-- Your PR will be reviewed by another contributor, and then either merged or have changes requested.
-
-You are free to use the method you like to translate the file. Here are a few recommendations:
-
-- Don't translate variable names and don't modify code blocks. Most French-speaker developers have their code base in English, the purpose of this translation is to explain Ember concepts in a more accessible language.
-
-- Keep the translation as close as possible to the original one and respect the original characters' case.
-
-- [Google translate](https://translate.google.fr/?hl=fr&sl=en&tl=fr&op=translate) is an efficient translation tool that can set up an approximative translation for you, then you can fix the mistakes with your own words.
-
-## Keeping your fork updated
-
-As you tackle new issues, you'll want to be sure that you always start by working on the most recent code. To sync up your fork's  `master` with a parent repository's `master`, set an upstream and pull from it. For this to work, you should make sure you're always committing to a branch, not `master`.
-
+If it's your first contribution, fork this repository from GitHub interface, then on your machine:
 ```
-git remote add upstream https://github.com/dazzlingfugu/ember-fr-guides-source.git
-git checkout master
+git clone <your fork's url>
+git remote add upstream https://github.com/ember-learn/guides-source.git
+```
+
+As you tackle new issues, you'll want to be sure that you always start by working on the most recent code. The second command sets an upstream. By pulling from it, you can sync up your fork's `master` branch with its upstream repository's `master` branch. For this to work, make sure you're always committing to a different branch, not `master`.
+
+Each time you want to start a new page:
+```
+git switch master
 git pull upstream master
+git switch --create some-branch-name
 ```
 
-## Spellchecking/linting
+### 3. Translate and lint the page
 
-The Guides are spellchecked and linted for markdown consistency. You can test your contributions by running `npm run lint`. Linting and spellchecking must pass or they will fail in CI (continuous integration).
+Each PR should have:
+- **1 commit** (keep the commit stack clean with one commit, and make the message clear enough to identify the issue number or the file at first glance)
+- **2~3 files changed** (`[some-page].md`, `.remarkignore`, optionally `.local.dic`)
 
-Spellchecking uses a French dictionary [dictionary-fr](https://www.npmjs.com/package/dictionary-fr). As variable names and code blocks mustn't be modified, a local dictionary `.local.dic` contains English words and terms that are common to the Ember community. Translating a specific guide sometimes requires placing new words and terms in the `.local.dic` dictionary file.
+Once you have translated the `.md` page of your choice, you need to run the linter to make sure there's no typo:
+- Add the path to your page in `.remarkignore` (respect the alphabetical order for readability)
+- Run `npm run lint`
+
+If there are errors such as "a word is written twice" but it's expected in French (“Je vais vous "faire faire" une jolie traduction”), make sure to fix all the other errors of the same paragraph before adding `<!-- spell ignore -->` above the paragraph.
+
+If there are errors because you kept an English term commonly used in French, add this word to the `.local.dic` file (respect the alphabetical order for readability, lowercase words are below uppercase acronyms).
+
+### 4. Label your PR
+
+Once you're at the point that you'd like feedback: 
+- Submit a Pull Request
+- Add the label "**Guides FR trad**" on it
+
+## What syntax rules should I follow?
+
+### 1. Translate the UI data, but not the code
+
+Don't translate variable names in code blocks. Most French-speaker devs have their codebase in English, the purpose of these translations is to explain Ember concepts in a more accessible language. In the code blocks, translate the UI-related elements, what a French user would see on the page or would hear when using a screen reader.
+
+```diff
+  <button type="button" class="image large" {{on "click" this.toggleSize}}>
+-    <img ...attributes alt="Picture of the rental">
+-    <small>View smaller</small>
++    <img ...attributes alt="Photo de la propriété">
++    <small>Réduire</small>
+  </button>
+  ```
+
+### 2. Use _italics_ for English terms, and explain them
+
+Some technical terms can be intuitively translated into French. For instance, we will translate "tag" to "balise" or "generator" to "générateur, this won't be shocking to the reader. We should translate as soon as it's intuitive enough. 
+
+On the other hand, some terms are not intuitive to translate and we generally keep the English one. For instance, we wouldn't naturally say "assistant" for "helper" or "fabrique" for "factory".
+
+In any case, when you encounter a technical term:
+- Put the English in _italic_ style and keep the regular style for French.
+- The first time the word appears on the page, use the language you'll reuse along the page and add the language you _won't_ use in parenthesis so the reader can do the link between English and French.
+
+In this example, we will stick to "espace de nom" in the rest of the page:
+```diff
+- Components like these are known as namespaced components. Namespacing allows us to organize our components by folders according to their purpose.
++ Les composants comme ceux-ci sont appelés composants à espace de nom (_namespaced components_). Les espaces de nom permettent d'organiser les composants par dossiers selon leur fonction.
+```
+
+In this example, we will go for "store" and "record" in the rest of the page:
+```diff
+- The EmberData store provides an interface for retrieving records of a single type. Use `store.findRecord()` to retrieve a record.
++ Le _store_ (magasin, réserve) d'EmberData fournit une interface pour récupérer les _records_ (enregistrements) d'un type donné. Utilisez `store.findRecord()` pour récupérer un _record_.
+```
+
+If the literal translation of a term is _reeeeally_ convoluted, don't hesitate to be wordy about it. The purpose is to make it understandable to non-English speakers:
+
+```diff
+- This method is also known as the _model hook_.
++ Cette méthode est aussi appelée le _model hook_ (_hook_ signifie littéralement "un crochet" mais se traduit mal dans un contexte technique. On peut voir le _hook_ comme une fonction mise à disposition et exécutée en interne par le framework, et dont on définit le contenu, on y "accroche" du code).
+```
+
+### 3. Translate article descriptions, but not their titles
+
+Some pages of the Guides reference articles, introduced with a title and sometimes a description. If this resource is also available in French (for instance, a lot of pages from MDN website are translated), then use the French URL in the translation (be careful with that MDN example though, because some pages are not translated entirely and it can be better to keep the English).
+
+If the resource is not translated or if the translation is incomplete, keep the English link and translate only the description, not the title of the resource itself, because we need to make clear to the reader it's an English document:
+```diff
+- [Using ARIA:](https://www.w3.org/TR/using-aria/) a practical guide for developers on how to add accessibility information to HTML element
++ <!-- spell ignore -->
++ [Using ARIA](https://www.w3.org/TR/using-aria/) : un guide pratique pour ajouter aux éléments HTML des informations accessibles.
+```
+
+### 4. Set non-breakable spaces
+
+`&nbsp;` is the HTML sign for "non-breakable space" and can be used in markdown as well. If the space is not set non-breakable, then a punctuation mark like ":" or ";" could be separated from the previous word and moved to the next line, which is incorrect.
+```diff
+- Using ARIA: a practical guide (...)
++ Using ARIA&nbsp;: un guide pratique (...)
+```
+
+## What tone should I use?
+
+### 1. General tone
+
+To stick to the official Guides tone, try to find the right balance to be "relax" without being too familiar:
+- Prefer "ça" over "cela"
+- Use "nous" when you mean "you & the reader", let's do this together (this is used a lot in the tutorial): "À présent, faisons ça"
+- Use "on" as the undefined pronoun, when you talk about a general rule: "En général, on écrit les variable en anglais"
+
+### 2. Inclusive writing
+
+We avoid the "·" character in the translation because all screen readers don't handle it very well. However, there are other ways to be inclusive in your writing. Be aware of all masculine endings and don't hesitate to rephrase the sentence in order to use a more neutral tone.
+
+```diff
+If (...), the developer would need to write the following additional code
+
+- Si (...), alors le développeur aurait dû écrire le code suivant
++ Si (...), alors nous aurions dû écrire le code suivant
+```
+
+If you don't see how to make the sentence neutral and it's only one spot on the page, prefer the "·" character over the masculine term.
+
+### 3. Can I use Google Translate to go faster?
+
+You are free to use the method and tools you like to translate the file, what matters is the result. 
+
+Tools like [DeepL](https://www.deepl.com) can set up an approximative translation for you, then you can fix the mistakes with your own words. But keep in mind you could have _a lot_ of things to fix because it produces very literal translations. Most of the time translating yourself directly is just faster.
+
+In the end, the point is to "sound French".
+
+If you have any questions, if you are not sure what to work on, or if you are looking for a buddy to pair with, you can join the #-lang-french channel in the [Ember Community Discord](https://discordapp.com/invite/zT3asNS).
