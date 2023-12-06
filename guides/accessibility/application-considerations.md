@@ -56,4 +56,4 @@ Voici quelques exemples d'addons axés sur l'accessibilité créés par des memb
   ![Aperçu d'un compte rendu de _lint_ d'un _template_](/images/accessibility/application-considerations/template-lint.png)
 
 <!-- spell ignore -->
-Bien qu'il y ait beaucoup de notions à prendre en compte et à connaître, voici un aide-mémoire pour vous aidez à commencer&nbsp;: [Accessibility Cheat Sheet](https://moritzgiessmann.de/accessibility-cheatsheet/)
+Bien qu'il y ait beaucoup de notions à prendre en compte et à connaître, voici un aide-mémoire pour vous aider à commencer&nbsp;: [Accessibility Cheat Sheet](https://moritzgiessmann.de/accessibility-cheatsheet/)
