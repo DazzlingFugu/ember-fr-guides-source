@@ -51,6 +51,8 @@ Each PR should have:
 - **1 commit** (keep the commit stack clean with one commit, and make the message clear enough to identify the issue number or the file at first glance)
 - **2~3 files changed** (`[some-page].md`, `.remarkignore`, optionally `.local.dic`)
 
+**Grammalecte**: if you use Visual Studio, you can improve the spellchecking tools that will assist you in writing a perfect French file. Check out how to [install Grammalecte plugin in Visual Studio](./CONTRIBUTING_GRAMMALECTE.md).
+
 ### 4. Label your PR
 
 Once you're at the point that you'd like feedback: 
