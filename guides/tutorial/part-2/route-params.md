@@ -6,13 +6,13 @@ Now that we are fetching real data from our "server", let's add a new feature �
 
 While adding these rental pages, you will learn about:
 
-- Routes with dynamic segments
-- Links with dynamic segments
-- Component tests with access to the router
-- Accessing parameters from dynamic segments
-- Sharing common setup code between tests
+- Routes avec segments dynamiques
+- Liens avec segments dynamiques
+- Tests de composants avec accès au routeur
+- Accéder aux paramètres des segments dynamiques
+- Partager des configurations communes entre les tests
 
-## Routes with Dynamic Segments
+## Routes avec segments dynamiques
 
 It would be great for our individual rental pages to be available through predictable URLs like `/rentals/grand-old-mansion`. Also, since these pages are dedicated to individual rentals, we can show more detailed information about each property on this page. It would also be nice to be able to have a way to bookmark a rental property, and share direct links to each individual rental listing so that our users can come back to these pages later on, after they are done browsing.
 
@@ -36,7 +36,7 @@ Router.map(function () {
 
 Notice that we are doing something a little different here. Instead of using the default path (`/rental`), we're specifying a custom path. Not only are we using a custom path, but we're also passing in a `:rental_id`, which is what we call a _[dynamic segment](../../../routing/defining-your-routes/#toc_dynamic-segments)_. When these routes are evaluated, the `rental_id` will be substituted with the `id` of the individual rental property that we are trying to navigate to.
 
-## Links with Dynamic Segments
+## Liens avec segments dynamiques
 
 Now that we have this route in place, we can update our `<Rental>` component to actually _link_ to each of our detailed rental properties!
 
@@ -178,7 +178,7 @@ If we run the tests in the browser, everything should just pass!
 
 <img src="/images/tutorial/part-2/route-params/pass@2x.png" alt="Tests are passing" width="1024" height="768">
 
-## Accessing Parameters from Dynamic Segments
+## Accéder aux paramètres des segments dynamiques
 
 Super&nbsp;! We're making such great progress.
 

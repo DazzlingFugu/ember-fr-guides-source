@@ -6,11 +6,11 @@ In this chapter, we will work on removing some code duplication in our route han
 
 During this refactor, you will learn about:
 
-- Ember Data models
-- Testing models
-- Loading models in routes
-- The Ember Data store
-- Working with adapters and serializers
+- Les modèles Ember Data
+- Tester les modèles
+- Charger un modèle dans une route
+- Le _store_ d'Ember Data
+- Travailler avec des adaptateurs et des sérialiseurs
 
 ## What is Ember Data?
 
@@ -286,7 +286,7 @@ Wow... that removed a lot of code! This is all possible thanks to the power of c
 
 As mentioned above, Ember Data provides a `store` service, which we can inject into our route using the `@service store;` declaration, making the Ember Data store available as `this.store`. It provides the `find` and `findAll` methods for loading records. Specifically, the [`findRecord` method](../../../models/finding-records/#toc_retrieving-a-single-record) takes a model type (`rental` in our case) and a model ID (for us, that would be `params.rental_id` from the URL) as arguments and fetches a single record from the store. On the other hand, the [`findAll` method](../../../models/finding-records/#toc_retrieving-multiple-records) takes the model type as an argument and fetches all records of that type from the store.
 
-The Ember Data store acts as a kind of intermediary between our app and the server; it does many important things, including caching the responses that were fetched from the server. If we request some records (instances of model classes) that we had _already_ fetched from the server in the past, Ember Data's store ensures that we can access the records immediately, without having to fetch them again unnecessarily and wait for the server to respond. But, if we don't already have that response cached in our store, then it will go off and fetches it from the server. Pretty nice, right?
+Le _store_ d'Ember Data acts as a kind of intermediary between our app and the server; it does many important things, including caching the responses that were fetched from the server. If we request some records (instances of model classes) that we had _already_ fetched from the server in the past, Ember Data's store ensures that we can access the records immediately, without having to fetch them again unnecessarily and wait for the server to respond. But, if we don't already have that response cached in our store, then it will go off and fetches it from the server. Pretty nice, right?
 
 That's a lot of theory, but is this going to work in our app? Let's run the tests and find out!
 
@@ -301,7 +301,7 @@ Looking at the failure messages, the problem appears to be that the store went t
 
 Hm, okay, so we have to teach Ember Data to fetch data from the correct location. But how does Ember Data know how to fetch data from our server in the first place?
 
-## Working with Adapters and Serializers
+## Travailler avec des adaptateurs et des sérialiseurs
 
 Ember Data uses an _[adapter](../../../models/customizing-adapters/)_ and _[serializer](../../../models/customizing-serializers/)_ architecture. Adapters deal with _how_ and _where_ Ember Data should fetch data from your servers, such as whether to use HTTP, HTTPS, WebSockets or local storage, as well as the URLs, headers and parameters to use for these requests. On the other hand, serializers are in charge of converting the data returned by the server into a format Ember Data can understand.
 
