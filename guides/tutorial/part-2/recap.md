@@ -1,41 +1,39 @@
-<!-- Heads up! This is a generated file, do not edit directly. You can find the source at https://github.com/ember-learn/super-rentals-tutorial/blob/master/src/markdown/tutorial/part-2/recap.md -->
+Félicitations, vous avez terminé la deuxième partie du tutoriel&nbsp;!
 
-Congratulations, you finished the second part of the tutorial!
+Nous avons couvert beaucoup de concepts dans cette partie. En résumé, voici ce que nous avons appris&nbsp;:
 
-There was a lot of concepts to cover in part two. To recap, here is what you learned:
+<h3><a href="../route-params/">Chapitre 9</a></h3>
 
-<h3><a href="../route-params/">Chapter 9</a></h3>
+- Routes avec segments dynamiques
+- Liens avec segments dynamiques
+- Tests de composants avec accès au routeur
+- Accéder aux paramètres des segments dynamiques
+- Partager des configurations communes entre les tests
 
-- Routes with dynamic segments
-- Links with dynamic segments
-- Component tests with access to the router
-- Accessing parameters from dynamic segments
-- Sharing common setup code between tests
+<h3><a href="../service-injection/">Chapitre 10</a></h3>
 
-<h3><a href="../service-injection/">Chapter 10</a></h3>
+- _Splattributes_ et l'attribut `class`
+- Le service routeur
+- Services Ember versus variables globales
+- _Mocker_ un service dans un test
 
-- Splattributes and the `class` attribute
-- The router service
-- Ember services vs. global variables
-- Mocking services in tests
+<h3><a href="../ember-data/">Chapitre 11</a></h3>
 
-<h3><a href="../ember-data/">Chapter 11</a></h3>
+- Les modèles Ember Data
+- Tester les modèles
+- Charger un modèle dans une route
+- Le _store_ d'Ember Data
+- Travailler avec des adaptateurs et des sérialiseurs
 
-- Ember Data models
-- Testing models
-- Loading models in routes
-- The Ember Data store
-- Working with adapters and serializers
+<h3><a href="../provider-components/">Chapitre 12</a></h3>
 
-<h3><a href="../provider-components/">Chapter 12</a></h3>
+- Utiliser le composant `<Input>` d'Ember
+- Le patron de conception _provider component_
+- Utiliser des paramètres de bloc en invoquant un composant
+- Retourner des données au composant appelant
 
-- Using Ember's built-in `<Input>` component
-- The provider component pattern
-- Using block parameters when invoking components
-- Yielding data to caller components
+Super&nbsp;! Vous trouverez les concepts ci-dessus dans de nombreuses apps Ember en production. Vous avez désormais un bon niveau de connaissance et vous avez aussi terminé le tutoriel entièrement, bravo&nbsp;!
 
-Super&nbsp;! The concepts you learned about in part 2 of the tutorial are ones that you'll find in many production-level Ember apps. You've now taken your knowledge to the next level—and you've also finished the entire tutorial, hooray!
+Si vous souhaitez en apprendre plus, vous pouvez feuilleter le reste du Guide pour creuser davantage les concepts que nous avons couverts. Si vous voulez mettre en pratique les idées que nous avons évoquées, vous pouvez aussi vous lancer dans la construction de votre propre app Ember.
 
-If you're curious to learn more, you can check out the rest of the guides and learn more about the concepts we've covered in even more depth! If you want to practice some of the ideas we've covered, you can also try building your own Ember app.
-
-Happy coding!
+Bon code&nbsp;!
