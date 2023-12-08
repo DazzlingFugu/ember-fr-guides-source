@@ -5,7 +5,7 @@ Dans cette partie, vous allez en apprendre plus sur les différentes configurati
 Déclarer la langue d'une page HTML permet aux utilisateurs de mieux comprendre son contenu.
 
 > Les outils d'accessibilités ainsi que les navigateurs Web sont capables d'avoir un rendu plus précis quand la langue d'une page est définie. Les lecteurs d'écrans peuvent ainsi affiner leurs prononciations. Les navigateurs Web peuvent correctement afficher les caractères et les scripts. Les lecteurs vidéos peuvent afficher les bons sous-titres. Tout ceci permet aux utilisateurs ayant un handicap, de mieux comprendre le contenu d'une page Web.
-> <!-- spell ignore -->[WCAG Success Criterion 3.1.1: Intent](https://www.w3.org/WAI/WCAG21/Understanding/language-of-page.html#intent)
+> <!-- spell ignore --><span lang="en">[WCAG Success Criterion 3.1.1: Intent](https://www.w3.org/WAI/WCAG21/Understanding/language-of-page.html#intent)</span>
 
 La langue principale doit être définie au niveau de l'attribut `lang` de l'élément `<html>`. Lors de la création d'une nouvelle application, vous pouvez utiliser l'option `--lang` de la commande `ember new` afin d'en définir sa langue principale.
 
@@ -56,4 +56,4 @@ Voici quelques exemples d'addons axés sur l'accessibilité créés par des memb
   ![Aperçu d'un compte rendu de _lint_ d'un _template_](/images/accessibility/application-considerations/template-lint.png)
 
 <!-- spell ignore -->
-Bien qu'il y ait beaucoup de notions à prendre en compte et à connaître, voici un aide-mémoire pour vous aider à commencer&nbsp;: [Accessibility Cheat Sheet](https://moritzgiessmann.de/accessibility-cheatsheet/)
+Bien qu'il y ait beaucoup de notions à prendre en compte et à connaître, voici un aide-mémoire pour vous aider à commencer&nbsp;: <span lang="en">[Accessibility Cheat Sheet](https://moritzgiessmann.de/accessibility-cheatsheet/)</span>

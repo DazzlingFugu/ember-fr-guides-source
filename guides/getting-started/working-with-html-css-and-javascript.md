@@ -25,7 +25,7 @@ Si vous débutez en JavaScript, voici d'excellentes ressources d'introduction&nb
 
 - [Le tutoriel JavaScript de Mozilla](https://developer.mozilla.org/fr/docs/Web/JavaScript/Language_overview) est plutôt complet, et la documentation MDN est une source incontournable pour apprendre JavaScript et les APIs web.
 - [javascript.info](https://fr.javascript.info/) est un guide interactif détaillé qui vous emmènera des bases aux concepts avancés. Cette ressource est très bien pour les débutants qui ont peu d'expérience de la programmation, puisqu'il part de zéro et fait monter en compétence.
-- <!-- spell ignore -->[ES6 for humans](https://github.com/metagrover/ES6-for-humans) est une super ressource si vous êtes déjà familier avec JavaScript en général, mais que nous n'avez pas eu l'opportunité de découvrir ses dernières fonctionnalités, finalisées en 2015.
+- <!-- spell ignore --><span lang="en">[ES6 for humans](https://github.com/metagrover/ES6-for-humans)</span> est une super ressource si vous êtes déjà familier avec JavaScript en général, mais que nous n'avez pas eu l'opportunité de découvrir ses dernières fonctionnalités, finalisées en 2015.
 
 Nous vous recommandons de vous familiariser avec les concepts suivants, afin de tirer le maximum de ce guide et d'Ember&nbsp;: 
 

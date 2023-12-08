@@ -40,7 +40,7 @@ Quand vos besoins deviennent plus complexes, les addons suivants permettent une 
 - [ember-cli-document-title](https://github.com/kimroen/ember-cli-document-title)
 
 <!-- spell ignore -->
-Pour découvrir plus d'addons d'ajout / gestion de contenu dans le `<head>` d'une page, jetez un œil à la catégorie [header-content](https://emberobserver.com/categories/header-content) sur Ember Observer.
+Pour découvrir plus d'addons d'ajout / gestion de contenu dans le `<head>` d'une page, jetez un œil à la catégorie <span lang="en">[header-content](https://emberobserver.com/categories/header-content)</span> sur Ember Observer.
 
 Vous pouvez vous assurer que les titres de page sont générés correctement en écrivant une assertion sur la valeur de `document.title` dans vos tests&nbsp;:
 

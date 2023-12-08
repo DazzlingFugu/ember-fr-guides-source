@@ -288,9 +288,9 @@ Le comportement implémenté, nous pouvons retourner sur le template du composan
 Ici, nous utilisons le _modifier_ `on` pour attacher l'action `this.showPerson` au bouton qui se trouve dans le template.
 
 <!-- spell ignore -->
-Cependant, nous avons un problème. Si vous essayez dans le navigateur, vous vous apercevrez que cliquer sur les boutons affiche une boîte de dialogue annonçant "Le nom de cette personne est `[Object MouseEvent]`!" – eek&nbsp;!
+Cependant, nous avons un problème. Si vous essayez dans le navigateur, vous vous apercevrez que cliquer sur les boutons affiche une boîte de dialogue annonçant "Le nom de cette personne est `[Object MouseEvent]`!", eek&nbsp;!
 
-La cause de ce bug est que l'action que nous avons écrite prend un argument – le nom de la personne – et nous avons oublié de le passer. Fixer ça est assez simple&nbsp;:
+La cause de ce bug est que l'action que nous avons écrite prend un argument (le nom de la personne), et nous avons oublié de le passer. Fixer ça est assez simple&nbsp;:
 
 ```handlebars {data-filename="app/components/people-list.hbs" data-diff="-6,+7"}
 <h2>{{@title}}</h2>
