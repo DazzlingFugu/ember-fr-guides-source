@@ -111,8 +111,10 @@ If the resource is not translated or if the translation is incomplete, keep the 
 ```diff
 - [Using ARIA:](https://www.w3.org/TR/using-aria/) a practical guide for developers on how to add accessibility information to HTML element
 + <!-- spell ignore -->
-+ [Using ARIA](https://www.w3.org/TR/using-aria/) : un guide pratique pour ajouter aux éléments HTML des informations accessibles.
++ <span lang="en">[Using ARIA](https://www.w3.org/TR/using-aria/)</span>&nbsp;: un guide pratique pour ajouter aux éléments HTML des informations accessibles.
 ```
+
+Markdown supports HTML. Embedding English titles in a `<span lang="en">` HTML tag informs assistive technologies the content of that link is written in English. Using this information, screen readers can adapt the voice so the reading is more natural and understandable.
 
 ### 4. Set non-breakable spaces
 
