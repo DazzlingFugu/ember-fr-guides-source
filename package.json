@@ -28,7 +28,8 @@
     "test:ember": "ember test",
     "test:node": "mocha node-tests --exclude node-tests/local/**",
     "test:node-local": "mocha node-tests/local",
-    "test:node-local-exclude-api-urls": "FOLLOW_API_URLS=false npm run test:node-local"
+    "test:node-local-exclude-api-urls": "FOLLOW_API_URLS=false npm run test:node-local",
+    "catchup": "node scripts/catchup.mjs"
   },
   "devDependencies": {
     "@ember/optional-features": "^2.0.0",
@@ -39,6 +40,7 @@
     "broccoli-asset-rev": "^3.0.0",
     "chai": "^4.3.4",
     "dictionary-fr": "^2.8.0",
+    "dotenv": "^16.3.1",
     "ember-auto-import": "^2.6.1",
     "ember-cli": "~3.28.6",
     "ember-cli-app-version": "^5.0.0",
@@ -80,8 +82,9 @@
     "loader.js": "^4.7.0",
     "lodash": "^4.17.21",
     "markdown-link-extractor": "^1.2.2",
+    "minimist-lite": "^2.2.1",
     "mocha": "^8.3.2",
-    "node-fetch": "^2.6.7",
+    "node-fetch": "^2.7.0",
     "npm-run-all": "^4.1.5",
     "prember": "^1.0.3",
     "prettier": "^2.5.1",
@@ -99,6 +102,7 @@
     "retext-spell": "^5.3.0",
     "retext-syntax-urls": "^3.1.2",
     "sass": "^1.62.1",
+    "shelljs": "^0.8.5",
     "unified": "^10.1.2",
     "walk-sync": "^2.0.2"
   },
