@@ -27,6 +27,7 @@ guides/**/*.md
 !guides/getting-started/working-with-html-css-and-javascript.md
 !guides/index.md
 !guides/pages.md
+!guides/routing/index.md
 !guides/services/index.md
 !guides/tutorial/part-1/automated-testing.md
 !guides/tutorial/part-1/building-pages.md
