@@ -38,3 +38,4 @@ guides/**/*.md
 !guides/tutorial/part-1/recap.md
 !guides/tutorial/part-1/reusable-components.md
 !guides/tutorial/part-1/working-with-data.md
+!guides/tutorial/part-2/index.md

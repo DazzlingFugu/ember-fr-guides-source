@@ -1,17 +1,15 @@
-<!-- Heads up! This is a generated file, do not edit directly. You can find the source at https://github.com/ember-learn/super-rentals-tutorial/blob/master/src/markdown/tutorial/part-2/index.md -->
+Super, vous avez atteint la seconde partie du tutoriel&nbsp;! Dans les sections suivantes, nous continuerons à construire sur la base des concepts clés appris dans la première partie.
 
-Hooray, you've made it to the second part of the tutorial! In the following sections, we'll build on the core concepts that we learned in the first part of the tutorial.
+En cours de route, nous ajouterons de nouvelles fonctionnalités à notre app "Super Rentals". À la fin de cette section, nous aurons implémenté une fonction de recherche et réarrangé une bonne partie du code pour utiliser de nouveaux concepts Ember.
 
-Along the way, we'll also add some new features to our Super Rentals app. By the end of this section, we'll have implemented some search functionality and refactored a good bit of our code to use some new Ember concepts
+<img src="/images/tutorial/part-2/provider-components/filtered-results@2x.png" alt="Fonctionnalité de recherche de l'app Super Rentals" width="1024" height="797">
 
-<img src="/images/tutorial/part-2/provider-components/filtered-results@2x.png" alt="Search functionality in the Super Rentals app" width="1024" height="797">
+Dans cette deuxième partie, nous couvrirons les concepts suivants&nbsp;:
 
-In part two, we'll cover the following concepts:
-
-- Dynamic segments
-- Ember services
+- Les segments dynamiques
+- Les services Ember
 - Ember Data
-- Adapters and serializers
-- The provider component pattern
+- Adaptateurs et sérialiseurs
+- Le patron de conception _provider component_
 
-We're going to cover a lot of ground, so let's get learning!
+Nous allons couvrir beaucoup de terrain, alors allons-y, apprenons&nbsp;!
