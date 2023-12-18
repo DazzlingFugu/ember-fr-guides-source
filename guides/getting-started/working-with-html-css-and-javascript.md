@@ -49,7 +49,7 @@ export default class PermissionController extends Controller {
 }
 ```
 
-Certaines fonctionnalités sur lesquelles Ember s'appuie, comme les [déclarations de champs (_class fields_)](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Classes#d%C3%A9clarations_de_champs) ou les [décorateurs (_decorators_)](https://github.com/tc39/proposal-decorators), n'ont pas encore été complètement finalisées en JavaScript, donc nous les couvrirons ici en supposant que vous avez déjà eu l'opportunité de vous familiariser avec les classes. Si ce n'est pas le cas, jetez d'abord un œil à notre section sur les [classes natives](../../in-depth-topics/native-classes-in-depth/).
+Certaines fonctionnalités sur lesquelles Ember s'appuie, comme les [déclarations de champs (_class fields_)](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Classes#d%C3%A9clarations_de_champs) ou les [décorateurs (<span lang="en">_decorators_</span>)](https://github.com/tc39/proposal-decorators), n'ont pas encore été complètement finalisées en JavaScript, donc nous les couvrirons ici en supposant que vous avez déjà eu l'opportunité de vous familiariser avec les classes. Si ce n'est pas le cas, jetez d'abord un œil à notre section sur les [classes natives](../../in-depth-topics/native-classes-in-depth/).
 
 ### Déclarations de champs
 
@@ -103,7 +103,7 @@ Les champs sont assignés avant que le code dans le constructeur ne s'exécute, 
 
 ### Décorateurs
 
-Les décorateurs (_decorators_) sont des _modifiers_ que vous définissez et qui peuvent s'appliquer à une classe ou un élément de classe, comme un champ ou un méthode, pour changer son comportement. Par exemple, vous pourriez créer un décorateur `@cache` qui retourne la valeur d'un accesseur la première fois qu'il est calculé&nbsp;:
+Les décorateurs (<span lang="en">_decorators_</span>) sont des _modifiers_ que vous définissez et qui peuvent s'appliquer à une classe ou un élément de classe, comme un champ ou un méthode, pour changer son comportement. Par exemple, vous pourriez créer un décorateur `@cache` qui retourne la valeur d'un accesseur la première fois qu'il est calculé&nbsp;:
 
 ```js
 import { cache } from 'my-cache-decorator';

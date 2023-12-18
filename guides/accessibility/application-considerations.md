@@ -45,15 +45,15 @@ Chaque addon doit être choisi en fonction des bénéfices qu'il apporte et de s
 Voici quelques exemples d'addons axés sur l'accessibilité créés par des membres de la communauté Ember&nbsp;:
 
 - [ember-a11y-landmarks](https://github.com/ember-a11y/ember-a11y-landmarks) - Addon facilitant l'utilisation des rôles sémantiques HTML afin d'améliorer l'accessibilité.
-- [ember-component-focus](https://github.com/ember-a11y/ember-component-focus) - Une _mixin_ pour ajouter des méthodes à vos composants Ember afin de vous aider à gérer l'élément ayant le focus.
-- [ember-steps](https://github.com/rwjblue/ember-steps) - Addon de création de _wizard_, de navigation avec onglets, et plus...
+- [ember-component-focus](https://github.com/ember-a11y/ember-component-focus) - Une <span lang="en">_mixin_</span> pour ajouter des méthodes à vos composants Ember afin de vous aider à gérer l'élément ayant le focus.
+- [ember-steps](https://github.com/rwjblue/ember-steps) - Addon de création de <span lang="en">_wizard_</span>, de navigation avec onglets, et plus...
 - [ember-page-title](https://github.com/tim-evans/ember-page-title) - Addon de gestion des titres de page pour applications Ember.js
 - [ember-self-focused](https://github.com/linkedin/self-focused/tree/master/packages/ember-self-focused) - Bouge le focus sur le corps d'une page au changement de route.
 - [ember-keyboard](https://github.com/patience-tema-baron/ember-keyboard) - Addon pour simplifier la gestion des événements clavier.
 - [ember-a11y-testing](https://github.com/ember-a11y/ember-a11y-testing) - Pour ajouter facilement des tests d'accessibilité dans une suite de tests Ember.
 - [a11y-announcer](https://github.com/ember-a11y/a11y-announcer) - Addon permettant d'annoncer les changements de route côté lecteur d'écran.
-- [ember-template-lint](https://github.com/ember-template-lint/ember-template-lint) - _Linter_ pour les _templates_ Ember.
-  ![Aperçu d'un compte rendu de _lint_ d'un _template_](/images/accessibility/application-considerations/template-lint.png)
+- [ember-template-lint](https://github.com/ember-template-lint/ember-template-lint) - <span lang="en">_Linter_</span> pour les <span lang="en">_templates_</span> Ember.
+  ![Aperçu d'un compte rendu de <span lang="en">_lint_</span> d'un <span lang="en">_template_</span>](/images/accessibility/application-considerations/template-lint.png)
 
 <!-- spell ignore -->
 Bien qu'il y ait beaucoup de notions à prendre en compte et à connaître, voici un aide-mémoire pour vous aider à commencer&nbsp;: <span lang="en">[Accessibility Cheat Sheet](https://moritzgiessmann.de/accessibility-cheatsheet/)</span>

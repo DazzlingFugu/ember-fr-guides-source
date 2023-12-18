@@ -6,17 +6,17 @@ Généralement, les [services](../../services/) sont la principale méthode d'Em
 
 Les applications et les instances d'application jouent chacune un rôle dans la mise en œuvre de la DI d'Ember.
 
-Une [`Application`](https://api.emberjs.com/ember/release/classes/Application) sert de _registry_ (registre) pour les déclarations de dépendances. Les _factories_ (usines / fabriques), c'est-à-dire les classes, sont enregistrées avec l'application, tout comme les règles qui régissent l'injection de dépendances, et qui sont appliquées quand les objets sont instanciés.
+Une [`Application`](https://api.emberjs.com/ember/release/classes/Application) sert de <span lang="en">_registry_</span> (registre) pour les déclarations de dépendances. Les <span lang="en">_factories_</span> (usines / fabriques), c'est-à-dire les classes, sont enregistrées avec l'application, tout comme les règles qui régissent l'injection de dépendances, et qui sont appliquées quand les objets sont instanciés.
 
-Une _[`ApplicationInstance`](https://api.emberjs.com/ember/release/classes/ApplicationInstance)_ (instance d'application) sert de _owner_ (propriétaire) pour les objets instanciés à partir des _factories_ enregistrées. Les instances d'application fournissent un moyen de "rechercher" (c'est-à-dire d'instancier et/ou de récupérer) des objets.
+Une _[`ApplicationInstance`](https://api.emberjs.com/ember/release/classes/ApplicationInstance)_ (instance d'application) sert de <span lang="en">_owner_</span> (propriétaire) pour les objets instanciés à partir des <span lang="en">_factories_</span> enregistrées. Les instances d'application fournissent un moyen de "rechercher" (c'est-à-dire d'instancier et/ou de récupérer) des objets.
 
 > _Note: Bien qu'une `Application` serve de registre principal pour une app, chaque `ApplicationInstance` peut également servir de registre. Les enregistrements au niveau de l'instance sont utiles pour fournir des personnalisations au niveau de l'instance, telles que les tests A/B d'une fonctionnalité._
 
-## Enregistrement des _factories_
+## Enregistrement des <span lang="en">_factories_</span>
 
-Une _factory_ (fabrique) peut représenter n'importe quelle partie de votre application, comme une route , un modèle ou un _template_. Chaque _factory_ est enregistrée avec une clé particulière. Par exemple, le _template_ d'index est enregistré avec la clé `template:index`, et la route de l'application est enregistrée avec la clé `route:application`.
+Une <span lang="en">_factory_</span> (fabrique) peut représenter n'importe quelle partie de votre application, comme une route , un modèle ou un <span lang="en">_template_</span>. Chaque <span lang="en">_factory_</span> est enregistrée avec une clé particulière. Par exemple, le <span lang="en">_template_</span> d'index est enregistré avec la clé `template:index`, et la route de l'application est enregistrée avec la clé `route:application`.
 
-Les clés d'enregistrement sont formées de deux segments séparés par deux points (`:`). Le premier segment est le type de `factory` du framework, et le second est le nom de la _factory_ en question. Ainsi, le template d'index a pour clé `template:index`. Ember a plusieurs types de _factories_ intégrées, tels que `service`, `route`, `template` et `component`.
+Les clés d'enregistrement sont formées de deux segments séparés par deux points (`:`). Le premier segment est le type de `factory` du framework, et le second est le nom de la <span lang="en">_factory_</span> en question. Ainsi, le template d'index a pour clé `template:index`. Ember a plusieurs types de <span lang="en">_factories_</span> intégrées, tels que `service`, `route`, `template` et `component`.
 
 <div class="cta">
   <div class="cta-note">
@@ -35,11 +35,11 @@ Les clés d'enregistrement sont formées de deux segments séparés par deux poi
   </div>
 </div>
 
-Vous pouvez créer votre propre type de _factory_ en l'enregistrant simplement avec le nouveau type. Par exemple, pour créer un type `user` (utilisateur), vous devez enregistrer votre _factory_ avec `application.register('user:user-to-register')`.
+Vous pouvez créer votre propre type de <span lang="en">_factory_</span> en l'enregistrant simplement avec le nouveau type. Par exemple, pour créer un type `user` (utilisateur), vous devez enregistrer votre <span lang="en">_factory_</span> avec `application.register('user:user-to-register')`.
 
-Les enregistrements de _factory_ doivent être effectués dans les initialiseurs d'application (_initializers_) ou d'instance d'application (_instance initializers_), le premier étant beaucoup plus courant.
+Les enregistrements de <span lang="en">_factory_</span> doivent être effectués dans les initialiseurs d'application (<span lang="en">_initializers_</span>) ou d'instance d'application (<span lang="en">_instance initializers_</span>), le premier étant beaucoup plus courant.
 
-Par exemple, un initialiseur d'application pourrait enregistrer une _factory_ `Logger` (enregistreur de messages) avec la clé `logger:main`:
+Par exemple, un initialiseur d'application pourrait enregistrer une <span lang="en">_factory_</span> `Logger` (enregistreur de messages) avec la clé `logger:main`:
 
 ```javascript {data-filename=app/initializers/logger.js}
 import EmberObject from '@ember/object';
@@ -62,7 +62,7 @@ export default {
 
 ### Enregistrer des objets déjà instanciés
 
-Par défaut, Ember tentera d'instancier une _factory_ enregistrée lorsqu'elle est recherchée (_lookup_). Lors de l'enregistrement d'un objet déjà instancié au lieu d'une classe, utilisez l'option `instantiate: false` pour éviter les tentatives de ré-instanciation lors des recherches.
+Par défaut, Ember tentera d'instancier une <span lang="en">_factory_</span> enregistrée lorsqu'elle est recherchée (<span lang="en">_lookup_</span>). Lors de l'enregistrement d'un objet déjà instancié au lieu d'une classe, utilisez l'option `instantiate: false` pour éviter les tentatives de ré-instanciation lors des recherches.
 
 Dans l'exemple suivant, le `logger` est un objet JavaScript simple qui doit être renvoyé "tel quel" lorsqu'il est recherché&nbsp;:
 
@@ -87,7 +87,7 @@ export default {
 
 Par défaut,les enregistrements sont traités comme des "singletons". Cela signifie simplement qu'une instance sera créée lors de la première recherche, puis que cette même instance sera alors mise en cache et retournée lors des recherches suivantes.
 
-Quand vous souhaitez qu'un nouvel objet soit créé à chaque recherche, enregistrez vos _factories_ en tant que non-singletons à l'aide de l'option `singleton: false`.
+Quand vous souhaitez qu'un nouvel objet soit créé à chaque recherche, enregistrez vos <span lang="en">_factories_</span> en tant que non-singletons à l'aide de l'option `singleton: false`.
 
 Dans l'exemple suivant, la classe `Message` est enregistrée en tant que non-singleton&nbsp;:
 
@@ -108,11 +108,11 @@ export default {
 };
 ```
 
-## Injections de _factory_
+## Injections de <span lang="en">_factory_</span>
 
-Une fois qu'une _factory_ est enregistrée, elle peut être "injectée" là où elle est nécessaire.
+Une fois qu'une <span lang="en">_factory_</span> est enregistrée, elle peut être "injectée" là où elle est nécessaire.
 
-Les _factories_ peuvent être injectées dans des "types" entiers de _factories_ avec des "injections de type". Par exemple:
+Les <span lang="en">_factories_</span> peuvent être injectées dans des "types" entiers de <span lang="en">_factories_</span> avec des "injections de type". Par exemple:
 
 ```javascript {data-filename=app/initializers/logger.js}
 import EmberObject from '@ember/object';
@@ -134,7 +134,7 @@ export default {
 };
 ```
 
-Avec une telle injection de type, toutes les _factories_ de type `route` seront instanciées avec la propriété `logger` injectée. La valeur de `logger` viendra de la _factory_ nommée `logger:main`.
+Avec une telle injection de type, toutes les <span lang="en">_factories_</span> de type `route` seront instanciées avec la propriété `logger` injectée. La valeur de `logger` viendra de la <span lang="en">_factory_</span> nommée `logger:main`.
 
 Dans cet exemple d'application, les routes peuvent maintenant accéder au `logger` injecté&nbsp;:
 
@@ -149,7 +149,7 @@ export default class IndexRoute extends Route {
 }
 ```
 
-Les injections peuvent également être effectuées dans une _factory_ spécifique en utilisant sa clé complète&nbsp;:
+Les injections peuvent également être effectuées dans une <span lang="en">_factory_</span> spécifique en utilisant sa clé complète&nbsp;:
 
 ```javascript
 application.inject('route:index', 'logger', 'logger:main');
@@ -185,19 +185,19 @@ export default class CartContentComponent extends Component {
 }
 ```
 
-## Rechercher une instance de _factory_ (_Lookups_)
+## Rechercher une instance de <span lang="en">_factory_</span> (<span lang="en">_Lookups_</span>)
 
-Pour récupérer une instance de _factory_ de l'application en cours d'exécution, on appelle la méthode [`lookup`](https://api.emberjs.com/ember/release/classes/ApplicationInstance/methods/lookup?anchor=lookup) de l'instance d'application. Cette méthode prend un `string` pour identifier la _factory_ et retourne l'objet demandé&nbsp;:
+Pour récupérer une instance de <span lang="en">_factory_</span> de l'application en cours d'exécution, on appelle la méthode [`lookup`](https://api.emberjs.com/ember/release/classes/ApplicationInstance/methods/lookup?anchor=lookup) de l'instance d'application. Cette méthode prend un `string` pour identifier la <span lang="en">_factory_</span> et retourne l'objet demandé&nbsp;:
 
 ```javascript
 applicationInstance.lookup('factory-type:factory-name');
 ```
 
-L'instance d'application est passée aux _instance initializers_ d'Ember et est ajoutée en tant que _owner_ de chaque objet instancié.
+L'instance d'application est passée aux <span lang="en">_instance initializers_</span> d'Ember et est ajoutée en tant que <span lang="en">_owner_</span> de chaque objet instancié.
 
-### Utiliser une instance d'application dans un _instance initializer_
+### Utiliser une instance d'application dans un <span lang="en">_instance initializer_</span>
 
-Les _instance initializers_ reçoivent une instance d'application en argument, offrant ainsi l'opportunité de rechercher une instance de _factory_ enregistrée&nbsp;:
+Les <span lang="en">_instance initializers_</span> reçoivent une instance d'application en argument, offrant ainsi l'opportunité de rechercher une instance de <span lang="en">_factory_</span> enregistrée&nbsp;:
 
 ```javascript {data-filename=app/instance-initializers/logger.js}
 export function initialize(applicationInstance) {
@@ -212,7 +212,7 @@ export default {
 };
 ```
 
-### Obtenir une instance d'application depuis une instance de _factory_
+### Obtenir une instance d'application depuis une instance de <span lang="en">_factory_</span>
 
 [`Ember.getOwner`](https://api.emberjs.com/ember/release/classes/@ember%2Fapplication/methods/getOwner?anchor=getOwner) retourne l'instance d'application qui "détient" un objet. Ça signifie que les objets fournis par le frameworks comme les composants, les _helpers_ ou les routes peuvent appeler [`Ember.getOwner`](https://api.emberjs.com/ember/release/classes/@ember%2Fapplication/methods/getOwner?anchor=getOwner) pour effectuer une recherche de leur instance d'application pendant l'exécution.
 

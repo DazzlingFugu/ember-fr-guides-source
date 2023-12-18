@@ -1,6 +1,6 @@
-Les initialiseurs (_initializers_) offrent la possibilité de configurer l'application lors de son démarrage.
+Les initialiseurs (<span lang="en">_initializers_</span>) offrent la possibilité de configurer l'application lors de son démarrage.
 
-Il y a deux types d'initialiseurs&nbsp;: les initialiseurs d'application (_initializers_) et les initialiseurs d'instance d'application (_instance initializers_).
+Il y a deux types d'initialiseurs&nbsp;: les initialiseurs d'application (<span lang="en">_initializers_</span>) et les initialiseurs d'instance d'application (<span lang="en">_instance initializers_</span>).
 
 Les initialiseurs d'application s'exécutent lors du démarrage de l'app et constituent le principal moyen de configurer les [injections de dépendance](../dependency-injection/). 
 

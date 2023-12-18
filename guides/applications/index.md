@@ -1,6 +1,6 @@
 Une application Ember est toujours représentée par une classe qui étend [`Application`](https://api.emberjs.com/ember/release/classes/Application). Cette classe est utilisée pour déclarer et configurer les nombreux objets qui constituent l'app.
 
-Quand l'application démarre, elle crée une [`ApplicationInstance`](https://api.emberjs.com/ember/release/classes/ApplicationInstance) qui est utilisée pour gérer tout ce qui à trait aux états. L'instance agit en tant que "_owner_" (propriétaire) des objets instanciés pour l'app.
+Quand l'application démarre, elle crée une [`ApplicationInstance`](https://api.emberjs.com/ember/release/classes/ApplicationInstance) qui est utilisée pour gérer tout ce qui à trait aux états. L'instance agit en tant que "<span lang="en">_owner_</span>" (propriétaire) des objets instanciés pour l'app.
 
 Pour le formuler autrement, l'`Application` _définit votre application_ tandis que l'`ApplicationInstance` _gère son état_.
 
