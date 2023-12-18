@@ -21,6 +21,7 @@ guides/**/*.md
 !guides/applications/dependency-injection.md
 !guides/components/block-content.md
 !guides/components/built-in-components.md
+!guides/configuring-ember/build-targets.md
 !guides/getting-started/index.md
 !guides/getting-started/anatomy-of-an-ember-app.md
 !guides/getting-started/quick-start.md
