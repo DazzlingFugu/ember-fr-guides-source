@@ -8,10 +8,10 @@ In this chapter, we'll work on adding a new search feature, and refactor our `in
 
 During this refactor, you will learn about:
 
-- Using Ember's built-in `<Input>` component
-- The provider component pattern
-- Using block parameters when invoking components
-- Yielding data to caller components
+- Utiliser le composant `<Input>` d'Ember
+- Le patron de conception _provider component_
+- Utiliser des paramètres de bloc en invoquant un composant
+- Retourner des données au composant appelant
 
 ## Add input
 
@@ -245,7 +245,7 @@ Ember's `<Input>` component is pretty neat; it will wire up things behind the sc
   </div>
 </div>
 
-## Adding the `<Rentals::Filter>` Provider Component
+## Ajouter le _Provider Component_ `<Rentals::Filter>`
 
 Now that our search query is wired up to our `<Rentals>` component, we can get into the really fun stuff! Namely, we can make our component _filter_ results based on our search query. In order to encapsulate this functionality, we'll create another component called `<Rentals::Filter>`.
 
