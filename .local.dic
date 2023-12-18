@@ -16,14 +16,11 @@ CWD
 Chai
 Checkboxes
 CoffeeScript
-CoffeeScript
-ColorSafe
 ColorSafe
 CommonJS
 Config
 Ctrl-C
 Customizable
-D3
 D3
 DAP
 DI
@@ -42,7 +39,6 @@ ES3
 ES5
 ES6
 ESLint
-Edge
 Edge
 EditorConfig
 EmbeddedRecordMixin
@@ -201,7 +197,6 @@ chainable
 cheatsheet
 checkbox
 checkboxes
-checksum/nombrable
 checksum/nombrable
 class
 classic
@@ -492,7 +487,6 @@ transpile/DGS
 transpiler/nombrable
 tree
 treesitter
-triple-backtick
 triple-backtick
 truthy
 typeahead
