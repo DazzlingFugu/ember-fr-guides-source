@@ -413,6 +413,7 @@ reader/nombrable
 readme
 readonly
 recognizers
+record/nombrable
 refactorisation/nombrable
 refactorer/réparer
 refresh
@@ -453,6 +454,7 @@ stateful
 stdin
 stdout
 storage
+store
 storeConfigInMeta
 styleguide/nombrable
 stylesheet/nombrable
