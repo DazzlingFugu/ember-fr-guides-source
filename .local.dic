@@ -281,6 +281,7 @@ lockfile/nombrable
 lookups
 LSP
 LTS
+many-to-many
 Mapbox
 Markdown
 md5
@@ -317,6 +318,9 @@ npm
 NVDA
 ok
 onboarding
+one-to-one
+one-to-many
+one-to-many
 Orca
 outputPaths
 owner/nombrable
@@ -329,6 +333,7 @@ parameterizing
 params
 PascalCased
 pathing
+paypal
 performant
 PhantomJS
 pipelining
@@ -510,8 +515,3 @@ XHR
 XSS
 ZEIT
 Zoey
-one-to-one
-one-to-many
-many-to-many
-one-to-many
-paypal
