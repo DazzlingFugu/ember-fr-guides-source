@@ -3,7 +3,7 @@ Le _store_ (magasin, réserve) d'EmberData fournit une interface pour récupére
 ### Récupération d'un seul _record_
 
 Utilisez [`store.findRecord()`](https://api.emberjs.com/ember-data/release/classes/Store/methods/findRecord?anchor=findRecord) pour récupérer un _record_ via son type et son ID.
-Cela renverra une promesse qui sera résolue avec le _record_ demandé:
+Cela renverra une promesse qui sera résolue avec le _record_ demandé&nbsp;:
 
 ```javascript
 // GET /blog-posts/1
@@ -14,7 +14,7 @@ this.store.findRecord('blog-post', 1)  // => GET /blog-posts/1
 ```
 
 Utilisez [`store.peekRecord()`](https://api.emberjs.com/ember-data/release/classes/Store/methods/peekRecord?anchor=peekRecord) pour récupérer un _record_ via son type et son ID, sans déclencher de requête réseau.
-Cela renverra le _record_ uniquement s'il est déjà présent dans le _store_:
+Cela renverra le _record_ uniquement s'il est déjà présent dans le _store_&nbsp;:
 
 ```javascript
 let blogPost = this.store.peekRecord('blog-post', 1); // => no network request
