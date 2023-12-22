@@ -61,7 +61,7 @@ module('Acceptance | posts', function(hooks) {
 
 ## Liens pour sauter la navigation
 
-Un lien pour sauter la navigation (_skip navigation link_ ou _skip link_) est une fonctionnalité utile aux utilisateurs qui souhaitent passer le contenu répétés sur plusieurs pages (par exemple, l'entête du site). C'est particulièrement bienvenu pour les utilisateurs qui s'aident de technologies d'assistance, qui naviguent dans le contenu du site de manière plus linéaire, mais c'est aussi utile pour les utilisateurs avancés qui préfèrent naviguer sur le site uniquement avec le clavier.
+Un lien pour sauter la navigation (_skip navigation link_ ou _skip link_) est une fonctionnalité utile aux utilisateurs qui souhaitent passer le contenu répété sur plusieurs pages (par exemple, l'entête du site). C'est particulièrement bienvenu pour les utilisateurs qui s'aident de technologies d'assistance, qui naviguent dans le contenu du site de manière plus linéaire, mais c'est aussi utile pour les utilisateurs avancés qui préfèrent naviguer sur le site uniquement avec le clavier.
 
 <img width="675px" title="Exemple où la navigation est sautée" alt="Une représentation visuelle de la manière dont le lien pour sauter la navigation fonctionne dans le navigateur" src="/images/accessibility/page-template-considerations/skip-main-content.png"/>
 
@@ -73,7 +73,7 @@ Pour lire davantage sur les _skip links_, visitez [la documentation MDN (non tra
 
 Aucun framework d'application monopage (_single-page_) ne fournit par défaut une gestion des niveaux de routes appropriée pour les technologies d'assistance. Ceci est principalement dû à la manière dont `pushState` fonctionne, et au manque d'une gestion d'événement pour les frameworks JavaScript qui permettrait de notifier les technologies d'assistance que le contenu de la page a changé. Ça signifie _aussi_ que le focus reste inchangé lors de la navigation d'une route à l'autre, ce qui veut dire que, dans certains cas, il est entièrement perdu (si l'élément qui avait le focus n'est plus présent sur la nouvelle page).
 
-La plupart des frameworks proposent des mécaniques pour ajouter les fonctionnalités manquantes à une application. Avec Ember.js, une tentative de remédier à ces deux lacunes existe via la [RFC 433](https://github.com/emberjs/rfcs/pull/433); d'ici là, quelques addons fournissent une aide pour gérer le focus au niveau de la vue de l'application. À vous d'évaluer toutes les options pour déterminer la plus appropriée à votre cas d'usage&nbsp;:
+La plupart des frameworks proposent des mécaniques pour ajouter les fonctionnalités manquantes à une application. Avec Ember.js, une tentative de remédier à ces deux lacunes existe via la [RFC 433](https://github.com/emberjs/rfcs/pull/433)&nbsp;; d'ici là, quelques addons fournissent une aide pour gérer le focus au niveau de la vue de l'application. À vous d'évaluer toutes les options pour déterminer la plus appropriée à votre cas d'usage&nbsp;:
 
 - [ember-a11y](https://github.com/ember-a11y/ember-a11y)
 - [ember-self-focused](https://github.com/linkedin/self-focused/tree/master/packages/ember-self-focused)

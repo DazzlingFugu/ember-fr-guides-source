@@ -8,10 +8,10 @@ As promised, we will now work on implementing the share button!
 
 While adding the share button, you will learn about:
 
-- Splattributes and the `class` attribute
-- The router service
-- Ember services vs. global variables
-- Mocking services in tests
+- _Splattributes_ et l'attribut `class`
+- Le service routeur
+- Services Ember versus variables globales
+- _Mocker_ des services dans les tests
 
 ## Scoping the Feature
 
@@ -352,13 +352,13 @@ export default class ShareButtonComponent extends Component {
 }
 ```
 
-Here, we added the `@service router;` declaration to our component class. This injects the router service into the component, making it available to us as `this.router`. The router service has a `currentURL` property, providing the current "logical" URL as seen by Ember's router. Similar to the test helper with the same name, this is a relative URL, so we would have to join it with `window.location.origin` to get an absolute URL that we can share.
+Here, we added the `@service router;` declaration to our component class. This injects the router service into the component, making it available to us as `this.router`. Le service routeur has a `currentURL` property, providing the current "logical" URL as seen by Ember's router. Similar to the test helper with the same name, this is a relative URL, so we would have to join it with `window.location.origin` to get an absolute URL that we can share.
 
 With this change, everything is now working the way we intended.
 
 <img src="/images/tutorial/part-2/service-injection/pass-1@2x.png" alt="The previously failing test is now green" width="1024" height="960">
 
-## Ember Services vs. Global Variables
+## Services Ember versus variables globales
 
 In Ember, services serve a similar role to global variables, in that they can be easily accessed by any part of your app. For example, we can inject any available service into components, as opposed to having them passed in as an argument. This allows deeply nested components to "skip through" the layers and access things that are logically global to the entire app, such as routing, authentication, user sessions, user preferences, etc. Without services, every component would have to pass through a lot of the same arguments into every component it invokes.
 

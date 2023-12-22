@@ -1,4 +1,5 @@
 CONTRIBUTING.md
+CONTRIBUTING_GRAMMALECTE.md
 README.md
 MAINTAINERS.md
 tmp
@@ -26,6 +27,7 @@ guides/**/*.md
 !guides/getting-started/working-with-html-css-and-javascript.md
 !guides/index.md
 !guides/pages.md
+!guides/routing/index.md
 !guides/services/index.md
 !guides/tutorial/part-1/automated-testing.md
 !guides/tutorial/part-1/building-pages.md
@@ -38,3 +40,5 @@ guides/**/*.md
 !guides/tutorial/part-1/reusable-components.md
 !guides/tutorial/part-1/working-with-data.md
 !guides/models/creating-updating-and-deleting-records.md
+!guides/tutorial/part-2/index.md
+!guides/tutorial/part-2/recap.md

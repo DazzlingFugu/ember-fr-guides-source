@@ -10,7 +10,7 @@ Les addons sont des paquets (ou _packages_) JavaScript qui s'intègrent avec Emb
 ember install ember-cli-sass
 ```
 
-Quand cette commande s'exécute, elle modifie votre `package.json` (ainsi que `package-lock.json` ou `yarn.lock`) et, en général, importe d'autres dépendances. Certains addons génèrent aussi, lorsque c'est nécessaire, des fichiers additionnels dans votre projet.
+Quand cette commande s'exécute, elle modifie votre `package.json` (ainsi que `package-lock.json`, `yarn.lock` ou `pnpm-lock.yaml`) et, en général, importe d'autres dépendances. Certains addons génèrent aussi, lorsque c'est nécessaire, des fichiers additionnels dans votre projet.
 
 Il existe une multitude d'addons répondant à tous types de besoins. Pour plus de détails et pour consulter d'autres exemples sur ce que les addons peuvent faire, nous vous invitons à jeter un œil à la [documentation de Ember CLI](https://cli.emberjs.com/release/basic-use/using-addons/).
 

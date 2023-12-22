@@ -22,7 +22,7 @@ Please note that no attempt is made to translate content for older versions of t
 If it's your first contribution, fork this repository from GitHub interface, then on your machine:
 ```
 git clone <your fork's url>
-git remote add upstream https://github.com/ember-learn/guides-source.git
+git remote add upstream https://github.com/DazzlingFugu/ember-fr-guides-source.git
 ```
 
 As you tackle new issues, you'll want to be sure that you always start by working on the most recent code. The second command sets an upstream. By pulling from it, you can sync up your fork's `master` branch with its upstream repository's `master` branch. For this to work, make sure you're always committing to a different branch, not `master`.
@@ -36,17 +36,22 @@ git switch --create some-branch-name
 
 ### 3. Translate and lint the page
 
+Here is the journey to submit a PR:
+1. Translate the `.md` page of your choice.
+2. Once the file is in French, add the path of the page to the `.remarkignore` file (in alphabetical order)
+3. Run `npm run lint`
+
+The command `npm run lint` runs the tools that will spellcheck your page. If all files are green and the command ends without error, you are good! If there are warnings, you need to fix them. The three most common errors are a misspelled French word, a commonly used English term that you haven't translated on purpose, and a word repeated twice.
+
+If there are errors because you kept an English term commonly used in French, add this word to the `.local.dic` file (in alphabetical order, lowercase words are below uppercase acronyms).
+
+If there are errors such as "a word is repeated twice" but it's expected in French (“Je vais vous "faire faire" une jolie traduction”), make sure to fix all the other errors of the same paragraph before adding `<!-- spell ignore -->` above the paragraph.
+
 Each PR should have:
 - **1 commit** (keep the commit stack clean with one commit, and make the message clear enough to identify the issue number or the file at first glance)
 - **2~3 files changed** (`[some-page].md`, `.remarkignore`, optionally `.local.dic`)
 
-Once you have translated the `.md` page of your choice, you need to run the linter to make sure there's no typo:
-- Add the path to your page in `.remarkignore` (respect the alphabetical order for readability)
-- Run `npm run lint`
-
-If there are errors such as "a word is written twice" but it's expected in French (“Je vais vous "faire faire" une jolie traduction”), make sure to fix all the other errors of the same paragraph before adding `<!-- spell ignore -->` above the paragraph.
-
-If there are errors because you kept an English term commonly used in French, add this word to the `.local.dic` file (respect the alphabetical order for readability, lowercase words are below uppercase acronyms).
+**Grammalecte**: if you use Visual Studio Code, you can improve the spellchecking tools that will assist you in writing a perfect file in French. Check out how to [install Grammalecte plugin in Visual Studio Code](./CONTRIBUTING_GRAMMALECTE.md).
 
 ### 4. Label your PR
 
