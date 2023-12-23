@@ -12,11 +12,17 @@ for translated in $CHANGES; do
       exit 0
     fi
   done < ".remarkignore"
+
+  echo
   echo "******* WARNING *******"
+  echo
   echo "Check your spelling ;)"
   echo You translated the file:
   echo "$translated"
   echo But it is not present in .remarkignore
+  echo
   echo "***********************"
+  echo
+
 done
 exit 0
