@@ -2,27 +2,39 @@
 
 SRC_PATTERN="guides/"
 CHANGES=$(git diff --cached --name-only | grep "$SRC_PATTERN")
+FILE_IGNORED_PAGES=".remarkignore"
+FILES_NOT_IGNORED=()
 
 readonly CHANGES
+readonly FILE_IGNORED_PAGES
 readonly SRC_PATTERN
 
+# Find the files not declared in `$FILE_IGNORED_PAGES`
 for translated in $CHANGES; do
-  while read -r line; do
-    if [ "!$translated" = "$line" ]; then
-      exit 0
-    fi
-  done < ".remarkignore"
+  if ! grep --quiet "$translated" "$FILE_IGNORED_PAGES"; then
+    FILES_NOT_IGNORED+=("$translated")
+  fi
+done
+
+if [ ${#FILES_NOT_IGNORED[@]} -ne 0 ]; then
+  # Warn user about files missing from `$FILE_IGNORED_PAGES`
 
   echo
   echo "******* WARNING *******"
   echo
   echo "Check your spelling ;)"
-  echo You translated the file:
-  echo "$translated"
-  echo But it is not present in .remarkignore
+  echo "You have translated these files:"
+  echo
+
+  for file_path in "${FILES_NOT_IGNORED[@]}"; do
+    printf '%s\n' "- $file_path"
+  done
+
+  echo
+  echo "But they are not present in the \`$FILE_IGNORED_PAGES\` file."
   echo
   echo "***********************"
   echo
+fi
 
-done
 exit 0
