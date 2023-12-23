@@ -21,6 +21,7 @@
     "test": "tests"
   },
   "scripts": {
+    "preinstall": "node scripts/preinstall.mjs",
     "build": "ember build --environment=production",
     "lint": "npm-run-all --aggregate-output --continue-on-error --parallel \"lint:!(fix)\"",
     "lint:md": "remark . --frail",
