@@ -1,8 +1,12 @@
 #!/usr/bin/env bash
 
 SRC_PATTERN="guides/"
-changes=$(git diff --cached --name-only | grep "$SRC_PATTERN")
-for translated in $changes; do
+CHANGES=$(git diff --cached --name-only | grep "$SRC_PATTERN")
+
+readonly CHANGES
+readonly SRC_PATTERN
+
+for translated in $CHANGES; do
   while read -r line; do
     if [ "!$translated" = "$line" ]; then
       exit 0
