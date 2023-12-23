@@ -22,19 +22,24 @@ if [ ${#FILES_NOT_IGNORED[@]} -ne 0 ]; then
   echo
   echo "******* WARNING *******"
   echo
-  echo "Check your spelling ;)"
   echo "You have translated these files:"
   echo
 
   for file_path in "${FILES_NOT_IGNORED[@]}"; do
     printf '%s\n' "- $file_path"
+    echo "!$file_path" >> $FILE_IGNORED_PAGES
   done
 
   echo
-  echo "But they are not present in the \`$FILE_IGNORED_PAGES\` file."
+  echo "But they were not present in \`$FILE_IGNORED_PAGES\`, so we have added them for you."
+  echo
+  echo "All you have to do now is:"
+  echo "1. To make sure entries are listed in alphabetical order"
+  echo "2. To stage and commit \`$FILE_IGNORED_PAGES\`"
   echo
   echo "***********************"
   echo
-fi
 
-exit 0
+  exit 1
+
+fi
