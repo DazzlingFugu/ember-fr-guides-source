@@ -1,16 +1,21 @@
 #!/usr/bin/env bash
 
-SRC_PATTERN="guides/"
-CHANGES=$(git diff --cached --name-only | grep "$SRC_PATTERN")
 FILE_IGNORED_PAGES=".remarkignore"
 FILES_NOT_IGNORED=()
+SRC_PATTERN="guides/"
+STAGED_FILES=$(git diff --cached --name-only)
 
-readonly CHANGES
 readonly FILE_IGNORED_PAGES
 readonly SRC_PATTERN
+readonly STAGED_FILES
+
+# No changes staged, abort
+if [ -z "$STAGED_FILES" ]; then
+  exit 0
+fi
 
 # Find the files not declared in `$FILE_IGNORED_PAGES`
-for translated in $CHANGES; do
+for translated in $(echo "$STAGED_FILES" | grep "$SRC_PATTERN"); do
   if ! grep --quiet "$translated" "$FILE_IGNORED_PAGES"; then
     FILES_NOT_IGNORED+=("$translated")
   fi
@@ -41,5 +46,24 @@ if [ ${#FILES_NOT_IGNORED[@]} -ne 0 ]; then
   echo
 
   exit 1
+
+else
+
+  # Auto-stage `$FILE_IGNORED_PAGES` only if staged files include translated pages.
+  if  echo "$STAGED_FILES" | grep --quiet "$SRC_PATTERN" && \
+    ! echo "$STAGED_FILES" | grep --quiet "$FILE_IGNORED_PAGES"
+  then
+
+    git add "$FILE_IGNORED_PAGES"
+
+    echo
+    echo "******* WARNING *******"
+    echo
+    echo "\`$FILE_IGNORED_PAGES\` was not in your staged files, so we have added it for you. "
+    echo
+    echo "***********************"
+    echo
+
+  fi
 
 fi
