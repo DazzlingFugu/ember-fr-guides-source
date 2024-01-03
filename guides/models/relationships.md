@@ -1,10 +1,8 @@
-EmberData includes several built-in relationship types to help you
-define how your models relate to each other.
+EmberData inclut plusieurs types d'associations pour vous aider à définir comment vos modèles sont liés les uns aux autres.
 
 ### One-to-One
 
-To declare a one-to-one relationship between two models, use
-`belongsTo`:
+Pour déclarer une association _one-to-one_ entre deux modèles, utilisez `belongsTo`&nbsp;:
 
 ```javascript {data-filename=app/models/user.js}
 import Model, { belongsTo } from '@ember-data/model';
@@ -24,8 +22,7 @@ export default class ProfileModel extends Model {
 
 ### One-to-Many
 
-To declare a one-to-many relationship between two models, use
-`belongsTo` in combination with `hasMany`, like this:
+Pour déclarer une association _one-to-many_ entre deux modèles, utilisez `belongsTo` ainsi que `hasMany`, comme ça&nbsp;:
 
 ```javascript {data-filename=app/models/blog-post.js}
 import Model, { hasMany } from '@ember-data/model';
@@ -45,8 +42,7 @@ export default class CommentModel extends Model {
 
 ### Many-to-Many
 
-To declare a many-to-many relationship between two models, use
-`hasMany`:
+Pour déclarer une association _many-to-many_ entre deux modèles, utilisez `hasMany`&nbsp;:
 
 ```javascript {data-filename=app/models/blog-post.js}
 import Model, { hasMany } from '@ember-data/model';
@@ -64,19 +60,17 @@ export default class TagModel extends Model {
 }
 ```
 
-### Explicit Inverses
+### Inverses explicites
 
-EmberData will do its best to discover which relationships map to one
-another. In the one-to-many code above, for example, EmberData can figure out that
-changing the `comments` relationship should update the `blogPost`
-relationship on the inverse because `blogPost` is the only relationship to
-that model.
+EmberData fera de son mieux pour découvrir quelles associations sont liées les unes aux autres.
+Par exemple, dans le code _one-to-many_ ci-dessus, EmberData comprend que
+modifier la relation `comments` doit aussi mettre à jour l'association `blogPost` à l'inverse,
+car `blogPost` est la seule association de ce modèle.
 
-However, sometimes you may have multiple `belongsTo`/`hasMany`s for
-the same type. You can specify which property on the related model is
-the inverse using `belongsTo` or `hasMany`'s `inverse`
-option. Relationships without an inverse can be indicated as such by
-including `{ inverse: null }`.
+Cependant, parfois vous pouvez avoir plusieurs `belongsTo`/`hasMany` pour
+le même type. Vous pouvez spécifier quelle propriété du modèle lié est l'inverse
+en utilisant l'option `inverse` sur `belongsTo` ou `hasMany`. Les associations sans inverse
+peuvent être indiquées en utilisant `{ inverse: null }`.
 
 ```javascript {data-filename=app/models/comment.js}
 import Model, { belongsTo } from '@ember-data/model';
@@ -94,19 +88,19 @@ import Model, { hasMany } from '@ember-data/model';
 
 export default class BlogPostModel extends Model {
   @hasMany('comment', {
-    inverse: 'redPost'
+    inverse: 'redPost',
   })
   comments;
 }
 ```
 
-### Reflexive Relations
+### Associations réflexives
 
-When you want to define a reflexive relation (a model that has a relationship to
-itself), you must explicitly define the inverse relationship. If there
-is no inverse relationship then you can set the inverse to `null`.
+Quand vous voulez définir une association réflexive (un modèle qui a une association
+avec lui-même), vous devez explicitement définir l'inverse de l'association. S'il
+n'y a pas d'association inverse alors vous pouvez mettre l'inverse à `null`.
 
-Here's an example of a one-to-many reflexive relationship:
+Voici un exemple d'association réflexive _one-to-many_&nbsp;:
 
 ```javascript {data-filename=app/models/folder.js}
 import Model, { belongsTo, hasMany } from '@ember-data/model';
@@ -117,7 +111,7 @@ export default class FolderModel extends Model {
 }
 ```
 
-Here's an example of a one-to-one reflexive relationship:
+Voici un exemple d'association réflexive _one-to-one_&nbsp;:
 
 ```javascript {data-filename=app/models/user.js}
 import Model, { attr, belongsTo } from '@ember-data/model';
@@ -128,7 +122,7 @@ export default class UserModel extends Model {
 }
 ```
 
-You can also define a reflexive relationship that doesn't have an inverse:
+Vous pouvez aussi définir une association réflexive qui n'a pas d'inverse&nbsp;:
 
 ```javascript {data-filename=app/models/folder.js}
 import Model, { belongsTo } from '@ember-data/model';
@@ -138,19 +132,20 @@ export default class FolderModel extends Model {
 }
 ```
 
-### Polymorphism
+### Polymorphisme
 
-Polymorphism is a powerful concept which allows a developer
-to abstract common functionality into a base class. Consider the
-following example: a user with multiple payment methods. They
-could have a linked PayPal account, and a couple credit cards on
-file.
+Le polymorphisme est un concept puissant qui permet aux développeurs
+d'abstraire des fonctionnalités communes dans une classe de base.
+Considérons l'exemple suivant&nbsp;: un utilisateur avec plusieurs
+méthodes de paiement. Ils pourraient avoir un compte Paypal lié, et plusieurs
+cartes de crédit.
 
-Note that, for polymorphism to work, EmberData expects a
-"type" declaration polymorphic type via the reserved `type`
-property on the model. Confused? See the API response below.
+Notez que pour que le polymorphisme fonctionne, EmberData s'attend
+à ce qu'un type polymorphe soit déclaré par un "type" de déclaration
+polymorphe via la propriété réservée `type` sur le modèle.
+Confus&nbsp;? Voir la réponse de l'API ci-dessous.
 
-First, let's look at the model definitions:
+En premier, regardons la définition du modèle&nbsp;:
 
 ```javascript {data-filename=app/models/user.js}
 import Model, { hasMany } from '@ember-data/model';
@@ -183,7 +178,7 @@ export default class PaymentMethodCcModel extends PaymentMethod {
 
 ```javascript {data-filename=app/models/payment-method-paypal.js}
 import { attr } from '@ember-data/model';
-import PaymentMethod from './payment-method'
+import PaymentMethod from './payment-method';
 
 export default class PaymentMethodPaypalModel extends PaymentMethod {
   @attr linkedEmail;
@@ -201,7 +196,7 @@ export default class PaymentMethodPaypalModel extends PaymentMethod {
 }
 ```
 
-And our API might setup these relationships like so:
+Notre API peut configurer ces associations de la manière suivante&nbsp;:
 
 ```json
 {
@@ -256,22 +251,21 @@ And our API might setup these relationships like so:
 }
 ```
 
-### Readonly Nested Data
+### Données imbriquées en lecture seule
 
-Some models may have properties that are deeply nested objects of
-readonly data. The naïve solution would be to define models for each
-nested object and use `hasMany` and `belongsTo` to recreate the nested
-relationship. However, since readonly data will never need to be
-updated and saved this often results in the creation of a great deal
-of code for very little benefit. An alternate approach is to define
-these relationships using an attribute with no transform
-(`@attr`). This makes it easy to access readonly values in
-other objects and templates without the overhead of defining
-extraneous models.
+Certains modèles peuvent avoir des propriétés qui sont des objets de données profondément
+imbriqués en lecture seule. La solution naïve serait de définir
+un modèle pour chaque objet imbriqué et utiliser `hasMany` et `belongsTo` pour
+créer l'association imbriquée. Cependant, puisque les données en lecture seule n'auront
+jamais besoin d'être mises à jour et sauvegardées cela aboutit souvent à la création
+d'une grande quantité de code pour très peu d'avantages. Une approche alternative est de
+définir cette association en utilisant un attribut sans transformation (`@attr`). Cela
+simplifie l'accès aux valeurs en lecture seule des autres objets et templates sans
+devoir définir de modèles superflus.
 
-### Creating Records
+### Création de _Records_ (enregistrements)
 
-Let's assume that we have a `blog-post` and a `comment` model. A single blog post can have several comments linked to it. The correct relationship is shown below:
+Supposons que nous ayons un modèle `blog-post` et un autre modèle `comment`. Un article de blog peut avoir plusieurs commentaires qui lui sont liés. La bonne association est montrée ci-dessous&nbsp;:
 
 ```javascript {data-filename=app/models/blog-post.js}
 import Model, { hasMany } from '@ember-data/model';
@@ -289,88 +283,82 @@ export default class CommentModel extends Model {
 }
 ```
 
-Now, suppose we want to add comments to an existing blogPost. We can do this in two ways, but for both of them, we first need to look up a blog post that is already loaded in the store, using its id:
+Maintenant, supposons que nous voulons ajouter des commentaires sur un article existant. Nous pouvons le faire de deux manières différentes, en premier nous avons besoin de chercher un article de blog qui est déjà chargé dans le _store_ en utilisant son identifiant&nbsp;:
 
 ```javascript
 let myBlogPost = this.store.peekRecord('blog-post', 1);
 ```
 
-Now we can either set the `belongsTo` relationship in our new comment, or, update the blogPost's `hasMany` relationship. As you might observe, we don't need to set both `hasMany` and `belongsTo` for a record. EmberData will do that for us.
+Maintenant nous pouvons soit mettre à jour l'association `belongsTo` dans notre nouveau commentaire, soit mettre à jour l'association `hasMany` de l'article de blog. Comme vous pouvez le constater, nous n'avons pas besoin de mettre à jour à la fois `hasMany` et `belongsTo`, EmberData le fera pour nous.
 
-First, let's look at setting the `belongsTo` relationship in our new comment:
+En premier, regardons comment définir l'association `belongsTo` dans notre nouveau commentaire&nbsp;;
 
 ```javascript
 let comment = this.store.createRecord('comment', {
-  blogPost: myBlogPost
+  blogPost: myBlogPost,
 });
 comment.save();
 ```
 
-In the above snippet, we have referenced `myBlogPost` while creating the record. This will let Ember know that the newly created comment belongs to `myBlogPost`.
-This will create a new `comment` record and save it to the server. EmberData will also update `myBlogPost` to include our newly created comment in its `comments` relationship.
+Dans l'extrait ci-dessus, nous référençons `myBlogPost` pendant que nous créons le _record_. Cela permettra à Ember de savoir que le commentaire nouvellement créé appartient à `myBlogPost`.
+Cela créera un nouveau _record_ `comment` et le sauvegardera sur le serveur. EmberData mettra aussi à jour `myBlogPost` en incluant notre commentaire nouvellement créé dans l'association `comments`.
 
-The second way of doing the same thing is to link the two records together by updating the blogPost's `hasMany` relationship as shown below:
+La seconde manière de faire la même chose est de lier les deux _records_ ensemble en mettant à jour l'association `hasMany` de blogPost, comme montré ci-dessous&nbsp;:
 
 ```javascript
 let comment = this.store.createRecord('comment', {});
 let comments = await myBlogPost.comments;
 comments.push(comment);
-comment.save().then(function() {
+comment.save().then(function () {
   myBlogPost.save();
 });
 ```
 
-In this above case, the new comment's `belongsTo` relationship will be automatically set to the parent blogPost.
+Dans le cas ci-dessus, la nouvelle association `belongsTo` du commentaire sera automatiquement définie à l'article de blog parent.
 
-Although `createRecord` is fairly straightforward, the only thing to watch out for
-is that you cannot assign a promise as a relationship, currently.
+Bien que `createRecord` soit assez simple, la seule chose à laquelle il faut faire attention est que vous ne pouvez actuellement pas assigner une promesse comme association.
 
-For example, if you want to set the `author` property of a blogPost, this would **not** work
-if the `user` with id isn't already loaded into the store:
+Par exemple, si vous voulez définir une propriété `author` d'un article de blog, ça **ne fonctionnerait pas** si l'utilisateur avec l'ID `1` n'est pas déjà chargé dans le _store_&nbsp;:
 
 ```javascript
 this.store.createRecord('blog-post', {
   title: 'Rails is Omakase',
   body: 'Lorem ipsum',
-  author: this.store.findRecord('user', 1)
+  author: this.store.findRecord('user', 1),
 });
 ```
 
-However, you can easily set the relationship after the promise has fulfilled:
+Cependant, vous pouvez facilement définir l'association une fois que la promesse est résolue&nbsp;:
 
 ```javascript
 let blogPost = this.store.createRecord('blog-post', {
   title: 'Rails is Omakase',
-  body: 'Lorem ipsum'
+  body: 'Lorem ipsum',
 });
 
-this.store.findRecord('user', 1).then(function(user) {
+this.store.findRecord('user', 1).then(function (user) {
   blogPost.author = user;
 });
 ```
 
-### Retrieving Related Records
+### Récupérer les _records_ liés
 
-When you request data from the server for a model that has relationships with one or more others,
-you may want to retrieve records corresponding to those related models at the same time.
-For example, when retrieving a blog post, you may need to access the comments associated
-with the post as well.
-The [JSON:API specification allows](http://jsonapi.org/format/#fetching-includes)
-servers to accept a query parameter with the key `include` as a request to
-include those related records in the response returned to the client.
-The value of the parameter should be a comma-separated list of names of the
-relationships required.
+Quand vous récupérez des données depuis le serveur pour un modèle qui a une association avec
+un ou plusieurs autres modèles, vous voudrez peut-être récupérer les _records_ liés à ces modèles
+en même temps. Par exemple, lors de la récupération d'un article de blog, vous voulez aussi
+peut-être accéder aux commentaires associés à l'article. La spécification [JSON:API](https://jsonapi.org/format/#fetching-includes)
+permet aux serveurs d'accepter un paramètre de requête, via la clé `include`, en tant que
+requête afin d'inclure ces _records_ liés dans la réponse retournée aux clients.
+La valeur du paramètre doit être une liste de noms d'associations, séparés par des virgules.
 
-If you are using an adapter that supports JSON:API, such as Ember's default [`JSONAPIAdapter`](https://api.emberjs.com/ember-data/release/classes/JSONAPIAdapter),
-you can easily add the `include` parameter to the server requests created by
-the `findRecord()`, `findAll()`,
-`query()` and `queryRecord()` methods.
+Si vous utilisez un adaptateur qui supporte JSON:API, comme celui par défaut d'Ember [`JSONAPIAdapter`](https://api.emberjs.com/ember-data/release/classes/JSONAPIAdapter), vous pouvez facilement ajouter le paramètre `include` aux requêtes serveur créées par les méthodes `findRecord()`, `findAll()`,
+`query()` et `queryRecord()`.
 
-`findRecord()` and `findAll()` each take an `options` argument in which you can
-specify the `include` parameter.
-For example, given a `post` model that has a `hasMany` relationship with a `comment` model,
-when retrieving a specific post we can have the server also return that post's comments
-as follows:
+Chacune des méthodes `findRecord()` et `findAll()` accepte un argument `options` dans
+lequel vous pouvez spécifier le paramètre `include`.
+Par exemple, prenons un modèle `post` (article) qui a une association `hasMany` avec le modèle `comment` (commentaire),
+lors de la récupération d'un article spécifique, nous pouvons demander au serveur de renvoyer
+également les commentaires de cet article. Comme ça&nbsp;:
 
 ```javascript {data-filename=app/routes/post.js}
 import Route from '@ember/routing/route';
@@ -380,17 +368,18 @@ export default class PostRoute extends Route {
   @service store;
   model(params) {
     return this.store.findRecord('post', params.post_id, {
-      include: 'comments'
+      include: 'comments',
     });
   }
 }
 ```
 
-The post's comments would then be available in your template as `model.comments`.
+Les commentaires de l'article seraient alors disponibles dans votre template via `model.comments`.
 
-Nested relationships can be specified in the `include` parameter as a dot-separated sequence of relationship names.
-So to request both the post's comments and the authors of those comments the request
-would look like this:
+Les associations imbriquées peuvent être spécifiées dans le paramètre `include`, sous la forme
+d'une liste de noms d'associations, séparés par des points.
+Ainsi, pour récupérer à la fois les commentaires de l'article et les auteurs de ces
+commentaires, la requête ressemblerait à ça&nbsp;:
 
 ```javascript {data-filename=app/routes/post.js}
 import Route from '@ember/routing/route';
@@ -400,16 +389,15 @@ export default class PostRoute extends Route {
   @service store;
   model(params) {
     return this.store.findRecord('post', params.post_id, {
-      include: 'comments,comments.author'
+      include: 'comments,comments.author',
     });
   }
 }
 ```
 
-The `query()` and `queryRecord()` methods each take a `query` argument that is
-serialized directly into the URL query string and the `include` parameter may
-form part of that argument.
-For example:
+Chacune des méthodes `query()` et `queryRecord()` accepte un argument `query` qui est directement
+sérialisé dans les paramètres de l'URL et le paramètre `include` peut faire partie de cet argument.
+Par exemple&nbsp;:
 
 ```javascript {data-filename=app/routes/adele.js}
 import Route from '@ember/routing/route';
@@ -422,18 +410,18 @@ export default class AdeleRoute extends Route {
     return this.store
       .query('artist', {
         filter: { name: 'Adele' },
-        include: 'albums'
+        include: 'albums',
       })
-      .then(function(artists) {
+      .then(function (artists) {
         return artists[0];
       });
   }
 }
 ```
 
-### Updating Existing Records
+### Mettre à jour des _records_ existants
 
-Sometimes we want to set relationships on already existing records. We can simply set a `belongsTo` relationship:
+Parfois nous voulons définir des associations sur des _records_ déjà existants. Nous pouvons simplement définir une association `belongsTo`&nbsp;:
 
 ```javascript
 let blogPost = this.store.peekRecord('blog-post', 1);
@@ -442,7 +430,7 @@ comment.blogPost = blogPost;
 comment.save();
 ```
 
-Alternatively, we could update the `hasMany` relationship by pushing a record into the relationship:
+Ou bien, nous pourrions mettre à jour l'association `hasMany` en définissant un _record_ dans l'association&nbsp;:
 
 ```javascript
 let blogPost = this.store.peekRecord('blog-post', 1);
@@ -452,9 +440,9 @@ comments.push(comment);
 blogPost.save();
 ```
 
-### Removing Relationships
+### Supprimer des associations
 
-To remove a `belongsTo` relationship, we can set it to `null`, which will also remove it from the `hasMany` side:
+Pour supprimer une association `belongsTo`, nous pouvons la définir à `null`, ce qui la supprimera aussi du côté de `hasMany`&nbsp;:
 
 ```javascript
 let comment = this.store.peekRecord('comment', 1);
@@ -462,7 +450,7 @@ comment.blogPost = null;
 comment.save();
 ```
 
-It is also possible to remove a record from a `hasMany` relationship:
+Il est également possible de supprimer un _record_ d'une association `hasMany`&nbsp;:
 
 ```javascript
 let blogPost = this.store.peekRecord('blog-post', 1);
@@ -472,13 +460,13 @@ comments.removeObject(comment);
 blogPost.save();
 ```
 
-As in the earlier examples, the comment's `belongsTo` relationship will also be cleared by EmberData.
+Comme dans les exemples précédents, l'association `belongsTo` du commentaire sera également effacée par EmberData.
 
-### Relationships as Promises
+### Les associations en tant que promesses
 
-While working with relationships it is important to remember that they return promises.
+Lorsque nous travaillons avec des associations, il est important de se souvenir qu'elles retournent des promesses.
 
-For example, if we were to work on a blogPost's asynchronous comments, we would have to wait until the promise has fulfilled:
+Par exemple, si nous devions travailler sur les commentaires asynchrones d'un article de blog, nous devrions attendre que la promesse soit résolue&nbsp;:
 
 ```javascript
 let blogPost = this.store.peekRecord('blog-post', 1);
@@ -487,7 +475,7 @@ let comments = await blogPost.comments;
 // now we can work with the comments
 ```
 
-The same applies to `belongsTo` relationships:
+La même chose s'applique aux associations `belongsTo` :
 
 ```javascript
 let comment = this.store.peekRecord('comment', 1);
@@ -496,7 +484,7 @@ let blogPost = await comment.blogPost;
 // the blogPost is available here
 ```
 
-Handlebars templates will automatically be updated to reflect a resolved promise. We can display a list of comments in a blogPost like so:
+Les templates Handlebars seront automatiquement mis à jour pour refléter une promesse résolue. Nous pouvons afficher une liste de commentaires dans un article de blog comme ça&nbsp;:
 
 ```handlebars
 <ul>
@@ -506,4 +494,4 @@ Handlebars templates will automatically be updated to reflect a resolved promise
 </ul>
 ```
 
-EmberData will query the server for the appropriate records and re-render the template once the data is received.
+EmberData interrogera le serveur pour obtenir les _records_ appropriés et régénérera le template une fois les données reçues.
