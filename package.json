@@ -13,8 +13,18 @@
   },
   "license": "MIT",
   "contributors": [
-    "Marine Dunstetter",
-    "Guillaume Gérard"
+    {
+      "name": "Marine Dunstetter",
+      "email": "marine.dunstetter@mainmatter.com"
+    },
+    {
+      "name": "Guillaume Gérard",
+      "email": "guillaume.gerard88@gmail.com"
+    },
+    {
+      "name": "Mr Chocolatine",
+      "email": "gh.pro.mhj2e@simplelogin.fr"
+    }
   ],
   "directories": {
     "doc": "doc",
