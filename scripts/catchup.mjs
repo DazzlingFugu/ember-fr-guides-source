@@ -308,6 +308,24 @@ ACTION REQUIRED: The issue for file ${file.filename} (${file.diffName}) couldn't
   }
 }
 
+/*
+ * This function adds, commits, and pushes the modifications in "guides" folder
+ */
+const pushChanges = () => {
+  try {
+    runShell('git add guides');
+    runShell(`git commit -m "feat: automatic catch up from ${currentEmberVersion} to ${newEmberVersion}"`);
+    runShell(`git push origin ${catchupBranch}`);
+  } catch (error) {
+    warnings.push(`
+ACTION REQUIRED: Failed to push the catchup branch
+-> Check what's the issue, then push the changes and open the Github PR manually.
+
+`);
+    throw error;
+  }
+}
+
 try {
 
   try {
@@ -352,7 +370,14 @@ try {
 
     // Post the catchup PR if there's at least one patched file to commit
     if (hasAutoApply) {
-      // catchup PR
+      try {
+        pushChanges();
+
+        // catchup PR
+
+      } catch (error) {
+        console.error('Failed to push the catchup branch.');
+      }
     }
 
   } else {
