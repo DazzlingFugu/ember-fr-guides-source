@@ -32,6 +32,17 @@ const catchupBranch = `catchup-${newEmberVersion}`;
 // List of filenames that changed between origin/ref-upstream and upstream/master
 let files;
 
+/* 
+ * List of { filename, diffname } that require a GitHub issue to be adjusted manually
+ * Example:
+ * { filename: "my-page.md", diffName: "3.diff" } 
+ * This mean that the diff between origin/ref-upstream and upstream/master for the file "my-page.md"
+ * has been printed in "3.diff".
+ * The command "git apply 3.diff" failed, probably because "my-page.md" was already translated into French.
+ * Therefore, we need to open a GitHub issue showing the diff English to English so translators know how to adjust the translation.
+ */
+let filesToPost = [];
+
 // List of manual actions to perform if the script encounters some failures
 let warnings = [];
 
