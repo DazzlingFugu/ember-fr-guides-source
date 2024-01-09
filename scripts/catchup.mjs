@@ -61,6 +61,27 @@ Here are all the actions you should perform manually to fully complete it:
   }
 }
 
+/* 
+ * This function compares the given filename in both branches and output a [index].diff file.
+ * Example: 
+ * filename = guides/accessibility/index.md, index = 3
+ * The diff between ref-upstream and upstream/master for this file is printed in 3.diff
+ */
+const createDiff = (filename, index) => {
+  const diffName = `scripts/patches/${index}.diff`;
+  try {
+    runShell(`git diff ref-upstream upstream/master -- ${filename} > ${diffName}`);
+    return diffName;
+  } catch (error) {
+    warnings.push(`
+ACTION REQUIRED: The diff file was not created for ${filename}.
+-> Check manually if there is a diff to handle between origin/ref-upstream and upstream/master for this file.
+
+`);
+    throw new Error(`Failed to create the diff for ${filename}. This was caused by: ${err}`);
+  }
+}
+
 try {
 
   try {
