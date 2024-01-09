@@ -465,7 +465,7 @@ try {
     fs.mkdirSync('scripts/patches', { recursive: true });
     console.log('scripts/patches folder created to store the patch files');
 
-    /* Try to apply the diff files automatically and keep track of the failed  and new ones.
+    /* Try to apply the diff files automatically and keep track of the failed and new ones.
      * hasAutoApply is true if at least one file could be patched automatically. */
     let hasAutoApply = await writeDiffFiles();
     console.log('Files to post on GitHub:', filesToPost);
@@ -487,8 +487,8 @@ try {
         } catch (error) {
           console.error(`Failed to post the catchup PR. This was caused by: ${error}`);
           warnings.push(`
-  ACTION REQUIRED: The catchup PR was not opened automatically on GitHub.
-  -> Chack what's the issue, then open the PR on GitHub manually.
+ACTION REQUIRED: The catchup PR was not opened automatically on GitHub.
+-> Chack what's the issue, then open the PR on GitHub manually.
   
   `);
         }
@@ -507,5 +507,6 @@ try {
 
 } catch (error) {
   console.error(error);
+  printWarningMessages();
   process.exitCode = 1;
 }
