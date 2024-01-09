@@ -269,6 +269,20 @@ const postIssue = (file) => {
   });
 }
 
+const openCatchupPR = () => {
+  return fetch(`https://api.github.com/repos/${repo}/pulls`, {
+    method: 'POST',
+    headers: getRequestHeaders(),
+    body: JSON.stringify({
+      title: `Catch up latest docs: from ${currentEmberVersion} to ${newEmberVersion}`,
+      body: 'This is an automatic catch up PR to align our non-translated documentation with the latest official documentation.',
+      head: catchupBranch,
+      base: 'master',
+      labels: ['Guides FR trad']
+    })
+  });
+}
+
 /*
  * This function post a GitHub issue for each file that couldn't be patched automatially.
  * It works with a classic for loop that pauses the execution during the request and wait one second after the answer is received.
@@ -373,7 +387,19 @@ try {
       try {
         pushChanges();
 
-        // catchup PR
+        try {
+          console.log('Attempting to post the catch up PR');
+          const prResponse = await openCatchupPR();
+          const jsonPrResponse = await prResponse.json();
+          console.log('Server responded with:', jsonPrResponse);
+        } catch (error) {
+          console.error(`Failed to post the catchup PR. This was caused by: ${error}`);
+          warnings.push(`
+  ACTION REQUIRED: The catchup PR was not opened automatically on GitHub.
+  -> Chack what's the issue, then open the PR on GitHub manually.
+  
+  `);
+        }
 
       } catch (error) {
         console.error('Failed to push the catchup branch.');
