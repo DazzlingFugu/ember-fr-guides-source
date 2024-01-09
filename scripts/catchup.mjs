@@ -32,6 +32,9 @@ const catchupBranch = `catchup-${newEmberVersion}`;
 // List of filenames that changed between origin/ref-upstream and upstream/master
 let files;
 
+// List of manual actions to perform if the script encounters some failures
+let warnings = [];
+
 /* 
  * This function executes a shell command using execSync with an additional log.
  * If the command failed, execSync throws the error, so use runShell inside a try...catch.
@@ -39,6 +42,23 @@ let files;
 const runShell = (command) => {
   console.log(`Attempting to execute: "${command}"`);
   execSync(command);
+}
+
+/*
+ * This function prints the messages stored in warnings.
+ * It should always be called before forcing the process to exit.
+ */
+const printWarningMessages = () => {
+  if (warnings.length > 0) {
+    console.log(`
+The process has been completed with warnings.
+Here are all the actions you should perform manually to fully complete it:
+
+`);
+    for (const warning of warnings) {
+      console.warn(warning);
+    };
+  }
 }
 
 try {
@@ -77,6 +97,8 @@ try {
   } else {
     console.log('No change between both versions of the Ember Guides.');
   }
+
+  printWarningMessages();
 
 } catch (error) {
   console.error(error);
