@@ -53,6 +53,9 @@ let filesToPost = [];
 // List of manual actions to perform if the script encounters some failures
 let warnings = [];
 
+// True if the ref-upstream branch cannot be updated because we need some manual checks between ref-upstream and upstream/master
+let hasPendingDiff = false;
+
 // Some issues haven't been posted on Github, so it would be neat to stay on the catchup branch at the end of the process
 let issuePostingError = false;
 
@@ -200,6 +203,7 @@ ACTION REQUIRED: The patch paths could not be edited for ${diffName} because the
   return Promise.all(writePromises).then((result) => {
     const hasErrors = result.some((status) => status === 1);
     if (hasErrors) {
+      hasPendingDiff = true;
       console.log('Writing operations have been completed with errors. Some of the patch files are applied or stored in scripts/patches/, and manual actions have been added to the warning list.');
     } else {
       console.log('All writing operations have been completed without errors, patch files are applied or stored in scripts/patches/');
@@ -393,6 +397,41 @@ ACTION REQUIRED: The process failed to reset ref-upstream to the latest upstream
   }
 }
 
+/*
+ * This function performs the last actions once most of the catchup is done
+ * It updates ref-upstream to upstream/master if there's no pending manual action,
+ * then it switches back to master.
+ */
+const closeProcess = () => {
+  if (hasPendingDiff) {
+    warnings.push(`
+ACTION REQUIRED: To manage some of the warnings above, you might need to use ref-upstream in its current state, so it was not updated. 
+-> Once you are done with everything above, run:
+ * git switch ref-upstream
+ * git reset --hard upstream/master
+ * git push origin -f ref-upstream
+
+  `);
+  }
+  else {
+    try {
+      /* Reset ref-upstream to the current upstream/master to get ready for the next catchup
+       * ref-upstream should always match the version under translation */
+      updateRefUpstream();
+
+      /* Then go back to master only if there's no diff file to post manually.
+       * If there are diff files to post manually, then it's more convinient to stay on the catchup branch */
+      if (!issuePostingError) {
+        switchToMaster();
+      } else {
+        switchToCatchup();
+      }
+    } catch(error) {
+      throw error;
+    }
+  }
+}
+
 try {
 
   try {
@@ -463,6 +502,7 @@ try {
     console.log('No change between both versions of the Ember Guides.');
   }
 
+  closeProcess();
   printWarningMessages();
 
 } catch (error) {
