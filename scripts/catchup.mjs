@@ -1,6 +1,13 @@
+import 'dotenv/config';
 import { execSync } from 'child_process';
 import fs from 'fs';
 import minimist from 'minimist-lite';
+
+// Declare repository
+const repo = 'DazzlingFugu/ember-fr-guides-source';
+
+// Read Github token
+const token = process.env.GITHUB_TOKEN;
 
 /*
  * Read script arguments
@@ -196,6 +203,18 @@ ACTION REQUIRED: The patch paths could not be edited for ${diffName} because the
     }
     return result.some((status) => status === 0);
   });
+}
+
+/* 
+ * This function returns the headers required for all requests to GitHub API.
+ * It includes both posting issues and opening the catchup PR.
+ */
+const getRequestHeaders = () => {
+  return {
+    'Accept': 'application/vnd.github+json',
+    'Authorization': `token ${token}`,
+    'X-GitHub-Api-Version': '2022-11-28'
+  }
 }
 
 try {
