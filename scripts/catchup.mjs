@@ -72,6 +72,18 @@ Here are all the actions you should perform manually to fully complete it:
   }
 }
 
+/*
+ * This function looks for the paths guides/release in the provided string and replace it with guides.
+ * We need this to adjust the paths to our scaffolding:
+ * The official English guides allow to navigate to legacy versions of Ember, it's "versioned" docs.
+ * The French guides show only the latest version, so we don't have a dropdown to navigate, it's "unversioned" docs.
+ * It's the scaffolding of the guides folder that impacts the dropdown presence: instead of having a release/ folder
+ * that corresponds to the latest version, we have the docs at the root of guides directly.
+ */
+const unversionPath = (stringContent) => {
+  return stringContent.replace(/guides\/release/g, 'guides');
+}
+
 /* 
  * This function compares the given filename in both branches and output a [index].diff file.
  * Example: 
@@ -126,8 +138,11 @@ ACTION REQUIRED: The patch paths could not be edited for ${diffName} because the
           console.error(`Failed to read ${diffName} to edit the patch path. This was caused by: ${err}`);
           resolve(1);
         }
-        // In the next commit, we will use the content of the file which is assigned to the parameter data
-        // Because we want to rewrite a part of this content
+
+        // Matching Guidemaker scaffolding consists in replacing path guides/release with guides
+        const unversionedFileName = unversionPath(filename);
+        const replacement = unversionPath(data);
+        // next commit, we will rewrite the diff file content with replacement
         resolve(0);
       });
     });
