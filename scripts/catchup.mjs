@@ -142,8 +142,25 @@ ACTION REQUIRED: The patch paths could not be edited for ${diffName} because the
         // Matching Guidemaker scaffolding consists in replacing path guides/release with guides
         const unversionedFileName = unversionPath(filename);
         const replacement = unversionPath(data);
-        // next commit, we will rewrite the diff file content with replacement
-        resolve(0);
+
+        fs.writeFile(diffName, replacement, 'utf8', function(err) {
+          if (err) {
+            warnings.push(`
+ACTION REQUIRED: The patch paths could not be edited for ${diffName} because the file couldn't be edited.
+-> Check what's the issue then edit the path manually:
+ * Find and replace "guides/release" with "guides" in ${diffName}
+ * Run "git apply ${diffName}"
+   If the command is successful, commit the file.
+   If the command fails, open a GitHub issue and copy the diff using the provided issue template.
+            
+            `);
+            console.error(`Failed to write ${diffName} to edit the patch path. This was caused by: ${err}`);
+            resolve(1);
+          }
+          console.log(`Path in ${diffName} updated`);
+          // next commit, our diff file is now ready to be applied with 'git apply'
+          resolve(0);
+        });
       });
     });
   });
