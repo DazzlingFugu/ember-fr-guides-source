@@ -69,7 +69,11 @@ try {
 
   // If there's no diff in the guides part, we can stop here
   if (files && files.length > 0) {
-    // Do something
+
+    // Create a directory to put the children diff
+    fs.mkdirSync('scripts/patches', { recursive: true });
+    console.log('scripts/patches folder created to store the patch files');
+
   } else {
     console.log('No change between both versions of the Ember Guides.');
   }
