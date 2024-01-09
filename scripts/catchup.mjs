@@ -243,6 +243,29 @@ ${diffblock}
 `
 }
 
+// This function posts a GitHub issue related to the given file
+const postIssue = (file) => {
+  const { filename, diffName } = file;
+  const shorterName = filename.substring(6);
+
+  let diffblock;
+  if (diffName) {
+    // We need this replacement to not break the body string
+    diffblock = fs.readFileSync(diffName, 'utf8');
+    diffblock = diffblock.replaceAll('```', '');
+  }
+
+  return fetch(`https://api.github.com/repos/${repo}/issues`, {
+    method: 'POST',
+    headers: getRequestHeaders(),
+    body: JSON.stringify({
+      title: `Translate \`${shorterName}\`, Ember ${newEmberVersion}`,
+      body: getIssueBody(filename, diffblock),
+      labels: ['Guides FR trad']
+    })
+  });
+}
+
 try {
 
   try {
