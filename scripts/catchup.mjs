@@ -194,6 +194,7 @@ ACTION REQUIRED: The patch paths could not be edited for ${diffName} because the
     } else {
       console.log('All writing operations have been completed without errors, patch files are applied or stored in scripts/patches/');
     }
+    return result.some((status) => status === 0);
   });
 }
 
@@ -230,7 +231,18 @@ try {
     fs.mkdirSync('scripts/patches', { recursive: true });
     console.log('scripts/patches folder created to store the patch files');
 
-    await writeDiffFiles();
+    /* Try to apply the diff files automatically and keep track of the failed  and new ones.
+     * hasAutoApply is true if at least one file could be patched automatically. */
+    let hasAutoApply = await writeDiffFiles();
+    console.log('Files to post on GitHub:', filesToPost);
+
+    /* Post Github issues for diff files that couldn't be handled automatically
+     * we await so the POST for issues and the POST for the catchup PR below are not done at the same time */
+
+    // Post the catchup PR if there's at least one patched file to commit
+    if (hasAutoApply) {
+      // catchup PR
+    }
 
   } else {
     console.log('No change between both versions of the Ember Guides.');
