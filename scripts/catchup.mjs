@@ -53,6 +53,9 @@ let filesToPost = [];
 // List of manual actions to perform if the script encounters some failures
 let warnings = [];
 
+// Some issues haven't been posted on Github, so it would be neat to stay on the catchup branch at the end of the process
+let issuePostingError = false;
+
 /* 
  * This function executes a shell command using execSync with an additional log.
  * If the command failed, execSync throws the error, so use runShell inside a try...catch.
@@ -266,6 +269,45 @@ const postIssue = (file) => {
   });
 }
 
+/*
+ * This function post a GitHub issue for each file that couldn't be patched automatially.
+ * It works with a classic for loop that pauses the execution during the request and wait one second after the answer is received.
+ * This is done to control timing and concurrency, as explained in GitHub API documentation.
+ */
+const postAllIssues = async () => {
+  for (const file of filesToPost) {
+    try {
+      console.log(`Attempting to open an issue for ${file.filename}`);
+      const response = await postIssue(file);
+      const jsonResponse = await response.json();
+      console.log('Server responded with:', jsonResponse);
+    } catch (error) {
+      console.error('Issue posting has failed:', error);
+      warnings.push(`
+ACTION REQUIRED: The issue for file ${file.filename} (${file.diffName}) couldn't be opened automatically.
+-> Open it manually using the dedicated issue template.
+
+`);
+      issuePostingError = true;
+    } finally {
+      await new Promise(resolve => setTimeout(resolve, 1000));
+    }
+  };
+
+  // If one of the post failed, we keep the diff files so we can easily open the issue manually
+  if (issuePostingError) {
+    console.error("At least one Github issue was not posted, scripts/patches folder won't be deleted so missing issues can be posted manually");
+  } else {
+    try {
+      // If and once the issues are posted, delete patches folder and files
+      fs.rmSync('scripts/patches', { recursive: true, force: true });
+      console.log('scripts/patches folder and files did their job, deleted');
+    } catch(error) {
+      console.error('Failed to delete the folder scripts/patches and its content.')
+    }
+  }
+}
+
 try {
 
   try {
@@ -306,6 +348,7 @@ try {
 
     /* Post Github issues for diff files that couldn't be handled automatically
      * we await so the POST for issues and the POST for the catchup PR below are not done at the same time */
+    await postAllIssues();
 
     // Post the catchup PR if there's at least one patched file to commit
     if (hasAutoApply) {
