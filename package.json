@@ -38,8 +38,7 @@
     "test:ember": "ember test",
     "test:node": "mocha node-tests --exclude node-tests/local/**",
     "test:node-local": "mocha node-tests/local",
-    "test:node-local-exclude-api-urls": "FOLLOW_API_URLS=false npm run test:node-local",
-    "catchup": "node scripts/catchup.mjs"
+    "test:node-local-exclude-api-urls": "FOLLOW_API_URLS=false npm run test:node-local"
   },
   "devDependencies": {
     "@ember/optional-features": "^2.0.0",
