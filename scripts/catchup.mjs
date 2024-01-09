@@ -158,7 +158,29 @@ ACTION REQUIRED: The patch paths could not be edited for ${diffName} because the
             resolve(1);
           }
           console.log(`Path in ${diffName} updated`);
-          // next commit, our diff file is now ready to be applied with 'git apply'
+
+          // Once diff paths are ready, run "git apply" to patch the markdown file automatically
+          try {
+            // Does the current file already exist or is it a new page in the Ember Guides?
+            let isNew = !fs.existsSync(unversionedFileName);
+            // git apply runs after we've initialized isNew, because it can create the missing file
+            runShell(`git apply ${diffName}`);
+            // If the page is new, git apply works but we still need to push an issue
+            if (isNew) filesToPost.push({ filename: unversionedFileName });
+            // Remove the file if the apply was successfull
+            fs.unlink(diffName, function(err) {
+              if (err) {
+                console.error(err);
+              } else {
+                console.log(`${diffName} handled and deleted`);
+              }
+            });
+            resolve(0);
+          } catch (error) {
+            console.log(`"git apply" command failed for ${diffName}`);
+            filesToPost.push({ filename: unversionedFileName, diffName });
+            resolve(2);
+          }
           resolve(0);
         });
       });
