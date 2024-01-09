@@ -340,6 +340,59 @@ ACTION REQUIRED: Failed to push the catchup branch
   }
 }
 
+/*
+ * This function performs a switch to the master branch.
+ * The error message highlights the fact this is perform at the end of the process,
+ * to warn the developer that despite this last error, the process is completed.
+ */
+const switchToMaster = () => {
+  try {
+    runShell('git switch master');
+  } catch (error) {
+    console.error('The process is complete, but failed to switch back to master');
+  }
+}
+
+/*
+ * This function performs a switch to the catchup branch.
+ * The success message highlights the fact this is perform at the end of the process, 
+ * to exit on the catchup branch so post failures can be easily handled manually.
+ */
+const switchToCatchup = () => {
+  try {
+    runShell(`git switch ${catchupBranch}`);
+    console.log('Stay on the catchup branch at the end of the process, so non-posted issues can be handled.');
+  } catch (error) {
+    console.error(`The process is complete, but failed to switch back to ${catchupBranch}`);
+    warnings.push(`
+ACTION REQUIRED: The process failed to switch back to ${catchupBranch}. 
+-> Switch manually to ${catchupBranch} then complete the other required actions.
+
+  `);
+  }
+}
+
+/*
+ * This function switches to the ref-upstream branch to reset it to the latest upstream/master,
+ * then it pushes ref-upstream branch to the origin repository.
+ */
+const updateRefUpstream = () => {
+  try {
+    runShell('git switch ref-upstream');
+    runShell('git reset --hard upstream/master');
+    runShell('git push origin -f ref-upstream');
+  } catch (error) {
+    warnings.push(`
+ACTION REQUIRED: The process failed to reset ref-upstream to the latest upstream/master. 
+-> Perform manually:
+* git switch ref-upstream
+* git reset --hard upstream/master
+* git push origin -f ref-upstream
+  `);
+    throw new Error('Failed to reset ref-upstream to the latest upstream/master');
+  }
+}
+
 try {
 
   try {
