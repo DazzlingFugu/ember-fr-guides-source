@@ -93,6 +93,41 @@ ACTION REQUIRED: The diff file was not created for ${filename}.
   }
 }
 
+/* 
+ * This function executes all the read/write/unlink operations on diff files.
+ *
+ * files is the list of files (as path) that changed between ref-upstream and upstream/master
+ * filesToPost is an empty array of objects { filename, diffName } this function is in charge to fill,
+ * it will keep track of all the files whose diff can't be applied automatically, and we will reuse it
+ * to post Github issues.
+ */
+const writeDiffFiles = async () => {
+  let writePromises = files.map(async (filename, index) => {
+    return new Promise((resolve) => {
+      let diffName;
+      try {
+        diffName = createDiff(filename, index);
+      } catch (error) {
+        console.error(error);
+        resolve(1);
+      }
+      // We will use diffName in the next commits, with nestes async operations
+      // That's why we use an array of Promise + Promise.all, to control the location 
+      // of resolve instructions
+      resolve(0);
+    });
+  });
+  console.log('Ready to create the patch files');
+  return Promise.all(writePromises).then((result) => {
+    const hasErrors = result.some((status) => status === 1);
+    if (hasErrors) {
+      console.log('Writing operations have been completed with errors. Some of the patch files are applied or stored in scripts/patches/, and manual actions have been added to the warning list.');
+    } else {
+      console.log('All writing operations have been completed without errors, patch files are applied or stored in scripts/patches/');
+    }
+  });
+}
+
 try {
 
   try {
@@ -125,6 +160,8 @@ try {
     // Create a directory to put the children diff
     fs.mkdirSync('scripts/patches', { recursive: true });
     console.log('scripts/patches folder created to store the patch files');
+
+    await writeDiffFiles();
 
   } else {
     console.log('No change between both versions of the Ember Guides.');
