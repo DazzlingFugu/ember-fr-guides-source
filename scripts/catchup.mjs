@@ -1,5 +1,33 @@
 import { execSync } from 'child_process';
 import fs from 'fs';
+import minimist from 'minimist-lite';
+
+/*
+ * Read script arguments
+ * We expect options "from" and "to" to have decimal values (e.g. 5.4, 6.0...)
+ * By default, minimist-lite would treat these values as numbers so "6.0" would be parsed as "6".
+ * This is not the intended behavior, so we specify that "from" and "to" should be treated as strings.
+ */
+const argv = minimist(process.argv.slice(2), { string: ['from', 'to'] });
+
+// Read current Ember version (under translation)
+const currentEmberVersion = `${argv.from}`;
+if (currentEmberVersion.match(/\d+[.]\d+/g)?.[0] !== currentEmberVersion) {
+  console.error('Error: please provide the current Ember version under translation to option --from (e.g. --from=5.1)');
+  process.exit(2);
+}
+console.log(`Ember version under translation: ${currentEmberVersion}`);
+
+// Read new Ember version (documented by the English guides)
+const newEmberVersion = `${argv.to}`;
+if (newEmberVersion.match(/\d+[.]\d+/g)?.[0] !== newEmberVersion) {
+  console.error('Error: please provide the new Ember version documented on upstream to option --to (e.g. --to=5.4)');
+  process.exit(2);
+}
+console.log(`New Ember version documented on upstream: ${newEmberVersion}`);
+
+// Name of the catchup branch we will work on
+const catchupBranch = `catchup-${newEmberVersion}`;
 
 // List of filenames that changed between origin/ref-upstream and upstream/master
 let files;
@@ -17,7 +45,7 @@ try {
 
   try {
     // Create a catchup branch out of the current branch (should be up to date master)
-    runShell('git switch --create catchup');
+    runShell(`git switch --create ${catchupBranch}`);
     // Fetch the latest ref-upstream branch (English version under translation on this repo)
     runShell('git fetch');
     // Fetch the latest updates in the official Ember Guides
