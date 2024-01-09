@@ -217,6 +217,32 @@ const getRequestHeaders = () => {
   }
 }
 
+/* 
+ * This function generates the body of the Github issues posted by postIssue function.
+ * Note the diffBlock can be undefined if the file was initially non-existing in origin/ref-upstream branch,
+ * this case happens when new pages are added to the latest version of the Ember Guides.
+ */
+const getIssueBody = (filename, diffblock) => {
+  diffblock = diffblock 
+    ? `
+In the snippet below, you can see what changes were done in the latest English documentation. The purpose of this issue is to adjust the French translation to match the new version:
+
+\`\`\`diff
+${diffblock}
+\`\`\`
+`
+    : 'This is the first translation for this file.';
+  return `
+Please assign yourself to the issue or let a comment at the very moment you start the translation.
+      
+File: \`${filename}\`
+From Ember: **${currentEmberVersion}**
+To Ember: **${newEmberVersion}**
+
+${diffblock}
+`
+}
+
 try {
 
   try {
