@@ -111,10 +111,25 @@ const writeDiffFiles = async () => {
         console.error(error);
         resolve(1);
       }
-      // We will use diffName in the next commits, with nestes async operations
-      // That's why we use an array of Promise + Promise.all, to control the location 
-      // of resolve instructions
-      resolve(0);
+      // Read the created diff file, we need to access its content to adjust it to our Guidemaker scaffolding
+      fs.readFile(diffName, 'utf8', function(err, data) {
+        if (err) {
+          warnings.push(`
+ACTION REQUIRED: The patch paths could not be edited for ${diffName} because the file couldn't be read.
+-> Check what's the issue then edit the path manually:
+* Find and replace "guides/release" with "guides" in ${diffName}
+* Run "git apply ${diffName}"
+    If the command is successful, commit the file.
+    If the command fails, open a GitHub issue and copy the diff using the provided issue template.
+
+`);
+          console.error(`Failed to read ${diffName} to edit the patch path. This was caused by: ${err}`);
+          resolve(1);
+        }
+        // In the next commit, we will use the content of the file which is assigned to the parameter data
+        // Because we want to rewrite a part of this content
+        resolve(0);
+      });
     });
   });
   console.log('Ready to create the patch files');
