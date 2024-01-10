@@ -21,7 +21,7 @@ const argv = minimist(process.argv.slice(2), { string: ['from', 'to'] });
 const currentEmberVersion = `${argv.from}`;
 if (currentEmberVersion.match(/\d+[.]\d+/g)?.[0] !== currentEmberVersion) {
   console.error('Error: please provide the current Ember version under translation to option --from (e.g. --from=5.1)');
-  process.exit(2);
+  process.exit(9);
 }
 console.log(`Ember version under translation: ${currentEmberVersion}`);
 
@@ -29,7 +29,7 @@ console.log(`Ember version under translation: ${currentEmberVersion}`);
 const newEmberVersion = `${argv.to}`;
 if (newEmberVersion.match(/\d+[.]\d+/g)?.[0] !== newEmberVersion) {
   console.error('Error: please provide the new Ember version documented on upstream to option --to (e.g. --to=5.4)');
-  process.exit(2);
+  process.exit(9);
 }
 console.log(`New Ember version documented on upstream: ${newEmberVersion}`);
 
@@ -133,7 +133,7 @@ const writeDiffFiles = async () => {
       try {
         diffName = createDiff(filename, index);
       } catch (error) {
-        console.error(error);
+        console.warn(error);
         resolve(1);
       }
       // Read the created diff file, we need to access its content to adjust it to our Guidemaker scaffolding
@@ -148,7 +148,7 @@ ACTION REQUIRED: The patch paths could not be edited for ${diffName} because the
     If the command fails, open a GitHub issue and copy the diff using the provided issue template.
 
 `);
-          console.error(`Failed to read ${diffName} to edit the patch path. This was caused by: ${err}`);
+          console.warn(`Failed to read ${diffName} to edit the patch path. This was caused by: ${err}`);
           resolve(1);
         }
 
@@ -167,7 +167,7 @@ ACTION REQUIRED: The patch paths could not be edited for ${diffName} because the
    If the command fails, open a GitHub issue and copy the diff using the provided issue template.
             
             `);
-            console.error(`Failed to write ${diffName} to edit the patch path. This was caused by: ${err}`);
+            console.warn(`Failed to write ${diffName} to edit the patch path. This was caused by: ${err}`);
             resolve(1);
           }
           console.log(`Path in ${diffName} updated`);
@@ -183,7 +183,7 @@ ACTION REQUIRED: The patch paths could not be edited for ${diffName} because the
             // Remove the file if the apply was successfull
             fs.unlink(diffName, function(err) {
               if (err) {
-                console.error(err);
+                console.warn(err);
               } else {
                 console.log(`${diffName} handled and deleted`);
               }
@@ -194,7 +194,6 @@ ACTION REQUIRED: The patch paths could not be edited for ${diffName} because the
             filesToPost.push({ filename: unversionedFileName, diffName });
             resolve(2);
           }
-          resolve(0);
         });
       });
     });
@@ -204,7 +203,7 @@ ACTION REQUIRED: The patch paths could not be edited for ${diffName} because the
     const hasErrors = result.some((status) => status === 1);
     if (hasErrors) {
       hasPendingDiff = true;
-      console.log('Writing operations have been completed with errors. Some of the patch files are applied or stored in scripts/patches/, and manual actions have been added to the warning list.');
+      console.warn('Writing operations have been completed with errors. Some of the patch files are applied or stored in scripts/patches/, and manual actions have been added to the warning list.');
     } else {
       console.log('All writing operations have been completed without errors, patch files are applied or stored in scripts/patches/');
     }
@@ -300,7 +299,7 @@ const postAllIssues = async () => {
       const jsonResponse = await response.json();
       console.log('Server responded with:', jsonResponse);
     } catch (error) {
-      console.error('Issue posting has failed:', error);
+      console.warn('Issue posting has failed:', error);
       warnings.push(`
 ACTION REQUIRED: The issue for file ${file.filename} (${file.diffName}) couldn't be opened automatically.
 -> Open it manually using the dedicated issue template.
@@ -314,14 +313,14 @@ ACTION REQUIRED: The issue for file ${file.filename} (${file.diffName}) couldn't
 
   // If one of the post failed, we keep the diff files so we can easily open the issue manually
   if (issuePostingError) {
-    console.error("At least one Github issue was not posted, scripts/patches folder won't be deleted so missing issues can be posted manually");
+    console.warn("At least one Github issue was not posted, scripts/patches folder won't be deleted so missing issues can be posted manually");
   } else {
     try {
       // If and once the issues are posted, delete patches folder and files
       fs.rmSync('scripts/patches', { recursive: true, force: true });
       console.log('scripts/patches folder and files did their job, deleted');
     } catch(error) {
-      console.error('Failed to delete the folder scripts/patches and its content.')
+      console.warn('Failed to delete the folder scripts/patches and its content.')
     }
   }
 }
@@ -353,7 +352,7 @@ const switchToMaster = () => {
   try {
     runShell('git switch master');
   } catch (error) {
-    console.error('The process is complete, but failed to switch back to master');
+    console.warn('The process is complete, but failed to switch back to master');
   }
 }
 
@@ -367,7 +366,7 @@ const switchToCatchup = () => {
     runShell(`git switch ${catchupBranch}`);
     console.log('Stay on the catchup branch at the end of the process, so non-posted issues can be handled.');
   } catch (error) {
-    console.error(`The process is complete, but failed to switch back to ${catchupBranch}`);
+    console.warn(`The process is complete, but failed to switch back to ${catchupBranch}`);
     warnings.push(`
 ACTION REQUIRED: The process failed to switch back to ${catchupBranch}. 
 -> Switch manually to ${catchupBranch} then complete the other required actions.
@@ -452,7 +451,7 @@ try {
   files = data.split(/[\n\r]/).filter(name => name.length);
   fs.unlink('list.diff', function(err) {
     if (err) {
-      console.error('Failed to delete list.diff');
+      console.warn('Failed to delete list.diff');
     } else {
       console.log('list.diff did its job, deleted');
     }
@@ -485,7 +484,7 @@ try {
           const jsonPrResponse = await prResponse.json();
           console.log('Server responded with:', jsonPrResponse);
         } catch (error) {
-          console.error(`Failed to post the catchup PR. This was caused by: ${error}`);
+          console.warn(`Failed to post the catchup PR. This was caused by: ${error}`);
           warnings.push(`
 ACTION REQUIRED: The catchup PR was not opened automatically on GitHub.
 -> Chack what's the issue, then open the PR on GitHub manually.
@@ -494,7 +493,7 @@ ACTION REQUIRED: The catchup PR was not opened automatically on GitHub.
         }
 
       } catch (error) {
-        console.error('Failed to push the catchup branch.');
+        console.warn('Failed to push the catchup branch.');
       }
     }
 
