@@ -21,7 +21,7 @@ const argv = minimist(process.argv.slice(2), { string: ['from', 'to'] });
 const currentEmberVersion = `${argv.from}`;
 if (currentEmberVersion.match(/\d+[.]\d+/g)?.[0] !== currentEmberVersion) {
   console.error('Error: please provide the current Ember version under translation to option --from (e.g. --from=5.1)');
-  process.exit(2);
+  process.exit(9);
 }
 console.log(`Ember version under translation: ${currentEmberVersion}`);
 
@@ -29,7 +29,7 @@ console.log(`Ember version under translation: ${currentEmberVersion}`);
 const newEmberVersion = `${argv.to}`;
 if (newEmberVersion.match(/\d+[.]\d+/g)?.[0] !== newEmberVersion) {
   console.error('Error: please provide the new Ember version documented on upstream to option --to (e.g. --to=5.4)');
-  process.exit(2);
+  process.exit(9);
 }
 console.log(`New Ember version documented on upstream: ${newEmberVersion}`);
 
