@@ -51,7 +51,7 @@ module.exports = function (environment) {
 
     algolia: {
       algoliaId: 'E44SKR9ZB0', 
-      algoliaKey: '74120f5066e6f82be903407a9883b44e', 
+      algoliaKey: 'c253f41e9c6d5d0f29c97e1015e10166', 
       indexName: 'ember_french_guides'
     },
 
