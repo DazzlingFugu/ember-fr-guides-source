@@ -1,17 +1,73 @@
-#!/bin/sh
+#!/usr/bin/env bash
+
+FILE_IGNORED_PAGES=".remarkignore"
+FILES_NOT_IGNORED=()
 SRC_PATTERN="guides/"
-changes=`git diff --cached --name-only | grep "$SRC_PATTERN"`
-for translated in $changes; do
-  while read -r line; do
-    if [ "!$translated" = "$line" ]; then
-      exit 0
+STAGED_FILES=$(git diff --cached --name-only)
+
+readonly FILE_IGNORED_PAGES
+readonly SRC_PATTERN
+readonly STAGED_FILES
+
+# No changes staged, abort
+if [ -z "$STAGED_FILES" ]; then
+  exit 0
+fi
+
+FILES_TRANSLATED=$(echo "$STAGED_FILES" | grep "$SRC_PATTERN")
+readonly FILES_TRANSLATED
+
+if [ -n "$FILES_TRANSLATED" ]; then
+
+  # Find the files not declared in `$FILE_IGNORED_PAGES`
+  for translated in $FILES_TRANSLATED; do
+    if ! grep --quiet "$translated" "$FILE_IGNORED_PAGES"; then
+      FILES_NOT_IGNORED+=("$translated")
     fi
-  done < ".remarkignore"
-  echo "******* WARNING *******"
-  echo "Check your spelling ;)"
-  echo You translated the file:
-  echo $translated
-  echo But it is not present in .remarkignore
-  echo "***********************"
-done
-exit 0
+  done
+
+  if [ ${#FILES_NOT_IGNORED[@]} -ne 0 ]; then
+    # Warn user about files missing from `$FILE_IGNORED_PAGES`
+
+    echo
+    echo "******* WARNING *******"
+    echo
+    echo "You have translated these files:"
+    echo
+
+    for file_path in "${FILES_NOT_IGNORED[@]}"; do
+      printf '%s\n' "- $file_path"
+      echo "!$file_path" >> $FILE_IGNORED_PAGES
+    done
+
+    echo
+    echo "But they were not present in \`$FILE_IGNORED_PAGES\`, so we have added them for you."
+    echo
+    echo "All you have to do now is:"
+    echo "1. To make sure entries are listed in alphabetical order"
+    echo "2. To stage and commit \`$FILE_IGNORED_PAGES\`"
+    echo
+    echo "***********************"
+    echo
+
+    exit 1
+
+  else
+
+    if ! echo "$STAGED_FILES" | grep --quiet "$FILE_IGNORED_PAGES"; then
+
+      git add "$FILE_IGNORED_PAGES"
+
+      echo
+      echo "******* WARNING *******"
+      echo
+      echo "\`$FILE_IGNORED_PAGES\` was not in your staged files, so we have added it for you. "
+      echo
+      echo "***********************"
+      echo
+
+    fi
+
+  fi
+
+fi
