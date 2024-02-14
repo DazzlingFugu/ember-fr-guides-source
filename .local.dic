@@ -44,6 +44,7 @@ blogPost
 bookmarklet
 Bower
 breakpoint/nombrable
+Broccoli
 Browserlist
 buddy
 bugfix/nombrable
@@ -62,6 +63,7 @@ checkbox
 checkboxes
 Checkboxes
 checksum/nombrable
+Chromium
 CI
 class
 classic
@@ -123,6 +125,7 @@ durations
 DX
 Edge
 EditorConfig
+Electron
 els-addon-docs
 els-addon-typed-templates
 EmbeddedRecordMixin
@@ -452,6 +455,7 @@ syntaxes
 tagless
 tailwindcss
 TalkBack
+targets
 teardown
 template-lifecycle-dom-and-modifiers
 template/nombrable
