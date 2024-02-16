@@ -34,6 +34,7 @@
     "preinstall": "node scripts/preinstall.mjs",
     "build": "ember build --environment=production",
     "lint": "npm-run-all --aggregate-output --continue-on-error --parallel \"lint:!(fix)\"",
+    "lint:fix:local-dic": "node scripts/lint:fix:local-dic.mjs",
     "lint:md": "remark . --frail",
     "start": "ember serve",
     "test:ember": "ember test",

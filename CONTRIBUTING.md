@@ -43,7 +43,8 @@ Here is the journey to submit a PR:
 
 The command `npm run lint` runs the tools that will spellcheck your page. If all files are green and the command ends without error, you are good! If there are warnings, you need to fix them. The three most common errors are a misspelled French word, a commonly used English term that you haven't translated on purpose, and a word repeated twice.
 
-If there are errors because you kept an English term commonly used in French, add this word to the `.local.dic` file (in alphabetical order, lowercase words are below uppercase acronyms).
+If there are errors because you kept an English term commonly used in French, add this word to the 
+`.local.dic` file and then run the command `npm run lint:fix:local-dic`.
 
 If there are errors such as "a word is repeated twice" but it's expected in French (“Je vais vous "faire faire" une jolie traduction”), make sure to fix all the other errors of the same paragraph before adding `<!-- spell ignore -->` above the paragraph.
 
