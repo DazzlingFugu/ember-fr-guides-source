@@ -9,7 +9,7 @@ Dans ce chapitre, vous allez construire les premières pages de votre app Ember 
 Tandis que vous construirez ces pages, vous apprendrez à&nbsp;:
 
 - Définir des routes
-- Utiliser des _templates_ de routes
+- Utiliser des <span lang="en">_templates_</span> de routes
 - Paramétrer des URLs
 - Lier des pages avec le composant `<LinkTo>`
 - Passer des arguments et des attributs aux composants
@@ -39,9 +39,9 @@ Router.map(function () {
 
 Ce code ajoute une _[route](../../../routing/defining-your-routes/)_ appelée "_about_" (à propos), qui est servie par défaut à l'URL `/about`.
 
-## Utiliser des _templates_ de routes
+## Utiliser des <span lang="en">_templates_</span> de routes
 
-Ceci en place, nous pouvons créer un nouveau _template_ `app/templates/about.hbs` avec le contenu suivant&nbsp;:
+Ceci en place, nous pouvons créer un nouveau <span lang="en">_template_</span> `app/templates/about.hbs` avec le contenu suivant&nbsp;:
 
 ```handlebars { data-filename="app/templates/about.hbs" }
 <div class="jumbo">
@@ -173,7 +173,7 @@ La syntaxe `@route=...` correspond à la façon de passer des [arguments](../../
 
 En plus des arguments, les composants supportent aussi les attributs HTML habituels. Dans notre exemple, nous avons ajouté une classe `"button"` pour appliquer un style, et nous pourrions également définir d'autres attributs comme l'attribut [ARIA](https://webaim.org/techniques/aria/) [`role`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles). On les passe sans le symbole `@` (`class=...` et non `@class=...`), ainsi Ember sait que ce sont des attributs HTML standards.
 
-Sous le capot, le composant `<LinkTo>` génère pour nous une balise `<a>` standard avec le `href` adéquat pour la route spécifique. Cette balise `<a>` fonctionne avec les [lecteurs d'écran](https://webaim.org/projects/screenreadersurvey/) (_screen readers_) et les utilisateurs peuvent aussi bien enregistrer le lien dans leurs marque-pages ou l'ouvrir dans un nouvel onglet.
+Sous le capot, le composant `<LinkTo>` génère pour nous une balise `<a>` standard avec le `href` adéquat pour la route spécifique. Cette balise `<a>` fonctionne avec les [lecteurs d'écran](https://webaim.org/projects/screenreadersurvey/) (<span lang="en">_screen readers_</span>) et les utilisateurs peuvent aussi bien enregistrer le lien dans leurs marque-pages ou l'ouvrir dans un nouvel onglet.
 
 Cependant, quand on clique sur ces liens spéciaux, Ember intercepte le clic, affiche le contenu de la nouvelle page et met à jour l'URL. Tout ça se fait localement, sans avoir à attendre le serveur, et évitant ainsi de recharger toute la page.
 

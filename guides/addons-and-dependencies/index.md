@@ -4,7 +4,7 @@ Pour résoudre certains de ces problèmes, Ember CLI fournit un format appelé [
 
 ## Addons
 
-Les addons sont des paquets (ou _packages_) JavaScript qui s'intègrent avec Ember. Par exemple, [`ember-cli-sass`](https://github.com/adopted-ember-addons/ember-cli-sass) est un addon qui permet d'utiliser SASS/SCSS dans les applications. Ember CLI vous permet de l'installer à l'aide de la commande suivante&nbsp;:
+Les addons sont des paquets (ou <span lang="en">_packages_</span>) JavaScript qui s'intègrent avec Ember. Par exemple, [`ember-cli-sass`](https://github.com/adopted-ember-addons/ember-cli-sass) est un addon qui permet d'utiliser SASS/SCSS dans les applications. Ember CLI vous permet de l'installer à l'aide de la commande suivante&nbsp;:
 
 ```bash
 ember install ember-cli-sass
@@ -28,7 +28,7 @@ Les fichiers propres à votre projet (comme `robots.txt`, `favicon`, les polices
 
 ## Compiler les fichiers
 
-Lorsque vous utilisez des dépendances qui ne sont pas incluses dans un addon, vous devez expliquer à Ember CLI comment inclure ces fichiers dans le _build_ (l'application compilée). Pour ce faire, il faut éditer le fichier `ember-cli-build.js`. N'importez que des fichiers se trouvant dans les dossiers `node_modules` et `vendor`.
+Lorsque vous utilisez des dépendances qui ne sont pas incluses dans un addon, vous devez expliquer à Ember CLI comment inclure ces fichiers dans le <span lang="en">_build_</span> (l'application compilée). Pour ce faire, il faut éditer le fichier `ember-cli-build.js`. N'importez que des fichiers se trouvant dans les dossiers `node_modules` et `vendor`.
 
 ### Variables globales fournies par les fichiers JavaScript
 
@@ -111,7 +111,7 @@ Par exemple, un fichier `favicon` dont le chemin est `public/images/favicon.ico`
 
 Tous les fichiers tiers, qu'ils soient inclus manuellement dans `vendor/` ou via un gestionnaire de paquets comme NPM, doivent être ajoutés avec `app.import()`.
 
-Les fichiers tiers qui ne sont pas ajoutés avec `app.import()` ne seront pas présents dans le _build_ final.
+Les fichiers tiers qui ne sont pas ajoutés avec `app.import()` ne seront pas présents dans le <span lang="en">_build_</span> final.
 
 Par défaut, les fichiers importés avec `import` seront copiés dans `dist/` tels qu'ils sont, avec la structure du répertoire maintenue.
 
