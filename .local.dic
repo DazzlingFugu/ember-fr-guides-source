@@ -215,7 +215,7 @@ guidemaker
 hackable
 HammerJS
 Handlebars
-handler
+handler/nombrable
 hardcode
 hardcode/D
 hashchange
@@ -382,6 +382,7 @@ refactorer/réparer
 refactorisation/nombrable
 refresh
 registry
+relationship/nombrable
 relayout
 reload
 renderer
@@ -389,6 +390,7 @@ rendering
 rental/nombrable
 repo
 repos
+requêter/rapporter
 request/nombrable
 rerender
 rerendering
