@@ -122,9 +122,9 @@ En passant `@model` au composant `<Rental>` sous la forme de l'argument `@rental
 <article class="rental">
   <Rental::Image
     src="https://upload.wikimedia.org/wikipedia/commons/c/cb/Crane_estate_(5).jpg"
-    alt="A picture of Le Manoir Ancien"
+    alt="Photo de la propriété Le Manoir Ancien"
     src={{@rental.image}}
-    alt="A picture of {{@rental.title}}"
+    alt="Photo de la propriété {{@rental.title}}"
   />
   <div class="details">
     <h3>Le Manoir Ancien</h3>
@@ -134,8 +134,8 @@ En passant `@model` au composant `<Rental>` sous la forme de l'argument `@rental
       <span>Propriétaire :</span> {{@rental.owner}}
     </div>
     <div class="detail type">
-      <span>Type:</span> Standalone
-      <span>Type:</span> {{@rental.type}}
+      <span>Type :</span> Propriété indépendante
+      <span>Type :</span> {{@rental.type}}
     </div>
     <div class="detail location">
       <span>Adresse :</span> San Francisco
@@ -154,8 +154,8 @@ En passant `@model` au composant `<Rental>` sous la forme de l'argument `@rental
     @zoom="9"
     @width="150"
     @height="150"
-    alt="A map of Le Manoir Ancien"
-    alt="A map of {{@rental.title}}"
+    alt="Carte de la propriété Le Manoir Ancien"
+    alt="Carte de la propriété {{@rental.title}}"
   />
 </article>
 ```
