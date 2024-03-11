@@ -51,4 +51,5 @@ guides/**/*.md
 !guides/tutorial/part-2/ember-data.md
 !guides/tutorial/part-2/index.md
 !guides/tutorial/part-2/recap.md
+!guides/tutorial/part-2/route-params.md
 !guides/upgrading/index.md

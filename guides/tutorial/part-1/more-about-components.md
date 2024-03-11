@@ -36,7 +36,7 @@ Commençons par éditer le _template_. Dans un premier temps, écrivons en dur (
       <span>Propriétaire :</span> Veruca Salt
     </div>
     <div class="detail type">
-      <span>Type :</span> Standalone
+      <span>Type :</span> Propriété indépendante
     </div>
     <div class="detail location">
       <span>Adresse :</span> San Francisco
@@ -149,7 +149,7 @@ Plutôt que de coder en dur les valeurs pour les attributs `src` et `alt` sur la
 <article class="rental">
   <Rental::Image
     src="https://upload.wikimedia.org/wikipedia/commons/c/cb/Crane_estate_(5).jpg"
-    alt="Une photo du Le Manoir Ancien"
+    alt="Photo de la propriété Le Manoir Ancien"
   />
   <div class="details">
     <h3>Le Manoir Ancien</h3>
@@ -157,7 +157,7 @@ Plutôt que de coder en dur les valeurs pour les attributs `src` et `alt` sur la
       <span>Propriétaire :</span> Veruca Salt
     </div>
     <div class="detail type">
-      <span>Type:</span> Standalone
+      <span>Type :</span> Propriété indépendante
     </div>
     <div class="detail location">
       <span>Adresse :</span> San Francisco

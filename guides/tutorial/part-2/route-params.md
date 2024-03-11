@@ -1,10 +1,8 @@
-<!-- Heads up! This is a generated file, do not edit directly. You can find the source at https://github.com/ember-learn/super-rentals-tutorial/blob/master/src/markdown/tutorial/part-2/09-route-params.md -->
+Maintenant que nous récupérons de vraies données depuis notre "serveur", ajoutons une nouvelle fonctionnalité, une page dédiée pour chacune de nos locations&nbsp;:
 
-Now that we are fetching real data from our "server", let's add a new feature — dedicated pages for each of our rentals:
+<img src="/images/tutorial/part-2/route-params/grand-old-mansion@2x.png" alt="L'app Super Rentals (page location) à la fin du chapitre" width="1024" height="1381">
 
-<img src="/images/tutorial/part-2/route-params/grand-old-mansion@2x.png" alt="The Super Rentals app (rentals page) by the end of the chapter" width="1024" height="1381">
-
-While adding these rental pages, you will learn about:
+En ajoutant ces pages locations, nous apprendrons les concepts suivants&nbsp;:
 
 - Routes avec segments dynamiques
 - Liens avec segments dynamiques
@@ -14,9 +12,9 @@ While adding these rental pages, you will learn about:
 
 ## Routes avec segments dynamiques
 
-It would be great for our individual rental pages to be available through predictable URLs like `/rentals/grand-old-mansion`. Also, since these pages are dedicated to individual rentals, we can show more detailed information about each property on this page. It would also be nice to be able to have a way to bookmark a rental property, and share direct links to each individual rental listing so that our users can come back to these pages later on, after they are done browsing.
+Il serait pratique que chacune de nos pages locations soit disponible via une URL prédictible, comme `/rentals/grand-old-mansion`. Aussi, puisque chaque page est dédiée à une seule location, nous pouvons afficher des informations plus détaillées sur la propriété en question. Il serait également intéressant de pouvoir mettre un signet sur une location, et de partager des liens directs vers chaque annonce de location afin que nos utilisateurs puissent revenir sur ces pages plus tard, une fois qu'ils ont fini de naviguer.
 
-But first things first: we need to add a route for this new page. We can do that by adding a `rental` route to the router.
+Mais commençons par le commencement&nbsp;: nous devons ajouter une route pour cette nouvelle page. Nous pouvons le faire en ajoutant une route `rental` au routeur.
 
 ```js { data-filename="app/router.js" data-diff="+12" }
 import EmberRouter from '@ember/routing/router';
@@ -34,17 +32,17 @@ Router.map(function () {
 });
 ```
 
-Notice that we are doing something a little different here. Instead of using the default path (`/rental`), we're specifying a custom path. Not only are we using a custom path, but we're also passing in a `:rental_id`, which is what we call a _[dynamic segment](../../../routing/defining-your-routes/#toc_dynamic-segments)_. When these routes are evaluated, the `rental_id` will be substituted with the `id` of the individual rental property that we are trying to navigate to.
+Remarquez que nous faisons quelque chose d'un peu différent ici. Au lieu d'utiliser le chemin par défaut (`/rental`), nous spécifions un chemin personnalisé. Non seulement nous utilisons un chemin personnalisé, mais nous passons également un `:rental_id`, qui est ce qu'on appelle un [segment dynamique](.../../../routing/defining-your-routes/#toc_dynamic-segments). Lorsque ces routes seront évaluées, le `rental_id` sera remplacé par l'`id` de la location vers laquelle nous essayons de naviguer.
 
 ## Liens avec segments dynamiques
 
-Now that we have this route in place, we can update our `<Rental>` component to actually _link_ to each of our detailed rental properties!
+Maintenant que cette route est en place, nous pouvons mettre à jour notre composant `<Rental>` pour créer un "lien" vers chaque page détaillée de nos locations&nbsp;!
 
 ```js { data-filename="app/components/rental.hbs" data-diff="-7,+8,+9,+10,+11,+12" }
 <article class="rental">
   <Rental::Image
     src={{@rental.image}}
-    alt="A picture of {{@rental.title}}"
+    alt="Photo de la propriété {{@rental.title}}"
   />
   <div class="details">
     <h3>{{@rental.title}}</h3>
@@ -54,16 +52,16 @@ Now that we have this route in place, we can update our `<Rental>` component to 
       </LinkTo>
     </h3>
     <div class="detail owner">
-      <span>Owner:</span> {{@rental.owner}}
+      <span>Propriétaire :</span> {{@rental.owner}}
     </div>
     <div class="detail type">
-      <span>Type:</span> {{@rental.type}}
+      <span>Type :</span> {{@rental.type}}
     </div>
     <div class="detail location">
-      <span>Location:</span> {{@rental.city}}
+      <span>Adresse :</span> {{@rental.city}}
     </div>
     <div class="detail bedrooms">
-      <span>Number of bedrooms:</span> {{@rental.bedrooms}}
+      <span>Nombre de chambres :</span> {{@rental.bedrooms}}
     </div>
   </div>
   <Map
@@ -72,26 +70,26 @@ Now that we have this route in place, we can update our `<Rental>` component to 
     @zoom="9"
     @width="150"
     @height="150"
-    alt="A map of {{@rental.title}}"
+    alt="Carte de la propriété {{@rental.title}}"
   />
 </article>
 ```
 
-Since we know that we're linking to the `rental` route that we just created, we also know that this route requires a dynamic segment. Thus, we need to pass in a `@model` argument so that the `<LinkTo>` component can generate the appropriate URL for that model.
+Puisque nous faisons un lien vers la route `rental` que nous venons de créer, nous savons que cette route nécessite un segment dynamique. Nous devons donc passer un argument `@model` pour que le composant `<LinkTo>` puisse générer l'URL appropriée pour ce modèle.
 
-Let's see this in action. If we go back to our browser and refresh the page, we should see our links, but something isn't quite right yet!
+Voyons ce que ça donne. Si nous retournons dans notre navigateur et actualisons la page, nous devrions voir nos liens, mais, pour l'instant, quelque chose ne va pas&nbsp;!
 
-<img src="/images/tutorial/part-2/route-params/broken-links@2x.png" alt="Broken links" width="1024" height="1129">
+<img src="/images/tutorial/part-2/route-params/broken-links@2x.png" alt="Les liens sont cassés" width="1024" height="1129">
 
-The links are all pointing to `/rentals/undefined`. Yikes! This is because `<LinkTo>` tries to use the `id` property from our model in order to replace the dynamic segment and generate the URL.
+Les liens pointent tous sur `/rentals/undefined`. Mince&nbsp;! C'est parce que `<LinkTo>` essaie d'utiliser la propriété `id` de notre modèle pour remplacer le segment dynamique et générer l'URL.
 
-So what's the problem here? Well, our model doesn't actually have an `id` property! So _of course_ the `<LinkTo>` component isn't going to be able to find it and use it to generate the URL. Oops!
+Alors quel est le problème&nbsp;? Eh bien notre modèle n'a pas de propriété `id`&nbsp;! Et donc le composant `<LinkTo>` est bien incapable de le trouver pour générer l'URL. Oups&nbsp;!
 
-Thankfully, we can fix this pretty easily. As it turns out, the data that is returned by our server—the JSON data that lives in our `public/api` folder—actually does have an `id` attribute on it. We can double check this by going to `http://localhost:4200/api/rentals.json`.
+Heureusement, nous pouvons corriger ça assez facilement. Il se trouve que les données retournées par notre serveur (les données JSON qui se trouvent dans notre dossier `public/api`) ont bien un attribut `id`. On peut le vérifier en visitant `http://localhost:4200/api/rentals.json`.
 
-<img src="/images/tutorial/part-2/route-params/data@2x.png" alt="Our data do have an id attribute" width="1024" height="512">
+<img src="/images/tutorial/part-2/route-params/data@2x.png" alt="Nos données ont bien un attribut id" width="1024" height="512">
 
-If we look at the JSON data here, we can see that the `id` is included right alongside the `attributes` key. So we have access to this data; the only trouble is that we're not including it in our model! Let's change our model hook in the `index` route so that it includes the `id`.
+Si on regarde les données JSON ici, on peut voir que l'`id` est présent au même niveau que la clé `attributes`. Nous avons donc accès à cette donnée, le seul problème est que nous ne l'avons pas incluse dans notre modèle&nbsp;! Changeons notre _hook_ de modèle (_model hook_) dans la route `index` de manière à ce que l'`id` soit inclus.
 
 ```js { data-filename="app/routes/index.js" data-diff="-11,+12,-21,+22" }
 import Route from '@ember/routing/route';
@@ -121,11 +119,11 @@ export default class IndexRoute extends Route {
 }
 ```
 
-Now that we've included our model's `id`, we should see the correct URLs to each rental property on our index page after refreshing the page.
+Maintenant que nous avons inclus l'`id` du modèle, nous devrions voir des URLs correctes pour chaque location de notre page d'index une fois la page actualisée.
 
-## Component Tests with Access to the Router
+## Tests de composants avec accès au routeur
 
-Alright, we have just one more step left here: updating the tests. We can add an `id` to the rental that we defined in our test using `setProperties` and add an assertion for the expected URL, too.
+Très bien, il ne nous reste plus qu'une dernière étape&nbsp;: mettre à jour les tests. Nous pouvons ajouter un `id` à l'objet `rental` que nous avons défini dans nos tests à l'aide de `setProperties`, puis ajouter une assertion pour confirmer l'URL.
 
 ```js { data-filename="tests/integration/components/rental-test.js" data-diff="+12,+34,+35,+36" }
 import { module, test } from 'qunit';
@@ -174,15 +172,15 @@ module('Integration | Component | rental', function (hooks) {
 });
 ```
 
-If we run the tests in the browser, everything should just pass!
+Si nous exécutons les tests dans le navigateur, tout devrait passer&nbsp;!
 
-<img src="/images/tutorial/part-2/route-params/pass@2x.png" alt="Tests are passing" width="1024" height="768">
+<img src="/images/tutorial/part-2/route-params/pass@2x.png" alt="Les tests passent" width="1024" height="768">
 
 ## Accéder aux paramètres des segments dynamiques
 
-Super&nbsp;! We're making such great progress.
+Super&nbsp;! Nous faisons de gros progrès.
 
-Now that we have our `rental` route, let's finish up our `rental` page. The first step to doing this is making our route actually _do_ something. We added the route, but we haven't actually implemented it. So let's do that first by creating the route file.
+Maintenant que nous avons notre route `rental`, finissons la page `rental`. La première chose à faire est de rendre notre route capable de faire quelque chose, justement. Nous avons certes ajouté la route, mais nous ne l'avons pas encore implémentée. Alors faisons ça en créant un fichier de route.
 
 ```js { data-filename="app/routes/rental.js" }
 import Route from '@ember/routing/route';
@@ -208,17 +206,17 @@ export default class RentalRoute extends Route {
 }
 ```
 
-We'll notice that the model hook in our `RentalRoute` is _almost_ the same as our `IndexRoute`. There is one major difference between these two routes, and we can see that difference reflected here.
+On notera que le _hook_ de modèle dans notre `RentalRoute` est "presque" le même que celui de `IndexRoute`. Il y a une différence majeure entre ces deux routes, et on peut voir cette différence reflétée ici.
 
-Unlike the `IndexRoute`, we have a `params` object being passed into our model hook. This is because we need to fetch our data from the `/api/rentals/${id}.json` endpoint, _not_ the `/api/rentals.json` endpoint we were previously using. We already know that the individual rental endpoints fetch a single rental object, rather than an array of them, and that the route uses a `/:rental_id` dynamic segment to figure out which rental object we're trying to fetch from the server.
+Contrairement à `IndexRoute`, nous avons un objet `params` qui est passé dans notre _hook_ de modèle. C'est parce que nous avons besoin de récupérer nos données depuis le point de terminaison (_endpoint_) `/api/rentals/${id}.json`, **pas** le point de terminaison `/api/rentals.json` que nous utilisions précédemment. Nous savons déjà que les points de terminaison d'une location individuelle récupèrent un seul objet location, plutôt qu'un tableau, et que la route utilise un segment dynamique `/:rental_id` pour déterminer quelle location nous essayons de récupérer sur le serveur.
 
-But how does the dynamic segment actually get to the `fetch` function? Well, we have to pass it into the function. Conveniently, we have access to the value of the `/:rental_id` dynamic segment through the `params` object. This is why we have a `params` argument in our model hook here. It is being passed through to this hook, and we use the `params.rental_id` attribute to figure out what data we want to `fetch`.
+Mais comment le segment dynamique arrive-t-il jusqu'à la fonction `fetch`&nbsp;? Eh bien, nous devons le passer dans la fonction. Nous avons accès à la valeur du segment dynamique `/:rental_id` à travers l'objet `params`, ce qui est bien pratique. C'est pourquoi nous avons un argument `params` dans notre _hook_ de modèle ici. Il est transmis à ce _hook_, et nous utilisons l'attribut `params.rental_id` pour déterminer les données que nous voulons récupérer avec `fetch`.
 
-Other than these minor differences though, the rest of the route is pretty much the same to what we had in our index route.
+En dehors de ces différences mineures, le reste de la route est pratiquement la même que ce que nous avions dans la route d'index.
 
-## Displaying Model Details with a Component
+## Afficher les détails d'un modèle avec un composant
 
-Next, let's make a `<Rental::Detailed>` component.
+Ensuite, créons un composant `<Rental::Detailed>`.
 
 ```shell
 $ ember generate component rental/detailed
@@ -234,32 +232,32 @@ installing component-test
 {{yield}}
 <Jumbo>
   <h2>{{@rental.title}}</h2>
-  <p>Nice find! This looks like a nice place to stay near {{@rental.city}}.</p>
+  <p>Bien trouvé&nbsp;! Voilà ce qui semble être un bon endroit où rester près de {{@rental.city}}.</p>
   <a href="#" target="_blank" rel="external nofollow noopener noreferrer" class="share button">
-    Share on Twitter
+    Partager sur Twitter
   </a>
 </Jumbo>
 
 <article class="rental detailed">
   <Rental::Image
     src={{@rental.image}}
-    alt="A picture of {{@rental.title}}"
+    alt="Photo de la propriété {{@rental.title}}"
   />
 
   <div class="details">
-    <h3>About {{@rental.title}}</h3>
+    <h3>À propos de {{@rental.title}}</h3>
 
     <div class="detail owner">
-      <span>Owner:</span> {{@rental.owner}}
+      <span>Propriétaire :</span> {{@rental.owner}}
     </div>
     <div class="detail type">
-      <span>Type:</span> {{@rental.type}} – {{@rental.category}}
+      <span>Type :</span> {{@rental.type}} – {{@rental.category}}
     </div>
     <div class="detail location">
-      <span>Location:</span> {{@rental.city}}
+      <span>Adresse :</span> {{@rental.city}}
     </div>
     <div class="detail bedrooms">
-      <span>Number of bedrooms:</span> {{@rental.bedrooms}}
+      <span>Nombre de chambres :</span> {{@rental.bedrooms}}
     </div>
     <div class="detail description">
       <p>{{@rental.description}}</p>
@@ -272,22 +270,22 @@ installing component-test
     @zoom="12"
     @width="894"
     @height="600"
-    alt="A map of {{@rental.title}}"
+    alt="Carte de la propriété {{@rental.title}}"
     class="large"
   />
 </article>
 ```
 
-This component is similar to our `<Rental>` component, except for the following differences.
+Ce composant est similaire à notre composant `<Rental>`, à quelques différences près&nbsp;:
 
-- It shows a banner with a share button at the top (Implementation to come later).
-- It shows a bigger image by default, with some additional detailed information.
-- It shows a bigger map.
-- It shows a description.
+- Il affiche une bannière avec un bouton de partage en haut (l'implémentation se fera plus tard).
+- Il affiche une image plus grande par défaut, avec quelques informations détaillées supplémentaires.
+- Il affiche une carte plus grande.
+- Il affiche une description.
 
-## Sharing Common Setup Code Between Tests
+## Partager des configurations communes entre les tests
 
-Now that we have this template in place, we can add some tests for this new component of ours.
+Maintenant que nous avons ce _template_ en place, ajoutons des tests pour notre nouveau composant.
 
 ```handlebars { data-filename="tests/integration/components/rental/detailed-test.js" data-diff="-9,-10,-11,+12,+13,+14,+15,+16,+17,+18,+19,+20,+21,+22,+23,+24,+25,+26,+27,+28,+29,+30,+31,+32,-34,+35,+36,-38,+39,+40,+41,+42,+43,+44,+45,-47,-48,-49,-50,-51,-52,+53,+54,-56,+57,+58,+59,+60,+61,+62,+63,+64" }
 import { module, test } from 'qunit';
@@ -333,7 +331,7 @@ module('Integration | Component | rental/detailed', function (hooks) {
     assert
       .dom('.jumbo p')
       .containsText('a nice place to stay near San Francisco');
-    assert.dom('.jumbo a.button').containsText('Share on Twitter');
+    assert.dom('.jumbo a.button').containsText('Partager sur Twitter');
   });
 
     // Template block usage:
@@ -347,9 +345,9 @@ module('Integration | Component | rental/detailed', function (hooks) {
 
     assert.dom(this.element).hasText('template block text');
     assert.dom('article').hasClass('rental');
-    assert.dom('article h3').containsText('About Le Manoir Ancien');
+    assert.dom('article h3').containsText('À propos de Le Manoir Ancien');
     assert.dom('article .detail.owner').containsText('Veruca Salt');
-    assert.dom('article .detail.type').containsText('Standalone – Estate');
+    assert.dom('article .detail.type').containsText('Propriété indépendante');
     assert.dom('article .detail.location').containsText('San Francisco');
     assert.dom('article .detail.bedrooms').containsText('15');
     assert.dom('article .image').exists();
@@ -358,25 +356,25 @@ module('Integration | Component | rental/detailed', function (hooks) {
 });
 ```
 
-We can use the `beforeEach` hook to share some boilerplate code, which allows us to have two tests that each focus on a different, single aspect of the component. This feels similar to other tests that we've already written—hopefully it feels easy, too!
+On peut utiliser le _hook_ `beforeEach` pour partager du code par défaut, ce qui nous permet d'avoir deux tests qui se concentrent chacun sur un aspect distinct du composant. Ça ressemble à d'autres tests que nous avons déjà écrit (en espérant que ça ait l'air facile&nbsp;!)
 
 <div class="cta">
   <div class="cta-note">
     <div class="cta-note-body">
-      <div class="cta-note-heading">Zoey says...</div>
+      <div class="cta-note-heading">Zoey dit...</div>
       <div class="cta-note-message">
-        <p>As its name implies, the <code>beforeEach</code> hook runs <em>once</em> before each <code>test</code> function is executed. This hook is the ideal place to set up anything that might be needed by all test cases in the file. On the other hand, if you need to do any cleanup after your tests, there is an <code>afterEach</code> hook!</p>
+        <p>Comme son nom l'indique, le <em>hook</em> <code>beforeEach</code> s'exécute <strong>une fois</strong> avant que chaque fonction <code>test</code> soit exécutée. Ce <em>hook</em> est l'endroit idéal pour configurer ce dont tous les tests du fichier ont besoin. D'autre part, si vous avez besoin de faire du nettoyage après chaque test, il existe un <em>hook</em> <code>afterEach</code>&nbsp;!</p>
       </div>
     </div>
     <img src="/images/mascots/zoey.png" role="presentation" alt="">
   </div>
 </div>
 
-<img src="/images/tutorial/part-2/route-params/pass-2@2x.png" alt="Tests are passing as expected" width="1024" height="768">
+<img src="/images/tutorial/part-2/route-params/pass-2@2x.png" alt="Les tests passent comme attendu" width="1024" height="768">
 
-## Adding a Route Template
+## Ajouter un _template_ de route
 
-Finally, let's add a `rental` template to actually _invoke_ our `<Rental::Detailed>` component, as well as adding an acceptance test for this new behavior in our app.
+Pour terminer, ajoutons un _template_ `rental` pour "invoquer" notre composant `<Rental::Detailed>`, puis ajouter un test d'acceptance pour ce nouveau comportement de notre app.
 
 ```handlebars { data-filename="app/templates/rental.hbs" }
 <Rental::Detailed @rental={{@model}} />
@@ -396,9 +394,9 @@ module('Acceptance | super rentals', function (hooks) {
     assert.strictEqual(currentURL(), '/');
     assert.dom('nav').exists();
     assert.dom('h1').hasText('SuperRentals');
-    assert.dom('h2').hasText('Welcome to Super Rentals!');
+    assert.dom('h2').hasText('Bienvenue sur "Super Rentals" !');
 
-    assert.dom('.jumbo a.button').hasText('About Us');
+    assert.dom('.jumbo a.button').hasText('À propos de nous');
     await click('.jumbo a.button');
 
     assert.strictEqual(currentURL(), '/about');
@@ -428,9 +426,9 @@ module('Acceptance | super rentals', function (hooks) {
     assert.strictEqual(currentURL(), '/about');
     assert.dom('nav').exists();
     assert.dom('h1').hasText('SuperRentals');
-    assert.dom('h2').hasText('About Super Rentals');
+    assert.dom('h2').hasText('À propos de "Super Rentals"');
 
-    assert.dom('.jumbo a.button').hasText('Contact Us');
+    assert.dom('.jumbo a.button').hasText('Contactez-nous');
     await click('.jumbo a.button');
 
     assert.strictEqual(currentURL(), '/getting-in-touch');
@@ -442,9 +440,9 @@ module('Acceptance | super rentals', function (hooks) {
     assert.strictEqual(currentURL(), '/getting-in-touch');
     assert.dom('nav').exists();
     assert.dom('h1').hasText('SuperRentals');
-    assert.dom('h2').hasText('Contact Us');
+    assert.dom('h2').hasText('Contactez-nous');
 
-    assert.dom('.jumbo a.button').hasText('About');
+    assert.dom('.jumbo a.button').hasText('À propos');
     await click('.jumbo a.button');
 
     assert.strictEqual(currentURL(), '/about');
@@ -455,7 +453,7 @@ module('Acceptance | super rentals', function (hooks) {
 
     assert.dom('nav').exists();
     assert.dom('nav a.menu-index').hasText('SuperRentals');
-    assert.dom('nav a.menu-about').hasText('About');
+    assert.dom('nav a.menu-about').hasText('À propos');
     assert.dom('nav a.menu-contact').hasText('Contact');
 
     await click('nav a.menu-about');
@@ -470,14 +468,14 @@ module('Acceptance | super rentals', function (hooks) {
 });
 ```
 
-Now, when we visit `http://localhost:4200/rentals/grand-old-mansion`, this is what we see:
+Maintenant, quand nous visitons `http://localhost:4200/rentals/grand-old-mansion`, voici ce que nous voyons&nbsp;:
 
-<img src="/images/tutorial/part-2/route-params/grand-old-mansion@2x.png" alt="A dedicated page for the Le Manoir Ancien" width="1024" height="1381">
+<img src="/images/tutorial/part-2/route-params/grand-old-mansion@2x.png" alt="Une page dédiée pour Le Manoir Ancien" width="1024" height="1381">
 
-And if we run our tests now...
+Et si nous lançons les tests...
 
-<img src="/images/tutorial/part-2/route-params/pass-3@2x.png" alt="All tests passing!" width="1024" height="768">
+<img src="/images/tutorial/part-2/route-params/pass-3@2x.png" alt="Tous les tests passent !" width="1024" height="768">
 
-...they all pass! Great work!
+...ils passent tous&nbsp;! Bon travail&nbsp;!
 
-This page _looks_ done, but we have a share button that doesn't actually work. We'll address this in the next chapter.
+Cette page "a l'air" terminée, mais il nous reste un bouton de partage qui ne fonctionne pas. Nous aborderons ça dans le chapitre suivant.
