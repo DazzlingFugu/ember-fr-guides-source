@@ -1,7 +1,7 @@
 CONTRIBUTING.md
 CONTRIBUTING_GRAMMALECTE.md
-README.md
 MAINTAINERS.md
+README.md
 tmp
 
 # redirect only files
@@ -16,18 +16,20 @@ guides/**/*.md
 !guides/accessibility/page-template-considerations.md
 !guides/accessibility/testing.md
 !guides/addons-and-dependencies/index.md
+!guides/applications/dependency-injection.md
 !guides/applications/ember-engines.md
 !guides/applications/index.md
 !guides/applications/initializers.md
-!guides/applications/dependency-injection.md
 !guides/components/block-content.md
 !guides/components/built-in-components.md
 !guides/configuring-ember/build-targets.md
-!guides/getting-started/index.md
 !guides/getting-started/anatomy-of-an-ember-app.md
+!guides/getting-started/index.md
 !guides/getting-started/quick-start.md
 !guides/getting-started/working-with-html-css-and-javascript.md
 !guides/index.md
+!guides/models/creating-updating-and-deleting-records.md
+!guides/models/relationships.md
 !guides/pages.md
 !guides/routing/index.md
 !guides/services/index.md
@@ -44,5 +46,3 @@ guides/**/*.md
 !guides/tutorial/part-2/ember-data.md
 !guides/tutorial/part-2/index.md
 !guides/tutorial/part-2/recap.md
-!guides/models/creating-updating-and-deleting-records.md
-!guides/models/relationships.md
