@@ -153,7 +153,7 @@ module('Integration | Component | rental', function (hooks) {
         image:
           'https://upload.wikimedia.org/wikipedia/commons/c/cb/Crane_estate_(5).jpg',
         description:
-          'Ce manoir ancien et spatieux se trouve sur un domaine de plus de 100 acres de collines et de forêts de séquoias denses.',
+          'Ce manoir ancien et spacieux se trouve sur un domaine de plus de 100 acres de collines et de forêts de séquoias denses.',
       },
     });
 
@@ -318,7 +318,7 @@ module('Integration | Component | rental/detailed', function (hooks) {
         image:
           'https://upload.wikimedia.org/wikipedia/commons/c/cb/Crane_estate_(5).jpg',
         description:
-          'Ce manoir ancien et spatieux se trouve sur un domaine de plus de 100 acres de collines et de forêts de séquoias denses.',
+          'Ce manoir ancien et spacieux se trouve sur un domaine de plus de 100 acres de collines et de forêts de séquoias denses.',
       },
     });
   });

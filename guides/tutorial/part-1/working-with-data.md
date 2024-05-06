@@ -39,7 +39,7 @@ export default class IndexRoute extends Route {
       type: 'Indépendant',
       bedrooms: 15,
       image: 'https://upload.wikimedia.org/wikipedia/commons/c/cb/Crane_estate_(5).jpg',
-      description: 'Ce manoir ancien et spatieux se trouve sur un domaine de plus de 100 acres de collines et de forêts de séquoias denses.',
+      description: 'Ce manoir ancien et spacieux se trouve sur un domaine de plus de 100 acres de collines et de forêts de séquoias denses.',
     };
   }
 }
@@ -196,7 +196,7 @@ module('Integration | Component | rental', function (hooks) {
         image:
           'https://upload.wikimedia.org/wikipedia/commons/c/cb/Crane_estate_(5).jpg',
         description:
-          'Ce manoir ancien et spatieux se trouve sur un domaine de plus de 100 acres de collines et de forêts de séquoias denses.',
+          'Ce manoir ancien et spacieux se trouve sur un domaine de plus de 100 acres de collines et de forêts de séquoias denses.',
       },
     });
 
@@ -271,7 +271,7 @@ export default class IndexRoute extends Route {
       type: 'Propriété indépendante',
       bedrooms: 15,
       image: 'https://upload.wikimedia.org/wikipedia/commons/c/cb/Crane_estate_(5).jpg',
-      description: 'Ce manoir ancien et spatieux se trouve sur un domaine de plus de 100 acres de collines et de forêts de séquoias denses.',
+      description: 'Ce manoir ancien et spacieux se trouve sur un domaine de plus de 100 acres de collines et de forêts de séquoias denses.',
     };
     let response = await fetch('/api/rentals.json');
     let parsed = await response.json();
@@ -307,7 +307,7 @@ Avant d'aller plus loin, prenons une seconde pour regarder à nouveau les donné
         "category": "Domaine",
         "bedrooms": 15,
         "image": "https://upload.wikimedia.org/wikipedia/commons/c/cb/Crane_estate_(5).jpg",
-        "description": "Ce manoir ancien et spatieux se trouve sur un domaine de plus de 100 acres de collines et de forêts de séquoias denses."
+        "description": "Ce manoir ancien et spacieux se trouve sur un domaine de plus de 100 acres de collines et de forêts de séquoias denses."
       }
     },
     {
