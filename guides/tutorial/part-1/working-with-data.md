@@ -5,18 +5,18 @@ Dans ce chapitre, nous supprimerons les données en dur du composant `<Rental>`.
 Dans ce chapitre, vous apprendrez à&nbsp;:
 
 - Travailler avec les fichiers de route
-- Retourner des données locales à partir du _model hook_
-- Accéder aux modèles des routes depuis les _templates_
+- Retourner des données locales à partir du <span lang="en">_model hook_</span>
+- Accéder aux modèles des routes depuis les <span lang="en">_templates_</span>
 - _Mocker_ les données du serveur avec des fichiers JSON statiques
-- Récupérer les données distantes à partir du _model hook_
+- Récupérer les données distantes à partir du <span lang="en">_model hook_</span>
 - Adapter les données du serveur
-- Créer des boucles et des variables locales dans les _templates_ avec `{{#each}}`
+- Créer des boucles et des variables locales dans les <span lang="en">_templates_</span> avec `{{#each}}`
 
 ## Travailler avec les fichiers de route
 
 Jusque-là, nous avons tout codé en dur dans notre composant `<Rental>`. Mais ce n'est probablement pas très maintenable, surtout qu'à terme, nous voulons que nos données proviennent plutôt d'un serveur. Allons-y, déplaçons une partie des valeurs en dur en dehors du composant pour préparer le terrain. 
 
-Ce que nous voulons à terme, c'est que l'app récupère les données du serveur, puis les affiche en tant que contenu dynamique depuis les _templates_. Pour faire ça, il nous faut un endroit où écrire le code qui va récupérer les données et les charger dans les routes.
+Ce que nous voulons à terme, c'est que l'app récupère les données du serveur, puis les affiche en tant que contenu dynamique depuis les <span lang="en">_templates_</span>. Pour faire ça, il nous faut un endroit où écrire le code qui va récupérer les données et les charger dans les routes.
 
 Dans Ember, [les fichiers de route](../../../routing/defining-your-routes/) sont l'endroit idéal. Nous n'en avions pas eu besoin jusqu'ici car toutes nos routes ne faisaient essentiellement qu'afficher des pages statiques, mais nous sommes sur le point de changer ça.
 
@@ -49,21 +49,21 @@ export default class IndexRoute extends Route {
 
 Ensuite, nous étendons la classe `Route` à notre propre `IndexRoute`, que nous [exportons](https://javascript.info/import-export#export-default) également afin que le reste de l'application puisse l'utiliser.
 
-## Retourner des données locales à partir du _model hook_
+## Retourner des données locales à partir du <span lang="en">_model hook_</span>
 
-Jusque-là, tout va bien. Mais que se passe-t-il dans cette classe de route&nbsp;? Nous avons implémenté une méthode _[async](https://developer.mozilla.org/docs/Learn/JavaScript/Asynchronous/Concepts)_ appelée `model()`. Cette méthode est aussi appelée le _model hook_ (_hook_ signifie littéralement "un crochet" mais se traduit mal dans un contexte technique. On peut voir le _hook_ comme une fonction mise à disposition et exécutée en interne par le framework, et dont on définit le contenu, on y "accroche" du code).
+Jusque-là, tout va bien. Mais que se passe-t-il dans cette classe de route&nbsp;? Nous avons implémenté une méthode _[async](https://developer.mozilla.org/docs/Learn/JavaScript/Asynchronous/Concepts)_ appelée `model()`. Cette méthode est aussi appelée le <span lang="en">_model hook_</span> (<span lang="en">_hook_</span> signifie littéralement "un crochet" mais se traduit mal dans un contexte technique. On peut voir le <span lang="en">_hook_</span> comme une fonction mise à disposition et exécutée en interne par le framework, et dont on définit le contenu, on y "accroche" du code).
 
-Le _model hook_ est responsable de la récupération et de la préparation de toutes les données dont la route a besoin. Ember va appeler ce _hooK_ automatiquement en entrant dans une route, afin que vous ayez l'opportunité d'exécuter votre propre code pour obtenir les données qu'il vous faut. L'objet retourné par le _hook_ est appelé le [_model_ (modèle)](../../../routing/specifying-a-routes-model/) de la route (sans blague&nbsp;!)
+Le <span lang="en">_model hook_</span> est responsable de la récupération et de la préparation de toutes les données dont la route a besoin. Ember va appeler ce <span lang="en">_hook_</span> automatiquement en entrant dans une route, afin que vous ayez l'opportunité d'exécuter votre propre code pour obtenir les données qu'il vous faut. L'objet retourné par le <span lang="en">_hook_</span> est appelé le [<span lang="en">_model_</span> (modèle)](../../../routing/specifying-a-routes-model/) de la route (sans blague&nbsp;!)
 
-Habituellement, c'est là qu'on récupère les données d'un serveur. Puisque la récupération des données est une opération asynchrone, le _model hook_ est marqué `async`. Ceci nous donne la possibilité d'utiliser le mot-clé `await` pour attendre la fin de l'opération.
+Habituellement, c'est là qu'on récupère les données d'un serveur. Puisque la récupération des données est une opération asynchrone, le <span lang="en">_model hook_</span> est marqué `async`. Ceci nous donne la possibilité d'utiliser le mot-clé `await` pour attendre la fin de l'opération.
 
 Nous y viendrons un peu plus tard. Pour le moment, nous retournons simplement le même modèle de données codé en dur, extrait du composant `<Rental>`, mais au format d'un [objet JavaScript](https://developer.mozilla.org/docs/Learn/JavaScript/Objects/Basics)
 
-## Accéder aux modèles des routes depuis les _templates_
+## Accéder aux modèles des routes depuis les <span lang="en">_templates_</span>
 
-Maintenant que nous avons préparé un modèle de données pour notre route, utilisons-le dans notre _template_. Dans les _templates_ de route, nous pouvons accéder au modèle de la route en tant que `@model`. Dans notre cas, il contiendra le [POJO](https://fr.wikipedia.org/wiki/Plain_old_Java_object) retourné par notre _model hook_.
+Maintenant que nous avons préparé un modèle de données pour notre route, utilisons-le dans notre <span lang="en">_template_</span>. Dans les <span lang="en">_templates_</span> de route, nous pouvons accéder au modèle de la route en tant que `@model`. Dans notre cas, il contiendra le [POJO](https://fr.wikipedia.org/wiki/Plain_old_Java_object) retourné par notre <span lang="en">_model hook_</span>.
 
-Pour tester ça, modifions notre _template_ et essayons d'afficher la propriété `title` du modèle&nbsp;:
+Pour tester ça, modifions notre <span lang="en">_template_</span> et essayons d'afficher la propriété `title` du modèle&nbsp;:
 
 ```handlebars { data-filename="app/templates/index.hbs" data-diff="+7,+8" }
 <Jumbo>
@@ -116,7 +116,7 @@ D'abord, passons le modèle au composant `<Rental>` sous la forme de l'argument 
 </div>
 ```
 
-En passant `@model` au composant `<Rental>` sous la forme de l'argument `@rental`, nous aurons accès à l'objet modèle "Le Manoir Ancien" dans le _template_ de `<Rental>`&nbsp;! À présent, nous pouvons remplacer nos valeurs en dur par les valeurs à l'intérieur de notre modèle `@rental`.
+En passant `@model` au composant `<Rental>` sous la forme de l'argument `@rental`, nous aurons accès à l'objet modèle "Le Manoir Ancien" dans le <span lang="en">_template_</span> de `<Rental>`&nbsp;! À présent, nous pouvons remplacer nos valeurs en dur par les valeurs à l'intérieur de notre modèle `@rental`.
 
 ```handlebars { data-filename="app/components/rental.hbs" data-diff="-3,-4,+5,+6,-9,+10,-12,+13,-16,+17,-20,+21,-24,+25,-29,-30,+31,+32,-36,+37" }
 <article class="rental">
@@ -166,7 +166,7 @@ Puisque l'objet modèle contient exactement les mêmes données que celles, pré
 
 Il ne nous reste plus qu'une chose à faire&nbsp;: mettre à jour les tests pour refléter les changements.
 
-Parce que les tests des composants sont supposés afficher et tester un seul composant en isolation du reste de l'app, ils ne peuvent pas effectuer de navigation, ce qui signifie qu'ils n'ont pas accès aux données du _model hook_.
+Parce que les tests des composants sont supposés afficher et tester un seul composant en isolation du reste de l'app, ils ne peuvent pas effectuer de navigation, ce qui signifie qu'ils n'ont pas accès aux données du <span lang="en">_model hook_</span>.
 
 Ainsi, dans le test de notre composant `<Rental>`, nous devons créer les données d'une autre manière. Nous pouvons le faire en utilisant la méthode `setProperties` apprise dans le [chapitre précédent](../reusable-components/).
 
@@ -220,7 +220,7 @@ Notez que nous devons aussi mettre à jour l'invocation du composant `<Rental>` 
 
 ## _Mocker_ les données du serveur avec des fichiers JSON statiques
 
-Maintenant que nous avons préparé le terrain, attaquons la partie amusante en supprimant _toutes_ les valeurs en dur du _model hook_ et récupérons des données provenant du serveur&nbsp;!
+Maintenant que nous avons préparé le terrain, attaquons la partie amusante en supprimant _toutes_ les valeurs en dur du <span lang="en">_model hook_</span> et récupérons des données provenant du serveur&nbsp;!
 
 Dans une app en production, les données que nous récupérons proviendraient probablement d'un serveur d'API distant. Pour éviter de configurer un serveur d'API juste pour ce tutoriel, nous placerons des données JSON dans le dossier `public`. De cette manière, nous pouvons toujours demander ces données JSON avec des requêtes HTTP classiques (mais sans avoir à écrire de la logique serveur).
 
@@ -250,9 +250,9 @@ Vous pouvez vérifier que tout fonctionne correctement en navigant sur `http://l
 
 Super&nbsp;! Notre "serveur" est maintenant prêt et en marche, il sert nos propriétés à louer en tant que données JSON.
 
-## Récupérer les données distantes à partir du _model hook_
+## Récupérer les données distantes à partir du <span lang="en">_model hook_</span>
 
-Maintenant, tournons de nouveau notre attention vers le _model hook_. Nous devons le modifier afin qu'il récupère effectivement les données du serveur.
+Maintenant, tournons de nouveau notre attention vers le <span lang="en">_model hook_</span>. Nous devons le modifier afin qu'il récupère effectivement les données du serveur.
 
 ```js { data-filename="app/routes/index.js" data-diff="-5,-6,-7,-8,-9,-10,-11,-12,-13,-14,-15,-16,-17,-18,+19,+20,+21" }
 import Route from '@ember/routing/route';
@@ -282,7 +282,7 @@ export default class IndexRoute extends Route {
 
 Que se passe-t-il ici&nbsp;? D'abord, nous utilisons l'[API Fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) du navigateur pour demander nos données JSON situées à l'adresse `public/api/rentals.json`, la même URL que nous avons visité plus tôt.
 
-Comme mentionné ci-dessus, récupérer les données provenant du serveur est généralement une opération asynchrone. L'API Fetch prend ça en compte, c'est pourquoi `fetch` est une fonction `async`, tout comme notre _model hook_. Pour exploiter la réponse, nous devons la pairer avec le mot-clé `await`.
+Comme mentionné ci-dessus, récupérer les données provenant du serveur est généralement une opération asynchrone. L'API Fetch prend ça en compte, c'est pourquoi `fetch` est une fonction `async`, tout comme notre <span lang="en">_model hook_</span>. Pour exploiter la réponse, nous devons la pairer avec le mot-clé `await`.
 
 L'API Fetch retourne un [objet réponse](https://developer.mozilla.org/docs/Web/API/Response) de façon asynchrone. Une fois que nous avons cet objet, nous pouvons convertir la réponse du serveur au format dont nous avons besoin&nbsp;; dans notre cas, nous savons que le serveur envoie les données au format JSON, donc nous pouvons utiliser la méthode `json()` pour ["parser"](https://developer.mozilla.org/docs/Web/API/Body/json) les données de réponses en conséquence. Parser les données de réponse est aussi une opération asynchrone, donc nous employons le mot-clé `await` ici aussi.
 
@@ -348,17 +348,17 @@ Avant d'aller plus loin, prenons une seconde pour regarder à nouveau les donné
 }
 ```
 
-Ces données suivent le format [JSON:API](https://jsonapi.org/), qui est "légèrement" différent des données en dur que nous retournions du _model hook_ auparavant.
+Ces données suivent le format [JSON:API](https://jsonapi.org/), qui est "légèrement" différent des données en dur que nous retournions du <span lang="en">_model hook_</span> auparavant.
 
 Tout d'abord, le format JSON:API retourne un tableau imbriqué sous la clé `"data"`, plutôt qu'un objet pour une seule propriété à louer. Quand on y pense, ça fait sens&nbsp;; à ce stade nous voulons afficher une liste entière de locations provenant du serveur, et non plus une seule, donc un tableau d'objets représentant les propriétés à louer est exactement ce qu'il nous faut.
 
-Les objets représentant les locations, contenus dans le tableau, ont également une structure légèrement différente. Chaque objet de données possède un `type` et un `id`, que nous n'avons pas (encore&nbsp;!) l'intention d'utiliser dans notre _template_. Pour l'instant, les seules données dont nous avons vraiment besoin sont celles imbriquées dans la clé `attributes`.
+Les objets représentant les locations, contenus dans le tableau, ont également une structure légèrement différente. Chaque objet de données possède un `type` et un `id`, que nous n'avons pas (encore&nbsp;!) l'intention d'utiliser dans notre <span lang="en">_template_</span>. Pour l'instant, les seules données dont nous avons vraiment besoin sont celles imbriquées dans la clé `attributes`.
 
 Il y a une autre différence clé ici, et il faut avoir le regard aiguisé pour la détecter&nbsp;: les données provenant du serveur n'ont pas la propriété `type` qui existait dans notre objet modèle codé en dur. La propriété `type` pouvait être `"Propriété indépendante"` ou `"Dans une copropriété"` en fonction du type de location, et elle est requise par notre composant `<Rental>`.
 
 Dans la [Partie 2](../../part-2/) de ce tutoriel, nous apprendrons un moyen plus pratique d'exploiter les données au format JSON:API. Pour l'instant, fixons simplement les données en gérant nous-mêmes les différences dans entre les formats.
 
-Nous pouvons gérer ça dans le _model hook_&nbsp;:
+Nous pouvons gérer ça dans le <span lang="en">_model hook_</span>&nbsp;:
 
 ```js { data-filename="app/routes/index.js" data-diff="+3,+4,-8,-9,+10,+11,+12,+13,+14,+15,+16,+17,+18,+19,+20,+21,+22,+23" }
 import Route from '@ember/routing/route';
@@ -388,13 +388,13 @@ export default class IndexRoute extends Route {
 }
 ```
 
-Après avoir parser les données JSON, nous extrayons l'objet `attributes`, nous y rajoutons l'attribut `type` manquant manuellement, puis nous le retournons du _model hook_. De cette manière, le reste de l'app n'y verra que du feu.
+Après avoir parser les données JSON, nous extrayons l'objet `attributes`, nous y rajoutons l'attribut `type` manquant manuellement, puis nous le retournons du <span lang="en">_model hook_</span>. De cette manière, le reste de l'app n'y verra que du feu.
 
 Super&nbsp;! Maintenant, passons à la suite.
 
-## Créer des boucles et des variables locales dans les _templates_ avec `{{#each}}`
+## Créer des boucles et des variables locales dans les <span lang="en">_templates_</span> avec `{{#each}}`
 
-Le dernier changement à faire se situe dans le _template_ de route `index.hbs`, où nous invoquons les composants `<Rental>`. Précédemment, nous passions `@model` à nos composants via `@rental`. Sauf que `@model` n'est plus un objet simple, mais un tableau&nbsp;! Ainsi, il faut changer le _template_ pour prendre ça en compte.
+Le dernier changement à faire se situe dans le <span lang="en">_template_</span> de route `index.hbs`, où nous invoquons les composants `<Rental>`. Précédemment, nous passions `@model` à nos composants via `@rental`. Sauf que `@model` n'est plus un objet simple, mais un tableau&nbsp;! Ainsi, il faut changer le <span lang="en">_template_</span> pour prendre ça en compte.
 
 Voyons comment&nbsp;:
 
@@ -417,7 +417,7 @@ Voyons comment&nbsp;:
 </div>
 ```
 
-Nous utilisons la syntaxe `{{#each}}...{{/each}}` pour itérer et boucler sur le tableau retourné par le _model hook_. Pour chaque itération sur le tableau (c'est-à-dire pour chaque élément à l'intérieur du tableau), nous affichons le bloc qui lui est passé une seule fois. Dans notre cas, le bloc est notre composant `<Rental>`, entouré de balises `<li>`.
+Nous utilisons la syntaxe `{{#each}}...{{/each}}` pour itérer et boucler sur le tableau retourné par le <span lang="en">_model hook_</span>. Pour chaque itération sur le tableau (c'est-à-dire pour chaque élément à l'intérieur du tableau), nous affichons le bloc qui lui est passé une seule fois. Dans notre cas, le bloc est notre composant `<Rental>`, entouré de balises `<li>`.
 
 À l'intérieur du bloc, nous avons accès à l'élément de l'itération "courante" via la variable `{{rental}}`. Pourquoi&nbsp;`rental`? Eh bien, parce que c'est le nom que nous avons choisi de lui donner&nbsp;! Cette variable vient de la déclaration `as |rental|` de la boucle `each`. Nous aurions très bien pu l'appeler autrement, comme `as |property|`, auquel cas nous aurions accédé à l'élément courant via la variable `{{property}}`.
 
