@@ -1,71 +1,71 @@
-## Creating Records
+## Créer des _records_
 
-You can create records by calling the
-[`createRecord()`](https://api.emberjs.com/ember-data/release/classes/Store/methods/createRecord?anchor=createRecord)
-method on the store.
+Vous pouvez créer des _records_ (enregistrements) en appelant la méthode 
+[`createRecord()`](https://api.emberjs.com/ember-data/release/classes/Store/methods/createRecord?anchor=createRecord) 
+sur le _store_ (magasin, réserve).
 
 ```javascript
 this.store.createRecord('post', {
   title: 'Rails is Omakase',
-  body: 'Lorem ipsum'
+  body: 'Lorem ipsum',
 });
 ```
 
-To make `store` available, you can [inject the `store` service](../#toc_injecting-the-store).
+Pour rendre disponible le _store_, il faut 
+[injecter le service `store`](../#toc_injecting-the-store).
 
-## Updating Records
+## Mettre à jour des _records_
 
-Making changes to EmberData records is as simple as setting the attribute you
-want to change:
+Modifier des _records_ EmberData est aussi simple que de mettre à jour l'attribut que vous souhaitez
+modifier&nbsp;:
 
 ```javascript
-this.store.findRecord('post', 1).then(function(post) {
-  // ...after the record has loaded
-  post.title = 'A new post';
+this.store.findRecord('post', 1).then(function (post) {
+  // ...une fois le record chargé
+  post.title = 'Un nouvel article';
 });
 ```
 
-## Persisting Records
+## _Records_ persistants
 
-Records in EmberData are persisted on a per-instance basis.
-Call [`save()`](https://api.emberjs.com/ember-data/release/classes/Model/methods/save?anchor=save)
-on any instance of `Model` and it will make a network request.
+Les _records_ dans EmberData persistent sur une base de pré-instance.
+Appelez [`save()`](https://api.emberjs.com/ember-data/release/classes/Model/methods/save?anchor=save) 
+sur une instance de `Model`, et cela déclenchera une requête réseau.
 
-EmberData takes care of tracking the state of each record for
-you. This allows EmberData to treat newly created records differently
-from existing records when saving.
+EmberData s'occupe de suivre l'état de chaque _record_ pour vous. Ça lui permet de traiter 
+différemment les _records_ nouvellement créés de ceux déjà existants pendant la sauvegarde.
 
-By default, EmberData will `POST` newly created records to their type URL.
+Par défaut, EmberData va `POST` les _records_ nouvellement créés vers l'URL correspondant à leur 
+type.
 
 ```javascript
 let post = store.createRecord('post', {
   title: 'Rails is Omakase',
-  body: 'Lorem ipsum'
+  body: 'Lorem ipsum',
 });
 
-post.save(); // => POST to '/posts'
+post.save(); // => POST vers '/posts'
 ```
 
-Records that already exist on the backend are updated using the HTTP `PATCH` verb.
+Les _records_ déjà existants au niveau du _backend_ sont mis à jour en utilisant la méthode HTTP 
+`PATCH`.
 
 ```javascript
-store.findRecord('post', 1).then(function(post) {
+store.findRecord('post', 1).then(function (post) {
   post.title; // => "Rails is Omakase"
 
-  post.title = 'A new post';
+  post.title = 'Un nouvel article';
 
-  post.save(); // => PATCH to '/posts/1'
+  post.save(); // => PATCH vers '/posts/1'
 });
 ```
 
-You can tell if a record has outstanding changes that have not yet been
-saved by checking its
-[`hasDirtyAttributes`](https://api.emberjs.com/ember-data/release/classes/Model/properties/hasDirtyAttributes?anchor=hasDirtyAttributes)
-property. You can also see which parts of
-the record were changed and what the original value was using the
-[`changedAttributes()`](https://api.emberjs.com/ember-data/release/classes/Model/methods/changedAttributes?anchor=changedAttributes)
-method. `changedAttributes` returns an object, whose keys are the changed
-properties and values are an array of values `[oldValue, newValue]`.
+Vous pouvez vérifier si un _record_ a des changements en cours non sauvegardés en vérifiant sa 
+propriété [`hasDirtyAttributes`](https://api.emberjs.com/ember-data/release/classes/Model/properties/hasDirtyAttributes?anchor=hasDirtyAttributes).
+Vous pouvez également voir quelles parties du _record_ ont été modifiées et quelle était leur valeur
+d'origine en utilisant la méthode [`changedAttributes()`](https://api.emberjs.com/ember-data/release/classes/Model/methods/changedAttributes?anchor=changedAttributes).
+`changedAttributes` retourne un objet dont les clés sont les propriétés modifiées et les valeurs 
+sont un tableau de valeurs `[ancienneValeur, nouvelleValeur]`.
 
 ```javascript
 person.isAdmin; // => false
@@ -75,7 +75,8 @@ person.hasDirtyAttributes; // => true
 person.changedAttributes(); // => { isAdmin: [false, true] }
 ```
 
-At this point, you can either persist your changes via `save()` or you can roll back your changes using [`rollbackAttributes()`](https://api.emberjs.com/ember-data/release/classes/Model/methods/rollbackAttributes?anchor=rollbackAttributes).
+À ce stade, vous pouvez soit conserver vos changements avec `save()`, soit les annuler en utilisant 
+[`rollbackAttributes()`](https://api.emberjs.com/ember-data/release/classes/Model/methods/rollbackAttributes?anchor=rollbackAttributes).
 
 ```javascript
 person.hasDirtyAttributes; // => true
@@ -88,58 +89,60 @@ person.isAdmin; // => false
 person.changedAttributes(); // => {}
 ```
 
-## Handling Validation Errors
+## Gérer les erreurs de validation
 
-If the backend server returns validation errors after trying to save, they will
-be available on the `errors` property of your model. Here's how you might display
-the errors from saving a blog post in your template:
+Si le serveur _backend_ retourne des erreurs de validation après une tentative de sauvegarde, elles
+seront disponibles dans la propriété `errors` de votre modèle. Voici un exemple montrant comment 
+afficher ces erreurs dans votre _template_ après avoir sauvegardé un article de blog&nbsp;:
 
 ```handlebars
 {{#each this.post.errors.title as |error|}}
-  <div class="error">{{error.message}}</div>
+  <div class='error'>{{error.message}}</div>
 {{/each}}
 {{#each this.post.errors.body as |error|}}
-  <div class="error">{{error.message}}</div>
+  <div class='error'>{{error.message}}</div>
 {{/each}}
 ```
 
-## Promises
+## Promesses
 
-[`save()`](https://api.emberjs.com/ember-data/release/classes/Model/methods/save?anchor=save) returns
-a promise, which makes it easy to asynchronously handle success and failure
-scenarios. Here's a common pattern:
+[`save()`](https://api.emberjs.com/ember-data/release/classes/Model/methods/save?anchor=save) 
+retourne une promesse, ce qui facilite la gestion asynchrone des succès et des échecs. Voici un 
+exemple de cas fréquent&nbsp;:
 
 ```javascript
-// Assumed to have already injected the router and store services
+// On suppose que l'on a déjà injecté les services `router` et `store`
 const newPost = this.store.createRecord('post', {
   title: 'Rails is Omakase',
-  body: 'Lorem ipsum'
+  body: 'Lorem ipsum',
 });
 
 try {
   await newPost.save();
   this.router.transitionTo('posts.show', newPost.id);
 } catch (error) {
-  // Handle error
+  // gestion de l'erreur
 }
 ```
 
-## Deleting Records
+## Supprimer des _records_
 
-Deleting records is as straightforward as creating records. Call [`deleteRecord()`](https://api.emberjs.com/ember-data/release/classes/Model/methods/deleteRecord?anchor=deleteRecord)
-on any instance of `Model`. This flags the record as `isDeleted`. The
-deletion can then be persisted using `save()`. Alternatively, you can use
-the [`destroyRecord`](https://api.emberjs.com/ember-data/release/classes/Model/methods/destroyRecord?anchor=destroyRecord) method to delete and persist at the same time.
+Supprimer des _records_ est aussi simple que d'en créer. Appelez 
+[`deleteRecord()`](https://api.emberjs.com/ember-data/release/classes/Model/methods/deleteRecord?anchor=deleteRecord)
+sur n'importe quelle instance de `Model`. Ça donne au _record_ l'attribut `isDeleted`. La 
+suppression peut alors être sauvegardée en utilisant `save()`. Sinon, vous pouvez utiliser la 
+méthode [`destroyRecord`](https://api.emberjs.com/ember-data/release/classes/Model/methods/destroyRecord?anchor=destroyRecord)
+pour supprimer et sauvegarder en même temps.
 
 ```javascript
 let post = store.peekRecord('post', 1);
 post.deleteRecord();
 post.isDeleted; // => true
-post.save(); // => DELETE to /posts/1
+post.save(); // => DELETE vers '/posts/1'
 
 // OR
 post = store.peekRecord('post', 2);
-post.destroyRecord(); // => DELETE to /posts/2
+post.destroyRecord(); // => DELETE vers '/posts/2'
 ```
 
 <!-- eof - needed for pages that end in a code block  -->
