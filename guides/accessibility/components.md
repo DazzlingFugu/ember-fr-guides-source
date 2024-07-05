@@ -47,7 +47,7 @@ Voici quelques astuces pour bien commencer&nbsp;:
 
 ## Nom accessible
 
-Tous les éléments interactifs doivent avoir un nom accessible. Mais qu'est ce que ça signifie exactement&nbsp;?
+Tous les éléments interactifs doivent avoir un nom accessible. Mais qu'est-ce que ça signifie exactement&nbsp;?
 
 <!-- spell ignore -->
 Ça signifie que le code fourni doit être lisible par d'autres machines (par exemple, les technologies d'assistance comme les lecteurs d'écrans). Voici de la documentation pour comprendre comment ce nom accessible est déterminé: [Accessible Name and Description Computation](https://www.w3.org/TR/accname-1.1/).
@@ -57,7 +57,7 @@ Cependant, les méthodes les plus communes pour fournir des noms accessibles peu
 
 ### Ajouter un label à une saisie d'élément
 
-Chaque élément de saisie `<input>` doit être associé avec un élément `<label>`. Pour cela, l'élément `<input>` doit avoir un attribut `id` de la même valeur que l'attribut `for` de l'élément `<label>`, par exemple&nbsp;:
+Chaque élément de saisie `<input>` doit être associé avec un élément `<label>`. Pour cela, l'élément `<input>` doit avoir un attribut `id` de la même valeur que l'attribut `for` de l'élément `<label>`. Ember intègre un _helper_ `unique-id` capable de générer des identifiants uniques, à utiliser comme ceci&nbsp;:
 
 ![Séparer les éléments input et label à l'aide d'une correspondance établie entre les attributs for et id](/images/accessibility/component-considerations/input-for-id.png)
 
@@ -71,10 +71,10 @@ Il est également possible d'envelopper l'élément `<label>` autour de l'élém
 ![Un sous-élément input imbriqué dans un élément parent label sans attribut for ni id](/images/accessibility/component-considerations/input-nested.png)
 
 ```html
-<label>
-  Nom :
-  <input name="name" value="" type="text" />
-</label>
+{{#let (unique-id) as |id|}}
+  <label for={{id}}>Nom :</label>
+  <input id={{id}} name="name" value="" type="text" />
+{{/let}}
 ```
 
 En revanche, cette option peut rendre un peu plus difficile l'application des styles, de ce fait il est préférable de tester les deux approches avant de choisir la meilleure.
