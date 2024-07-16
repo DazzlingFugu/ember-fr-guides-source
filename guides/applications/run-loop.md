@@ -1,29 +1,26 @@
 **Note:**
-* _For basic Ember app development scenarios, you don't need to understand the run loop or use it directly. All common paths are paved nicely for you and don't require working with the run loop._
-* _However, the run loop will be helpful to understand the internals of Ember and to assist in customized performance tuning by manually batching costly work._
+* <!-- spell ignore -->Pour les scénarios de développement d'apps Ember simples, vous n'avez pas besoin de comprendre la boucle d'exécution (_run loop_) ou de l'utiliser directement. Le chemin vers les usages communs est pavé pour vous et ne nécessite pas de travailler avec la boucle d'exécution.
+* Cela dit, connaître la boucle d'exécution est utile pour comprendre la mécanique interne d'Ember et peut vous aider à personnaliser l'optimisation des performances en regroupant manuellement les tâches coûteuses.
 
-Ember's internals and most of the code you will write in your applications takes place in a run loop.
-The run loop is used to batch, and order (or reorder) work in a way that is most effective and efficient.
+La mécanique interne d'Ember et la plupart du code que vous écrivez dans vos apps se déroulent dans une boucle d'exécution. La boucle d'exécution est utilisée pour grouper et ordonner (ou réordonner) le travail de la manière la plus efficace.
 
-It does so by scheduling work on specific queues.
-These queues have a priority, and are processed to completion in priority order.
+Pour cela, les tâches sont planifiées sur des files d'attente (_queues_) spécifiques. Ces files d'attente ont une priorité et sont traitées par ordre de priorité.
 
-The most common case for using the run loop is integrating with a non-Ember API
-that includes some sort of asynchronous callback.
-For example:
+Le cas le plus courant d'utilisation de la boucle d'exécution est l'intégration avec une API non Ember qui inclut un genre de _callback_ (rappel de fonction) asynchrone.
 
-- DOM update and event callbacks
-- `setTimeout` and `setInterval` callbacks
-- `postMessage` and `messageChannel` event handlers
-- fetch or ajax callbacks
-- WebSocket callbacks
+Par exemple&nbsp;:
 
-## Why is the run loop useful?
+- Mise à jour du DOM et _callbacks_ d'événements
+- _callbacks_ de `setTimeout` et `setInterval`
+- Gestionnaires d'événement `postMessage` et `messageChannel`
+- _callbacks_ de `fetch` ou `ajax`
+- _callbacks_ de _WebSocket_
 
-Very often, batching similar work has benefits.
-Web browsers do something quite similar by batching changes to the DOM.
+## Quelle est l'utilité de la boucle d'exécution&nbsp;?
 
-Consider the following HTML snippet:
+Très souvent, regrouper des tâches semblables présente des avantages. Les navigateurs Web utilisent plus ou moins cette approche en regroupant les modifications apportées au DOM.
+
+Considérez l'extrait de code HTML suivant&nbsp;:
 
 ```html
 <div id="foo"></div>
@@ -31,37 +28,34 @@ Consider the following HTML snippet:
 <div id="baz"></div>
 ```
 
-and executing the following code:
+et exécutez le code suivant&nbsp;:
 
 ```javascript
-foo.style.height = '500px' // write
-foo.offsetHeight // read (recalculate style, layout, expensive!)
+foo.style.height = '500px' // écriture
+foo.offsetHeight // lecture (recalcul du style et de la mise en page, coûteux !)
 
-bar.style.height = '400px' // write
-bar.offsetHeight // read (recalculate style, layout, expensive!)
+bar.style.height = '400px' // écriture
+bar.offsetHeight // lecture (recalcul du style et de la mise en page, coûteux !)
 
-baz.style.height = '200px' // write
-baz.offsetHeight // read (recalculate style, layout, expensive!)
+baz.style.height = '200px' // écriture
+baz.offsetHeight // lecture (recalcul du style et de la mise en page, coûteux !)
 ```
 
-In this example, the sequence of code forced the browser to recalculate style, and relayout after each step.
-However, if we were able to batch similar jobs together,
-the browser would have only needed to recalculate the style and layout once.
+Dans cet exemple, la séquence de code force le navigateur à recalculer le style et remettre en page après chaque étape. Cependant, si on pouvait regrouper les tâches semblables ensemble, le navigateur n'aurait à recalculer le style et la mise en page qu'une seule fois&nbsp;:
 
 ```javascript
-foo.style.height = '500px' // write
-bar.style.height = '400px' // write
-baz.style.height = '200px' // write
+foo.style.height = '500px' // écriture
+bar.style.height = '400px' // écriture
+baz.style.height = '200px' // écriture
 
-foo.offsetHeight // read (recalculate style, layout, expensive!)
-bar.offsetHeight // read (fast since style and layout are already known)
-baz.offsetHeight // read (fast since style and layout are already known)
+foo.offsetHeight // lecture (recalcul du style et de la mise en page, coûteux !)
+bar.offsetHeight // lecture (rapide car le style et la mise en page sont déjà connus)
+baz.offsetHeight // lecture (rapide car le style et la mise en page sont déjà connus)
 ```
 
-Interestingly, this pattern holds true for many other types of work.
-Essentially, batching similar work allows for better pipelining, and further optimization.
+Il est intéressant de noter que ce modèle de conception reste applicable à d'autres types de tâches&nbsp;; il permet essentiellement d'avoir de meilleures _pipelines_ (processus d'exécution), et des optimisations plus avancées.
 
-Let's look at a similar example that is optimized in Ember, starting with an `Image` class:
+Voyons un exemple similaire optimisé dans Ember, en commençant par une classe `Image`&nbsp;:
 
 ```javascript
 import { tracked } from '@glimmer/tracking';
@@ -81,28 +75,27 @@ class Image {
 }
 ```
 
-and a template to display its attributes:
+et un _template_ pour afficher ses attributs&nbsp;:
 
 ```handlebars
 {{this.width}}
 {{this.aspectRatio}}
 ```
 
-If we execute the following code without the run loop:
+Si on exécute le code suivant sans la boucle d'exécution&nbsp;:
 
 ```javascript
 let profilePhoto = new Image({ width: 250, height: 500 });
 profilePhoto.width = 300;
-// profilePhoto.width and profilePhoto.aspectRatio are updated
+// profilePhoto.width et profilePhoto.aspectRatio sont mis à jour
 
 profilePhoto.height = 300;
-// profilePhoto.height and profilePhoto.aspectRatio are updated
+// profilePhoto.height et profilePhoto.aspectRatio sont mis à jour
 ```
 
-We see that the browser will rerender the template twice.
+On constate que le navigateur réaffiche le _template_ deux fois.
 
-However, if we have the run loop in the above code,
-the browser will only rerender the template once the attributes have all been set.
+Maintenant, si nous avons la boucle d'exécution dans le code ci-dessus, le navigateur ne réaffiche le _template_ qu'une fois tous les attributs définis.
 
 ```javascript
 let profilePhoto = new Image({ width: 250, height: 500 });
@@ -112,111 +105,95 @@ profilePhoto.width = 300;
 profilePhoto.height = 300;
 ```
 
-In the above example with the run loop, since the user's attributes end up at the same values as before execution,
-the template will not even rerender!
+Dans l'exemple ci-dessus avec la boucle d'exécution, puisque les attributs de l'utilisateur ont les mêmes valeurs qu'avant l'exécution,
+le modèle ne sera même pas réaffiché&nbsp;!
 
-It is of course possible to optimize these scenarios on a case-by-case basis,
-but getting them for free is much nicer.
-Using the run loop, we can apply these classes of optimizations not only for each scenario, but holistically app-wide.
+Il est bien sûr possible d'optimiser ces scénarios au cas par cas, mais les obtenir clé en main est bien plus appréciable.
+En utilisant la boucle d'exécution, nous pouvons appliquer ce type d'optimisation non seulement pour chaque situation, mais aussi de manière holistique pour l'ensemble de l'app.
 
-## How does the Run Loop work in Ember?
+## Comment la boucle d'exécution fonctionne dans Ember&nbsp;?
 
-As mentioned earlier, we schedule work (in the form of function invocations) on queues,
-and these queues are processed to completion in priority order.
+Comme indiqué précédemment, on programme le travail (sous la forme d'invocations de fonctions) dans des files d'attente, et ces files d'attente sont traitées par ordre de priorité.
 
-What are the queues, and what is their priority order?
+Quelles sont les différentes files d'attente, et quel est leur ordre de priorité&nbsp;?
 
 1. `actions`
-2. `routerTransitions`
-3. `render`
-4. `afterRender`
-5. `destroy`
+2. `routerTransitions` (transitions du routeur)
+3. `render` (affichage)
+4. `afterRender` (après l'affichage)
+5. `destroy` (destruction)
 
-Here, in this list, the "actions" queue has a higher priority than the "render" or "destroy" queue.
+Dans la liste ci-dessus, la file d'attente `actions` a une plus haute priorité que les files `render` ou `destroy`.
 
-## What happens in these queues?
+## Que se passe-t-il dans ces files d'attente&nbsp;?
 
-* The `actions` queue is the general work queue and will typically contain scheduled tasks e.g. promises.
-* The `routerTransitions` queue contains transition jobs in the router.
-* The `render` queue contains jobs meant for rendering, these will typically update the DOM.
-* The `afterRender` queue contains jobs meant to be run after all previously scheduled render tasks are complete.
-This is often good for 3rd-party DOM manipulation libraries,
-that should only be run after an entire tree of DOM has been updated.
-* The `destroy` queue contains jobs to finish the teardown of objects other jobs have scheduled to destroy.
+* `actions` est la file d'attente générale et contient typiquement des tâches planifiées, par exemple des promesses.
+* `routerTransitions` contient les tâches de transition dans le routeur.
+* `render` contient les tâches destinées au rendu qui, typiquement, mettent à jour le DOM.
+* `afterRender` contient les tâches destinées à être exécutées après que toutes les tâches de rendu précédemment programmées sont terminées. C'est souvent utile pour les bibliothèques de manipulation du DOM, qui ne doivent être exécutées qu'après qu'un arbre entier de DOM ait été mis à jour.
+* `destroy` contient des tâches pour terminer de détruire des objets dont d'autres tâches ont planifié la destruction.
 
-## In what order are jobs executed on the queues?
-The algorithm works this way:
+## Dans quel ordre les tâches sont-elles exécutées dans la file d'attente&nbsp;?
 
-1. Let the highest priority queue with pending jobs be: `CURRENT_QUEUE`,
-if there are no queues with pending jobs the run loop is complete
-2. Let a new temporary queue be defined as `WORK_QUEUE`
-3. Move jobs from `CURRENT_QUEUE` into `WORK_QUEUE`
-4. Process all the jobs sequentially in `WORK_QUEUE`
-5. Return to Step 1
+L'algorithme fonctionne de la manière suivante&nbsp;:
 
-## An example of the internals
+1. Soit `CURRENT_QUEUE` la file d'attente la plus prioritaire avec des tâches en attente. S'il n'y a plus de tâche en attente, la boucle d'exécution est terminée. Sinon...
+2. Soit `WORK_QUEUE` une nouvelle file d'attente temporaire.
+3. On déplace les tâches de `CURRENT_QUEUE` vers `WORK_QUEUE`.
+4. On traite toutes les tâches séquentiellement dans `WORK_QUEUE`.
+5. On retourne à l'étape 1.
 
-Rather than writing the higher level app code that internally invokes the various run loop scheduling functions,
-we have stripped away the covers, and shown the raw run-loop interactions.
+## Un exemple de la mécanique interne
 
-Working with this API directly is not common in most Ember apps,
-but understanding this example will help you to understand the run-loops algorithm,
-which will make you a better Ember developer.
+Plutôt que d'écrire le code de l'application de haut niveau, qui invoque en interne les diverses fonctions de planification de la boucle d'exécution, nous avons soulevé le capot et montré les interactions brutes de la boucle d'exécution.
+
+Travailler directement avec cette API n'est pas courant dans la plupart des apps Ember, mais comprendre cet exemple vous aidera à comprendre aussi l'algorithme des boucles d'exécution, ce qui améliorera vos compétences en Ember.
 
 <iframe src="https://s3.amazonaws.com/emberjs.com/run-loop-guide/index.html" width="678" height="410" style="border:1px solid rgb(170, 170, 170);margin-bottom:1.5em;"></iframe>
 
-## How do I tell Ember to start a run loop?
+## Comment dire à Ember de démarrer une boucle d'exécution&nbsp;?
 
-You should begin a run loop when the callback fires.
+Vous devriez commencer une boucle d'exécution quand le _callback_ se déclenche.
 
-The `Ember.run` method can be used to create a run loop.
-In this example, `Ember.run` is used to handle an online
-event (browser gains internet access) and run some Ember code.
+La méthode `Ember.run` permet de créer une boucle d'exécution. Dans cet exemple, `Ember.run` est utilisé pour gérer un événement en ligne (le navigateur accède à Internet) et exécuter du code Ember.
 
 ```javascript
 window.addEventListener('online', () => {
-  Ember.run(() => {  // begin loop
-    // Code that results in jobs being scheduled goes here
-  }); // end loop, jobs are flushed and executed
+  Ember.run(() => {  // commencement de la boucle
+    // Ici se trouve le code dont résultent des tâches planifiées
+  }); // fin de la boucle, les tâches sont traitées et exécutées
 });
 ```
 
+## Que se passe-t-il si j'oublie de commencer une boucle d'exécution dans un _handler_ asynchrone&nbsp;?
 
-
-## What happens if I forget to start a run loop in an async handler?
-
-As mentioned above, you should wrap any non-Ember async callbacks in `Ember.run`.
-If you don't, Ember will try to approximate a beginning and end for you.
-Consider the following callback:
+Comme mentionné plus haut, vous devez imbriquer tous les _callbacks_ asynchrones non Ember dans `Ember.run`. Si vous ne le faites pas, Ember estimera approximativement un début et une fin pour vous. Considérons le _callback_ suivant&nbsp;:
 
 ```javascript
 window.addEventListener('online', () => {
-  console.log('Doing things...');
+  console.log('Faire des trucs...');
 
   Ember.run.schedule('actions', () => {
-    // Do more things
+    // Faire plus de trucs
   });
 });
 ```
 
-The run loop API calls that _schedule_ work, i.e. [`run.schedule`](https://api.emberjs.com/ember/release/classes/@ember%2Frunloop/methods/schedule?anchor=schedule),
-[`run.scheduleOnce`](https://api.emberjs.com/ember/release/classes/@ember%2Frunloop/methods/scheduleOnce?anchor=scheduleOnce),
-[`run.once`](https://api.emberjs.com/ember/release/classes/@ember%2Frunloop/methods/once?anchor=once) have the property that they will approximate a run loop for you if one does not already exist.
-These automatically created run loops we call _autoruns_.
+Les appels API de la boucle d'exécution qui "planifient" le travail, c'est-à-dire [`run.schedule`](https://api.emberjs.com/ember/release/classes/@ember%2Frunloop/methods/schedule?anchor=schedule), [`run.scheduleOnce`](https://api.emberjs.com/ember/release/classes/@ember%2Frunloop/methods/scheduleOnce?anchor=scheduleOnce), [`run.once`](https://api.emberjs.com/ember/release/classes/@ember%2Frunloop/methods/once?anchor=once), ont la propriété d'estimer approximativement une boucle d'exécution pour vous s'il n'en existe pas déjà une. Ces boucles d'exécution créées automatiquement sont appelées _autoruns_.
 
-Here is some pseudocode to describe what happens using the example above:
+Voici du pseudo-code pour décrire ce qui se passe dans l'exemple ci-dessus&nbsp;:
 
 ```javascript
 window.addEventListener('online', () => {
-  // 1. autoruns do not change the execution of arbitrary code in a callback.
-  //    This code is still run when this callback is executed and will not be
-  //    scheduled on an autorun.
-  console.log('Doing things...');
+  // 1. Les autoruns ne modifient pas l'exécution d'un code arbitraire dans un callback.
+  //    Ce code est toujours exécuté au moment où le callback se déclenche et ne sera pas
+  //    programmé dans un autorun.
+  console.log('Faire des trucs...');
 
   Ember.run.schedule('actions', () => {
-    // 2. schedule notices that there is no currently available run loop so it
-    //    creates one. It schedules it to close and flush queues on the next
-    //    turn of the JS event loop.
+    // 2. schedule note qu'il n'y a actuellement pas de boucle d'exécution disponible, donc
+    //    il en crée une. Il la programme pour fermer et envoyer les files d'attentes au
+    //    prochain tour de la boucle d'événements JS.
     if (! Ember.run.hasOpenRunLoop()) {
       Ember.run.begin();
       nextTick(() => {
@@ -224,23 +201,21 @@ window.addEventListener('online', () => {
       }, 0);
     }
 
-    // 3. There is now a run loop available so schedule adds its item to the
-    //    given queue
+    // 3. Il y a maintenant une boucle d'exécution disponible donc schedule y ajoute son item.
     Ember.run.schedule('actions', () => {
-      // Do more things
+      // Faire plus de trucs
     });
 
   });
 
-  // 4. This schedule sees the autorun created by schedule above as an available
-  //    run loop and adds its item to the given queue.
+  // 4. Ce schedule voit l'autorun créé par le schedule du dessus comme une boucle d'exécution
+  //    disponible et y ajoute son item.
   Ember.run.schedule('afterRender', () => {
-    // Do yet more things
+    // Faire encore plus de trucs
   });
 });
 ```
 
-## Where can I find more information?
+## Où puis-je trouver plus d'informations&nbsp;?
 
-Check out the [Ember.run](https://api.emberjs.com/ember/release/classes/@ember%2Frunloop) API documentation,
-as well as the [Backburner library](https://github.com/ebryn/backburner.js/) that powers the run loop.
+Jetez un œil à la documentation d'API de [Ember.run](https://api.emberjs.com/ember/release/classes/@ember%2Frunloop), ainsi qu'à la [librairie Backburner](https://github.com/ebryn/backburner.js/) qui alimente la boucle d'exécution.
