@@ -21,6 +21,7 @@ assistive
 async
 asynchronicity
 asynchrony
+Atom
 auto-rollup
 auto-track/auto
 autocomplete
@@ -207,6 +208,8 @@ GIFs
 GitHub
 GitLab
 Glimmer
+GlimmerX
+Glint
 globals
 Globals
 globbing
@@ -339,6 +342,7 @@ paypal
 performant
 PhantomJS
 pipelining
+piratable/nombrable
 placeholder/nombrable
 pluralization/nombrable
 Pluralization/nombrable
@@ -363,6 +367,7 @@ preprocessor/nombrable
 presentational
 Presentational
 présentationnel/sensationnel
+Prettier
 properties
 provider/nombrable
 Proxying
@@ -516,6 +521,7 @@ websocket
 WebSocket/nombrable
 wizard
 workflow/nombrable
+workspace/nombrable
 XHR
 XSS
 ZEIT

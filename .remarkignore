@@ -20,6 +20,7 @@ guides/**/*.md
 !guides/applications/ember-engines.md
 !guides/applications/index.md
 !guides/applications/initializers.md
+!guides/code-editors/index.md
 !guides/components/block-content.md
 !guides/components/built-in-components.md
 !guides/configuring-ember/build-targets.md
