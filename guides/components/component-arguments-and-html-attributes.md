@@ -1,32 +1,26 @@
-Components become useful building blocks of our app if we make them _reusable_. When we reuse components efficiently, we can avoid having to recreate parts of our app again and again. If you want to _reuse_ a component in multiple places, you'll need a way to template out parts of it.
+Les composants deviennent des éléments utiles d'une application quand on les rend "réutilisables". Lorsqu'on réutilise efficacement les composants, on peut éviter d'avoir à recréer des parties de l'app encore et encore. Si vous voulez "réutiliser" un composant à plusieurs endroits, vous aurez besoin d'un moyen d'en abstraire certaines parties.
 
-Let's start with two similar but not identical avatar components, that represent
-different users:
+Commençons par deux composants d'avatar similaires mais non identiques, qui représentent deux utilisateurs différents&nbsp;:
 
 ```handlebars {data-filename="app/components/received-message/avatar.hbs"}
 <aside>
-  <div class="avatar" title="Tomster's avatar">T</div>
+  <div class="avatar" title="Avatar de Tomster">T</div>
 </aside>
 ```
 
 ```handlebars {data-filename="app/components/sent-message/avatar.hbs"}
 <aside class="current-user">
-  <div class="avatar" title="Zoey's avatar">Z</div>
+  <div class="avatar" title="Avatar de Zoey">Z</div>
 </aside>
 ```
 
-The _structure_ of these components is identical, but they have somewhat
-different content (the user's first initial) and attributes (the `title` and `class`
-attributes).
+La "structure" de ces composants est identique, mais ils ont un contenu (l'initiale de l'utilisateur) et des attributs (`title` et `class`) différents.
 
 <div class="cta">
   <div class="cta-note">
     <div class="cta-note-body">
       <div class="cta-note-message">
-        You may notice that the <code>is-active</code> class on the
-        received message avatar from the previous chapters is missing here.
-        We'll cover that in the next chapter on
-        <a href="../conditional-content">Conditional Content</a>.
+        Vous avez peut-être noté la classe <code>is-active</code> sur l'avatar du message reçu, présente dans l'exemple des chapitres précédents, est absente dans celui-ci. Nous couvrirons ça dans le chapitre suivant, dans <a href="../conditional-content">Contenu Conditionnel</a>.
       </div>
     </div>
   </div>
@@ -34,8 +28,7 @@ attributes).
 
 ## Arguments
 
-We can create a component that can be used in both situations by _templating_
-the parts of the HTML that are different.
+Nous pouvons créer un composant utilisable dans les deux situations en factorisant sous forme de _template_ les parties du HTML qui sont différentes.
 
 ```handlebars {data-filename="app/components/avatar.hbs"}
 <aside>
@@ -43,32 +36,23 @@ the parts of the HTML that are different.
 </aside>
 ```
 
-The syntax `{{@initial}}` means that the contents inside the `<div>` tag are
-_dynamic_ and will be specified by the `<Avatar>` tag. Likewise, the
-`{{@title}}` syntax means that the contents of the `title` attribute are dynamic
-and will be specified in the same way. We can now replace the received message
-avatar by using the `<Avatar>` tag and providing it with some arguments.
+La syntaxe `{{@initial}}` signifie que le contenu de la balise `<div>` est "dynamique" et sera spécifié par la balise `<Avatar>`. De même, la balise `{{@title}}` signifie que le contenu de l'attribut `title` est dynamique et sera spécifié de la même manière. Nous pouvons maintenant remplacer le message reçu en utilisant la balise `<Avatar>` et en lui passant quelques arguments.
 
 ```handlebars {data-filename="app/components/received-message/avatar.hbs"}
-<Avatar @title="Tomster's avatar" @initial="T" />
+<Avatar @title="Avatar de Tomster" @initial="T" />
 ```
 
-This code includes the `<Avatar>` component, which expects two _arguments_:
-`@title` and `@initial`.
+Ce code inclut le composant `<Avatar>`, qui attend deux "arguments_"&nbsp;: `@title` et `@initial`.
 
-You are probably familiar with HTML attributes, which tell the _browser_ how to
-draw an HTML element. The syntax `@title=` is similar, but instead of telling
-the _browser_ what to do, it's telling your custom tag what to do.
+Vous êtes probablement familier avec les attributs HTML, qui indiquent au navigateur comment afficher un élément HTML. La syntaxe `@title=` est similaire, mais au lieu d'indiquer au navigateur ce qu'il doit faire, elle l'indique à votre balise personnalisée.
 
 <div class="cta">
   <div class="cta-note">
     <div class="cta-note-body">
-      <div class="cta-note-heading">Zoey says...</div>
+      <div class="cta-note-heading">Zoey dit...</div>
       <div class="cta-note-message">
         <p>
-          You might be wondering why Ember uses the `@` syntax for its
-          components instead of normal HTML attribute syntax. We'll learn why
-          in the next section.
+          Vous vous demandez peut-être pourquoi Ember utilise la syntaxe `@` pour ses composants au lieu de la syntaxe normale des attributs HTML. Nous apprendrons pourquoi dans la section suivante.
         </p>
       </div>
     </div>
@@ -76,36 +60,34 @@ the _browser_ what to do, it's telling your custom tag what to do.
   </div>
 </div>
 
-## HTML Attributes
+## Attributs HTML
 
-Let's try to use our `<Avatar>` component for the sent message avatar.
+Essayons d'invoquer notre composant `<Avatar>` pour l'avatar du message envoyé.
 
 ```handlebars {data-filename="app/components/sent-message/avatar.hbs"}
-<Avatar @title="Zoey's avatar" @initial="Z" />
+<Avatar @title="Avatar de Zoey" @initial="Z" />
 ```
 
-We're really, really close.
+Nous y sommes presque.
 
 ```handlebars {data-filename="output" data-diff="-1,+2"}
 <aside class="current-user">
 <aside>
-  <div class="avatar" title="Zoey's avatar">Z</div>
+  <div class="avatar" title="Avatar de Zoey">Z</div>
 </aside>
 ```
 
-We're just missing the `current-user` class on the HTML `<aside>` element. To
-make that work, we'll specify the HTML attribute `class` on the `<Avatar>` tag.
+Il nous manque juste la classe `current-user` sur l'élément HTML `<aside>`. Pour l'ajouter, nous allons spécifier l'attribut HTML `class` sur la balise `<Avatar>`.
 
 ```handlebars {data-filename="app/components/sent-message/avatar.hbs"}
 <Avatar
-  @title="Zoey's avatar"
+  @title="Avatar de Zoey"
   @initial="Z"
   class="current-user"
 />
 ```
 
-The avatar component also needs to specify where to put attributes that were
-specified on the tag.
+Le composant `avatar` doit également spécifier où placer les attributs qui ont été passés à la balise.
 
 ```handlebars {data-filename="app/components/avatar.hbs"}
 <aside ...attributes>
@@ -113,32 +95,21 @@ specified on the tag.
 </aside>
 ```
 
-The `...attributes` syntax determines where the attributes from a tag should
-appear in the component's template. Any number of attributes can be specified on
-the avatar component now, and they will all end up on the element that has
-`...attributes`.
+La syntaxe `...attributes` détermine où les attributs d'une balise doivent apparaître dans le _template_ du composant. N'importe quel nombre d'attributs peuvent désormais être spécifiés sur composant `avatar`, et ils se retrouveront tous sur l'élément qui a la syntaxe `...attributes`.
 
 <div class="cta">
   <div class="cta-note">
     <div class="cta-note-body">
-      <div class="cta-note-heading">Zoey says...</div>
+      <div class="cta-note-heading">Zoey dit...</div>
       <div class="cta-note-message">
         <p>
-          In general, you should place <code>...attributes</code> after any attributes you
-          specify to give people using your component an opportunity to override your attribute.
-          If <code>...attributes</code> appears <em>after</em> an attribute,
-          it overrides that attribute. If it appears <em>before</em> an attribute, it
-          does not.</p>
-        <p>
-          Place <code>...attributes</code>
-          <strong>before</strong> your attributes only if you want to disallow tags from
-          overriding your attributes. This is likely to be unusual.
+          En général, vous devriez placer <code>...attributes</code> après tout attribut que vous spécifiez vous-mêmes afin de laisser à vos utilisateurs la possibilité de le surcharger. En effet, si <code>...attributes</code> apparaît "après" un attribut, alors il surchargera cet attribut&nbsp;; s'il apparaît "avant", ce ne sera pas le cas.
         </p>
         <p>
-          In addition, the <code>class</code> attribute is special, and will be
-          <em>merged</em> with any existing classes on the element rather than
-          overwriting them. This allows you to progressively add CSS classes to
-          your components, and makes them more flexible overall.
+          Placez <code>...attributes</code> "avant" vos propres attributs seulement si vous ne souhaitez pas autoriser la balise à les surcharger. C'est plutôt inhabituel.
+        </p>
+        <p>
+          De plus, l'attribut <code>class</code> est particulier en cela qu'il est "fusionné" avec toutes les classes existantes sur l'élément, plutôt que de les surcharger. Ça permet d'ajouter progressivement plus de classes CSS à vos composants et de les rendre globalement plus flexibles.
         </p>
       </div>
     </div>
