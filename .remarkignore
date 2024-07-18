@@ -23,6 +23,7 @@ guides/**/*.md
 !guides/applications/run-loop.md
 !guides/code-editors/index.md
 !guides/components/block-content.md
+!guides/components/component-arguments-and-html-attributes.md
 !guides/components/built-in-components.md
 !guides/components/looping-through-lists.md
 !guides/configuring-ember/build-targets.md
