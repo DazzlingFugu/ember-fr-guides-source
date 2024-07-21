@@ -299,7 +299,7 @@ Hé, tous les tests sont passés&nbsp;! Est-ce que ça signifie pour autant que 
 <article class="rental">
   <Rental::Image
     src="https://upload.wikimedia.org/wikipedia/commons/c/cb/Crane_estate_(5).jpg"
-    alt="A picture of Le Manoir Ancien"
+    alt="Photo de la propriété Le Manoir Ancien"
   />
   <div class="details">
     <h3>Le Manoir Ancien</h3>
@@ -307,7 +307,7 @@ Hé, tous les tests sont passés&nbsp;! Est-ce que ça signifie pour autant que 
       <span>Propriétaire :</span> Veruca Salt
     </div>
     <div class="detail type">
-      <span>Type:</span> Standalone
+      <span>Type :</span> Propriété indépendante
     </div>
     <div class="detail location">
       <span>Adresse :</span> San Francisco
@@ -322,7 +322,7 @@ Hé, tous les tests sont passés&nbsp;! Est-ce que ça signifie pour autant que 
     @zoom="9"
     @width="150"
     @height="150"
-    alt="A map of Le Manoir Ancien"
+    alt="Carte de la propriété Le Manoir Ancien"
   />
 </article>
 ```
