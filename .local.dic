@@ -375,7 +375,6 @@ reader/nombrable
 readme
 README
 readonly
-release/nombrable
 recognizers
 record/nombrable
 Redux
@@ -385,6 +384,7 @@ refresh
 registry
 relationship/nombrable
 relayout
+release/nombrable
 reload
 renderer
 rendering
