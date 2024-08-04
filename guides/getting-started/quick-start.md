@@ -30,7 +30,7 @@ ember new ember-quickstart --lang en
 Cette commande crée un nouveau dossier appelé `ember-quickstart` et prépare une nouvelle application Ember à l'intérieur. L'option `--lang en` définit l'anglais comme langue principale afin d'améliorer dès le départ l'[accessibilité](../../accessibility/application-considerations/). Telle quelle, l'application fraîchement créée inclut&nbsp;:
 
 - Un serveur de développement
-- Un compilateur de templates
+- Un compilateur de <span lang="en">_templates_</span>
 - La minification des fichiers JavaScript et CSS
 - Les fonctionnalités modernes via Babel
 
@@ -69,9 +69,9 @@ Vous devriez voir une page de bienvenue Ember, et rien d'autre.
 
 Félicitations&nbsp;! Vous venez de créer et lancer votre première app Ember.
 
-## Écrire du HTML dans un template
+## Écrire du HTML dans un <span lang="en">_template_</span>
 
-Nous commencerons par éditer le template de l'`application`. Ce template est toujours celui affiché à l'écran quand un utilisateur charge votre application. Dans votre éditeur, ouvrez `app/templates/application.hbs` et changez le contenu comme suit&nbsp;:
+Nous commencerons par éditer le template de l'`application`. Ce <span lang="en">_template_</span> est toujours celui affiché à l'écran quand un utilisateur charge votre application. Dans votre éditeur, ouvrez `app/templates/application.hbs` et changez le contenu comme suit&nbsp;:
 
 ```handlebars {data-filename=app/templates/application.hbs}
 <h1>Registre de noms</h1>
@@ -85,7 +85,7 @@ Ember détecte automatiquement que le fichier a changé et recharge la page pour
 
 Construisons une application qui affiche une liste de scientifiques. Pour cela, la première étape est de créer une route. Dans un premier temps, imaginez les routes comme étant les différentes pages de votre application.
 
-Ember inclut des _generators_ (générateurs) qui automatisent l'écriture des morceaux de code les plus courants. Pour générer une route, tapez ceci dans une nouvelle fenêtre de votre terminal, toujours depuis le répertoire `ember-quickstart`&nbsp;:
+Ember inclut des <span lang="en">_generators_</span> (générateurs) qui automatisent l'écriture des morceaux de code les plus courants. Pour générer une route, tapez ceci dans une nouvelle fenêtre de votre terminal, toujours depuis le répertoire `ember-quickstart`&nbsp;:
 
 ```bash
 ember generate route scientists
@@ -105,23 +105,23 @@ installing route-test
 
 Ember vous indique les fichiers qu'il a créé pour vous&nbsp;:
 
-1. Un template à afficher quand l'utilisateur visite `/scientists`.
-2. Un objet `Route` qui récupère le modèle utilisé par ce template.
+1. Un <span lang="en">_template_</span> à afficher quand l'utilisateur visite `/scientists`.
+2. Un objet `Route` qui récupère le modèle utilisé par ce <span lang="en">_template_</span>.
 3. Une entrée dans le routeur de l'application (situé dans `app/router.js`).
 4. Un test unitaire pour cette route.
 
-Ouvrez le template fraîchement créé dans `app/templates/scientists.hbs` et ajoutez le contenu HTML suivant&nbsp;:
+Ouvrez le <span lang="en">_template_</span> fraîchement créé dans `app/templates/scientists.hbs` et ajoutez le contenu HTML suivant&nbsp;:
 
 ```handlebars {data-filename=app/templates/scientists.hbs}
 {{page-title "Scientifiques"}}
 <h2>Liste de Scientifiques</h2>
 ```
 
-Dans votre navigateur, ouvrez [`http://localhost:4200/scientists`](http://localhost:4200/scientists). Vous devriez voir le `<h2>` que nous avons écrit dans `scientists.hbs`, juste en dessous du `<h1>` provenant du template `application.hbs`.
+Dans votre navigateur, ouvrez [`http://localhost:4200/scientists`](http://localhost:4200/scientists). Vous devriez voir le `<h2>` que nous avons écrit dans `scientists.hbs`, juste en dessous du `<h1>` provenant du <span lang="en">_template_</span> `application.hbs`.
 
-Puisque la route "scientist" est imbriquée dans la route de l'application, Ember affiche son contenu à l'intérieur de la directive `{{outlet}}` du template de l'application.
+Puisque la route "scientist" est imbriquée dans la route de l'application, Ember affiche son contenu à l'intérieur de la directive `{{outlet}}` du <span lang="en">_template_</span> de l'application.
 
-Maintenant que le rendu du template `scientists` est prêt, fournissons-lui quelques données à afficher. Pour cela, nous allons spécifier un _model_ (modèle) pour cette route en éditant `app/routes/scientists.js`.
+Maintenant que le rendu du <span lang="en">_template_</span> `scientists` est prêt, fournissons-lui quelques données à afficher. Pour cela, nous allons spécifier un <span lang="en">_model_</span> (modèle) pour cette route en éditant `app/routes/scientists.js`.
 
 Partons du code créé pour nous par le générateur et ajoutons une méthode `model()` à la `Route`&nbsp;:
 
@@ -139,7 +139,7 @@ Cet exemple de code utilise une fonctionnalité de JavaScript appelée les class
 
 La méthode `model()` d'une route vous permet de retourner n'importe quelles données que vous souhaitez rendre accessible au template. Si vous devez récupérer des données de manière asynchrone, la méthode `model()` supporte n'importe quelle librairie basée sur les [Promises (promesses) JavaScript](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Promise).
 
-À présent, indiquons à Ember comment transformer ce tableau de `string` en HTML. Ouvrez le template `scientists` et ajoutez le code suivant pour itérer sur le tableau et l'afficher&nbsp;:
+À présent, indiquons à Ember comment transformer ce tableau de `string` en HTML. Ouvrez le <span lang="en">_template_</span> `scientists` et ajoutez le code suivant pour itérer sur le tableau et l'afficher&nbsp;:
 
 ```handlebars {data-filename="app/templates/scientists.hbs"}
 <h2>Liste de Scientifiques</h2>
@@ -151,16 +151,16 @@ La méthode `model()` d'une route vous permet de retourner n'importe quelles don
 </ul>
 ```
 
-Ici, nous utilisons le _helper_ `each` pour itérer sur chaque élément transmis par le _hook_ `model()` (Le terme _hook_ désigne une fonction "prévue par le framework"&nbsp;: parce que la méthode `model()` se trouve dans un fichier spécifique et porte un nom spécifique, Ember sait où la trouver et exécute le code que vous y avez écrit à un moment précis.)
+Ici, nous utilisons le <span lang="en">_helper_</span> `each` pour itérer sur chaque élément transmis par le <span lang="en">_hook_</span> `model()` (Le terme <span lang="en">_hook_</span> désigne une fonction "prévue par le framework"&nbsp;: parce que la méthode `model()` se trouve dans un fichier spécifique et porte un nom spécifique, Ember sait où la trouver et exécute le code que vous y avez écrit à un moment précis.)
 
-Ember affiche le bloc contenu à l'intérieur du _helper_ `{{#each}}...{{/each}}` pour chaque élément (dans notre cas, chaque scientifique) du tableau. L'élément (le scientifique) en cours de traitement est rendu disponible dans une variable `scientist`, notée `as |scientist|` dans le _helper_ `each`.
+Ember affiche le bloc contenu à l'intérieur du <span lang="en">_helper_</span> `{{#each}}...{{/each}}` pour chaque élément (dans notre cas, chaque scientifique) du tableau. L'élément (le scientifique) en cours de traitement est rendu disponible dans une variable `scientist`, notée `as |scientist|` dans le <span lang="en">_helper_</span> `each`.
 
 Le résultat final consiste en une balise `<li>` par scientifique du tableau à l'intérieur de la balise `<ul>` (pour _unordered list_, liste non ordonnée).
 
 ## Écrire un composant d'UI
 
 <!-- spell ignore -->
-À mesure que votre application grandit, vous constaterez que vous partagez certains éléments d'UI entre plusieurs pages, ou bien que vous utiliserez les mêmes plusieurs fois dans la même page. Ember vous permet d'améliorer facilement vos templates en en faisant des composants réutilisables.
+À mesure que votre application grandit, vous constaterez que vous partagez certains éléments d'UI entre plusieurs pages, ou bien que vous utiliserez les mêmes plusieurs fois dans la même page. Ember vous permet d'améliorer facilement vos <span lang="en">_templates_</span> en en faisant des composants réutilisables.
 
 Créons un composant `<PeopleList>` que nous pouvons utiliser à de multiples endroits pour afficher une liste de personnes.
 
@@ -170,7 +170,7 @@ Comme toujours, un générateur nous rend la tâche facile. Créez un nouveau co
 ember generate component people-list
 ```
 
-Copiez-collez le contenu du template `scientists` dans celui de `<PeopleList>`, puis éditez-le comme suit&nbsp;:
+Copiez-collez le contenu du <span lang="en">_template_</span> `scientists` dans celui de `<PeopleList>`, puis éditez-le comme suit&nbsp;:
 
 ```handlebars {data-filename=app/components/people-list.hbs}
 <h2>{{@title}}</h2>
@@ -202,7 +202,7 @@ Notre composant s'appelle `<PeopleList>`, ce nom est basé sur le nom du fichier
   </div>
 </div>
 
-Sauvegardez ce template et retournez sur le template `scientists`.
+Sauvegardez ce <span lang="en">_template_</span> et retournez sur le <span lang="en">_template_</span> `scientists`.
 
 Nous allons indiquer à notre composant&nbsp;:
 
@@ -250,9 +250,9 @@ D'abord, modifions le composant `<PeopleList>` pour inclure un bouton&nbsp;:
 
 Maintenant que nous avons un bouton, nous devons le brancher pour "faire quelque chose" quand un utilisateur clique dessus. Pour rester simple, admettons que, au moment du clic, nous voulons afficher un message d'alerte contenant le nom de la personne.
 
-Jusque-là, notre composant `<PeopleList>` est purement présentationnel, il prend des arguments en entrée et les affiche à l'aide d'un template. Pour donner un comportement à notre composant – ici, gérer le clic – nous devons "attacher du code" au composant.
+Jusque-là, notre composant `<PeopleList>` est purement présentationnel, il prend des arguments en entrée et les affiche à l'aide d'un <span lang="en">_template_</span>. Pour donner un comportement à notre composant – ici, gérer le clic – nous devons "attacher du code" au composant.
 
-Pour cela, en plus du template, un composant peut aussi avoir un fichier JavaScript. Créez un fichier `.js` avec le même nom et dans le même dossier que le template (`app/components/people-list.js`), et collez le contenu suivant&nbsp;:
+Pour cela, en plus du <span lang="en">_template_</span>, un composant peut aussi avoir un fichier JavaScript. Créez un fichier `.js` avec le même nom et dans le même dossier que le <span lang="en">_template_</span> (`app/components/people-list.js`), et collez le contenu suivant&nbsp;:
 
 ```javascript {data-filename="app/components/people-list.js"}
 import Component from "@glimmer/component";
@@ -268,9 +268,9 @@ export default class PeopleListComponent extends Component {
 
 _Note: Si vous voulez que ce fichier soit généré pour vous, vous pouvez passer l'option `-gc` quand vous lancez le générateur de composant._
 
-Ici, nous avons créé une classe de composant basique et ajouté une méthode qui accepte une personne en argument et affiche une boîte de dialogue avec son nom. Le _decorator_ (décorateur) `@action` indique que nous souhaitons utiliser cette méthode en tant qu'"action" dans notre template, en réponse à une interaction utilisateur.
+Ici, nous avons créé une classe de composant basique et ajouté une méthode qui accepte une personne en argument et affiche une boîte de dialogue avec son nom. Le <span lang="en">_decorator_</span> (décorateur) `@action` indique que nous souhaitons utiliser cette méthode en tant qu'"action" dans notre <span lang="en">_template_</span>, en réponse à une interaction utilisateur.
 
-Le comportement implémenté, nous pouvons retourner sur le template du composant et le mettre à jour&nbsp;:
+Le comportement implémenté, nous pouvons retourner sur le <span lang="en">_template_</span> du composant et le mettre à jour&nbsp;:
 
 ```handlebars {data-filename="app/components/people-list.hbs" data-diff="-6,+7"}
 <h2>{{@title}}</h2>
@@ -285,12 +285,12 @@ Le comportement implémenté, nous pouvons retourner sur le template du composan
 </ul>
 ```
 
-Ici, nous utilisons le _modifier_ `on` pour attacher l'action `this.showPerson` au bouton qui se trouve dans le template.
+Ici, nous utilisons le _modifier_ `on` pour attacher l'action `this.showPerson` au bouton qui se trouve dans le <span lang="en">_template_</span>.
 
 <!-- spell ignore -->
-Cependant, nous avons un problème. Si vous essayez dans le navigateur, vous vous apercevrez que cliquer sur les boutons affiche une boîte de dialogue annonçant "Le nom de cette personne est `[Object MouseEvent]`!" – eek&nbsp;!
+Cependant, nous avons un problème. Si vous essayez dans le navigateur, vous vous apercevrez que cliquer sur les boutons affiche une boîte de dialogue annonçant "Le nom de cette personne est `[Object MouseEvent]`!", eek&nbsp;!
 
-La cause de ce bug est que l'action que nous avons écrite prend un argument – le nom de la personne – et nous avons oublié de le passer. Fixer ça est assez simple&nbsp;:
+La cause de ce bug est que l'action que nous avons écrite prend un argument (le nom de la personne), et nous avons oublié de le passer. Fixer ça est assez simple&nbsp;:
 
 ```handlebars {data-filename="app/components/people-list.hbs" data-diff="-6,+7"}
 <h2>{{@title}}</h2>
@@ -308,7 +308,7 @@ La cause de ce bug est que l'action que nous avons écrite prend un argument –
 </ul>
 ```
 
-Au lieu de passer l'action directement au _modifier_ `on`, nous utilisons le _helper_ `fn` pour passer `person` en tant qu'argument attendu par l'action.
+Au lieu de passer l'action directement au _modifier_ `on`, nous utilisons le <span lang="en">_helper_</span> `fn` pour passer `person` en tant qu'argument attendu par l'action.
 
 Essayez dans votre navigateur. Cette fois, tout devrait se comporter comme espéré&nbsp;!
 
@@ -322,7 +322,7 @@ Pour cela, lancez la commande suivante&nbsp;:
 ember build --environment=production
 ```
 
-La commande `build` empaquette tous les fichiers qui constituent votre application &mdash; JavaScript, templates, CSS, polices web, images, etc... &mdash; Dans le Guide, nous appellerons le résultat de cette commande le "build" et emploierons l'anglicisme "builder" en tant que verbe d'action pour cette opération.
+La commande `build` empaquette tous les fichiers qui constituent votre application &mdash; JavaScript, <span lang="en">_templates_</span>, CSS, polices web, images, etc... &mdash; Dans le Guide, nous appellerons le résultat de cette commande le "build" et emploierons l'anglicisme "builder" en tant que verbe d'action pour cette opération.
 
 Ici, nous avons dit à Ember de builder l'application pour l'environnement de production via l'option `--environment`. On obtient ainsi un paquet optimisé et prêt à être téléversé sur votre serveur web. Une fois le build terminé, vous trouverez tous les fichiers concaténés et minifiés dans le dossier `dist/` de votre application.
 

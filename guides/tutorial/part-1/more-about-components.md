@@ -11,7 +11,7 @@ Lors de la construction de cette liste de propriétés à louer, vous en apprend
 
 ## Générer des composants
 
-Commençons par créer le composant `<Rental>`. Cette fois, nous utiliserons le générateur de composant pour créer le _template_ et le fichier de test pour nous&nbsp;:
+Commençons par créer le composant `<Rental>`. Cette fois, nous utiliserons le générateur de composant pour créer le <span lang="en">_template_</span> et le fichier de test pour nous&nbsp;:
 
 ```shell
 $ ember generate component rental
@@ -23,9 +23,9 @@ installing component-test
   create tests/integration/components/rental-test.js
 ```
 
-Le générateur crée deux nouveaux fichiers pour nous, un _template_ de composant `app/components/rental.hbs`, et un fichier de test de composant `tests/integration/components/rental-test.js`.
+Le générateur crée deux nouveaux fichiers pour nous, un <span lang="en">_template_</span> de composant `app/components/rental.hbs`, et un fichier de test de composant `tests/integration/components/rental-test.js`.
 
-Commençons par éditer le _template_. Dans un premier temps, écrivons en dur (_[hard-code](https://en.wikipedia.org/wiki/Hard_coding)_) les détails d'une propriété à louer, et nous les remplacerons plus tard par les vraies données venant du serveur.  
+Commençons par éditer le <span lang="en">_template_</span>. Dans un premier temps, écrivons en dur (_[hard-code](https://en.wikipedia.org/wiki/Hard_coding)_) les détails d'une propriété à louer, et nous les remplacerons plus tard par les vraies données venant du serveur.  
 
 ```handlebars { data-filename="app/components/rental.hbs" data-diff="-1,+2,+3,+4,+5,+6,+7,+8,+9,+10,+11,+12,+13,+14,+15,+16,+17,+18" }
 {{yield}}
@@ -90,7 +90,7 @@ Le test devrait passer.
 
 <img src="/images/tutorial/part-1/more-about-components/pass@2x.png" alt="Les tests passent avec le nouveau test &lt;Rental&gt;" width="1024" height="512" />
 
-Enfin, invoquons le composant une paire de fois dans notre _template_ d'index pour alimenter la page.
+Enfin, invoquons le composant une paire de fois dans notre <span lang="en">_template_</span> d'index pour alimenter la page.
 
 ```js { data-filename="app/templates/index.hbs" data-diff="+6,+7,+8,+9,+10,+11,+12,+13" }
 <Jumbo>
