@@ -1,64 +1,56 @@
-Oftentimes we'll need to repeat a component multiple times in a row, with
-different data for each usage of the component. We can use the
-[`{{#each}}`](https://api.emberjs.com/ember/release/classes/Ember.Templates.helpers/methods/each?anchor=each)
-helper to loop through lists of items like this, repeating a section of template
-for each item in the list.
+Souvent, on a besoin de répéter un même composant de multiples fois, l'un à la suite de l'autre, avec des données différentes pour chaque invocation. Pour boucler ainsi sur les éléments d'une liste, on peut utiliser le _helper_ [`{{#each}}`](https://api.emberjs.com/ember/release/classes/Ember.Templates.helpers/methods/each?anchor=each), et répéter une section de _template_ pour chaque élément.
 
-For instance, in a messaging app, we could have a `<Message>` component that we
-repeat for each message that the users have sent to each other.
+Par exemple, dans une app de messagerie, nous pourrions avoir un composant `<Message>` que nous répéterions pour chaque message que les utilisateurs se sont envoyés.
 
 ```handlebars {data-filename="app/components/messages.hbs"}
 <div class="messages">
   <Message
     @username="Tomster"
     @userIsActive={{true}}
-    @userLocalTime="4:56pm"
+    @userLocalTime="16:56"
   >
     <p>
-      Hey Zoey, have you had a chance to look at the EmberConf
-      brainstorming doc I sent you?
+      Hey Zoey, as-tu eu l'occasion de regarder le document
+      de brainstorming pour l'EmberConf que je t'ai envoyé ?
     </p>
   </Message>
   <Message
     @username="Zoey"
     @userIsActive={{true}}
   >
-    <p>Hey!</p>
+    <p>Hey !</p>
 
     <p>
-      I love the ideas! I'm really excited about where this year's
-      EmberConf is going, I'm sure it's going to be the best one yet.
-      Some quick notes:
+      J'adore les idées ! Je suis vraiment enthousiaste de voir la 
+      direction que prend l'EmberConf cette année, je suis sûre que ce 
+      sera la meilleure de toutes.
+      Quelques notes rapides :
     </p>
 
     <ul>
       <li>
-        Definitely agree that we should double the coffee budget this
-        year (it really is impressive how much we go through!)
+        Tout à fait d'accord sur le fait qu'on devrait doubler le budget 
+        café cette année (c'est vraiment impressionnant tout ce qu'on 
+        boit !)
       </li>
       <li>
-        A blimp would definitely make the venue very easy to find, but
-        I think it might be a bit out of our budget. Maybe we could
-        rent some spotlights instead?
+        Un dirigeable rendrait certainement le lieu très facile à trouver, 
+        mais je pense que c'est peut-être un peu hors budget. On 
+        pourrait peut-être louer des projecteurs à la place ?
       </li>
       <li>
-        We absolutely will need more hamster wheels, last year's line
-        was <em>way</em> too long. Will get on that now before rental
-        season hits its peak.
+        On a absolument besoin de plus de roues pour hamster, l'année dernière la file d'attente était <em>beaucoup</em> trop longue. Je vais m'occuper de ça maintenant, avant que la saison des locations soit à son pic.
       </li>
     </ul>
 
-    <p>Let me know when you've nailed down the dates!</p>
+    <p>Dis-moi quand tu auras fixé les dates !</p>
   </Message>
 
   <NewMessageInput />
 </div>
 ```
 
-First, we would add a component class and extract the parts of each `<Message>`
-component that are different into an array on that class. We would extract the
-username, active value, local time, and the yielded content for each message.
-For the yielded content, since it's plain HTML, we can extract it as a string.
+D'abord, nous pourrions créer une classe de composant et, dans un tableau, y extraire les parties différentes de chaque composant `<Message>`. On extrairait le `username`, `userIsActive`, `userLocalTime` et le contenu du bloc pour chaque message. Pour le contenu du bloc, puisque c'est du HTML pur et simple, nous pouvons l'extraire en tant que chaîne de caractères.
 
 ```js {data-filename="app/components/messages.js"}
 import Component from '@glimmer/component';
@@ -70,11 +62,11 @@ export default class MessagesComponent extends Component {
     {
       username: 'Tomster',
       active: true,
-      localTime: '4:56pm',
+      localTime: '16:56',
       content: `
         <p>
-          Hey Zoey, have you had a chance to look at the EmberConf
-          brainstorming doc I sent you?
+          Hey Zoey, as-tu eu l'occasion de regarder le document
+          de brainstorming pour l'EmberConf que je t'ai envoyé ?
         </p>
       `
     },
@@ -82,41 +74,39 @@ export default class MessagesComponent extends Component {
       username: 'Zoey',
       active: true,
       content: `
-        <p>Hey!</p>
+        <p>Hey !</p>
 
         <p>
-          I love the ideas! I'm really excited about where this year's
-          EmberConf is going, I'm sure it's going to be the best one yet.
-          Some quick notes:
+          J'adore les idées ! Je suis vraiment enthousiaste de voir la 
+          direction que prend l'EmberConf cette année, je suis sûre que ce 
+          sera la meilleure de toutes.
+          Quelques notes rapides :
         </p>
 
         <ul>
           <li>
-            Definitely agree that we should double the coffee budget this
-            year (it really is impressive how much we go through!)
+            Tout à fait d'accord sur le fait qu'on devrait doubler le budget 
+            café cette année (c'est vraiment impressionnant tout ce qu'on 
+            boit !)
           </li>
           <li>
-            A blimp would definitely make the venue very easy to find, but
-            I think it might be a bit out of our budget. Maybe we could
-            rent some spotlights instead?
+            Un dirigeable rendrait certainement le lieu très facile à trouver, 
+            mais je pense que c'est peut-être un peu hors budget. On 
+            pourrait peut-être louer des projecteurs à la place ?
           </li>
           <li>
-            We absolutely will need more hamster wheels, last year's line
-            was <em>way</em> too long. Will get on that now before rental
-            season hits its peak.
+            On a absolument besoin de plus de roues pour hamster, l'année dernière la file d'attente était <em>beaucoup</em> trop longue. Je vais m'occuper de ça maintenant, avant que la saison des locations soit à son pic.
           </li>
         </ul>
 
-        <p>Let me know when you've nailed down the dates!</p>
+        <p>Dis-moi quand tu auras fixé les dates !</p>
       `
     }
   ];
 }
 ```
 
-Then, we can add an `{{each}}` helper to the template by passing
-`this.messages` to it. `{{each}}` will receive each message as its first block
-param, and we can use that item in the template block for the loop.
+Ensuite, nous ajoutons le _helper_ `{{each}}` au _template_ et lui passons `this.messages`. `{{each}}` reçoit chaque message en tant que premier paramètre de bloc, et nous pouvons alors utiliser cet élément dans le _template_ du bloc pour la boucle.
 
 ```handlebars {data-filename="app/components/messages.hbs" data-diff="+2,+3,+4,+5,+6,+7,+8,+9,+10,-11,-12,-13,-14,-15,-16,-17,-18,-19,-20,-21,-22,-23,-24,-25,-26,-27,-28,-29,-30,-31,-32,-33,-34,-35,-36,-37,-38,-39,-40,-41,-42,-43,-44,-45,-46,-47,-48,-49,-50,-51"}
 <div class="messages">
@@ -132,69 +122,61 @@ param, and we can use that item in the template block for the loop.
   <Message
     @username="Tomster"
     @userIsActive={{true}}
-    @userLocalTime="4:56pm"
+    @userLocalTime="16:56"
   >
     <p>
-      Hey Zoey, have you had a chance to look at the EmberConf
-      brainstorming doc I sent you?
+      Hey Zoey, as-tu eu l'occasion de regarder le document
+      de brainstorming pour l'EmberConf que je t'ai envoyé ?
     </p>
   </Message>
   <Message
     @username="Zoey"
     @userIsActive={{true}}
   >
-    <p>Hey!</p>
+    <p>Hey !</p>
 
     <p>
-      I love the ideas! I'm really excited about where this year's
-      EmberConf is going, I'm sure it's going to be the best one yet.
-      Some quick notes:
+      J'adore les idées ! Je suis vraiment enthousiaste de voir la 
+      direction que prend l'EmberConf cette année, je suis sûre que ce 
+      sera la meilleure de toutes.
+      Quelques notes rapides :
     </p>
 
     <ul>
       <li>
-        Definitely agree that we should double the coffee budget this
-        year (it really is impressive how much we go through!)
+        Tout à fait d'accord sur le fait qu'on devrait doubler le budget 
+        café cette année (c'est vraiment impressionnant tout ce qu'on 
+        boit !)
       </li>
       <li>
-        A blimp would definitely make the venue very easy to find, but
-        I think it might be a bit out of our budget. Maybe we could
-        rent some spotlights instead?
+        Un dirigeable rendrait certainement le lieu très facile à trouver, 
+        mais je pense que c'est peut-être un peu hors budget. On 
+        pourrait peut-être louer des projecteurs à la place ?
       </li>
       <li>
-        We absolutely will need more hamster wheels, last year's line
-        was <em>way</em> too long. Will get on that now before rental
-        season hits its peak.
+        On a absolument besoin de plus de roues pour hamster, l'année dernière la file d'attente était <em>beaucoup</em> trop longue. Je vais m'occuper de ça maintenant, avant que la saison des locations soit à son pic.
       </li>
     </ul>
 
-    <p>Let me know when you've nailed down the dates!</p>
+    <p>Dis-moi quand tu auras fixé les dates !</p>
   </Message>
 
   <NewMessageInput />
 </div>
 ```
 
-Notice that we used triple curly brackets around `{{{message.content}}}`. This
-is how Ember knows to insert the content directly as HTML, rather than directly
-as a string.
+Notez que nous utilisons des accolades triples autour de `{{{message.content}}}`. C'est comme ça qu'Ember sait qu'il faut insérer directement du contenu HTML, plutôt qu'une chaîne de caractères.
 
 <div class="cta">
   <div class="cta-note">
     <div class="cta-note-body">
-      <div class="cta-note-heading">Zoey says...</div>
+      <div class="cta-note-heading">Zoey dit...</div>
       <div class="cta-note-message">
         <p>
-        Triple curly brackets are a convenient way to put dynamic HTML into Ember templates,
-        but are not recommended for production apps.
-        Inserting unknown HTML can create unexpected results and security issues.
-        Be sure to sanitize the HTML before you render it.
+        Les accolades triples sont un moyen pratique d'insérer dynamiquement du HTML dans les _templates_ Ember, mais il n'est pas recommandé de le faire pour les apps en production. Insérer du HTML inconnu peut créer des résultats inattendus et des failles de sécurité. Assurez-vous d'assainir (<em>sanitize</em>) le HTML avant de l'afficher.
         </p>
         <p>
-        We can use the <a href="https://api.emberjs.com/ember/release/functions/@ember%2Ftemplate/htmlSafe">htmlSafe</a>
-        function to mark a sanitized HTML as safe, then use double curly brackets to render the HTML.
-        We can also create a <a href="../helper-functions">helper</a> that sanitizes the HTML, marks it as safe,
-        and returns the output.
+        Il est possible d'utiliser la fonction <a href="https://api.emberjs.com/ember/release/functions/@ember%2Ftemplate/htmlSafe">htmlSafe</a> pour marquer un HTML assaini en tant que HTML sûr (<em>safe</em>), puis d'utiliser des accolades doubles pour afficher le HTML. On peut également créer un <a href="../helper-functions"><em>helper</em></a> qui assaini le HTML, le marque comme sûr puis retourne le résultat.
         </p>
       </div>
     </div>
@@ -202,11 +184,9 @@ as a string.
   </div>
 </div>
 
-### Updating Lists
+### Mettre à jour une liste
 
-Next, let's add a way for the user to send a new message. First, we need to
-add an action for creating the new message. We'll add this to the
-`<NewMessageInput />` component:
+Ensuite, ajoutons un moyen pour les utilisateurs d'envoyer un nouveau message. D'abord, il nous faut une action pour créer le nouveau message. Nous l'ajouterons au composant `<NewMessageInput />`&nbsp;:
 
 ```handlebars {data-filename="app/components/new-message-input.hbs" data-diff="-1,+2,-3,+4"}
 <form>
@@ -214,16 +194,12 @@ add an action for creating the new message. We'll add this to the
   <input>
   <Input @value={{this.message}}>
   <button type="submit">
-    Send
+    Envoyer
   </button>
 </form>
 ```
 
-We're using the `submit` event on the form itself here rather than adding a
-`click` event handler to the button since it is about submitting the form as a
-whole. We also updated the `input` tag to instead use the built in `<Input>`
-component, which automatically updates the value we pass to `@value`. Next,
-let's add the component class:
+Nous utilisons l'événement `submit` sur le formulaire lui-même plutôt que d'ajouter un gestionnaire d'événement `click` au bouton, car il s'agit de soumettre le formulaire en entier. Nous avons aussi changé la balise `input` pour lui préférer le composant intégré `<Input>`, qui met à jour la valeur passée à `@value` automatiquement. Ensuite, créons la classe de composant&nbsp;:
 
 ```javascript {data-filename="app/components/new-message-input.js"}
 import Component from '@glimmer/component';
@@ -240,19 +216,16 @@ export default class NewMessageInputComponent extends Component {
     if (this.message && this.args.onCreate) {
       this.args.onCreate(this.message);
 
-      // reset the message input
+      // réinitialise le message saisi
       this.message = '';
     }
   }
 }
 ```
 
-This action uses the `onCreate` argument to expose a public API for defining
-what happens when a message is created. This way, the `<NewMessageInput>`
-component doesn't have to worry about the external details - it can focus on
-getting the new message input.
+Cette action utilise l'argument `onCreate` pour exposer une API publique permettant de définir ce qui se passe quand un message est créé. De cette façon, le composant `<NewMessageInput>` n'a pas à se soucier du contexte extérieur, il peut se concentrer sur son seul travail, obtenir le nouveau message saisi.
 
-Next, we'll update the parent component to use this new argument.
+À présent, mettons à jour le composant parent pour passer ce nouvel argument.
 
 ```handlebars {data-filename="app/components/messages.hbs" data-diff="-12,+13"}
 <div class="messages">
@@ -271,9 +244,7 @@ Next, we'll update the parent component to use this new argument.
 </div>
 ```
 
-And in the component class, we'll add the `addMessage` action. This action will
-create the new message from the text that the `<NewMessageInput>` component
-gives us, and push it into the messages array.
+Puis dans la classe de composant, ajoutons l'action `addMessage`. Cette action va créer le nouveau message à partir du texte que le `<NewMessageInput>` nous donne, avant de le pousser dans le tableau de messages.
 
 ```js {data-filename="app/components/messages.js"}
 import Component from '@glimmer/component';
@@ -296,11 +267,11 @@ export default class MessagesComponent extends Component {
     {
       username: 'Tomster',
       active: true,
-      localTime: '4:56pm',
+      localTime: '16:56',
       content: `
         <p>
-          Hey Zoey, have you had a chance to look at the EmberConf
-          brainstorming doc I sent you?
+          Hey Zoey, as-tu eu l'occasion de regarder le document
+          de brainstorming pour l'EmberConf que je t'ai envoyé ?
         </p>
       `
     },
@@ -308,46 +279,45 @@ export default class MessagesComponent extends Component {
       username: 'Zoey',
       active: true,
       content: `
-        <p>Hey!</p>
+        <p>Hey !</p>
 
         <p>
-          I love the ideas! I'm really excited about where this year's
-          EmberConf is going, I'm sure it's going to be the best one yet.
-          Some quick notes:
+          J'adore les idées ! Je suis vraiment enthousiaste de voir la 
+          direction que prend l'EmberConf cette année, je suis sûre que ce 
+          sera la meilleure de toutes.
+          Quelques notes rapides :
         </p>
 
         <ul>
           <li>
-            Definitely agree that we should double the coffee budget this
-            year (it really is impressive how much we go through!)
+            Tout à fait d'accord sur le fait qu'on devrait doubler le budget 
+            café cette année (c'est vraiment impressionnant tout ce qu'on 
+            boit !)
           </li>
           <li>
-            A blimp would definitely make the venue very easy to find, but
-            I think it might be a bit out of our budget. Maybe we could
-            rent some spotlights instead?
+            Un dirigeable rendrait certainement le lieu très facile à trouver, 
+            mais je pense que c'est peut-être un peu hors budget. On 
+            pourrait peut-être louer des projecteurs à la place ?
           </li>
           <li>
-            We absolutely will need more hamster wheels, last year's line
-            was <em>way</em> too long. Will get on that now before rental
-            season hits its peak.
+            On a absolument besoin de plus de roues pour hamster, l'année dernière 
+            la file d'attente était <em>beaucoup</em> trop longue. Je vais m'occuper
+            de ça maintenant, avant que la saison des locations soit à son pic.
           </li>
         </ul>
 
-        <p>Let me know when you've nailed down the dates!</p>
+        <p>Dis-moi quand tu auras fixé les dates !</p>
       `
     }
   ];
 }
 ```
 
-Now, whenever we type a value and submit it in the form, a new message object
-will be added to the array, and the `{{each}}` will update with the new item.
+Maintenant, à chaque fois que nous tapons une valeur et la soumettons via le formulaire, un nouvel objet message est ajouté au tableau, et `{{each}}` met à jour l'affichage avec le nouvel élément.
 
-### Item Indexes
+### Index des éléments
 
-The index of each item in the array is provided as a second block param. This
-can be useful at times if you need the index, for instance if you needed to
-print positions in a queue
+L'index de chaque élément d'un tableau est fourni en tant que second paramètre de bloc. C'est utile lorsque vous avez besoin de l'index, par exemple si vous voulez afficher des positions dans une file d'attente&nbsp;:
 
 ```javascript
 import Component from '@glimmer/component';
@@ -364,39 +334,34 @@ export default class SomeComponent extends Component {
 ```handlebars
 <ul>
   {{#each this.queue as |person index|}}
-    <li>Hello, {{person.name}}! You're number {{index}} in line</li>
+    <li>Bonjour, {{person.name}} ! Vous avez le numéro {{index}} dans la file.</li>
   {{/each}}
 </ul>
 ```
 
-### Empty Lists
+### Listes vides
 
-The [`{{#each}}`](https://api.emberjs.com/ember/release/classes/Ember.Templates.helpers/methods/each?anchor=each)
-helper can also have a corresponding `{{else}}`. The contents of this block will
-render if the array passed to `{{#each}}` is empty:
+Le _helper_ [`{{#each}}`](https://api.emberjs.com/ember/release/classes/Ember.Templates.helpers/methods/each?anchor=each) peut aussi avoir un `{{else}}` correspondant. Le contenu de ce bloc ne s'affiche que si le tableau passé à `{{#each}}` est vide&nbsp;:
 
 ```handlebars
 {{#each this.people as |person|}}
-  Hello, {{person.name}}!
+  Bonjour, {{person.name}} !
 {{else}}
-  Sorry, nobody is here.
+  Désolé, il n'y a personne.
 {{/each}}
 ```
 
-## Looping Through Objects
+## Boucler sur les objets
 
-There are also times when we need to loop through the keys and values of an
-object rather than an array, similar to JavaScript's `for...in` loop. We can use
-the [`{{#each-in}}`](https://api.emberjs.com/ember/release/classes/Ember.Templates.helpers/methods/each-in?anchor=each-in)
-helper to do this:
+Il y a aussi des situations où on a besoin de boucler sur les clés et les valeurs d'un objet plutôt que sur les éléments d'un tableau, à la manière de la boucle `for...in` de JavaScript. Pour faire ça, on peut utiliser le _helper_ [`{{#each-in}}`](https://api.emberjs.com/ember/release/classes/Ember.Templates.helpers/methods/each-in?anchor=each-in)&nbsp;:
 
 ```javascript {data-filename=/app/components/store-categories.js}
 import Component from '@glimmer/component';
 
 export default class StoreCategoriesComponent extends Component {
-  // Set the "categories" property to a JavaScript object
-  // with the category name as the key and the value a list
-  // of products.
+  // On définit la propriété "categories" d'un objet JavaScript
+  // avec le nom de la catégorie en tant que clé et une liste
+  // de produit en tant que valeur.
   categories = {
     'Bourbons': ['Bulleit', 'Four Roses', 'Woodford Reserve'],
     'Ryes': ['WhistlePig', 'High West']
@@ -418,11 +383,9 @@ export default class StoreCategoriesComponent extends Component {
 </ul>
 ```
 
-The template inside of the `{{#each-in}}` block is repeated once for each key in the passed object.
-The first block parameter (`category` in the above example) is the key for this iteration,
-while the second block parameter (`products`) is the actual value of that key.
+Le _template_ à l'intérieur du bloc `{{#each-in}}` est répété une fois pour chaque clé dans l'objet passé. Le premier paramètre de bloc (`category` dans notre exemple) est la clé pour cette itération, tandis que le second paramètre (`products`) est la valeur de cette clé.
 
-The above example will print a list like this:
+L'exemple ci-dessus afficherait la liste comme ceci&nbsp;:
 
 ```html
 <ul>
@@ -442,25 +405,19 @@ The above example will print a list like this:
 </ul>
 ```
 
-### Ordering
+### Ordre
 
-An object's keys will be listed in the same order as the array returned from
-calling `Object.keys` on that object. If you want a different sort order, you
-should use `Object.keys` to get an array, sort that array with the built-in JavaScript
-tools, and use the [`{{#each}}`](https://api.emberjs.com/ember/release/classes/Ember.Templates.helpers/methods/each?anchor=each)
-helper instead.
+Les clés d'un objet sont listées dans le même ordre que dans le tableau retourné par  `Object.keys` pour cet objet. Si vous voulez un ordre de tri différent, utilisez `Object.keys` pour obtenir un tableau de clés, ordonnez ce tableau avec les outils intégrés de JavaScript, puis passez-le au _helper_ [`{{#each}}`](https://api.emberjs.com/ember/release/classes/Ember.Templates.helpers/methods/each?anchor=each).
 
-### Empty Lists
+### Listes vides
 
-The [`{{#each-in}}`](https://api.emberjs.com/ember/release/classes/Ember.Templates.helpers/methods/each-in?anchor=each-in)
-helper can have a matching `{{else}}`. The contents of this block will render if
-the object is empty, null, or undefined:
+Le _helper_ [`{{#each-in}}`](https://api.emberjs.com/ember/release/classes/Ember.Templates.helpers/methods/each-in?anchor=each-in) peut avoir un `{{else}}` correspondant. Le contenu de ce bloc s'affiche si l'objet est vide, `null` ou `undefined`&nbsp;:
 
 ```handlebars
 {{#each-in this.people as |name person|}}
-  Hello, {{name}}! You are {{person.age}} years old.
+  Bonjour, {{name}}! Vous avez {{person.age}} ans.
 {{else}}
-  Sorry, nobody is here.
+  Désolé, il n'y a personne.
 {{/each-in}}
 ```
 
