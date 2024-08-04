@@ -1,39 +1,27 @@
-When someone says they are "upgrading" their Ember app, it could mean one of several things, especially if they say that they are "upgrading to Octane."
-This Guide will help fill in the blanks about how to upgrade your app's version, get access to the latest and greatest features, and form a strategy for using Octane's features in your existing apps.
+Quand quelqu'un vous dit qu'il ou elle "met à jour" leur app Ember, ça peut vouloir dire plusieurs choses, en particulier s'il s'agit de "passer à Octane". Cette page du Guide vous aidera à remplir les blancs sur ce qui concerne la mise à jour de la version de votre app, l'accès aux dernières et meilleures fonctionnalités, et à définir une stratégie pour utiliser les fonctionnalités d'Octane dans vos apps existantes.
 
-## Details about recent releases
+## Détail des dernières version
 
-You can learn about what changed in every release by reading the 
-[official Ember blog](https://blog.emberjs.com).
+Pour connaître les changements apportés par chaque version (_release_), reportez-vous au [blog officiel d'Ember](https://blog.emberjs.com).
 
-## Routine minor version maintenance upgrades
+## Mises à jour de routine pour maintenir les versions mineures
 
-Let's say you are upgrading an app from `v3.4` to `v3.8`.
-Although you heard there are some new features, your main goal is to keep up with security updates.
-To do this kind of version upgrade, follow the instructions [here in the CLI Guides](https://cli.emberjs.com/release/basic-use/upgrading/).
-That process will make sure that any peer dependencies of the `ember.js` core codebase get upgraded too.
-Automated tools will help you make the right changes to `package.json` and other files.
-The point of a minor version bump is that you shouldn't need to change anything in your app when you upgrade - it should all keep working, whether or not you choose to adopt new syntaxes and features.
+Mettons que vous voulez mettre à jour une app de `v3.4` à `v3.8`. Bien que vous ayez entendu parler de nouvelles fonctionnalités, votre objectif principal est de suivre les mises à jour de sécurité. Pour faire ce type de mise à jour, suivez les instructions [ici, dans le Guide CLI](https://cli.emberjs.com/release/basic-use/upgrading/). Ce processus vous assurera que toutes les dépendances de la base de code `ember.js` sont également mises à jour. Des outils automatisés vous aideront à faire les bons changements dans le `package.json` et d'autres fichiers. L'intérêt d'un saut de version mineure est que vous ne devriez pas avoir besoin de changer quoi que ce soit dans votre application lors de la mise à jour&nbsp;; tout devrait continuer à fonctionner, que vous choisissiez ou non d'adopter de nouvelles syntaxes et fonctionnalités.
 
-## Using new features
+## Utiliser de nouvelles fonctionnalités
 
-Once you have upgraded an app's version, some new features may be available out of the box.
-On the other hand, some features will require that you enable them specifically in your app's configuration, since they may change the app's default behavior.
+Une fois que vous avez mis à jour la version d'une app, de nouvelles fonctionnalités prêtes à l'emploi peuvent parfois être disponibles. En revanche, d'autres fonctionnalités nécessitent que vous les activiez spécifiquement dans la configuration de votre app, car il est possible qu'elles puissent modifier son comportement par défaut.
 
-The best way to discover new features is to read the [release blog posts](https://blog.emberjs.com/tags/releases.html).
-If a new feature requires you to opt-in, it's called an optional feature.
-Follow [the optional features guide](../configuring-ember/optional-features/) to learn which optional features are available in your app's version of Ember, and how to enable them.
-In many cases, codemods will be available to help you make syntax-related updates.
-A codemod is a tool that rewrites your existing code into a new syntax.
-When they are available, they can save a lot of time that you would spend making edits by hand.
+<!-- spell ignore -->
+La meilleure manière de découvrir les nouvelles fonctionnalités est de lire les [articles de blog sur les _releases_](https://blog.emberjs.com/tags/releases.html). Une nouvelle fonctionnalité qui requiert que vous l'activiez est appelée fonctionnalité optionnelle (_optional feature_). Suivez [le guide des fonctionnalités optionnelles](../configuring-ember/optional-features/) pour savoir lesquelles sont disponibles dans la version d'Ember de votre app, et comment les activer. Dans de nombreux cas, des _codemods_ seront disponibles pour vous aider à faire des mises à jour liées à la syntaxe. Un _codemod_ est un outil qui réécrit votre code actuel dans une nouvelle syntaxe. Lorsqu'ils sont disponibles, ils peuvent vous épargner beaucoup de temps passé à faire des modifications à la main.
 
-## Managing deprecations
+## Gérer les dépréciations
 
-If an API you are using will be going away in the next major version of Ember, you will see a deprecation warning in the developer console.
-Sometimes, they will be deprecation warnings caused by code in your app, and other times, they may be caused by an addon.
+Si une API que vous utiliser doit être supprimée dans la prochaine version majeure d'Ember, vous verrez un message de dépréciation (_deprecation warning_) dans la console de développement. Ces messages pourront parfois être causés par le code de votre app, et d'autres fois, par celui d'un addon.
 
-For more guidance on what to do with deprecations, visit [Handling Deprecations](../configuring-ember/handling-deprecations/), check out the Ember Inspector [tools for deprecations](../ember-inspector/deprecations/), or read about the specifics in the [Deprecations Guides](https://deprecations.emberjs.com/).
+Pour en savoir plus sur la manière de gérer les dépréciations, lisez la page [Gérer les dépréciations](../configuring-ember/handling-deprecations/), jetez un œil [aux outils de gestion des dépréciations](../ember-inspector/deprecations/) de l'Ember Inspector, ou regardez les [_Deprecations Guides_](https://deprecations.emberjs.com/).
 
-## Upgrading to Octane
 
-Octane was a big shift in Ember's syntax, features, and mental models! If you are in the process of upgrading an existing app to use Octane patterns, check out our dedicated [Octane Update Guide](./current-edition/).
+## Mettre à jour vers Octane
+
+Octane a été un grand pas en avant dans la syntaxe, les fonctionnalités, et les modèles mentaux d'Ember&nbsp;! Si vous êtes en train de mettre à jour une app existante vers Octane, jetez un œil à la page dédiée [Guide de Mise à Jour vers Octane](./current-edition/).
