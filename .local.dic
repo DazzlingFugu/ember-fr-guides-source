@@ -307,6 +307,7 @@ mockup
 model/nombrable
 modifier
 modifiers
+modifieur/nombrable
 modularity
 monopage
 namespace/DG
@@ -369,6 +370,7 @@ Presentational
 présentationnel/sensationnel
 Prettier
 properties
+property
 provider/nombrable
 Proxying
 pseudocode
@@ -380,6 +382,7 @@ reader/nombrable
 readme
 README
 readonly
+réajouter/rajouter
 recognizers
 record/nombrable
 Redux
