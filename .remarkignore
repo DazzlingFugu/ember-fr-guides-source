@@ -22,6 +22,7 @@ guides/**/*.md
 !guides/applications/initializers.md
 !guides/components/block-content.md
 !guides/components/built-in-components.md
+!guides/components/looping-through-lists.md
 !guides/configuring-ember/build-targets.md
 !guides/getting-started/anatomy-of-an-ember-app.md
 !guides/getting-started/index.md

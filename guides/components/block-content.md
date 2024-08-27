@@ -51,12 +51,12 @@ Pour rendre ça plus concret, examinons deux composants similaires qui représen
 <section>
   <h4 class="username">Zoey</h4>
 
-  <p>Hey!</p>
+  <p>Hey !</p>
 
   <p>
     J'adore les idées ! Je suis vraiment enthousiaste de voir la 
     direction que prend l'EmberConf cette année, je suis sûre que ce 
-    sera la meilleure à ce jour.
+    sera la meilleure de toutes.
     Quelques notes rapides :
   </p>
 
@@ -68,14 +68,13 @@ Pour rendre ça plus concret, examinons deux composants similaires qui représen
     </li>
     <li>
       Un dirigeable rendrait certainement le lieu très facile à trouver, 
-      mais je pense que c'est peut-être un peu hors de notre budget. On 
+      mais je pense que c'est peut-être un peu hors budget. On 
       pourrait peut-être louer des projecteurs à la place ?
     </li>
     <li>
-      On aura absolument besoin de plus de roues de hamster, la file 
-      d'attente l'an dernier était <em>beaucoup</em> trop longue. Je 
-      vais m'y mettre maintenant avant la saison soit trop avancée pour 
-      la location.
+      On a absolument besoin de plus de roues pour hamster, l'année dernière 
+      la file d'attente était <em>beaucoup</em> trop longue. Je vais m'occuper
+      de ça maintenant, avant que la saison des locations soit à son pic.
     </li>
   </ul>
 
@@ -169,12 +168,12 @@ Vous pouvez penser à `{{yield}}` comme à un espace réservé au contenu de la 
   @avatarTitle="L'avatar de Zoey"
   @avatarInitial="Z"
 >
-  <p>Hey!</p>
+  <p>Hey !</p>
 
   <p>
     J'adore les idées ! Je suis vraiment enthousiaste de voir la 
     direction que prend l'EmberConf cette année, je suis sûre que ce 
-    sera la meilleure à ce jour.
+    sera la meilleure de toutes.
     Quelques notes rapides :
   </p>
 
@@ -186,14 +185,13 @@ Vous pouvez penser à `{{yield}}` comme à un espace réservé au contenu de la 
     </li>
     <li>
       Un dirigeable rendrait certainement le lieu très facile à trouver, 
-      mais je pense que c'est peut-être un peu hors de notre budget. On 
+      mais je pense que c'est peut-être un peu hors budget. On 
       pourrait peut-être louer des projecteurs à la place ?
     </li>
     <li>
-      On aura absolument besoin de plus de roues de hamster, la file 
-      d'attente l'an dernier était <em>beaucoup</em> trop longue. Je 
-      vais m'y mettre maintenant avant la saison soit trop avancée pour 
-      la location.
+      On a absolument besoin de plus de roues pour hamster, l'année dernière 
+      la file d'attente était <em>beaucoup</em> trop longue. Je vais m'occuper
+      de ça maintenant, avant que la saison des locations soit à son pic.
     </li>
   </ul>
 
