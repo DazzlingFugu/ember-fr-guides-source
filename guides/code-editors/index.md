@@ -1,129 +1,110 @@
-During development, add Ember.js specific extensions to your code editor to expand functionality.
-Below is a list of some of the extensions available,
-many of which are created and maintained by the developer community:
+Pendant le développement, vous pouvez ajouter à votre éditeur de code des extensions spécifiques à Ember pour étendre ses fonctionnalités. Vous trouverez ci-dessous une liste de certaines des extensions disponibles, dont beaucoup sont créées et maintenues par la communauté&nbsp;:
 
+<!-- spell ignore -->
 ## Visual Studio Code
 
-Visual Studio Code is a code editor optimized for building and debugging modern web applications.
-Visual Studio Code is one of the most popular text editors among Ember developers.
+<!-- spell ignore -->
+Visual Studio Code est un éditeur de code optimisé pour la construction et le débogage d'applications web modernes. C'est l'un des éditeurs de texte les plus populaires parmi les devs Ember.
 
-### Extension Pack
+### Pack d'extensions
 
-Install the extension pack to get everything you need to work on Ember.js projects.
+Installez le pack d'extension pour obtenir tout ce dont vous avez besoin pour travailler sur des projets Ember.
 
-[Ember.js Extension Pack](https://marketplace.visualstudio.com/items?itemName=EmberTooling.emberjs) - It will install the following addons
+[Ember.js Extension Pack](https://marketplace.visualstudio.com/items?itemName=EmberTooling.emberjs) - Le pack installera les addons suivants&nbsp;:
 
-### Syntax Highlighting
+### Coloration syntaxique
 
-[Glimmer Templates Syntax](https://marketplace.visualstudio.com/items?itemName=lifeart.vscode-glimmer-syntax) -
-Syntax formatting for glimmer templates.
+<!-- spell ignore -->
+[Glimmer Templates Syntax](https://marketplace.visualstudio.com/items?itemName=lifeart.vscode-glimmer-syntax) - Formatage syntaxique pour les _templates_ Glimmer
 
-### Language Server
+### Serveur de langage
 
-[Stable Ember Language Server](https://marketplace.visualstudio.com/items?itemName=lifeart.vscode-ember-unstable) -
-Stable Ember Language Server is a stable, full-featured language server. Its name comes from its history as a fork of Ember Language Server and the efforts to keep up with changes in Ember.
+<!-- spell ignore -->
+[Stable Ember Language Server](https://marketplace.visualstudio.com/items?itemName=lifeart.vscode-ember-unstable) - Un serveur de langage complet et stable. Son nom vient historiquement de Ember Language Server, dont il est un _fork_, et de ses efforts pour suivre les évolutions d'Ember.
 
-### Workflow
+### _Workflow_ (flux de travail)
 
-[ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) - Integrates ESLint into VS Code.
+[ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) - Intègre ESLint dans VS Code.
 
-[EditorConfig for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig) -
-Attempts to override user/workspace settings with settings found in `.editorconfig` files.
-The `.editorconfig` file helps developers define
-and maintain consistent coding styles between different editors and IDEs.
+[EditorConfig for VS Code](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig) - Remplace si possible les paramètres de l'utilisateur et du _workspace_ (espace de travail) avec les paramètres trouvés dans les fichiers `.editorconfig`. Le fichier `.editorconfig` aide les développeurs à définir et à maintenir des styles de codage cohérents entre différents éditeurs et IDE.
 
-[Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) -
-Prettier is an opinionated code formatting tool. It enforces a consistent style by parsing your code and re-printing it with its own rules that take the maximum line length into account, wrapping code when necessary. Prettier supports Handlebars, Ember and Glimmer out of the box.
+[Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) - Prettier est un outil de formatage de code qui a des avis arrêtés sur ledit format. Il applique un style cohérent en analysant le code et en le réimprimant avec ses propres règles qui prennent en compte la longueur de ligne maximale, en imbriquant le code si nécessaire. Prettier supporte Handlebars, Ember et Glimmer.
 
-### Typed Glimmer Templates
+### _Templates_ Glimmer typés
 
 <div class="cta">
   <div class="cta-note">
     <div class="cta-note-body">
-      <div class="cta-note-heading">Zoey says...</div>
+      <div class="cta-note-heading">Zoey dit...</div>
       <div class="cta-note-message">
-        This is not installed as part of the extension pack but should be considered for Ember projects built with TypeScript. Learn more about <a href="https://typed-ember.gitbook.io/glint/">Glint here</a>.
+        Cet addon ne fait pas partie du pack d'extension mais devrait être envisagé pour les projets Ember construits avec TypeScript. En savoir plus sur <a href="https://typed-ember.gitbook.io/glint/">Glint ici</a>.
       </div>
     </div>
     <img src="/images/mascots/zoey.png" role="presentation" alt="">
   </div>
 </div>
 
-[Glint](https://marketplace.visualstudio.com/items?itemName=typed-ember.glint-vscode) is a set of tools to aid in developing code that uses the Glimmer VM for rendering, such as Ember.js v3.24+ and GlimmerX projects.
+[Glint](https://marketplace.visualstudio.com/items?itemName=typed-ember.glint-vscode) est un ensemble d'outils pour aider à développer du code s'appuyant sur la VM Glimmer pour le rendu, comme les projets Ember v3.24+ et GlimmerX.
 
-## Vim and Neovim
+## Vim et Neovim
 
-Vim is a highly configurable text editor built to make creating and changing any kind of text very efficient.
-It is included as "vi" with most UNIX systems and with Apple OS X.
-Alternatively, Neovim is a hyper-extensible Vim-based text editor.
-Both editors share a range of cross-compatible extensions listed below.
+Vim est un éditeur de texte hautement configurable conçu pour rendre la création et la modification de tout type de texte très efficace. Il est inclus dans la plupart des systèmes UNIX et dans Apple OS X sous la forme de «&nbsp;vi&nbsp;». D'autre part, Neovim est un éditeur de texte hyper-extensible basé sur Vim. Les deux éditeurs partagent une série d'extensions compatibles entre elles énumérées ci-dessous.
 
-You'll want to remove any linter / completion manager you currently have installed
-(or disable them for `.js`, `.ts` or `.hbs` files), and follow the install guides for the following packages:
+Vous devrez supprimer tout linter ou gestionnaire de complétion actuellement installé (ou les désactiver pour les fichiers `.js`, `.ts` ou `.hbs`), et suivre les guides d'installation des paquets suivants&nbsp;:
 
-### Syntax Highlighting
+### Coloration syntaxique
 
-Only one of these solutions is needed, with tree-sitter being the highest fidelity.
+Une seule de ces solutions est nécessaire, `tree-sitter` étant la plus fidèle.
 
-[nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter) -
-high-fidelity static highlighting with support for `.gjs` and `.gts` and embedded `hbs`.
-Use `ensure_installed = { 'glimmer' }`.
-Example `nvim-treesitter` config [can be found here](https://github.com/NullVoxPopuli/dotfiles/blob/main/home/.config/nvim/lua/plugins/syntax.lua#L15)
+[nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter) - Mise en surbrillance statique de haute fidélité supportant `.gjs`, `.gts` et le `hbs` imbriqué. Utilisez `ensure_installed = { 'glimmer' }`. Un exemple de configuration `nvim-treesitter` [peut être trouvé ici](https://github.com/NullVoxPopuli/dotfiles/blob/main/home/.config/nvim/lua/plugins/syntax.lua#L15).
 
-or
+ou
 
-[vim-ember-hbs](https://github.com/joukevandermaas/vim-ember-hbs) -
-Add Ember template syntax highlighting and indentation to Vim.
-To get embedded highlighting will involve these additional plugins:
+[vim-ember-hbs](https://github.com/joukevandermaas/vim-ember-hbs) - Ajout de la coloration syntaxique et de l'indentation des _templates_ Ember à Vim. Pour obtenir la coloration intégrée, il faut utiliser ces plugins supplémentaires&nbsp;:
 
 - [vim-javascript](https://github.com/pangloss/vim-javascript)
 - [vim-js-pretty-template](https://github.com/Quramy/vim-js-pretty-template)
 
-### Language Server
+### Serveur de langage
 
-Only one of these solutions should be used at a time.
+Une seule de ces solutions doit être utilisée à un instant donné.
 
-Native LSP with assistance from [Mason.nvim](https://github.com/williamboman/mason.nvim)
-Easily install and manage LSP servers, DAP servers, linters, and formatters.
-Example mason+LSP config [can be found here](https://github.com/NullVoxPopuli/dotfiles/tree/main/home/.config/nvim/lua)
+LSP natif avec assistant, de [Mason.nvim](https://github.com/williamboman/mason.nvim). Permet d'installer et gérer facilement les serveurs LSP, les serveurs DAP, les linters et les formateurs. Un exemple de configuration Mason+LSP [peut être trouvé ici](https://github.com/NullVoxPopuli/dotfiles/tree/main/home/.config/nvim/lua).
 
-or
+ou
 
-[Conquer for Completion (COC) for Neovim](https://github.com/neoclide/coc.nvim) -
-An IntelliSense engine which takes control over all linting, hinting, and language-server integration.
-With the ember plugin [coc-ember](https://github.com/NullVoxPopuli/coc-ember) -
-Ember.js language server extension including useful configuration instructions.
+<!-- spell ignore -->
+[Conquer for Completion (COC) for Neovim](https://github.com/neoclide/coc.nvim) - Un moteur IntelliSense qui prend le contrôle de tout le _linting_, _hinting_, et l'intégration du serveur de langue.
 
-### Snippets / Workflow
+Avec le plugin Ember [coc-ember](https://github.com/NullVoxPopuli/coc-ember) - Extension du serveur de langue Ember.js comprenant des instructions de configuration utiles.
 
-[ember.vim](https://github.com/dsawardekar/ember.vim) -
-Shortcuts to navigate related files with Ember.js projects.
+### Formatage de code / _Workflow_
 
-[Ember Tools](https://github.com/AndrewRadev/ember_tools.vim) -
-Various tools for working with Ember.js projects.
+[ember.vim](https://github.com/dsawardekar/ember.vim) - Raccourcis pour naviguer dans les fichiers liés aux projets Ember.js.
+
+<!-- spell ignore -->
+[Ember Tools](https://github.com/AndrewRadev/ember_tools.vim) - Divers outils pour travailler avec des projets Ember.js.
 
 ## Atom
 
-Atom is hackable text editor for the 21st Century.
+<!-- spell ignore -->
+Atom est l'éditeur de texte piratable du 21ème siècle.
 
-[atom-ide-ember](https://github.com/josa42/atom-ide-ember) -
-Atom package to use the Ember Language Server.
+[atom-ide-ember](https://github.com/josa42/atom-ide-ember) - Paquet Atom pour utiliser le serveur de langue Ember.
 
-[emberjs-atom](https://atom.io/packages/emberjs-atom) -
-Atom autocomplete and snippets for Ember.js.
+[emberjs-atom](https://atom.io/packages/emberjs-atom) - Autocomplétion et formatage de code Ember.js pour Atom.
 
-[atom-ember-snippets](https://github.com/mattmcmanus/atom-ember-snippets) -
-Ember.js ES6, EmberData & Handlebars snippets for Atom editor.
+[atom-ember-snippets](https://github.com/mattmcmanus/atom-ember-snippets) - Formateur de code Ember.js ES6, EmberData et Handlebars pour l'éditeur Atom.
 
-[language-ember-htmlbars](https://atom.io/packages/language-ember-htmlbars) -
-Add Ember template syntax highlighting and indentation to Atom
+[language-ember-htmlbars](https://atom.io/packages/language-ember-htmlbars) - Ajout de la coloration syntaxique et de l'indentation des _templates_ Ember à Atom.
 
+<!-- spell ignore -->
 ## Sublime Text
 
-A sophisticated text editor for code, markup and prose.
+Un éditeur de texte sophistiqué pour le code, le balisage et la prose.
 
-[ember-cli-sublime-snippets](https://github.com/terminalvelocity/ember-cli-sublime-snippets) -
-Ember CLI snippets for Sublime Text 3.
+<!-- spell ignore -->
+[ember-cli-sublime-snippets](https://github.com/terminalvelocity/ember-cli-sublime-snippets) - Formateur de code Ember CLI pour Sublime Text 3.
 
-[ember-component-template-split-view](https://github.com/mmitchellgarcia/ember-component-template-split-view) -
-Super simple Sublime Text plugin that will let you open corresponding template or route files with Ember.js components.
+<!-- spell ignore -->
+[ember-component-template-split-view](https://github.com/mmitchellgarcia/ember-component-template-split-view) - Plugin Sublime Text extrêmement simple qui vous permettra d'ouvrir les fichiers de _template_ ou de route correspondants avec les composants Ember.js.
