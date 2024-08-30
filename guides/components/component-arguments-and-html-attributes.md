@@ -1,4 +1,4 @@
-Les composants deviennent des éléments utiles d'une application quand on les rend "réutilisables". Lorsqu'on réutilise efficacement les composants, on peut éviter d'avoir à recréer des parties de l'app encore et encore. Si vous voulez "réutiliser" un composant à plusieurs endroits, vous aurez besoin d'un moyen d'en abstraire certaines parties.
+Les composants deviennent des briques utiles d'une application quand on les rend "réutilisables". Lorsqu'on réutilise efficacement les composants, on peut éviter d'avoir à recréer des parties de notre app encore et encore. Si vous voulez "réutiliser" un composant à plusieurs endroits, vous aurez besoin d'un moyen d'en abstraire certaines parties.
 
 Commençons par deux composants d'avatar similaires mais non identiques, qui représentent deux utilisateurs différents&nbsp;:
 
@@ -20,7 +20,7 @@ La "structure" de ces composants est identique, mais ils ont un contenu (l'initi
   <div class="cta-note">
     <div class="cta-note-body">
       <div class="cta-note-message">
-        Vous avez peut-être noté la classe <code>is-active</code> sur l'avatar du message reçu, présente dans l'exemple des chapitres précédents, est absente dans celui-ci. Nous couvrirons ça dans le chapitre suivant, dans <a href="../conditional-content">Contenu Conditionnel</a>.
+        Vous avez peut-être noté que la classe <code>is-active</code> sur l'avatar du message reçu, présente dans l'exemple des chapitres précédents, est absente dans celui-ci. Nous couvrirons ça dans le chapitre suivant, dans <a href="../conditional-content">Contenu Conditionnel</a>.
       </div>
     </div>
   </div>
@@ -28,7 +28,7 @@ La "structure" de ces composants est identique, mais ils ont un contenu (l'initi
 
 ## Arguments
 
-Nous pouvons créer un composant utilisable dans les deux situations en factorisant sous forme de _template_ les parties du HTML qui sont différentes.
+Nous pouvons créer un composant utilisable dans les deux situations en combinant sous forme de _template_ les parties du HTML qui sont différentes.
 
 ```handlebars {data-filename="app/components/avatar.hbs"}
 <aside>
@@ -95,7 +95,7 @@ Le composant `avatar` doit également spécifier où placer les attributs qui on
 </aside>
 ```
 
-La syntaxe `...attributes` détermine où les attributs d'une balise doivent apparaître dans le _template_ du composant. N'importe quel nombre d'attributs peuvent désormais être spécifiés sur composant `avatar`, et ils se retrouveront tous sur l'élément qui a la syntaxe `...attributes`.
+La syntaxe `...attributes` (appelée _splattributes_) détermine où les attributs d'une balise doivent apparaître dans le _template_ du composant. N'importe quel nombre d'attributs peuvent désormais être spécifiés sur le composant `<Avatar>`, et ils se retrouveront tous sur l'élément qui a la syntaxe `...attributes`.
 
 <div class="cta">
   <div class="cta-note">
