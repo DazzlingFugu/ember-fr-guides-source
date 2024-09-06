@@ -1,85 +1,79 @@
-At its core, Ember's UIs are _HTML_ driven - every part of the UI that
-is shown to the user is defined in an HTML template somewhere in your
-application. Because of this, templates are central to Ember, and one of the
-most important parts of the framework.
+Les interfaces utilisateur (ou _UI_ pour _User Interfaces_) d'Ember sont basées sur le HTML, c'est-à-dire que chaque partie de l'UI montrée à l'utilisateur est définie dans un _template_ HTML, quelque part dans votre app. Les _templates_ sont, pour cette raison, une brique centrale d'Ember, et l'une des parties les plus importantes du _framework_.
 
-We'll discuss the capabilities and core concepts of templates in the following
-chapters, but before we do that, we should get started with the basics. The
-simplest way to get started on an Ember template is with some HTML!
+Dans les chapitres suivants, nous discuterons les capacités et les principaux concepts autour des _templates_&nbsp;; mais avant ça, commençons par les bases. Le moyen le plus simple de commencer un _template_ Ember, c'est avec du HTML&nbsp;!
 
-## The Application Template
+## Le _template_ de l'application
 
-The central template in an Ember application is the `app/templates/application.hbs`
-file. We can copy HTML into this file, and it will work without any changes. For
-instance, you can copy the following example HTML for a simple messaging app:
+Le _template_ principal dans une application Ember est le fichier `app/templates/application.hbs`. On peut copier du HTML dans ce fichier, il fonctionnera tel quel. Par exemple, copiez le HTML de l'exemple suivant pour une app de messagerie très simple&nbsp;:
 
 ```html {data-filename=app/templates/application.hbs}
 <div class="messages">
   <aside>
-    <div class="avatar is-active" title="Tomster's avatar">T</div>
+    <div class="avatar is-active" title="Avatar de Tomster">T</div>
   </aside>
   <section>
     <h4 class="username">
       Tomster
-      <span class="local-time">their local time is 4:56pm</span>
+      <span class="local-time">heure locale : 16:56</span>
     </h4>
 
     <p>
-      Hey Zoey, have you had a chance to look at the EmberConf brainstorming doc
-      I sent you?
+      Hey Zoey, as-tu eu l'occasion de regarder le document
+      de brainstorming pour l'EmberConf que je t'ai envoyé ?
     </p>
   </section>
 
   <aside class="current-user">
-    <div class="avatar" title="Zoey's avatar">Z</div>
+    <div class="avatar" title="Avatar de Zoey">Z</div>
   </aside>
   <section>
     <h4 class="username">Zoey</h4>
 
-    <p>Hey!</p>
+    <p>Hey !</p>
 
     <p>
-      I love the ideas! I'm really excited about where this year's EmberConf is
-      going, I'm sure it's going to be the best one yet. Some quick notes:
+      J'adore les idées ! Je suis vraiment enthousiaste de voir la
+      direction que prend l'EmberConf cette année, je suis sûre que ce
+      sera la meilleure de toutes.
+      Quelques notes rapides :
     </p>
 
     <ul>
       <li>
-        Definitely agree that we should double the coffee budget this year (it
-        really is impressive how much we go through!)
+        Tout à fait d'accord sur le fait qu'on devrait doubler le budget
+        café cette année (c'est vraiment impressionnant tout ce qu'on
+        boit !)
       </li>
       <li>
-        A blimp would definitely make the venue very easy to find, but I think
-        it might be a bit out of our budget. Maybe we could rent some spotlights
-        instead?
+        Un dirigeable rendrait certainement le lieu très facile à trouver,
+        mais je pense que c'est peut-être un peu hors budget. On
+        pourrait peut-être louer des projecteurs à la place ?
       </li>
       <li>
-        We absolutely will need more hamster wheels, last year's line was
-        <em>way</em> too long. Will get on that now before rental season hits
-        its peak.
+        On a absolument besoin de plus de roues pour hamster, l'année dernière
+        la file d'attente était <em>beaucoup</em> trop longue. Je vais m'occuper
+        de ça maintenant, avant que la saison des locations soit à son pic.
       </li>
     </ul>
 
-    <p>Let me know when you've nailed down the dates!</p>
+    <p>Dis-moi quand tu auras fixé les dates !</p>
   </section>
 
   <form>
     <label for="message">Message</label>
     <input id="message" />
     <button type="submit">
-      Send
+      Envoyer
     </button>
   </form>
 </div>
 ```
 
-You can _serve_ the app by running `ember s` in your terminal, which will make
-the local copy of your application available to view in your web browser.
+Vous pouvez "servir" l'app en exécutant `ember s` dans votre terminal, ce qui rendra la copie locale de votre app disponible pour votre navigateur web.
 
-If you serve the app and go to `localhost:4200` in your web browser, you'll see
-the HTML rendered. At this point, it will still be unstyled.
+Si vous servez l'app et allez sur `localhost:4200` dans votre navigateur, vous verrez le HTML affiché. Pour l'instant, il n'aura aucun style.
 
-To style the application, copy the following CSS into `app/styles/app.css`:
+Pour ajouter du style à l'application, copiez le CSS suivant dans `app/styles/app.css`&nbsp;:
 
 ```css {data-filename=styles/app.css}
 body {
@@ -174,50 +168,43 @@ form > button {
 }
 ```
 
-![screenshot of styled message app](/images/ember-core-concepts/messaging-app-1.png)
+![capture d'écran de l'app de messagerie avec le style](/images/ember-core-concepts/messaging-app-1.png)
 
-You start building parts of an Ember application using HTML, so if you already
-know HTML and CSS, you know how to build a basic Ember application!
+La construction d'une application Ember commence par l'utilisation de HTML, donc si vous connaissez déjà le HTML et le CSS, alors vous savez déjà construire une application Ember basique&nbsp;!
 
-You can even use SVG or web components without any changes. As long as your HTML
-is valid, Ember will render it.
+Vous pouvez même utiliser des SVG ou des _web components_ tels quels. Tant que votre HTML est valide, Ember l'affiche.
 
-# Self-Closing Tags
+# Balises auto-fermantes
 
-In addition to normal HTML syntax, Ember allows you to use self-closing syntax
-(`<div />`) as a shorthand for an opening and closing tag (`<div></div>`).
+En plus de la syntaxe HTML classique, Ember permet l'utilisation d'une syntaxe auto-fermante (`<div />`) comme raccourci pour les balises ouvrantes et fermantes (`<div></div>`).
 
 <div class="cta">
   <div class="cta-note">
     <div class="cta-note-body">
-      <div class="cta-note-heading">Zoey says...</div>
+      <div class="cta-note-heading">Zoey dit...</div>
       <div class="cta-note-message">
-        You don't <strong>need</strong> to use this syntax for <a href="https://html.spec.whatwg.org/multipage/syntax.html#void-elements">"void" HTML
-        tags</a> such as <code>img</code> or <code>br</code>, which are already
-        defined as self-closing by the HTML specification, but you <strong>can</strong> use this syntax
-        as a shorthand for tags that are not self-closing.
+        Vous n'avez pas <strong>besoin</strong> d'utiliser cette syntaxe pour les <a href="https://html.spec.whatwg.org/multipage/syntax.html#void-elements">balises HTML dites "vides"</a> comme <code>img</code> ou <code>br</code>, car elles sont déjà définies comme auto-fermantes par les spécifications HTML. En revanche, vous pouvez utiliser cette syntaxe comme raccourci pour les balises qui ne sont pas auto-fermantes par définition.
       </div>
     </div>
     <img src="/images/mascots/zoey.png" role="presentation" alt="">
   </div>
 </div>
 
-# Supported Features
+# Fonctionnalités supportées
 
-This means that all of the following HTML features work as-is:
+Toutes les fonctionnalités suivantes de HTML fonctionnent telles quelles&nbsp;:
 
-- Web components
+- _Web components_
 - SVG
-- HTML comments
-- White space (following the same rules as normal HTML)
-- Special HTML elements like `<table>` and `<select>`
+- Commentaires HTML
+- Espaces (les espaces suivent les mêmes règles que dans du HTML classique)
+- Éléments HTML spéciaux comme `<table>` ou `<select>`
 
 # Restrictions
 
-There are a handful of restrictions on the HTML that you can put in an Ember
-template:
+Il existe une poignée de restrictions sur le HTML pouvant être écrit dans un _template_ Ember&nbsp;:
 
-- Only valid HTML elements in a `<body>` tag can be used
-- No `<script>` tags
+- Seuls des éléments HTML valides dans une balise `<body>` peuvent être utilisés
+- Pas de balises `<script>`
 
-Other than that, go to town!
+En dehors de ça, faites tout ce que vous voulez&nbsp;!

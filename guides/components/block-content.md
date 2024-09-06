@@ -34,7 +34,7 @@ Pour rendre ça plus concret, examinons deux composants similaires qui représen
 <section>
   <h4 class="username">
     Tomster
-    <span class="local-time">heure locale : 16h56</span>
+    <span class="local-time">heure locale : 16:56</span>
   </h4>
 
   <p>
@@ -148,9 +148,9 @@ Vous pouvez penser à `{{yield}}` comme à un espace réservé au contenu de la 
 <Message
   @username="Tomster"
   @userIsActive={{true}}
-  @userLocalTime="16h56"
+  @userLocalTime="16:56"
 
-  @avatarTitle="L'avatar de Tomster"
+  @avatarTitle="Avatar de Tomster"
   @avatarInitial="T"
 >
   <p>
@@ -165,7 +165,7 @@ Vous pouvez penser à `{{yield}}` comme à un espace réservé au contenu de la 
   @username="Zoey"
   @isCurrentUser={{true}}
 
-  @avatarTitle="L'avatar de Zoey"
+  @avatarTitle="Avatar de Zoey"
   @avatarInitial="Z"
 >
   <p>Hey !</p>
