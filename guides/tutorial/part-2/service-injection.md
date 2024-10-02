@@ -1,12 +1,13 @@
 <!-- Heads up! This is a generated file, do not edit directly. You can find the source at https://github.com/ember-learn/super-rentals-tutorial/blob/master/src/markdown/tutorial/part-2/10-service-injection.md -->
 
-As promised, we will now work on implementing the share button!
+Comme convenu, nous allons maintant travailler sur l'implémentation du bouton de partage !
 
 <!-- TODO: make this a gif instead -->
 
 <img src="/images/tutorial/part-2/service-injection/share-button@2x.png" alt="The working share button by the end of the chapter" width="1024" height="1381">
 
-While adding the share button, you will learn about:
+En faisant cela, vous vous familiariserez avec :
+
 
 - _Splattributes_ et l'attribut `class`
 - Le service routeur
@@ -15,18 +16,18 @@ While adding the share button, you will learn about:
 
 ## Scoping the Feature
 
-In order to be able to share on Twitter, we'll need to make use of the Twitter [Web Intent API](https://developer.twitter.com/en/docs/twitter-for-websites/tweet-button/guides/web-intent.html).
+Afin de pouvoir partager sur Twitter, vous aurez besoin d'utiliser l'API Twitter [Web Intent API](https://developer.twitter.com/en/docs/twitter-for-websites/tweet-button/guides/web-intent.html).
 
-Conveniently, this API doesn't require us to procure any API keys; all we need to do is link to `https://twitter.com/intent/tweet`. This link will prompt the user to compose a new tweet. The API also supports us pre-populating the tweet with some text, hashtag suggestions, or even a link, all through the use of special query params.
+Cette API ne nécessite pas de fournir une clé API ; nous avons uniquement besoin de créer un lien vers `https://twitter.com/intent/tweet`. Ce lien demandera à l'utilisateur de rédiger un nouveau tweet. Cette API nous permet également de pré-remplir le tweet avec du texte, des suggestions de hashtags, ou même un lien, le tout via des query params spécifiques.
 
-For instance, let's say we would like to suggest a tweet with the following content:
+À titre d'exemple, supposons que nous souhaitions proposer un tweet avec le contenu suivant :
 
 ```plain
-Check out Le Manoir Ancien on Super Rentals! https://super-rentals.example/rentals/grand-old-mansion
+Allez voir Le Manoir Ancien sur Super Rentals! https://super-rentals.example/rentals/grand-old-mansion
 #vacation #travel #authentic #blessed #superrentals via @emberjs
 ```
 
-We could open a new page to the <a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fsuper-rentals.example%2Frentals%2Fgrand-old-mansion&text=Check+out+Grand+Old+Mansion+on+Super+Rentals%21&hashtags=vacation%2Ctravel%2Cauthentic%2Cblessed%2Csuperrentals&via=emberjs" target="_blank" rel="external nofollow noopener noreferrer">following URL</a>:
+Nous pourrions ouvrir une nouvelle page vers <a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fsuper-rentals.example%2Frentals%2Fgrand-old-mansion&text=Check+out+Grand+Old+Mansion+on+Super+Rentals%21&hashtags=vacation%2Ctravel%2Cauthentic%2Cblessed%2Csuperrentals&via=emberjs" target="_blank" rel="external nofollow noopener noreferrer">cette URL</a>:
 
 ```plain
 https://twitter.com/intent/tweet?
@@ -36,13 +37,12 @@ https://twitter.com/intent/tweet?
   via=emberjs
 ```
 
-Of course, the user will still have the ability to edit the tweet, or they can decide to just not tweet it at all.
+Bien entendu, l'utilisateur aura toujours la possibilité de modifier le tweet, ou bien de décider de ne pas tweeter du tout.
 
-For our app, it probably makes the most sense for our share button to automatically share the current page's URL.
 
-## Splattributes and the `class` Attribute
+## Les Splattributes et l'attribut `class`
 
-Now that we have a better understanding of the scope of this feature, let's get to work and generate a `share-button` component.
+Maintenant que nous avons une meilleure vision de l'étendue de cette fonctionnalité, mettons nous au travail et générons le composant `share-button`.
 
 ```shell
 $ ember generate component share-button --with-component-class
@@ -53,7 +53,7 @@ installing component-test
   create tests/integration/components/share-button-test.js
 ```
 
-Let's start with the template that was generated for this component. We already have some markup for the share button in the `<Rental::Detailed>` component we made earlier, so let's just copy that over into our new `<ShareButton>` component.
+Commençons avec le template qui a été généré pour ce composant. Comme nous avons déjà du markup pour le share button dans le composant `<Rental::Detailed>` que nous avons créé précédemment, nous n'avons qu'à copier cela dans notre nouveau composant `<ShareButton>`.
 
 ```handlebars { data-filename="app/components/share-button.hbs" data-diff="-1,+2,+3,+4,+5,+6,+7,+8,+9,+10" }
 {{yield}}
@@ -68,7 +68,7 @@ Let's start with the template that was generated for this component. We already 
 </a>
 ```
 
-Notice that we added `...attributes` to our `<a>` tag here. As [we learned earlier](../../part-1/reusable-components/) when working on our `<Map>` component, the order of `...attributes` relative to other attributes is significant. We don't want to allow `href`, `target`, or `rel` to be overridden by the invoker, so we specified those attributes after `...attributes`.
+Remarquez que nous avons ajouté `...attributes` à la balise `<a>`. Comme [nous l'avons appris plus tôt](../../part-1/reusable-components/) en travaillant sur notre composant `<Map>`, l'ordre de `...attributes` par rapport aux autres attributs est important. Nous ne voulons pas permettre que `href`, `target` ou `rel` soient remplacés par l'utilisateur, c'est pourquoi nous avons spécifié ces attributs après `...attributes`.
 
 But what happens to the `class` attribute? Well, as it turns out, the `class` attribute is the one exception to how these component attributes are overridden! While all other HTML attributes follow the "last-write wins" rule, the values for the `class` attribute are merged together (concatenated) instead. There is a good reason for this: it allows the component to specify whatever classes that _it_ needs, while allowing the invokers of the component to freely add any extra classes that _they_ need for styling purposes.
 
@@ -308,9 +308,8 @@ Looking at the failure closely, the problem seems to be that the component had c
 
 This brings up an interesting question – why does the `currentURL()` test helper not have the same problem? In our test, we have been writing assertions like `assert.strictEqual(currentURL(), '/about');`, and those assertions did not fail.
 
-It turns out that this is something Ember's router handled for us. In an Ember app, the router is responsible for handling navigation and maintaining the URL. For example, when you click on a `<LinkTo>` component, it will ask the router to execute a _[route transition](../../../routing/preventing-and-retrying-transitions/)_. Normally, the router is set up to update the browser's address bar whenever it transitions into a new route. That way, your users will be able to use the browser's back button and bookmark functionality just like any other webpage.
 
-However, during tests, the router is configured to maintain the "logical" URL internally, without updating the browser's address bar and history entries. This way, the router won't confuse the browser and its back button with hundreds of history entries as you run through your tests. The `currentURL()` taps into this piece of internal state in the router, instead of checking directly against the actual URL in the address bar using `window.location.href`.
+Allez voir during tests, sur router is configured to maintain the "logical" URL internally, without updating the browser's address bar and history entries. This way, the router won't confuse the browser and its back button with hundreds of history entries as you run through your tests. The `currentURL()` taps into this piece of internal state in the router, instead of checking directly against the actual URL in the address bar using `window.location.href`.
 
 ## The Router Service
 
@@ -360,11 +359,9 @@ With this change, everything is now working the way we intended.
 
 ## Services Ember versus variables globales
 
-In Ember, services serve a similar role to global variables, in that they can be easily accessed by any part of your app. For example, we can inject any available service into components, as opposed to having them passed in as an argument. This allows deeply nested components to "skip through" the layers and access things that are logically global to the entire app, such as routing, authentication, user sessions, user preferences, etc. Without services, every component would have to pass through a lot of the same arguments into every component it invokes.
 
 A major difference between services and global variables is that services are scoped to your app, instead of all the JavaScript code that is running on the same page. This allows you to have multiple scripts running on the same page without interfering with each other.
-
-More importantly, services are designed to be easily _swappable_. In our component class, all we did was request that Ember inject the service named `router`, without specifying where that service comes from. This allows us to _replace_ Ember's router service with a different object at runtime.
+Allez voir, services are sur to be easily _swappable_. In our component class, all we did was request that Ember inject the service named `router`, without specifying where that service comes from. This allows us to _replace_ Ember's router service with a different object at runtime.
 
 <div class="cta">
   <div class="cta-note">
