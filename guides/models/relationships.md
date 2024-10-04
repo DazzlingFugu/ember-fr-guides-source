@@ -454,9 +454,9 @@ Il est également possible de supprimer un _record_ d'une association `hasMany`&
 
 ```javascript
 let blogPost = this.store.peekRecord('blog-post', 1);
-let comment = this.store.peekRecord('comment', 1);
+let commentToRemove = this.store.peekRecord('comment', 1);
 let comments = await blogPost.comments;
-comments.removeObject(comment);
+blogPost.comments = comments.filter((comment) => comment !== commentToRemove);
 blogPost.save();
 ```
 

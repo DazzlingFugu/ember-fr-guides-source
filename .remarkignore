@@ -22,7 +22,6 @@ guides/**/*.md
 !guides/applications/initializers.md
 !guides/applications/run-loop.md
 !guides/code-editors/index.md
-!guides/components/block-content.md
 !guides/components/built-in-components.md
 !guides/components/component-arguments-and-html-attributes.md
 !guides/components/index.md
