@@ -1,5 +1,5 @@
 Les templates de composant peuvent avoir un ou plusieurs placeholders que les utilisateurs peuvent utiliser pour injecter leur propre code HTML.
-Ces placeholders sont appelés des blocs (ou _block_).
+Ces placeholders sont appelés des blocs (ou <span lang="en">_block_</span>).
 Voici un exemple de composant appelé avec le bloc par défaut (qui est implicite).
 
 ```handlebars
@@ -199,7 +199,7 @@ Vous pouvez penser à `{{yield}}` comme à un espace réservé au contenu de la 
 </Message>
 ```
 
-Comme montré ici, nous pouvons passer différents contenus dans la balise. Le contenu de la balise est aussi appelé _block_. La syntaxe `{{yield}}` "cède sa place" au bloc une fois celui-ci passé au composant.
+Comme montré ici, nous pouvons passer différents contenus dans la balise. Le contenu de la balise est aussi appelé <span lang="en">_block_</span>. La syntaxe `{{yield}}` "cède sa place" au bloc une fois celui-ci passé au composant.
 
 <div class="cta">
   <div class="cta-note">

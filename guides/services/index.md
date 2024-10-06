@@ -84,7 +84,7 @@ export default class CartContentsComponent extends Component {
 
 Ce code injecte le service `ShoppingCart` dans le composant et le rend accessible en tant que propriété `cart`.
 
-Parfois, un service peut ou non exister, par exemple quand un _initializer_ l'enregistre de manière conditionnelle. Comme une injection classique provoquera une erreur si le service n'existe pas, vous devez rechercher le service en utilisant la méthode [`getOwner`](https://api.emberjs.com/ember/release/classes/@ember%2Fapplication/methods/getOwner?anchor=getOwner) de Ember&nbsp;:
+Parfois, un service peut ou non exister, par exemple quand un <span lang="en">_initializer_</span> l'enregistre de manière conditionnelle. Comme une injection classique provoquera une erreur si le service n'existe pas, vous devez rechercher le service en utilisant la méthode [`getOwner`](https://api.emberjs.com/ember/release/classes/@ember%2Fapplication/methods/getOwner?anchor=getOwner) de Ember&nbsp;:
 
 ```javascript {data-filename=app/components/cart-contents.js}
 import Component from '@glimmer/component';

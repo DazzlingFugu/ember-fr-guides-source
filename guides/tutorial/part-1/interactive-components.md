@@ -9,9 +9,9 @@ Dans ce chapitre, vous allez ajouter l'interactivité à la page pour permettre 
 En faisant ça, vous apprendrez à&nbsp;:
 
 - Ajouter un comportement aux composants à l'aide de classes
-- Accéder aux états de l'instance à partir des _templates_
+- Accéder aux états de l'instance à partir des <span lang="en">_templates_</span>
 - Gérer l'état avec les _tracked properties_
-- Utiliser des syntaxes conditionnelles dans les _templates_
+- Utiliser des syntaxes conditionnelles dans les <span lang="en">_templates_</span>
 - Répondre à l'interaction de l'utilisateur avec des actions
 - Invoquer des modificateurs d'élément (_modifiers_)
 - Tester les interactions utilisateur
@@ -35,7 +35,7 @@ installing component-class
   create app/components/rental/image.js
 ```
 
-Ceci a généré un fichier JavaScript `app/components/rental/image.js` avec le même nom que le _template_ de notre composant. Il contient une classe JavaScript héritant de `@glimmer/component`.
+Ceci a généré un fichier JavaScript `app/components/rental/image.js` avec le même nom que le <span lang="en">_template_</span> de notre composant. Il contient une classe JavaScript héritant de `@glimmer/component`.
 
 <div class="cta">
   <div class="cta-note">
@@ -66,9 +66,9 @@ export default class RentalImageComponent extends Component {
 
 Ici dans le "constructeur du composant" (_constructor_), nous "initialisons" une "variable d'instance" `this.isLarge` avec la valeur `false`, car c'est l'état par défaut que nous voulons pour notre composant.
 
-## Accéder aux états de l'instance à partir des _templates_
+## Accéder aux états de l'instance à partir des <span lang="en">_templates_</span>
 
-Mettons à jour notre _template_ pour utiliser l'état que nous venons d'ajouter&nbsp;:
+Mettons à jour notre <span lang="en">_template_</span> pour utiliser l'état que nous venons d'ajouter&nbsp;:
 
 ```handlebars { data-filename="app/components/rental/image.hbs" data-diff="-1,-2,-3,+4,+5,+6,+7,+8,+9,+10,+11,+12,+13,+14" }
 <div class="image">
@@ -134,7 +134,7 @@ export default class RentalImageComponent extends Component {
 
 Là, nous avons fait une paire de changements, alors détaillons-les un par un.
 
-D'abord, nous avons ajouté le [décorateur](../../../in-depth-topics/native-classes-in-depth/#toc_decorators) `@tracked` à la variable d'instance `isLarge`. Cette annotation indique à Ember de monitorer cette variable pour la mettre à jour. À chaque fois que la valeur de la variable change, Ember va automatiquement réafficher tous les _templates_ qui dépendent de cette valeur.
+D'abord, nous avons ajouté le [décorateur](../../../in-depth-topics/native-classes-in-depth/#toc_decorators) `@tracked` à la variable d'instance `isLarge`. Cette annotation indique à Ember de monitorer cette variable pour la mettre à jour. À chaque fois que la valeur de la variable change, Ember va automatiquement réafficher tous les <span lang="en">_templates_</span> qui dépendent de cette valeur.
 
 Dans notre cas, à chaque fois que nous assignons une nouvelle valeur à `this.isLarge`, l'annotation `@tracked` déclenche la réévaluation de la conditionnelle `{{#if this.isLarge}}` par Ember, et l'affichage alterne entre les deux [blocs](../../../components/conditional-content/#toc_block-if) en fonction du résultat.
 
@@ -154,7 +154,7 @@ Dans notre cas, à chaque fois que nous assignons une nouvelle valeur à `this.i
 
 Ensuite nous avons ajouté une méthode _`toggleSize`_ (alterner entre les deux tailles) à notre classe, qui change `this.isLarge` à l'opposé de son état courant (`false` devient `true` et `true` devient `false`). 
 
-Enfin, nous avons ajouté le décorateur `@action` à notre méthode. Il indique à Ember que nous avons l'intention d'appeler cette méthode depuis le _template_. Sans ça, la méthode ne fonctionnera pas correctement en tant que fonction de _callback_ (dans le cas présent, un _click handler_ pour gérer le clic).
+Enfin, nous avons ajouté le décorateur `@action` à notre méthode. Il indique à Ember que nous avons l'intention d'appeler cette méthode depuis le <span lang="en">_template_</span>. Sans ça, la méthode ne fonctionnera pas correctement en tant que fonction de _callback_ (dans le cas présent, un _click handler_ pour gérer le clic).
 
 <div class="cta">
   <div class="cta-note">
@@ -168,7 +168,7 @@ Enfin, nous avons ajouté le décorateur `@action` à notre méthode. Il indique
   </div>
 </div>
 
-Avec ça, il est temps de câbler notre _template_:
+Avec ça, il est temps de câbler notre <span lang="en">_template_</span>:
 
 ```handlebars { data-filename="app/components/rental/image.hbs" data-diff="-2,+3,-6,+7,-9,+10,-13,+14" }
 {{#if this.isLarge}}
@@ -259,7 +259,7 @@ module('Integration | Component | rental/image', function (hooks) {
 
 <img src="/images/tutorial/part-1/interactive-components/pass@2x.png" alt="Les tests passent avec le nouveau test &lt;Rental::Image&gt;" width="1024" height="512" />
 
-Nettoyons notre _template_ avant de continuer. Nous y avons introduit beaucoup de duplication quand nous avons ajouté la conditionnelle. Si on regarde de près, les seules différences entre les deux blocs sont&nbsp;:
+Nettoyons notre <span lang="en">_template_</span> avant de continuer. Nous y avons introduit beaucoup de duplication quand nous avons ajouté la conditionnelle. Si on regarde de près, les seules différences entre les deux blocs sont&nbsp;:
 
 1. La présence de la classe CSS `"large"` sur la balise `<button>`.
 2. Les textes "Agrandir" et "Réduire".
@@ -288,7 +288,7 @@ Ces changements sont profondément enfouis dans la grande quantité de code dupl
 
 En tant qu'expression, `{{if}}` prend deux arguments. Le premier argument est la condition. Le second argument est l'expression qui doit être évaluée quand la condition est vraie.
 
-De manière optionnelle, `{{if}}` peut prendre un troisième argument indiquant l'expression qui doit être évaluée  quand la condition est fausse. Ça signifie que nous pourrions réécrire le _label_ du bouton comme suit&nbsp;:
+De manière optionnelle, `{{if}}` peut prendre un troisième argument indiquant l'expression qui doit être évaluée  quand la condition est fausse. Ça signifie que nous pourrions réécrire le <span lang="en">_label_</span> du bouton comme suit&nbsp;:
 
 ```handlebars { data-filename="app/components/rental/image.hbs" data-diff="-3,-4,-5,-6,-7,+8" }
 <button type="button" class="image {{if this.isLarge "large"}}" {{on "click" this.toggleSize}}>

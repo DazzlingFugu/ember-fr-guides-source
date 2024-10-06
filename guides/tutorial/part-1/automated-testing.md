@@ -90,7 +90,7 @@ Ce comportement sera presque toujours celui dont nous avons besoin, alors nous u
 
 Après avoir naviguer sur l'URL `/` et attendu que l'app soit prête, nous vérifions que l'URL courante est bien l'URL prévue (`/`). Ici, il est possible d'utiliser le _test helper_ `currentURL` aussi bien que l'_[assertion](https://github.com/emberjs/ember-test-helpers/blob/master/API.md)_ `equal`. Voilà comment nous codons notre "liste de choses à vérifier". En spécifiant et en "affirmant" (_asserting_) comment l'app _devrait_ se comporter, nous serons alertés si notre app ne se comporte `pas` comme attendu.
 
-Ensuite, nous confirmons que la page contient une balise `<h2>` dont le texte est `'Bienvenue sur "Super Rentals"&nbsp;!'`. En sachant que cette affirmation est vraie, nous pouvons être à peu près certains que le bon _template_ a été rendu, et sans erreur.
+Ensuite, nous confirmons que la page contient une balise `<h2>` dont le texte est `'Bienvenue sur "Super Rentals"&nbsp;!'`. En sachant que cette affirmation est vraie, nous pouvons être à peu près certains que le bon <span lang="en">_template_</span> a été rendu, et sans erreur.
 
 Puis nous recherchons un lien dont le texte est `'À propos de nous'`, localisé via le [sélecteur CSS](https://developer.mozilla.org/fr/docs/Learn/CSS/Building_blocks/Selectors) `.jumbo a.button`. C'est la même syntaxe que celle dans notre feuille de style, elle signifie "cherche à l'intérieur de la balise avec la classe `jumbo` une balise `<a>` ayant la classe `button`". Ça correspond à la structure HTML de notre template.
 

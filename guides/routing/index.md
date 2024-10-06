@@ -15,8 +15,8 @@ Qu'importe la manière dont l'URL est définie, le _Router_ d'Ember.js fera un l
 actuelle et un ou plusieurs gestionnaires de route. Un gestionnaire de route a plusieurs 
 fonctions&nbsp;:
 
-- Il peut afficher un _template_.
-- Il peut charger un modèle, qui est ensuite accessible dans le _template_.
+- Il peut afficher un <span lang="en">_template_</span>.
+- Il peut charger un modèle, qui est ensuite accessible dans le <span lang="en">_template_</span>.
 - Il peut rediriger vers une autre route, par exemple si l'utilisateur n'est pas autorisé à voir
   une certaine partie de l'application.
 - Il peut gérer des actions qui impliquent de changer le modèle ou de naviguer vers une autre route.
