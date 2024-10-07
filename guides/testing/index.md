@@ -53,7 +53,7 @@ ember t -f="Intégration"
 
 Dans QUnit, vous pouvez exclure des tests en ajoutant un point d'exclamation au début du filtre, par exemple `ember test --filter="!Acceptance"`.
 
-Pour en savoir plus sur les options de test, vous pouvez consulter la [documentation d'Ember CLI](https://ember-cli.com/testing) ou taper `ember help test` en ligne de commande.
+Pour en savoir plus sur les options de test, vous pouvez consulter la [documentation d'Ember CLI](https://ember-cli.com/testing) ou taper `ember help test` dans votre ligne de commande.
 
 ## Comment déboguer des tests
 
