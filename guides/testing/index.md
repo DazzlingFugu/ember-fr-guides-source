@@ -24,7 +24,7 @@ ember test
 ember t
 ```
 
-### Comment filter les tests
+### Comment filtrer les tests
 
 Lorsque vous travaillez sur un seul composant ou une seule page, vous ne voulez exécuter qu'un petit sous-ensemble de tests après chaque modification de fichier. Pour spécifier les tests à exécuter, vous pouvez ajouter l'option `--module` ou `--filter` à votre commande.
 
