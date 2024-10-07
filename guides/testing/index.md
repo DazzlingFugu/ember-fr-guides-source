@@ -38,7 +38,7 @@ ember test --module="Integration | Component | simple-button"
 ember t -m="Unit | Service | location"
 ```
 
-L'option `--filter` est plus polyvalente. Vous pouvez fournir une phrase à comparer aux modules et aux descriptions des tests. Une description de test est ce qui apparaît dans `test()` dans QUnit.
+L'option `--filter` est plus polyvalente. Vous pouvez fournir une phrase à rechercher dans les descriptions des modules et des tests. Une description de test est ce qui apparaît dans `test()` dans QUnit.
 
 ```bash
 # Exemple de composant Button
