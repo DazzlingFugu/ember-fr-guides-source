@@ -63,7 +63,7 @@ Pour trouver le problème, vous pouvez ajouter [`debugger`](https://developer.mo
 
 Grâce à la configuration d'Ember, vous pouvez également utiliser [`pauseTest()`](https://github.com/emberjs/ember-test-helpers/blob/master/API.md#pausetest) et [`resumeTest()`](https://github.com/emberjs/ember-test-helpers/blob/master/API.md#resumetest) pour déboguer vos tests. `pauseTest` vous permet d'inspecter facilement le DOM, mais ne peut être utilisé que dans les tests.
 
-Ajoutez simplement `await pauseTest();` pour tester votre code, et sauvegardez. Quand le test atteint cette ligne, il s'arrête, vous permettant d'inspecter l'état de votre application. Quand c'est fait, tapez `resumeTest()` dans le navigateur pour reprendre les tests.
+Ajoutez simplement `await pauseTest();` pour tester votre code, et sauvegardez. Quand le test atteint cette ligne, il s'arrête, vous permettant d'inspecter l'état de votre application. Quand c'est fait, tapez `resumeTest()` dans la console de votre navigateur pour reprendre les tests.
 
 ## En résumé
 
