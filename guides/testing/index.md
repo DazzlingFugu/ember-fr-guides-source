@@ -1,4 +1,4 @@
-Ember vous donne **la puissance d'écrire des tests et d'être productif dès le premier jour**. Vous pouvez être sûr que votre application fonctionnera correctement aujourd'hui et dans des années. Une question demeure : Comment devriez-vous écrire des tests ?
+Ember vous donne **le pouvoir d'écrire des tests et d'être productif dès le premier jour**. Vous pouvez être sûr que votre application fonctionnera correctement aujourd'hui et dans des années. Une question demeure : Comment devriez-vous écrire des tests ?
 
 Comme les tests sont un élément central du framework Ember et de votre cycle de développement, plusieurs sections sont consacrées à l'apprentissage de la rédaction de tests.
 
