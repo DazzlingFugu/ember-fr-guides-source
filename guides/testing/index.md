@@ -8,7 +8,7 @@ Dans cette section, nous aborderons les raisons pour lesquelles les tests sont i
 
 Écrire des tests est un ingrédient nécessaire si vous voulez garantir aux utilisateurs et aux parties prenantes que votre application, petite ou grande, fonctionnera comme prévu à tout moment. Plus votre application est volumineuse, plus les tests manuels deviennent coûteux et sujets aux erreurs.
 
-Écrire des tests est également une activité amusante, un bon changement de rythme par rapport à la livraison quotidienne de fonctionnalités. C'est aussi un moyen de vous aider à refactorer du code et à vous améliorer en tant que développeur. Enfin, Les tests peuvent vous servir de documentation vivante, un élément clé pour l'intégration de nouveaux développeurs.
+Écrire des tests est également une activité amusante et un bon changement de rythme par rapport à la livraison quotidienne de fonctionnalités. C'est aussi un moyen de vous aider à refactorer du code et à vous améliorer. Enfin, les tests peuvent vous servir de documentation vivante, un élément clé pour intégrer de nouve·aux·lles devs à l'équipe.
 
 ## Comment exécuter des tests
 
