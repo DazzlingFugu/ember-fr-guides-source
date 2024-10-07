@@ -2,7 +2,7 @@ Ember vous donne **le pouvoir d'écrire des tests et d'être productif dès le p
 
 Comme les tests sont un élément central du framework Ember et de votre cycle de développement, plusieurs sections sont consacrées à l'apprentissage de la rédaction de tests.
 
-Dans cette section, nous aborderons les raisons pour lesquelles les tests sont importants et comment exécuter, déboguer et filtrer vos tests.
+Dans cette section, nous expliquerons pourquoi tester est important, et comment exécuter, déboguer et filtrer vos tests.
 
 ## Pourqoi ai-je besoin de tests ?
 
