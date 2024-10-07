@@ -69,4 +69,4 @@ Ajoutez simplement `await pauseTest();` pour tester votre code, et sauvegardez. 
 
 Ember considère les tests comme un citoyen de première classe. De plus, il fournit diverses fonctionnalités intégrées pour exécuter, filtrer et déboguer les tests.
 
-Dans la section suivante, nous verrons quels outils peuvent vous aider à tester et comment démarrer avec eux.
+Dans la section suivante, nous verrons quels outils peuvent vous aider à tester et comment les prendre en main.
