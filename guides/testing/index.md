@@ -59,7 +59,7 @@ Pour en savoir plus sur les options de test, vous pouvez consulter la [documenta
 
 Lorsque vous écrivez des tests ou du code d'application, l'exécution de vos tests peut échouer.
 
-Pour trouver le problème, vous pouvez ajouter [`debugger`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/debugger) à votre code pour vérifier l'état intermédiaire. Vous pouvez ajouter cette dans le code des tests et celui de l'application.
+Pour trouver le problème, vous pouvez ajouter [`debugger`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/debugger) à votre code pour vérifier l'état intermédiaire. Vous pouvez ajouter cette instruction dans le code des tests et celui de l'application.
 
 Grâce à la configuration d'Ember, vous pouvez également utiliser [`pauseTest()`](https://github.com/emberjs/ember-test-helpers/blob/master/API.md#pausetest) et [`resumeTest()`](https://github.com/emberjs/ember-test-helpers/blob/master/API.md#resumetest) pour déboguer vos tests. `pauseTest` vous permet d'inspecter facilement le DOM, mais ne peut être utilisé que dans le code de test.
 
