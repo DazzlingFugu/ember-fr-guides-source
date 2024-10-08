@@ -1,72 +1,73 @@
-Ember gives you **the power to write tests and be productive from day one**. You can be confident that your app will be correct today and years from now. A question remains: _How_ should you write tests?
+Ember vous donne **le pouvoir d'écrire des tests et d'être productif dès le premier jour**. Vous pouvez être sûr que votre application fonctionnera correctement aujourd'hui et dans les années à venir. Une question demeure : Comment devriez-vous écrire des tests ?
 
-Since tests are a core part of the Ember framework and your development cycle, we will dedicate several sections to learning how to write tests.
+Comme les tests sont un élément central du framework Ember et de votre cycle de développement, plusieurs sections sont consacrées à l'apprentissage de la rédaction de tests.
 
-In this section, we will cover why testing is important and how to run, debug and filter your tests.
+Dans cette section, nous expliquerons pourquoi tester est important, et comment exécuter, déboguer et filtrer vos tests.
 
-## Why Do I Need Tests?
+## Pourquoi ai-je besoin de tests ?
 
-Writing tests is a necessary ingredient if you want to guarantee users and stakeholders that your app, whether small or large, will function as intended at any given time. The larger your app, the more costly and error-prone manual testing becomes.
+Écrire des tests est un ingrédient nécessaire si vous voulez garantir aux utilisateurs et aux parties prenantes que votre application, petite ou grande, fonctionnera comme prévu à tout moment. Plus votre application est volumineuse, plus les tests manuels deviennent coûteux et sujets aux erreurs.
 
-Writing tests is also a fun activity, a nice change of pace from delivering features daily, and a way to help you refactor code and improve as a developer. Tests can also serve as a living documentation — a key element in onboarding new developers.
+<!-- spell ignore -->
+Écrire des tests est également une activité amusante et un bon changement de rythme par rapport à la livraison quotidienne de fonctionnalités. C'est aussi un moyen de vous aider à refactorer du code et à vous améliorer. Enfin, les tests peuvent vous servir de documentation vivante, un élément clé pour intégrer de nouve·aux·lles devs à l'équipe.
 
-## How to Run Tests
+## Comment exécuter des tests
 
-You have a few options for running tests.
+Vous avez plusieurs options pour exécuter des tests.
 
-First, you can run the test suite by entering the command `ember test`, or `ember t`, in your terminal. This will run the suite just once.
+Tout d'abord, vous pouvez exécuter la suite de tests avec la commande `ember test`, ou `ember t`, dans votre terminal. Ceci exécutera la suite de test une seule fois.
 
-Running a local development server (through `npm start`), you can visit the `/tests` URI. This will render the `tests/index.html` template. This will also auto-update as you are changing files in your app.
+En lançant un serveur de développement local (avec `npm start`), vous pouvez visiter l'URI `/tests`. Ceci affichera le _template_ `tests/index.html`. Cette page se met à jour automatiquement quand vous changez des fichiers dans votre app.
 
 ```bash
-# Run all tests once
+# Exécute tous les tests une fois
 ember test
 ember t
 ```
 
-### How to Filter Tests
+### Comment filtrer les tests
 
-When you are working on a single component or page, you will want only a small subset of tests to run after every file change. To specify which tests to run, you can add `--module` or `--filter` option to your command.
+Lorsque vous travaillez sur un seul composant ou une seule page, vous ne voulez exécuter qu'un petit sous-ensemble de tests après chaque modification de fichier. Pour spécifier les tests à exécuter, vous pouvez ajouter l'option `--module` ou `--filter` à votre commande.
 
-The `--module` option allows you to select a **module**—a group of tests that you specified in `module()` in QUnit.
+L'option `--module` vous permet de sélectionner un **module**— un groupe de tests que vous avez spécifiés dans `module()` dans QUnit.
 
 ```bash
-# Button component example
+# Exemple de composant Button
 ember test --module="Integration | Component | simple-button"
 
-# Run tests for a location service
+# Exécute des tests pour un service de localisation
 ember t -m="Unit | Service | location"
 ```
 
-The `--filter` option is more versatile. You can provide a phrase to match against the modules and test descriptions. A test description is what appears in `test()` in QUnit.
+L'option `--filter` est plus polyvalente. Vous pouvez fournir une phrase à rechercher dans les descriptions des modules et des tests. Une description de test est ce qui apparaît dans `test()` dans QUnit.
 
 ```bash
-# Button component example
-ember test --filter="should show icon and label"
+# Exemple de composant Button
+ember test --filter="devrait afficher l'icône et l'étiquette"
 
-# Test everything related to your dashboard
-ember t -f="Dashboard"
+# Teste tout ce qui est lié à votre tableau de bord
+ember t -f="Tableau de bord"
 
-# Run integration tests
-ember t -f="Integration"
+# Exécute des tests d'intégration
+ember t -f="Intégration"
 ```
 
-In QUnit, you can exclude tests by adding an exclamation point to the beginning of the filter, e.g. `ember test --filter="!Acceptance"`.
+Dans QUnit, vous pouvez exclure des tests en ajoutant un point d'exclamation au début du filtre, par exemple `ember test --filter="!Acceptance"`.
 
-To learn more about options for testing, you can visit [Ember CLI Documentation](https://ember-cli.com/testing) or type `ember help test` in the command line.
+Pour en savoir plus sur les options de test, vous pouvez consulter la [documentation d'Ember CLI](https://ember-cli.com/testing) ou taper `ember help test` dans votre ligne de commande.
 
-## How to Debug Tests
+## Comment déboguer des tests
 
-When you are writing tests or application code, the execution of your tests may fail.
+Lorsque vous écrivez des tests ou du code d'application, l'exécution de vos tests peut échouer.
 
-To find out the problem, you can add [`debugger`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/debugger) to your code to check the intermediate state. You can add this line to both test and application code.
+Pour trouver le problème, vous pouvez ajouter [`debugger`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/debugger) à votre code pour vérifier l'état intermédiaire. Vous pouvez ajouter cette instruction dans le code des tests et celui de l'application.
 
-Thanks to Ember's setup, you can also use [`pauseTest()`](https://github.com/emberjs/ember-test-helpers/blob/master/API.md#pausetest) and [`resumeTest()`](https://github.com/emberjs/ember-test-helpers/blob/master/API.md#resumetest) to debug your tests. `pauseTest` allows you to inspect the DOM easily, but can only be used in the test code.
+Grâce à la configuration d'Ember, vous pouvez également utiliser [`pauseTest()`](https://github.com/emberjs/ember-test-helpers/blob/master/API.md#pausetest) et [`resumeTest()`](https://github.com/emberjs/ember-test-helpers/blob/master/API.md#resumetest) pour déboguer vos tests. `pauseTest` vous permet d'inspecter facilement le DOM, mais ne peut être utilisé que dans les tests.
 
-Simply add `await pauseTest();` to your test code, then save. When the test reaches this line, it will pause, allowing you to inspect the state of your application. When you are done, type `resumeTest()` in the browser console to continue the test.
+Ajoutez simplement `await pauseTest();` pour tester votre code, et sauvegardez. Quand le test atteint cette ligne, il s'arrête, vous permettant d'inspecter l'état de votre application. Quand c'est fait, tapez `resumeTest()` dans la console de votre navigateur pour reprendre les tests.
 
-## Summary
+## En résumé
 
-Ember considers testing a first-class citizen. In addition, it provides various inbuilt functionalities to run, filter and debug tests.
+Ember considère les tests comme des entités de première classe. De plus, il fournit diverses fonctionnalités intégrées pour exécuter, filtrer et déboguer les tests.
 
-In the next section, we will see what tools can help you with testing and how to get started with them.
+Dans la section suivante, nous verrons quels outils peuvent vous aider à tester et comment les prendre en main.
