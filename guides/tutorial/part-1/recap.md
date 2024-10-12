@@ -13,7 +13,7 @@ C’était ce que j'appelle un voyage&nbsp;! Pour résumer, voici ce que vous av
 <h3><a href="../building-pages/">Chapitre 2</a></h3>
 
 - Définir des routes
-- Utiliser des _templates_ de routes
+- Utiliser des <span lang="en">_templates_</span> de routes
 - Paramétrer des URLs
 - Lier des pages avec le composant `<LinkTo>`
 - Passer des arguments et des attributs aux composants
@@ -23,7 +23,7 @@ C’était ce que j'appelle un voyage&nbsp;! Pour résumer, voici ce que vous av
 - À quoi servent les tests automatisés
 - Écrire des tests d'acceptance
 - Utiliser les générateurs de Ember CLI
-- Tester avec le _framework_ de test QUnit
+- Tester avec le <span lang="en">_framework_</span> de test QUnit
 - Travailler avec les _test helpers_ de Ember
 - La pratique des _workflow_ de test
 
@@ -35,7 +35,7 @@ C’était ce que j'appelle un voyage&nbsp;! Pour résumer, voici ce que vous av
 - Retourner du contenu avec le mot-clé `{{yield}}`
 - Refactorer du code existant
 - Écrire des tests de composant
-- Utiliser le _template_ de l'application et son `{{outlet}}`
+- Utiliser le <span lang="en">_template_</span> de l'application et son `{{outlet}}`
 
 <h3><a href="../more-about-components/">Chapitre 5</a></h3>
 
@@ -47,9 +47,9 @@ C’était ce que j'appelle un voyage&nbsp;! Pour résumer, voici ce que vous av
 <h3><a href="../interactive-components/">Chapitre 6</a></h3>
 
 - Ajouter un comportement aux composants à l'aide de classes
-- Accéder aux états de l'instance à partir des _templates_
+- Accéder aux états de l'instance à partir des <span lang="en">_templates_</span>
 - Gérer l'état avec les _tracked properties_
-- Utiliser des syntaxes conditionnelles dans les _templates_
+- Utiliser des syntaxes conditionnelles dans les <span lang="en">_templates_</span>
 - Répondre à l'interaction de l'utilisateur avec des actions
 - Invoquer des modificateurs d'élément (_modifiers_)
 - Tester les interactions utilisateur
@@ -59,7 +59,7 @@ C’était ce que j'appelle un voyage&nbsp;! Pour résumer, voici ce que vous av
 - Gérer les configurations à l'échelle de l'app
 - Paramétrer des composants avec des arguments
 - Accéder aux arguments d'un composant
-- Interpoler des valeurs dans les _templates_
+- Interpoler des valeurs dans les <span lang="en">_templates_</span>
 - Surcharger des attributs HTML avec `...attributes`
 - Refactorer avec des _getters_ et l'_auto-track_
 - Récupérer des valeurs JavaScript dans le contexte d'un test
@@ -67,12 +67,12 @@ C’était ce que j'appelle un voyage&nbsp;! Pour résumer, voici ce que vous av
 <h3><a href="../working-with-data/">Chapitre 8</a></h3>
 
 - Travailler avec les fichiers de route
-- Retourner des données locales à partir du _model hook_
-- Accéder aux modèles des routes depuis les _templates_
+- Retourner des données locales à partir du <span lang="en">_model hook_</span>
+- Accéder aux modèles des routes depuis les <span lang="en">_templates_</span>
 - _Mocker_ les données du serveur avec des fichiers JSON statiques
-- Récupérer les données distantes à partir du _model hook_
+- Récupérer les données distantes à partir du <span lang="en">_model hook_</span>
 - Adapter les données du serveur
-- Créer des boucles et des variables locales dans les _templates_ avec `{{#each}}`
+- Créer des boucles et des variables locales dans les <span lang="en">_templates_</span> avec `{{#each}}`
 
 Ça fait beaucoup&nbsp;! À ce stade, vous êtes bien équipé pour accomplir une grande variété de tâches de développement avec Ember&nbsp;!
 

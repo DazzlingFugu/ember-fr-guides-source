@@ -1,6 +1,6 @@
 <!-- Heads up! This is a generated file, do not edit directly. You can find the source at https://github.com/ember-learn/super-rentals-tutorial/blob/master/src/markdown/tutorial/part-1/04-component-basics.md -->
 
-Dans ce chapitre, vous ferez une [refactorisation](../../../components/introducing-components/#toc_breaking-it-into-pieces) de vos _templates_ existants pour y utiliser des composants. Vous ajouterez aussi une barre de navigation à l'échelle du site:
+Dans ce chapitre, vous ferez une [refactorisation](../../../components/introducing-components/#toc_breaking-it-into-pieces) de vos <span lang="en">_templates_</span> existants pour y utiliser des composants. Vous ajouterez aussi une barre de navigation à l'échelle du site:
 
 <img src="/images/tutorial/part-1/component-basics/index-with-nav@2x.png" alt="L'app Super Rentals à la fin du chapitre" width="1024" height="314">
 
@@ -9,7 +9,7 @@ En faisant ça, vous apprendrez à&nbsp;:
 - Passer du contenu aux composants
 - Retourner du contenu avec le mot-clé `{{yield}}`
 - Écrire des tests de composant
-- Utiliser le _template_ de l'application et son `{{outlet}}`
+- Utiliser le <span lang="en">_template_</span> de l'application et son `{{outlet}}`
 
 ## Extraire du balisage dans des composants
 
@@ -26,7 +26,7 @@ Pendant le développement d'une app, il est très courant de réutiliser les mê
 
 Étant donné que ce code est très court, dupliquer cette structure n'apparaît pas nécessairement comme un problème. Cependant, si nos _designers_ nous demandaient de modifier l'entête, nous aurions à retrouver et mettre à jour chaque copie de ce code. À mesure que notre app prendra de l'ampleur, le problème en prendra aussi. 
 
-Les composants sont la solution parfaite. Dans sa forme la plus basique, un composant est juste un morceau de _template_ auquel on peut faire référence par nom. Commençons par créer un nouveau fichier `app/components/jumbo.hbs` avec le balisage de l'entête "jumbo"&nbsp;:
+Les composants sont la solution parfaite. Dans sa forme la plus basique, un composant est juste un morceau de <span lang="en">_template_</span> auquel on peut faire référence par nom. Commençons par créer un nouveau fichier `app/components/jumbo.hbs` avec le balisage de l'entête "jumbo"&nbsp;:
 
 ```handlebars { data-filename="app/components/jumbo.hbs" }
 <div class="jumbo">
@@ -51,9 +51,9 @@ Voilà, nous avons créé notre premier composant&nbsp;! Nous pouvons maintenant
 
 ## Passer du contenu à des composants avec `{{yield}}`
 
-Quand un composant est invoqué, Ember va remplacer la balise du composant avec le contenu trouvé dans le _template_ du composant. Tout comme avec les balises HTML classiques, il est courant de passer du [contenu](../../../components/block-content/) aux composants, par exemple `<Jumbo>some content</Jumbo>`. On s'accorde cette possibilité en utilisant le mot-clé `{{yield}}`, qui sera remplacé par le contenu passé au composant.
+Quand un composant est invoqué, Ember va remplacer la balise du composant avec le contenu trouvé dans le <span lang="en">_template_</span> du composant. Tout comme avec les balises HTML classiques, il est courant de passer du [contenu](../../../components/block-content/) aux composants, par exemple `<Jumbo>some content</Jumbo>`. On s'accorde cette possibilité en utilisant le mot-clé `{{yield}}`, qui sera remplacé par le contenu passé au composant.
 
-Essayons ça en éditant le _template_ d'index&nbsp;:
+Essayons ça en éditant le <span lang="en">_template_</span> d'index&nbsp;:
 
 ```js { data-filename="app/templates/index.hbs" data-diff="-1,-2,+3,-7,+8" }
 <div class="jumbo">
@@ -68,7 +68,7 @@ Essayons ça en éditant le _template_ d'index&nbsp;:
 
 ## Refactorer du code existant
 
-Après avoir enregistré les changements, votre page devrait se rafraîchir automatiquement et, voilà... rien n'a changé&nbsp;? Eh bien c'est exactement ce que nous voulions cette fois&nbsp;! Nous avons bien [refactoré](../../../components/introducing-components/#toc_breaking-components-down-further) notre _template_ d'index pour qu'il utilise le composant `<Jumbo>`, et tout continue à fonctionner comme prévu. Et les tests passent toujours&nbsp;!
+Après avoir enregistré les changements, votre page devrait se rafraîchir automatiquement et, voilà... rien n'a changé&nbsp;? Eh bien c'est exactement ce que nous voulions cette fois&nbsp;! Nous avons bien [refactoré](../../../components/introducing-components/#toc_breaking-components-down-further) notre <span lang="en">_template_</span> d'index pour qu'il utilise le composant `<Jumbo>`, et tout continue à fonctionner comme prévu. Et les tests passent toujours&nbsp;!
 
 <img src="/images/tutorial/part-1/component-basics/index@2x.png" alt="Page d'index – rien n'a changé" width="1024" height="250">
 
@@ -122,7 +122,7 @@ Après avoir enregistré, tout devrait rester exactement comme avant, et tous le
 
 <img src="/images/tutorial/part-1/component-basics/pass-2@2x.png" alt="Une nouvelle fois, les tests passent toujours après la refactorisation" width="1024" height="512">
 
-Bien que dans le cas présent, ça n'ait pas tant raccourci le code, [encapsuler](../../../components/component-arguments-and-html-attributes/) l'implémentation de l'entête "jumbo" dans son propre composant rend le _template_ légèrement plus facile à lire, ça permet au lecteur de ce concentrer sur les éléments uniques à une page donnée. De plus, si nous avons besoin de faire un changement dans l'entête, nous n'aurons à le faire qu'à un seul endroit. 
+Bien que dans le cas présent, ça n'ait pas tant raccourci le code, [encapsuler](../../../components/component-arguments-and-html-attributes/) l'implémentation de l'entête "jumbo" dans son propre composant rend le <span lang="en">_template_</span> légèrement plus facile à lire, ça permet au lecteur de ce concentrer sur les éléments uniques à une page donnée. De plus, si nous avons besoin de faire un changement dans l'entête, nous n'aurons à le faire qu'à un seul endroit. 
 
 ## Écrire des tests de composant
 
@@ -339,14 +339,14 @@ Nous avons mis à jour les tests existants pour nous assurer que l'élément `<n
 
 <img src="/images/tutorial/part-1/component-basics/pass-4@2x.png" alt="Les tests passent toujours avec nos tests de &lt;NavBar&gt;" width="1024" height="512">
 
-## Utiliser le _template_ de l'application et son `{{outlet}}`
+## Utiliser le <span lang="en">_template_</span> de l'application et son `{{outlet}}`
 
 Avant de passer à la fonctionnalité suivante, il y a encore une chose que nous pourrions "nettoyer". Puisque la `<NavBar>` sert la navigation à l'échelle du site, il est nécessaire de l'afficher sur _toutes_ les pages de l'app. Jusqu'ici, nous avons ajouté le composant manuellement sur chaque page. Cette approche est sujette aux erreurs, nous pourrions facilement oublier de l'ajouter la prochaine fois que nous créons une nouvelle page.
 
 <!-- spell ignore -->
-Nous pouvons résoudre ce problème en déplaçant la `<NavBar>` dans un _template_ particulier appelé `application.hbs`. Vous vous rappelez peut-être qu'il a été généré pour nous lors de la création de l'app, mais nous l'avions supprimé. À présent, il est temps de le ramener à la vie&nbsp;!
+Nous pouvons résoudre ce problème en déplaçant la `<NavBar>` dans un <span lang="en">_template_</span> particulier appelé `application.hbs`. Vous vous rappelez peut-être qu'il a été généré pour nous lors de la création de l'app, mais nous l'avions supprimé. À présent, il est temps de le ramener à la vie&nbsp;!
 
-Ce _template_ est spécial car il n'a pas sa propre URL et on ne peut pas y naviguer directement. Il sert plutôt à définir une mise en page commune, partagée par toutes les pages de votre app. C'est l'endroit idéal pour placer les éléments d'_UI_ à l'échelle du site, comme une barre de navigation ou un pied de page (_footer_).
+Ce <span lang="en">_template_</span> est spécial car il n'a pas sa propre URL et on ne peut pas y naviguer directement. Il sert plutôt à définir une mise en page commune, partagée par toutes les pages de votre app. C'est l'endroit idéal pour placer les éléments d'_UI_ à l'échelle du site, comme une barre de navigation ou un pied de page (_footer_).
 
 Pendant que nous y sommes, ajoutons aussi un élément _container_ (conteneur) qui encapsule toute la page, c'est une requête de notre _designer_ pour des questions de style.
 

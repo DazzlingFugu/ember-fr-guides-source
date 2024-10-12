@@ -28,9 +28,9 @@ Quand Ember rend ce template, vous pouvez voir le code HTML suivant :
 ```
 
 
-### Associer _labels_ et _inputs_
+### Associer <span lang="en">_labels_</span> et <span lang="en">_inputs_</span>
 
-Chaque _input_ (champ texte) doit être associé à un _label_ (étiquette). Il y a différentes manières d'écrire cette association en HTML. Avec le composant built-in `<Input>`, il est possible de :
+Chaque <span lang="en">_input_</span> (champ texte) doit être associé à un <span lang="en">_label_</span> (étiquette). Il y a différentes manières d'écrire cette association en HTML. Avec le composant built-in `<Input>`, il est possible de :
 
 1. Imbriquer l'input dans le label.
 
@@ -145,7 +145,7 @@ Notez que l'event `keydown` est utilisé pour détecter l'appui sur la touche `E
 
 ### Cases à cocher
 
-Vous pouvez utiliser le composant [`<Input>`](https://api.emberjs.com/ember/release/classes/Ember.Templates.components/methods/Input?anchor=Input) pour créer une _checkbox_ (case à cocher). Assignez le texte `"checkbox"` à l'argument `@type`, et utilisez `@checked` à la place de `@value`.
+Vous pouvez utiliser le composant [`<Input>`](https://api.emberjs.com/ember/release/classes/Ember.Templates.components/methods/Input?anchor=Input) pour créer une <span lang="en">_checkbox_</span> (case à cocher). Assignez le texte `"checkbox"` à l'argument `@type`, et utilisez `@checked` à la place de `@value`.
 
 ```handlebars
 <label for="admin-checkbox">Est admin ?</label>
@@ -171,7 +171,7 @@ Pour appeler une action lors d'events spécifiques, utilisez le modifier `{{on}}
 
 ## `<Textarea>`
 
-L'exemple suivant montre comment lier `this.userComment` à la valeur d'un élément _textarea_ (texte multi-lignes).
+L'exemple suivant montre comment lier `this.userComment` à la valeur d'un élément <span lang="en">_textarea_</span> (texte multi-lignes).
 
 ```handlebars
 <label for="user-comment">Commentaire :</label>
