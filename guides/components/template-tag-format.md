@@ -1,26 +1,25 @@
-The template tag format is a powerful, new way to write components in Ember. It's a single-file format that combines the component's JavaScript and Glimmer template code. The `<template>` tag is used to keep a clear separation between the template language and the JavaScript around it.
+Le format _template tag_ (balise _template_) est une nouvelle façon puissante d'écrire des composants dans Ember. Il s'agit d'un format de fichier unique qui combine le JavaScript du composant et le code du _template_ Glimmer. La balise `<template>` est utilisée pour garder une séparation claire entre le langage de _template_ et le JavaScript qui l'entoure.
 
-Template tag components use the file extension `.gjs`. This abbreviation is short for "Glimmer JavaScript". The file extension `.gts` is also supported for TypeScript components.
+Les composants _template tag_ utilisent l'extension de fichier `.gjs`. Cette abréviation signifie «&nbsp;Glimmer JavaScript&nbsp;». L'extension de fichier `.gts` est également supportée pour les composants TypeScript.
 
-This new format is [the official future of Ember's component authoring story](https://rfcs.emberjs.com/id/0779-first-class-component-templates/), and is stable and usable today. The RFC is currently in the "Accepted" stage, and work is ongoing to get it to "Ready for Release". We expect it to become the recommended and default way of authoring all Ember apps in the near future, once we are satisfied that we have sufficiently polished up all the corners of the implementation.
+Ce nouveau format est officiellement [l'avenir de la création de composants dans Ember](https://rfcs.emberjs.com/id/0779-first-class-component-templates/), et il est stable et utilisable aujourd'hui. La RFC (_Requests for comments_, littéralement "demande de commentaires") est actuellement au stade « Acceptée », et le travail est en cours pour la rendre « Prête pour la publication ». Il devrait devenir le moyen recommandé et par défaut de créer toutes les applications Ember dans un avenir proche, une fois que tous les aspects de l'implémentation auront été suffisamment peaufinés.
 
-> Can't wait to get started? Head over to the [installation section](#toc_installation) to begin using template tag components in your apps and addons today.
+Vous êtes impatient de commencer ? Rendez-vous dans la [section d'installation](#toc_installation) pour utiliser dès aujourd'hui les composants _template tag_ dans vos apps et _addons_.
 
-## Writing template tag components
+## Écrire des composants _template tag_
 
-Just like with separate JavaScript and Glimmer template files, the template tag format has the concept of template-only components and class-based components. Let's take a closer look at how these concepts compare between both component formats in the next section.
+Tout comme pour les fichiers JavaScript et les _template_ Glimmer distincts, le format _template tag_ propose les concepts de composant _template-only_ (le composant consiste simplement en un _template_) et de composant _class-based_ (basé sur la classe JavaScript). Dans la section suivante, examinons la manière dont ces concepts diffèrent entre les deux formats de composant.
 
-### Template-only components
+### Composants _template-only_
 
-The following template-only component was created in a [previous section](../component-arguments-and-html-attributes/) to extract an avatar layout into a reusable component.
+Le composant suivant a été créé dans une [section précédente](../component-arguments-and-html-attributes/) pour extraire un modèle d'avatar dans un composant réutilisable.
 
 ```handlebars {data-filename="app/components/avatar.hbs"}
 <aside>
   <div class="avatar" title={{@title}}>{{@initial}}</div>
 </aside>
 ```
-
-This layout can be turned into a template tag component by wrapping the code in a `<template>` tag and changing the file extension to `.gjs`.
+Cette disposition peut être transformée en un composant _template tag_ en enveloppant le code dans une balise `<template>` et en changeant l'extension du fichier en `.gjs`.
 
 ```gjs {data-filename="app/components/avatar.gjs"}
 <template>
@@ -30,7 +29,7 @@ This layout can be turned into a template tag component by wrapping the code in 
 </template>
 ```
 
-The top-level template tag is exported as the default component from the file. You *can* write this export explicitly, but it's not necessary. The following example is equivalent to the previous one.
+La balise _template_ de plus haut niveau est exportée en tant que composant par défaut du fichier. Vous pouvez écrire cet export explicitement, mais ce n'est pas nécessaire. L'exemple suivant est équivalent au précédent.
 
 ```gjs {data-filename="app/components/avatar.gjs"}
 export default <template>
@@ -40,16 +39,16 @@ export default <template>
 </template>;
 ```
 
-### Class-based components
+### Composant basés sur la classe
 
-A `<template>` tag can also be embedded inside a class definition of a component. This is useful when you need to add state or other logic to your component. Take for example the following "Avatar" component, where a default title is added when the `title` argument is not provided.
+Une balise `<template>` peut également être incorporée à une définition de classe d'un composant. C'est utile lorsque vous avez besoin d'ajouter un état ou une autre logique à votre composant. Prenons l'exemple du composant `<Avatar>` suivant, où un titre par défaut est ajouté quand l'argument `title` (titre) n'est pas fourni.
 
 ```gjs {data-filename="app/components/avatar.gjs"}
 import Component from '@glimmer/component';
 
 export default class Avatar extends Component {
   get titleWithDefault() {
-    return this.args.title ?? 'No avatar title provided';
+    return this.args.title ?? 'Avatar sans titre';
   }
 
   <template>
@@ -60,14 +59,13 @@ export default class Avatar extends Component {
 }
 ```
 
-## Importing components, helpers, and modifiers
+## Importer composants, _helpers_ et modifieurs
 
-In Ember templates, **“invokables”** are things you can *invoke* in a template. These include [components](./introducing-components/), [helpers](./helper-functions/), and [modifiers](./template-lifecycle-dom-and-modifiers/). In the template tag format, these invokables need to be imported before they can be used. This makes it easier to understand where values come from and what they do, as well as unlocks build optimizations.
+Dans les templates Ember, let "invocables" (_invokable_) sont des éléments que vous pouvez "invoquer" dans un _template_. Ils incluent les [composants](./introducing-components/), les [_helpers_](./helper-functions/) et les [modifieurs](./template-lifecycle-dom-and-modifiers/). Dans le format _template tag_, ces invocables doivent être importés pour pouvoir être utilisés. Ça permet de mieux comprendre d'où viennent les valeurs et ce qu'elles font, ainsi que d'optimiser le _build_.
 
+### Importer des invocables depuis sa propre app
 
-### Importing invokables from your own app
-
-When making use of the "Avatar" component as defined before in a different component file, it first needs to be imported. This is done using the `import` statement, just like you would import any other JavaScript module.
+Lorsqu'on veut utiliser le composant `<Avatar>` tel que défini précédemment dans un autre fichier de composant, il faut d'abord l'importer. On le fait à l'aide de l'instruction `import`, tout comme on importerait n'importe quel autre module JavaScript.
 
 ```gjs {data-filename="app/components/message.gjs"}
 import Avatar from './avatar';
@@ -83,23 +81,23 @@ import Avatar from './avatar';
 </template>
 ```
 
-The example above demonstrates defining a "Message" template-only component. The import syntax for class-based components is the same.
+L'exemple ci-dessus illustre la définition d'un composant _template-only_ `<Message>`. La syntaxe d'import pour les composants basés sur des classes est la même.
 
 <div class="cta">
   <div class="cta-note">
     <div class="cta-note-body">
-      <div class="cta-note-heading">Zoey says...</div>
+      <div class="cta-note-heading">Zoey dit...</div>
       <div class="cta-note-message">
-        The components that are imported are not required to use the new template tag format. This is intentional, and very powerful, as it <strong>allows incremental adoption</strong> of the new format.
+        Les composants importés ne sont pas nécessairement définis à l'aide du nouveau format _template tag_. C'est intentionnel, et très puissant, car ça permet <strong>l'adoption incrémentale</strong> du nouveau format.
         <br><br>
-        The only prerequisite is that the component is defined using the <a href="https://rfcs.emberjs.com/id/0481-component-templates-co-location">template-colocation structure</a> instead of splitting up the JavaScript and Glimmer template files into separate folders.
+        Le seul prérequis pour le composant importé est d'être défini via <a href="https://rfcs.emberjs.com/id/0481-component-templates-co-location">la structure dite en "colocation"</a> plutôt que d'avoir le fichier JavaScript et le _template_ Glimmer dans des dossiers séparés.
       </div>
     </div>
     <img src="/images/mascots/zoey.png" role="presentation" alt="">
   </div>
 </div>
 
-#### Nested components
+#### Composants imbriqués
 
 Component files can be organized in nested directory structures on the file system. Prior to the template tag format, the file path from the root component directory had be specified before to the component name, separated with `::`.
 
