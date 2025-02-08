@@ -108,3 +108,9 @@ Un éditeur de texte sophistiqué pour le code, le balisage et la prose.
 
 <!-- spell ignore -->
 [ember-component-template-split-view](https://github.com/mmitchellgarcia/ember-component-template-split-view) - Plugin Sublime Text extrêmement simple qui vous permettra d'ouvrir les fichiers de _template_ ou de route correspondants avec les composants Ember.js.
+
+## CodeLobster IDE
+
+CodeLobster IDE est un éditeur multi-plateformes gratuit et astucieux.
+
+[Le plugin CodeLobster IDE pour Ember](http://www.codelobster.com/emberjs.html) fournit de l'auto-complétion et des _tooltips_ (infobulles) pour les fonction Ember.js, ainsi que du contexte et des aides dynamiques.
