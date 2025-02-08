@@ -16,7 +16,7 @@ const argv = minimist(process.argv.slice(2), { string: ['from', 'to'] });
 // Read current Ember version (under translation)
 const currentEmberVersion = `${argv.from}`;
 if (currentEmberVersion.match(/\d+[.]\d+/g)?.[0] !== currentEmberVersion) {
-  raise(`please provide the current Ember version under translation to option ${chalk.cyan.bold('--from')} (e.g. --from=5.1)`)
+  raise(`please provide the current minor Ember version under translation to option ${chalk.cyan.bold('--from')} (e.g. --from=5.1)`)
   process.exit(9);
 }
 log(`Ember version under translation: ${chalk.cyan.bold(currentEmberVersion)}`);
@@ -24,7 +24,7 @@ log(`Ember version under translation: ${chalk.cyan.bold(currentEmberVersion)}`);
 // Read new Ember version (documented by the English guides)
 const newEmberVersion = `${argv.to}`;
 if (newEmberVersion.match(/\d+[.]\d+/g)?.[0] !== newEmberVersion) {
-  raise(`please provide the new Ember version documented on upstream to option ${chalk.cyan.bold('--to')} (e.g. --to=5.4)`)
+  raise(`please provide the new minor Ember version documented on upstream to option ${chalk.cyan.bold('--to')} (e.g. --to=5.4)`)
   process.exit(9);
 }
 log(`New Ember version documented on upstream: ${chalk.cyan.bold(newEmberVersion)}`);

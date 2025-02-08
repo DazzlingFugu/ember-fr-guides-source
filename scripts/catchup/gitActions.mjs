@@ -19,7 +19,9 @@ export function initCatchup(catchupBranch) {
 export function pushGuides(currentEmberVersion, newEmberVersion, catchupBranch) {
   try {
     runShell('git add guides');
-    runShell(`git commit -m "feat: automatic catch up from ${currentEmberVersion} to ${newEmberVersion}"`);
+    // The commit hook blocks the commit if a changed file is not in .remarkignore, because it assumes change=translation,
+    // but here we have English-only modifications, so we use --no-verify to prevent the hook to execute.
+    runShell(`git commit -m "feat: automatic catch up from ${currentEmberVersion} to ${newEmberVersion}" --no-verify`);
     runShell(`git push origin ${catchupBranch}`);
   } catch (error) {
     throw new Error('Failed to push the catchup branch.');
