@@ -161,7 +161,7 @@ Les injections peuvent être réalisées dans n'importe quelle classe qui néces
 
 ### Injections ad hoc
 
-Les injections de dépendances peuvent également être déclarées directement sur les classes Ember en utilisant `inject`. Actuellement, `inject` supporte l'injection de contrôleurs (via `import { inject } from '@ember/controller';`) et de services (via `import { inject } from '@ember/service';`).
+Les injections de dépendances peuvent également être déclarées directement sur les classes Ember en utilisant `inject`. Actuellement, `inject` supporte l'injection de contrôleurs (via `import { inject } from '@ember/controller';`) et de services (via `import { service } from '@ember/service';`).
 
 Le code suivant injecte le service `shopping-cart` dans le composant `cart-contents` en tant que propriété `cart`&nbsp;:
 
