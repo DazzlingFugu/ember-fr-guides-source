@@ -1,293 +1,253 @@
-While you can accomplish a lot in Ember using HTML templating, you'll need
-JavaScript to make your application interactive.
+Si vous pouvez accomplir beaucoup de choses en Ember simplement à l’aide de la mise en page HTML, vous aurez tout de même besoin de JavaScript pour rendre votre application interactive.
 
-Let's start with a small example, a counter component. When the user presses
-the `+1` button, the count will increase by 1. When the user presses the `-1`
-button, the count will decrease by 1.
+Commençons avec un exemple simple, un composant compteur. Quand l’utilisateur presse le bouton `+1`, le compteur augmente de 1. Quand l’utilisateur presse le bouton `-1`, le compteur descend de 1.
 
-First, let's start with the HTML.
+D’abord, écrivons le HTML.
 
 ```handlebars {data-filename="app/components/counter.hbs"}
 <p>0</p>
 
-<button type="button">+1</button>
-<button type="button">-1</button>
+<button type=“button”>+1</button>
+<button type=“button”>-1</button>
 ```
 
-## Tracked Properties
+## Propriétés _tracked_
 
-To make this work, we will need to stop hard coding the number, and we will need
-to wire up the buttons.
+Pour faire fonctionner ça, nous devrons cesser de coder le compteur en dur, et nous devrons brancher les boutons.
 
 ```js {data-filename="app/components/counter.js"}
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 
 export default class CounterComponent extends Component {
-  @tracked count = 0;
+  @tracked count = 0 ;
 }
 ```
 
-There are a few things going on here, but the most important part is
-`@tracked count = 0`. This line creates a dynamic value called `count`, which
-you can stick inside of the template instead of hard coding it.
+Plusieurs choses se passent ici, mais la partie la plus importante est `@tracked count = 0`. Cette ligne crée une valeur dynamique appelée `count`, que vous pouvez afficher dans le _template_ à la place de la valeur écrite en dur.
 
-```handlebars {data-filename="app/components/counter.hbs" data-diff="-1,+2"}
+```handlebars {data-filename="app/components/counter.hbs » data-diff="-1,+2"}
 <p>0</p>
 <p>{{this.count}}</p>
 
-<button type="button">+1</button>
-<button type="button">-1</button>
+<button type=“button”>+1</button>
+<button type=“button”>-1</button>
 ```
 
-When we use `{{this.count}}` in the component template, we're referring to a
-property that we defined in the JavaScript class.
+Quand on utilise `{{this.count}}` dans le _template_ du composant, on réfère la propriété définie dans la classe JavaScript.
 
-The output looks the same as before, but now the `0` comes from JavaScript, and
-after some more work, we can change its value with the buttons.
+L’affichage qui en résulte reste le même, mais le `0` vient maintenant bien du JavaScript, et après un peu de travail, nous pourrons changer cette valeur à l’aide des boutons.
 
-## HTML Modifiers and Actions
+## Modifieurs HTML et actions
 
-Next, we want to wire up the buttons. When the user presses `+1`, we want
-`this.count` to go up by 1. When the user presses `-1`, we want it to go down
-by 1.
+Ensuite, branchons les boutons. Nous voulons que `this.count` augmente de 1 quand l’utilisateur presse `+1`, et descende de 1 quand l’utilisateur presse `-1`.
 
-To attach an event handler to an HTML tag, we use the `on` HTML modifier. HTML
-modifiers are an Ember syntax that allow us to attach logic to a tag.
+Pour attacher un gestionnaire d’événement (_event handler_) à une balise HTML, on utilise le modifieur (_modifier_) HTML `on`. Les modifieurs HTML sont une syntaxe Ember permettant d’attacher de la logique à une balise.
 
-```handlebars {data-filename="app/components/counter.hbs" data-diff="-3,+4,-5,+6"}
+```handlebars {data-filename="app/components/counter.hbs » data-diff="-3,+4,-5,+6"}
 <p>{{this.count}}</p>
 
-<button type="button">+1</button>
-<button type="button" {{on "click" this.increment}}>+1</button>
-<button type="button">-1</button>
-<button type="button" {{on "click" this.decrement}}>-1</button>
+<button type=“button”>+1</button>
+<button type=“button” {{on “click” this.increment}}>+1</button>
+<button type=“button”>-1</button>
+<button type=“button” {{on “click” this.decrement}}>-1</button>
 ```
 
-To make those event handlers do something, we will need to define _actions_ in
-the component JavaScript. An action is a JavaScript method that can be used from
-a template.
+Pour que ces gestionnaires d’événement puissent faire quoi que ce soit, nous devons définir des “actions” dans le composant JavaScript. Une action est une méthode JavaScript qui peut être appelée depuis un _template_.
 
-```js {data-filename="app/components/counter.js" data-diff="+3,+8,+9,+10,+11,+13,+14,+15,+16"}
+```js {data-filename="app/components/counter.js » data-diff="+3,+8,+9,+10,+11,+13,+14,+15,+16"}
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 
 export default class CounterComponent extends Component {
-  @tracked count = 0;
+  @tracked count = 0 ;
 
   @action
   increment() {
-    this.count = this.count + 1;
+    this.count = this.count + 1 ;
   }
 
   @action
   decrement() {
-    this.count = this.count - 1;
+    this.count = this.count – 1 ;
   }
 }
 ```
 
-Now, when the `+1` and `-1` buttons get clicked, the number displayed will
-change.
+Maintenant, quand on clique sur les boutons `+1` et `-1`, le compteur affiché change.
 
-## Passing Arguments to Actions
+## Passer des arguments à une action
 
-Our counter has two different actions, `increment` and `decrement`. But both
-actions are mostly doing the same thing. The only difference is that `increment`
-changes the count by `+1`, while `decrement` changes it by `-1`.
+Notre compteur possède deux actions, `increment` (augmenter) et `decrement` (baisser). Ces deux actions font peu ou prou la même chose, la seule différence est que `increment` ajoute `+1` au compteur, tandis que `decrement` y ajoute `-1`.
 
-First, let's turn our `increment` and `decrement` methods into a single `change`
-method that takes the amount as a parameter.
+D’abord, transformons nos méthodes `increment` et `decrement` en une unique méthode qui prend un paramètre le nombre à ajouter.
 
-```js {data-filename="app/components/counter.js" data-diff="+8,+9,+10,+11,-12,-13,-14,-15,-17,-18,-19,-20"}
+```js {data-filename="app/components/counter.js » data-diff="+8,+9,+10,+11,-12,-13,-14,-15,-17,-18,-19,-20"}
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 
 export default class CounterComponent extends Component {
-  @tracked count = 0;
+  @tracked count = 0 ;
 
   @action
   change(amount) {
-    this.count = this.count + amount;
+    this.count = this.count + amount ;
   }
   @action
   increment() {
-    this.count = this.count + 1;
+    this.count = this.count + 1 ;
   }
 
   @action
   decrement() {
-    this.count = this.count - 1;
+    this.count = this.count – 1 ;
   }
 }
 ```
 
-Next, we'll update the template to turn the click handler into a function that
-passes an amount (for example, 1 and -1) in as an argument, using the `fn`
-helper.
+Ensuite, mettons à jour le _template_ pour faire du gestionnaire de clic une fonction passant un nombre (par exemple, 1 et -1) en argument. Pour ça, utilisons le _helper_ `fn`.
 
-```handlebars {data-filename="app/components/counter.hbs" data-diff="-3,+4,-5,+6"}
+```handlebars {data-filename="app/components/counter.hbs » data-diff="-3,+4,-5,+6"}
 <p>{{this.count}}</p>
 
-<button type="button" {{on "click" this.increment}}>+1</button>
-<button type="button" {{on "click" (fn this.change 1)}}>+1</button>
-<button type="button" {{on "click" this.decrement}}>-1</button>
-<button type="button" {{on "click" (fn this.change -1)}}>-1</button>
+<button type=“button” {{on “click” this.increment}}>+1</button>
+<button type=“button” {{on “click” (fn this.change 1)}}>+1</button>
+<button type=“button” {{on “click” this.decrement}}>-1</button>
+<button type=“button” {{on “click” (fn this.change -1)}}>-1</button>
 ```
 
-<div class="cta">
+<div class=“cta”>
   <div class="cta-note">
     <div class="cta-note-body">
-      <div class="cta-note-heading">Zoey says...</div>
+      <div class="cta-note-heading">Zoey dit…</div>
       <div class="cta-note-message">
-        An event handler takes a function as its second argument. When there are
-        no arguments to the function, you can pass it directly, just like in
-        JavaScript. Otherwise, you can build a function inline by using the
-        <code>fn</code> syntax.
+        Un gestionnaire d’événement prend comme second argument une fonction. Quand cette fonction ne prend aucun argument, alors on peut la passer directement, comme en JavaScript. En revanche, si elle doit prendre des arguments, vous pouvez construire une fonction en ligne en utilisant la syntaxe<code>fn</code>.
       </div>
     </div>
-    <img src="/images/mascots/zoey.png" role="presentation" alt="">
+    <img src="/images/mascots/zoey.png » role=“presentation” alt="">
   </div>
 </div>
 
-## Computed Values
+## Valeurs calculées
 
-Let's say we want to add a button to our counter that allows us to double the
-current count. Every time we press the button, the current count doubles.
+Mettons que nous voulons ajouter à notre app un bouton qui double le compteur courant. Chaque fois qu’on presse le bouton, le facteur par lequel on multiplie le compteur est aussi doublé.
 
-Based on what we've already learned, we'll need:
+Considérant ce que nous avons déjà appris, nous aurons besoin&nbsp;:
 
-- A `multiple`, a piece of state that represents the number to multiply the
-  `count` by
-- An action to double the `multiple`
-- A button in the template that calls the action
+— D’un `multiple`, un état qui représente le facteur par lequel multiplier `count`.
+— D’une action pour doubler le `multiple`.
+— D’un bouton dans le _template_ qui appelle cette action.
+— D’un moyen de multiplier le `count` par `multiple` et d’afficher le résultat dans le _template_.
 
-But we'll also need a way to multiply the `count` by the `multiple` and show it
-in the template.
+Commençons par ce que nous savons déjà. Ajoutons la _tracked property_ `multiple` et une action appelée `double` qui double le `multiple`.
 
-Let's start with what we know already. We'll add the `multiple` tracked property
-and an action called `double` that doubles the `multiple`.
-
-```js {data-filename="app/components/counter.js" data-diff="+7,+9,+10,+11,+12"}
+```js {data-filename="app/components/counter.js » data-diff="+7,+9,+10,+11,+12"}
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 
 export default class CounterComponent extends Component {
-  @tracked count = 0;
-  @tracked multiple = 1;
+  @tracked count = 0 ;
+  @tracked multiple = 1 ;
 
   @action
   double() {
-    this.multiple = this.multiple * 2;
+    this.multiple = this.multiple * 2 ;
   }
 
   @action
   change(amount) {
-    this.count = this.count + amount;
+    this.count = this.count + amount ;
   }
 }
 ```
 
-Then, we'll update the template to call the `double` action. We'll also add
-`this.multiple` to our output to help us confirm that our button is working.
+Ensuite, modifions le _template_ pour appeler l’action `double`. Nous ajouterons également `this.multiple` aux résultats affichés pour confirmer que le bouton fonctionne.
 
-```handlebars {data-filename="app/components/counter.hbs" data-diff="+2,+7"}
+```handlebars {data-filename="app/components/counter.hbs » data-diff="+2,+7"}
 <p>{{this.count}}</p>
 <p>× {{this.multiple}}</p>
 
-<button type="button" {{on "click" (fn this.change 1)}}>+1</button>
-<button type="button" {{on "click" (fn this.change -1)}}>-1</button>
+<button type=“button” {{on “click” (fn this.change 1)}}>+1</button>
+<button type=“button” {{on “click” (fn this.change -1)}}>-1</button>
 
-<button type="button" {{on "click" this.double}}>Double It</button>
+<button type=“button” {{on “click” this.double}}>Doubler</button>
 ```
 
-To get the multiplied number into the template, we'll use a
-[JavaScript getter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get).
+Pour afficher le compteur final dans le _template_, nous utiliserons un [_getter_ (accesseur) JavaScript](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Functions/get)
 
-```js {data-filename="app/components/counter.js" data-diff="+9,+10,+11"}
+```js {data-filename="app/components/counter.js » data-diff="+9,+10,+11"}
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 
 export default class CounterComponent extends Component {
-  @tracked count = 0;
-  @tracked multiple = 1;
+  @tracked count = 0 ;
+  @tracked multiple = 1 ;
 
   get total() {
-    return this.count * this.multiple;
+    return this.count * this.multiple ;
   }
 
   @action
   double() {
-    this.multiple = this.multiple * 2;
+    this.multiple = this.multiple * 2 ;
   }
 
   @action
   change(amount) {
-    this.count = this.count + amount;
+    this.count = this.count + amount ;
   }
 }
 ```
 
-**The getter does not need any special annotations.** As long as you've marked
-the properties that can change with `@tracked`, you can use JavaScript to
-compute new values from those properties.
+**Le _getter_ n’a pas besoin d’annotation particulière.** À compter du moment où vous avez marqué les propriétés susceptibles de changer avec `@tracked`, vous pouvez utilisez JavaScript pour calculer de nouvelles valeurs à partir de ces propriétés.
 
-We can now update the template to use the `total` property:
+Nous pouvons maintenant mettre à jour le _template_ afin d’utiliser la propriété `total`&nbsp;:
 
-```handlebars {data-filename="app/components/counter.hbs" data-diff="+3"}
+```handlebars {data-filename="app/components/counter.hbs » data-diff="+3"}
 <p>{{this.count}}</p>
 <p>× {{this.multiple}}</p>
 <p>= {{this.total}}</p>
 
-<button type="button" {{on "click" (fn this.change 1)}}>+1</button>
-<button type="button" {{on "click" (fn this.change -1)}}>-1</button>
+<button type=“button” {{on “click” (fn this.change 1)}}>+1</button>
+<button type=“button” {{on “click” (fn this.change -1)}}>-1</button>
 
-<button type="button" {{on "click" this.double}}>Double It</button>
+<button type=“button” {{on “click” this.double}}>Doubler</button>
 ```
 
-And we're all done! If we try to click the plus, minus, or double buttons in any
-order, we can watch as these three outputs stay up-to-date perfectly.
+Et c’est terminé&nbsp;! Si nous cliquons sur les boutons +1, -1, ou Doubler dans n’importe quel ordre, nous verrons les trois compteurs se mettre parfaitement à jour.
 
-<div class="cta">
+<div class=“cta”>
   <div class="cta-note">
     <div class="cta-note-body">
-      <div class="cta-note-heading">Zoey says...</div>
+      <div class="cta-note-heading">Zoey dit…</div>
       <div class="cta-note-message">
         <p>
-          You might have been tempted to make <code>total</code> a <code>@tracked</code> property and update it in
-          the <code>double</code> and <code>change</code> actions. But this kind of "push-based" approach creates a
-          lot of bugs. What happens if you create a new way to update <code>multiple</code> or <code>amount</code>
-          properties and forget to update <code>total</code> at the same time?
+          Vous pourriez être tentés de faire de <code>total</code> d'une <em>tracked property</em> et de la mettre à jour dans le corps des actions <code>double</code> et <code>change</code>, mais ce type d’approche « assignation forcée » crée beaucoup de bugs. Que se passerait-il si vous implémentiez de nouveaux moyens de mettre à jour <code>multiple</code> ou <code>amount</code> mais que vous oubliiez de passer le <code>total</code>&nbsp;?
         </p>
         <p>
-          When you use getters and functions to <em>derive</em> the state you need, you're taking advantage of
-          the benefits of <strong>declarative</strong> programming. In declarative programming, you describe
-          <em>what</em> you need, not <em>how</em> to get it, which reduces the number of places where you can
-          make mistakes.
+          Quand vous utilisez des _getters_ et des fonctions pour “dériver” l’état dont vous avez besoin, vous bénéficiez des avantages de la programmation “déclarative”. La programmation déclarative consiste à décrire de “quoi” vous avez besoin plutôt que “comment” l’obtenir, ce qui réduit le nombre d’emplacements où introduire des erreurs.
         </p>
-        <p>Making a <code>total</code> getter that computed the total from the <code>amount</code> and
-        <code>multiple</code> properties was more <strong>declarative</strong> than setting <code>total</code>
-        in all of the places that could have affected it. If you had changed <code>total</code> directly, you
-        would have taken the <em>"imperative" approach</em>).</p>
+        <p>
+          Créer un _getter_ <code>total</code> qui calcule le total à partir des propriétés <code>amount</code> et <code>multiple</code> est plus “déclaratif” que d’assigner une valeur à <code>total</code> à tous les emplacements qui peuvent l’affecter. (Si vous aviez changé le <code>total</code> directement, vous auriez pris l’approche “impérative”.)
+        </p>
       </div>
     </div>
-    <img src="/images/mascots/zoey.png" role="presentation" alt="">
+    <img src="/images/mascots/zoey.png » role=“presentation” alt="">
   </div>
 </div>
 
-## Combining Arguments and State
+## Combiner arguments et états
 
-Instead of allowing the component itself to be responsible for the multiple,
-let's allow it to be passed in.
+Plutôt que de donner au composant lui-même la responsabilité du multiple, permettons qu’il soit passé en argument.
 
 ```handlebars {data-filename="app/components/double-it.hbs"}
 <Counter @multiple={{this.multiple}} />
 
-<button type="button" {{on "click" this.double}}>Double It</button>
+<button type=“button” {{on “click” this.double}}>Doubler</button>
 ```
 
 ```js {data-filename="app/components/double-it.js"}
@@ -296,108 +256,95 @@ import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 
 export default class DoubleItComponent extends Component {
-  @tracked multiple = 1;
+  @tracked multiple = 1 ;
 
   @action
   double() {
-    this.multiple = this.multiple * 2;
+    this.multiple = this.multiple * 2 ;
   }
 }
 ```
 
-In the `Counter` component, instead of tracking the `multiple` internally, we
-take it as an argument. In the template, we refer to the argument as
-`@multiple`.
+Dans le composant `Counter`, plutôt que de traquer le `multiple` en interne, on le lit dans les arguments. Dans le _template_, on réfère l’argument avec `@multiple`.
 
 ```handlebars {data-filename="app/components/counter.hbs"}
 <p>{{this.count}}</p>
 <p>× {{@multiple}}</p>
 <p>= {{this.total}}</p>
 
-<button type="button" {{on "click" (fn this.change 1)}}>+1</button>
-<button type="button" {{on "click" (fn this.change -1)}}>-1</button>
+<button type=“button” {{on “click” (fn this.change 1)}}>+1</button>
+<button type=“button” {{on “click” (fn this.change -1)}}>-1</button>
 ```
 
-In templates, we refer to arguments by prefixing them with the `@` sign (in this
-case `@multiple`). In order to compute `this.total`, we'll need to refer to the
-`multiple` argument from JavaScript.
+Dans les _templates_, on accède aux arguments en les préfixant du symbole `@` (dans le cas présent, `@multiple`). Pour calculer `this.total`, nous aurons besoin d’accéder à l’argument `multiple` dans le JavaScript.
 
-We refer to a component's argument from JavaScript by prefixing them with
-`this.args.`.
+Pour accéder aux arguments d’un composant depuis le JavaScript, on les préfixe avec `this.args.`.
 
-In JavaScript, we refer to it as `this.args.multiple`.
+Dans le JavaScript, on écrit donc `this.args.multiple`.
 
-```js {data-filename="app/components/counter.js" data-diff="-7,-10,+11"}
+```js {data-filename="app/components/counter.js » data-diff="-7,-10,+11"}
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 
 export default class CounterComponent extends Component {
-  @tracked count = 0;
-  @tracked multiple = 1;
+  @tracked count = 0 ;
+  @tracked multiple = 1 ;
 
   get total() {
-    return this.count * this.multiple;
-    return this.count * this.args.multiple;
+    return this.count * this.multiple ;
+    return this.count * this.args.multiple ;
   }
 
   @action
   change(amount) {
-    this.count = this.count + amount;
+    this.count = this.count + amount ;
   }
 }
 ```
 
-The `total` is now computed by multiplying a piece of _local state_
-(`this.count`) with an argument (`this.args.multiple`). You can mix and match
-local state and arguments however you wish, which allows you to easily break up
-a component into smaller pieces.
+Le `total` est désormais calculé en multipliant un « état local » (`this.count`) avec un argument (`this.args.multiple`). Vous pouvez associer état locaux et arguments comme ça vous arrange, et ça permet de casser facilement un composant en morceaux plus petits.
 
-## Combining Arguments and Actions
+## Combiner arguments et actions
 
-We can also pass actions down to components via their arguments, which allows
-child components to communicate with their parents and notify them of changes
-to state. For instance, if we wanted to add back the doubling button we had
-previously, we could using an action passed down via arguments.
+Vous pouvez aussi passer des actions aux composants via leurs arguments, ce qui permet aux composants enfants de communiquer avec leur parent et de les notifier de leurs changements d’état. Par exemple, si nous voulions réajouter le bouton “Doubler” que nous avions précédemment, nous pourrions utiliser une action passée via les arguments.
 
 ```handlebars {data-filename="app/components/counter.hbs"}
 <p>{{this.count}}</p>
 <p>× {{@multiple}}</p>
 <p>= {{this.total}}</p>
 
-<button type="button" {{on "click" (fn this.change 1)}}>+1</button>
-<button type="button" {{on "click" (fn this.change -1)}}>-1</button>
+<button type=“button” {{on “click” (fn this.change 1)}}>+1</button>
+<button type=“button” {{on “click” (fn this.change -1)}}>-1</button>
 
-<button type="button" {{on "click" this.double}}>Double It</button>
+<button type=“button” {{on “click” this.double}}>Doubler</button>
 ```
 
-```js {data-filename="app/components/counter.js" data-diff="+9,+17,+18,+19,+20"}
+```js {data-filename="app/components/counter.js » data-diff="+9,+17,+18,+19,+20"}
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 
 export default class CounterComponent extends Component {
-  @tracked count = 0;
+  @tracked count = 0 ;
 
   get total() {
-    return this.count * this.args.multiple;
+    return this.count * this.args.multiple ;
   }
 
   @action
   change(amount) {
-    this.count = this.count + amount;
+    this.count = this.count + amount ;
   }
 
   @action
   double() {
-    this.args.updateMultiple(this.args.multiple * 2);
+    this.args.updateMultiple(this.args.multiple * 2) ;
   }
 }
 ```
 
-Now, the Counter calls the `updateMultiple` argument (which we expect to be a
-function) with the new value for `multiple`, and the parent component can update
-the multiple.
+Maintenant, le compteur appelle l’argument `updateMultiple` (supposé être une fonction) avec la nouvelle valeur de `multiple`, et le composant parent peut mettre à jour le multiple.
 
 ```handlebars {data-filename="app/components/double-it.hbs"}
 <Counter @multiple={{this.multiple}} @updateMultiple={{this.updateMultiple}} />
@@ -409,19 +356,19 @@ import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 
 export default class DoubleItComponent extends Component {
-  @tracked multiple = 1;
+  @tracked multiple = 1 ;
 
   @action
   updateMultiple(newMultiple) {
-    this.multiple = newMultiple;
+    this.multiple = newMultiple ;
   }
 }
 ```
 
-## Learn more
+## En savoir plus
 
-You will frequently create components in an app. Establishing patterns early can help reduce bugs and unforeseen issues. Learn more from the chapter [Patterns for Components](../../in-depth-topics/patterns-for-components/).
+Vous créerez très souvent des composants dans une app. Établir tôt des _patterns_ (« motifs d’implémentation ») peut vous aider à réduire le nombre de bugs ou de problèmes imprévus. Vous en apprendrez plus dans le chapitre [Patterns liés aux Composants](../../in-depth-topics/patterns-for-components/).
 
-Actions are JavaScript methods that you can call from a template. Find out how you can use actions with recommended patterns from the chapter [Patterns for Actions](../../in-depth-topics/patterns-for-actions/).
+Une action est une méthode JavaScript que vous pouvez appeler depuis un _template_. Découvrez les patterns recommandés pour l’usage des actions dans le chapitre [Patterns liés aux Actions](../../in-depth-topics/patterns-for-actions/).
 
-<!-- eof - needed for pages that end in a code block  -->
+<!-- eof – needed for pages that end in a code block -->
