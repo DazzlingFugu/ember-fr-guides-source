@@ -113,4 +113,4 @@ Un éditeur de texte sophistiqué pour le code, le balisage et la prose.
 
 CodeLobster IDE est un éditeur multi-plateformes gratuit et astucieux.
 
-[Le plugin CodeLobster IDE pour Ember](http://www.codelobster.com/emberjs.html) fournit de l'auto-complétion et des _tooltips_ (infobulles) pour les fonction Ember.js, ainsi que du contexte et des aides dynamiques.
+[Le plugin CodeLobster IDE pour Ember](http://www.codelobster.com/emberjs.html) fournit de l'auto-complétion et des _tooltips_ (infobulles) pour les fonctions Ember.js, ainsi que du contexte et des aides dynamiques.
