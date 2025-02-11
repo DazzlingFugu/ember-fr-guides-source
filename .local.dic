@@ -72,6 +72,7 @@ CLI
 click
 coc-ember
 codebase/nombrable
+CodeLobster
 codemod
 codemods
 CoffeeScript
@@ -472,7 +473,7 @@ Testem
 textarea
 todo/nombrable
 Tomster
-tooltip
+tooltip/nombrable
 trackable
 Trackable
 tracked

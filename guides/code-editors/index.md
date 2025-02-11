@@ -20,7 +20,7 @@ Installez le pack d'extension pour obtenir tout ce dont vous avez besoin pour tr
 ### Serveur de langage
 
 <!-- spell ignore -->
-[Stable Ember Language Server](https://marketplace.visualstudio.com/items?itemName=lifeart.vscode-ember-unstable) - Un serveur de langage complet et stable. Son nom vient historiquement de Ember Language Server, dont il est un _fork_, et de ses efforts pour suivre les évolutions d'Ember.
+[Ember Language Server](https://marketplace.visualstudio.com/items?itemName=EmberTooling.vscode-ember) - Ajoute des fonctions d'édition améliorées telles que l'auto-complétion et l'accès à la définition.
 
 ### _Workflow_ (flux de travail)
 
@@ -108,3 +108,9 @@ Un éditeur de texte sophistiqué pour le code, le balisage et la prose.
 
 <!-- spell ignore -->
 [ember-component-template-split-view](https://github.com/mmitchellgarcia/ember-component-template-split-view) - Plugin Sublime Text extrêmement simple qui vous permettra d'ouvrir les fichiers de _template_ ou de route correspondants avec les composants Ember.js.
+
+## CodeLobster IDE
+
+CodeLobster IDE est un éditeur multi-plateformes gratuit et astucieux.
+
+[Le plugin CodeLobster IDE pour Ember](http://www.codelobster.com/emberjs.html) fournit de l'auto-complétion et des _tooltips_ (infobulles) pour les fonctions Ember.js, ainsi que du contexte et des aides dynamiques.
