@@ -7,7 +7,7 @@ En ajoutant la carte, vous apprendrez à&nbsp;:
 - Gérer les configurations à l'échelle de l'app
 - Paramétrer des composants avec des arguments
 - Accéder aux arguments d'un composant
-- Interpoler des valeurs dans les _templates_
+- Interpoler des valeurs dans les <span lang="en">_templates_</span>
 - Surcharger des attributs HTML avec `...attributes`
 - Refactorer avec des _getters_ et l'_auto-track_
 - Récupérer des valeurs JavaScript dans le contexte d'un test
@@ -147,11 +147,11 @@ export default class MapComponent extends Component {
 }
 ```
 
-Ici, nous importons le _token_ d'accès du fichier de configuration et nous le retournons à l'aide d'un  _[getter](https://javascript.info/property-accessors)_ (accesseur) `token`. Celui-ci nous permet "d'accéder" à notre _token_ avec `this.token` non seulement dans le corps de la classe `MapComponent`, mais aussi dans le _template_ du composant. Il est aussi important [d'encoder l'URL](https://javascript.info/url#encoding-strings) du _token_, au cas où elle contiendrait des caractères spéciaux non sécurisés pour les URL.
+Ici, nous importons le _token_ d'accès du fichier de configuration et nous le retournons à l'aide d'un  _[getter](https://javascript.info/property-accessors)_ (accesseur) `token`. Celui-ci nous permet "d'accéder" à notre _token_ avec `this.token` non seulement dans le corps de la classe `MapComponent`, mais aussi dans le <span lang="en">_template_</span> du composant. Il est aussi important [d'encoder l'URL](https://javascript.info/url#encoding-strings) du _token_, au cas où elle contiendrait des caractères spéciaux non sécurisés pour les URL.
 
-## Interpoler des valeurs dans les _templates_
+## Interpoler des valeurs dans les <span lang="en">_templates_</span>
 
-Maintenant, passons du fichier JavaScript au _template_&nbsp;:
+Maintenant, passons du fichier JavaScript au <span lang="en">_template_</span>&nbsp;:
 
 ```handlebars { data-filename="app/components/map.hbs" data-diff="-1,+2,+3,+4,+5,+6,+7,+8,+9" }
 {{yield}}
@@ -169,7 +169,7 @@ D'abord, nous avons un élément conteneur pour des questions de style.
 
 Ensuite, nous avons une balise `<img>` pour demander à Mapbox et afficher l'image de carte statique.
 
-Notre _template_ contient plusieurs valeurs qui n'existent pas encore&nbsp;: `@lat`, `@lng`, `@zoom`, `@width` (largeur) et `@height` (hauteur). Ce sont des [arguments](../../../components/component-arguments-and-html-attributes/#toc_arguments) à passer au composant `<Map>` que nous fournirons quand nous l'invoquerons.
+Notre <span lang="en">_template_</span> contient plusieurs valeurs qui n'existent pas encore&nbsp;: `@lat`, `@lng`, `@zoom`, `@width` (largeur) et `@height` (hauteur). Ce sont des [arguments](../../../components/component-arguments-and-html-attributes/#toc_arguments) à passer au composant `<Map>` que nous fournirons quand nous l'invoquerons.
 
 En "paramètrant" notre composant à l'aide d'arguments, nous en faisons un composant réutilisable qui peut être invoqué depuis différentes partie de l'app et personnalisé en fonctions des besoins spécifiques du contexte. Nous avons déjà vu ce principe en action quand nous avons utilisé le composant `<LinkTo>` [plus tôt](../building-pages/)&nbsp;; nous avions spécifié un argument `@route` pour que le `<LinkTo>` sache sur quelle page naviguer.
 
@@ -293,7 +293,7 @@ _Croisons les doigts..._ Lançons nos tests.
 
 <img src="/images/tutorial/part-1/reusable-components/pass@2x.png" alt="Les tests passent avec le nouveau test de &lt;Map&gt;" width="1024" height="768" />
 
-Hé, tous les tests sont passés&nbsp;! Est-ce que ça signifie pour autant que tout fonctionne en pratique&nbsp;? Vérifions en invoquant le composant `<Map>` depuis le _template_ du composant `<Rental>`&nbsp;:
+Hé, tous les tests sont passés&nbsp;! Est-ce que ça signifie pour autant que tout fonctionne en pratique&nbsp;? Vérifions en invoquant le composant `<Map>` depuis le <span lang="en">_template_</span> du composant `<Rental>`&nbsp;:
 
 ```handlebars { data-filename="app/components/rental.hbs" data-diff="+21,+22,+23,+24,+25,+26,+27,+28" }
 <article class="rental">
@@ -373,9 +373,9 @@ module('Integration | Component | rental', function (hooks) {
 
 ## Refactorer avec des _getters_ et l'_auto-track_
 
-Jusqu'ici, la majeure partie de notre _template_ `<Map>` est dévolue à l'attribut `src` de la balise `<img>`, qui est plutôt long. Une alternative serait de le calculer dans la classe JavaScript.
+Jusqu'ici, la majeure partie de notre <span lang="en">_template_</span> `<Map>` est dévolue à l'attribut `src` de la balise `<img>`, qui est plutôt long. Une alternative serait de le calculer dans la classe JavaScript.
 
-Depuis le corps de la classe JavaScript, nous avons accès aux arguments du composant vis l'API `this.args.*`. En utilisant ça, nous pouvons bouger la logique derrière l'URL du _template_ à un nouveau _getter_.
+Depuis le corps de la classe JavaScript, nous avons accès aux arguments du composant vis l'API `this.args.*`. En utilisant ça, nous pouvons bouger la logique derrière l'URL du <span lang="en">_template_</span> à un nouveau _getter_.
 
 <div class="cta">
   <div class="cta-note">
@@ -430,9 +430,9 @@ Voilà qui est mieux&nbsp;! Et nos tests passent toujours&nbsp;!
 
 Notez que nous avons marqué notre _getter_ comme étant `@tracked` (suivi, tracé). Au contraire des variables d'instance, on ne peut pas "assigner" de nouvelle valeur aux _getters_ directement, donc ça ne fait pas sens pour Ember de les monitorer pour détecter des changements. 
 
-Ceci dit, les valeurs "produites" par les _getters_, elles, peuvent changer. Dans notre cas, la valeur produite par le _getter_ `src` dépend des valeurs de `lat`, `lng`, `width`, `height` et `zoom` de `this.args`. Chaque fois que des "dépendances" sont mises à jour, on s'attend à ce que `{{this.src}}`, dans notre _template_, soit mis à jour aussi.
+Ceci dit, les valeurs "produites" par les _getters_, elles, peuvent changer. Dans notre cas, la valeur produite par le _getter_ `src` dépend des valeurs de `lat`, `lng`, `width`, `height` et `zoom` de `this.args`. Chaque fois que des "dépendances" sont mises à jour, on s'attend à ce que `{{this.src}}`, dans notre <span lang="en">_template_</span>, soit mis à jour aussi.
 
-Ember fait ça automatiquement en "suivant" toute variable à laquelle il a accédé pendant le calcul d'une valeur de _getter_. Tant que les dépendances en elles-mêmes sont marquées comme `@tracked`, Ember sait exactement quand invalider et ré-afficher les _templates_ qui peuvent contenir potentiellement des valeurs de _getter_ obsolètes ("_stale_"). Cette fonctionnalité est aussi appelées _[auto-track](../../../in-depth-topics/autotracking-in-depth/)_. Tous les arguments auxquels on peut accéder depuis `this.args.*` sont implicitement marqués comme `@tracked` par la super-classe _Glimmer component_. Puisque notre composant hérite de cette super-classe, tout fonctionne "comme par magie".
+Ember fait ça automatiquement en "suivant" toute variable à laquelle il a accédé pendant le calcul d'une valeur de _getter_. Tant que les dépendances en elles-mêmes sont marquées comme `@tracked`, Ember sait exactement quand invalider et ré-afficher les <span lang="en">_templates_</span> qui peuvent contenir potentiellement des valeurs de _getter_ obsolètes ("_stale_"). Cette fonctionnalité est aussi appelées _[auto-track](../../../in-depth-topics/autotracking-in-depth/)_. Tous les arguments auxquels on peut accéder depuis `this.args.*` sont implicitement marqués comme `@tracked` par la super-classe _Glimmer component_. Puisque notre composant hérite de cette super-classe, tout fonctionne "comme par magie".
 
 ## Récupérer des valeurs JavaScript dans le contexte d'un test
 
@@ -588,7 +588,7 @@ En utilisant l'API de test `this.setProperties`, nous pouvons passer des valeurs
 
 Notez qu'ici, la valeur de `this` ne réfère **pas** l'instance du composant. Nous ne lisons pas directement ni ne modifions les états internes (voilà qui serait très impoli&nbsp;!)
 
-En fait, `this` réfère un objet particulier, le _test context_ (contexte du test), qui a accès au contenu du _helper_ `render`. Il agit comme un "pont" qui nous permet de passer des valeurs dynamiques, sous forme d'arguments, dans l'invocation de notre composant. Ça nous permet de mettre à jour ces valeurs depuis la fonction de test selon nos besoins.
+En fait, `this` réfère un objet particulier, le _test context_ (contexte du test), qui a accès au contenu du <span lang="en">_helper_</span> `render`. Il agit comme un "pont" qui nous permet de passer des valeurs dynamiques, sous forme d'arguments, dans l'invocation de notre composant. Ça nous permet de mettre à jour ces valeurs depuis la fonction de test selon nos besoins.
 
 Avec tous nos tests qui passent, nous sommes prêts pour la suite&nbsp;!
 

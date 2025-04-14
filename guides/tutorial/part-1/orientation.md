@@ -1,4 +1,4 @@
-Dans ce chapitre, vous installerez _[Ember CLI](https://cli.emberjs.com/release/)_, puis vous l'utiliserez pour générer un nouveau projet Ember ainsi que quelques _templates_ et styles basiques pour votre nouvelle app. À la fin de ce chapitre, vous devriez avoir une page d'accueil sur laquelle s'affiche la mignonne petite bouille du Professeur Tomster&nbsp;:
+Dans ce chapitre, vous installerez _[Ember CLI](https://cli.emberjs.com/release/)_, puis vous l'utiliserez pour générer un nouveau projet Ember ainsi que quelques <span lang="en">_templates_</span> et styles basiques pour votre nouvelle app. À la fin de ce chapitre, vous devriez avoir une page d'accueil sur laquelle s'affiche la mignonne petite bouille du Professeur Tomster&nbsp;:
 
 <img src="/images/tutorial/part-1/orientation/styled-with-tomster@2x.png" alt="L'app Super Rentals à la fin du chapitre" width="1024" height="250">
 
@@ -163,7 +163,7 @@ Nous apprendrons le rôle de ces fichiers et dossiers le long du tutoriel. Pour 
 
 ## Démarrer et arrêter le serveur de développement
 
-Ember CLI fournit beaucoup de commandes différentes adaptées à de nombreuses tâches, comme la commande `ember new` que nous avons vue plus tôt. Ember CLI fournit aussi un serveur de développement ( _development server_), que nous pouvons démarrer avec la commande `ember server`:
+Ember CLI fournit beaucoup de commandes différentes adaptées à de nombreuses tâches, comme la commande `ember new` que nous avons vue plus tôt. Ember CLI fournit aussi un serveur de développement ( <span lang="en">_development server_</span>), que nous pouvons démarrer avec la commande `ember server`:
 
 ```shell
 $ ember server
@@ -192,7 +192,7 @@ Vous pouvez stopper le serveur de développement à tout moment en tapant `Ctrl 
 
 ## Éditer des fichier et les recharger automatiquement
 
-Le serveur de développement possède une fonctionnalité appelée _live reload_ (rechargement en direct / instantané), qui monitore votre application pour savoir quand des fichiers sont modifiés, re-compile tout automatiquement et rafraîchit les pages ouvertes dans le navigateur s'il y en a. C'est très pratique durant le développement, alors essayons&nbsp;!
+Le serveur de développement possède une fonctionnalité appelée <span lang="en">_live reload_</span> (rechargement en direct / instantané), qui monitore votre application pour savoir quand des fichiers sont modifiés, re-compile tout automatiquement et rafraîchit les pages ouvertes dans le navigateur s'il y en a. C'est très pratique durant le développement, alors essayons&nbsp;!
 
 Comme l'indique le texte de la page de bienvenue, son code source se trouve dans `app/templates/application.hbs`. Essayons d'éditer ce fichier et de remplacer son contenu par le nôtre&nbsp;:
 
@@ -228,7 +228,7 @@ Créez un fichier `app/templates/index.hbs` et copiez-y le balisage suivant&nbsp
 ```
 
 <!-- spell ignore -->
-Si vous vous dites "Tiens, ça ressemble à du HTML&nbsp;!", alors vous avez raison&nbsp;! Dans leur forme la plus simple, les _templates_ Ember ne sont vraiment que du HTML. Si vous être déjà familier avec HTML, vous devriez vous sentir comme chez vous.
+Si vous vous dites "Tiens, ça ressemble à du HTML&nbsp;!", alors vous avez raison&nbsp;! Dans leur forme la plus simple, les <span lang="en">_templates_</span> Ember ne sont vraiment que du HTML. Si vous être déjà familier avec HTML, vous devriez vous sentir comme chez vous.
 
 Bien entendu, contrairement au HTML, les templates Ember peuvent faire bien plus qu'afficher du contenu statique. Nous verrons ça en action bientôt.
 
